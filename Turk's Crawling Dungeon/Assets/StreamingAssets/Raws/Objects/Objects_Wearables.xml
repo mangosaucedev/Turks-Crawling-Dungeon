@@ -6,5 +6,58 @@
 		<Part Name="Wearable"/>
 		
 	</Object>
+
+	<Object Name="PierrotBlouse" InheritsFrom="Wearable">
+		
+		<OverridePart Name="Render">
+			<Var Name="Sprite">PierrotBlouse</Var>
+		</OverridePart>
+
+		<OverridePart Name="Wearable">
+			<Var Name="Slot">Body</Var>
+			<Var Name="Dodge">20</Var>
+		</OverridePart>
+		
+	</Object>
+
+	<Object Name="PierrotPants" InheritsFrom="Wearable">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">PierrotPants</Var>
+		</OverridePart>
+
+		<OverridePart Name="Wearable">
+			<Var Name="Slot">Legs</Var>
+			<Var Name="Dodge">10</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="NeckRuff" InheritsFrom="Wearable">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">NeckRuff</Var>
+		</OverridePart>
+
+		<OverridePart Name="Wearable">
+			<Var Name="Slot">Necklace</Var>
+			<Var Name="Dodge">10</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="GoldBand" InheritsFrom="Wearable">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">GoldBand</Var>
+		</OverridePart>
+
+		<OverridePart Name="Wearable">
+			<Var Name="Slot">Ring1</Var>
+			<Var Name="OffSlot">Ring2</Var>
+			<Var Name="Stats">PhysicalPower:30</Var>
+		</OverridePart>
+
+	</Object>
 	
 </Objects>

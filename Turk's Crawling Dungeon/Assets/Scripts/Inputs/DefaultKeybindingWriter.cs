@@ -32,6 +32,12 @@ namespace TCD.Inputs
             Add(KeyCommand.OpenHealth, KeyCode.H);
             Add(KeyCommand.OpenHelp, KeyCode.Slash, KeyCode.LeftShift);
             Add(KeyCommand.OpenStatus, KeyCode.Z);
+            // TODO - Delete these later after 8/13/21
+            Add(KeyCommand.MoveNorthAlt, KeyCode.UpArrow);
+            Add(KeyCommand.MoveSouthAlt, KeyCode.DownArrow);
+            Add(KeyCommand.MoveWestAlt, KeyCode.LeftArrow);
+            Add(KeyCommand.MoveEastAlt, KeyCode.RightArrow);
+            //
         }
 
         private static void Add(KeyCommand command, KeyCode key, KeyCode primaryModifier = KeyCode.None, 

@@ -34,6 +34,6 @@ namespace TCD.UI
             GameResetter.ResetGame();
         }
 
-        private void ExitToDesktop() => Rawgue.ExitToDesktop();
+        private void ExitToDesktop() => TCDGame.ExitToDesktop();
     }
 }

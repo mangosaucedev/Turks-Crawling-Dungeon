@@ -79,7 +79,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 2
-  m_Text: 'Use the numpad to move <b>(make sure NumLock is enabled!)</b>
+  m_Text: 'Use the arrows keys or numpad to move <b>(make sure NumLock is enabled!)</b>
 
 
     Press

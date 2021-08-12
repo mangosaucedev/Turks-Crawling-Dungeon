@@ -38,17 +38,26 @@ namespace TCD.Objects.Parts
                 return false;
             if (!equippable.RequiresSecondSlot)
             {
-                EquipSlot primarySlot = equippable.equipSlots[0];
-                EquipSlot secondarySlot = equippable.equipSlots[1];
-                bool primaryOccupied = GetEquippedItem(primarySlot);
-                bool canEquipToPrimary = false;
-                bool canEquipToSecondary = false;
-                if (!primaryOccupied && (canEquipToPrimary = EquipToSlot(equipment, primarySlot)))
-                    return true;
-                if (primaryOccupied && (canEquipToSecondary = EquipToSlot(equipment, secondarySlot)))
-                    return true;
-                if (!canEquipToPrimary && !canEquipToSecondary)
-                    return false;
+                if (equippable.equipSlots.Length == 1)
+                {
+                    EquipSlot slot = equippable.equipSlots[0];
+                    if (!EquipToSlot(equipment, slot))
+                        return false;
+                }
+                else
+                {
+                    EquipSlot primarySlot = equippable.equipSlots[0];
+                    EquipSlot secondarySlot = equippable.equipSlots[1];
+                    bool primaryOccupied = GetEquippedItem(primarySlot);
+                    bool canEquipToPrimary = false;
+                    bool canEquipToSecondary = false;
+                    if (!primaryOccupied && (canEquipToPrimary = EquipToSlot(equipment, primarySlot)))
+                        return true;
+                    if (primaryOccupied && (canEquipToSecondary = EquipToSlot(equipment, secondarySlot)))
+                        return true;
+                    if (!canEquipToPrimary && !canEquipToSecondary)
+                        return false;
+                }
             }
             else
                 return EquipToAllSlots(equipment, availableSlots);

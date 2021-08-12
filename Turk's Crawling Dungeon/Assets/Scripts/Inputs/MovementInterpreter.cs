@@ -44,13 +44,17 @@ namespace TCD.Inputs
         {
             movementInputVector = Vector2Int.zero;
 
-            if (Keys.GetCommand(KeyCommand.MoveNorth, KeyState.PressedThisFrame))
+            if (Keys.GetCommand(KeyCommand.MoveNorth, KeyState.PressedThisFrame) ||
+                Keys.GetCommand(KeyCommand.MoveNorthAlt, KeyState.PressedThisFrame))
                 movementInputVector += new Vector2Int(0, 1);
-            if (Keys.GetCommand(KeyCommand.MoveSouth, KeyState.PressedThisFrame))
+            if (Keys.GetCommand(KeyCommand.MoveSouth, KeyState.PressedThisFrame) ||
+                Keys.GetCommand(KeyCommand.MoveSouthAlt, KeyState.PressedThisFrame))
                 movementInputVector += new Vector2Int(0, -1);
-            if (Keys.GetCommand(KeyCommand.MoveWest, KeyState.PressedThisFrame))
+            if (Keys.GetCommand(KeyCommand.MoveWest, KeyState.PressedThisFrame) ||
+                Keys.GetCommand(KeyCommand.MoveWestAlt, KeyState.PressedThisFrame))
                 movementInputVector += new Vector2Int(-1, 0);
-            if (Keys.GetCommand(KeyCommand.MoveEast, KeyState.PressedThisFrame))
+            if (Keys.GetCommand(KeyCommand.MoveEast, KeyState.PressedThisFrame) ||
+                Keys.GetCommand(KeyCommand.MoveEastAlt, KeyState.PressedThisFrame))
                 movementInputVector += new Vector2Int(1, 0);
 
             if (movementInputVector == Vector2Int.zero)
@@ -79,13 +83,17 @@ namespace TCD.Inputs
         {
             movementInputVector = Vector2Int.zero;
 
-            if (Keys.GetCommand(KeyCommand.MoveNorth, KeyState.Pressed))
+            if (Keys.GetCommand(KeyCommand.MoveNorth, KeyState.Pressed) ||
+                Keys.GetCommand(KeyCommand.MoveNorthAlt, KeyState.Pressed))
                 movementInputVector += new Vector2Int(0, 1);
-            if (Keys.GetCommand(KeyCommand.MoveSouth, KeyState.Pressed))
+            if (Keys.GetCommand(KeyCommand.MoveSouth, KeyState.Pressed) ||
+                Keys.GetCommand(KeyCommand.MoveSouthAlt, KeyState.Pressed))
                 movementInputVector += new Vector2Int(0, -1);
-            if (Keys.GetCommand(KeyCommand.MoveWest, KeyState.Pressed))
+            if (Keys.GetCommand(KeyCommand.MoveWest, KeyState.Pressed) ||
+                Keys.GetCommand(KeyCommand.MoveWestAlt, KeyState.Pressed))
                 movementInputVector += new Vector2Int(-1, 0);
-            if (Keys.GetCommand(KeyCommand.MoveEast, KeyState.Pressed))
+            if (Keys.GetCommand(KeyCommand.MoveEast, KeyState.Pressed) ||
+                Keys.GetCommand(KeyCommand.MoveEastAlt, KeyState.Pressed))
                 movementInputVector += new Vector2Int(1, 0);
 
             if (movementInputVector == Vector2Int.zero)

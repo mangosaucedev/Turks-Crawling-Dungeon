@@ -23,7 +23,12 @@ namespace TCD.Zones
         {
             if (TryGetPointWithinFeature(out Vector2Int position))
             {
-                string obj = Choose.Random(new string[] { "LooseChange", "LooseBills", "Spinel", "Zircon", "SharpStone", "SharpStone", "HealthPotion"});
+                string[] money = new string[] { "LooseChange", "LooseBills", "Spinel", "Zircon" };
+                string[] weapons = new string[] { "RustyDagger", "SharpStone", "Branch", "ThrowingRock" };
+                string[] wearables = new string[] { "NeckRuff", "PierrotBlouse", "PierrotPants", "GoldBand" };
+                string[] health = new string[] { "HealthPotion" };
+                string[] chosenArray = Choose.Random(money, weapons, wearables, health);
+                string obj = Choose.Random(chosenArray);
                 ObjectFactory.BuildFromBlueprint(obj, position);
             }
         }

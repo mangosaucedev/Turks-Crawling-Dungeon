@@ -40,7 +40,7 @@ namespace TCD.Zones
         {
             if (TryFindEmptyPositionInFeature(out Vector2Int position))
             {
-                string obj = Choose.Random(new string[] { "GenericEnemy", "Tarantula" });
+                string obj = Choose.Random(new string[] { "GenericEnemy", "Tarantula", "Shrunk", "Shrunk", "WhiteHand" });
                 ObjectFactory.BuildFromBlueprint(obj, position);
             }
         }

@@ -130,4 +130,43 @@
 
 	</Object>
 
+	<Object Name="Shrunk" InheritsFrom="Enemy">
+
+		<DisplayName>Shrunk</DisplayName>
+
+		<Description>Nothing to see here.</Description>
+
+		<Faction>Enemy</Faction>
+
+		<OverridePart Name="Hitpoints">
+			<Var Name="BaseHpMax">10</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">Shrunk</Var>
+		</OverridePart>
+
+		<OverridePart Name="ScoreOnDeath">
+			<Var Name="Score">50</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="WhiteHand" InheritsFrom="Enemy">
+
+		<DisplayName>White Hand</DisplayName>
+
+		<Description>Nothing to see here.</Description>
+
+		<Faction>Enemy</Faction>
+
+		<OverridePart Name="Hitpoints">
+			<Var Name="BaseHpMax">25</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">WhiteHand</Var>
+		</OverridePart>
+	</Object>
+
 </Objects>

@@ -52,6 +52,12 @@ namespace TCD.Inputs
         HotbarC7,
         HotbarC8,
         HotbarC9,
-        HotbarC0
+        HotbarC0,
+        // TODO - Delete these later after 8/13/21
+        MoveNorthAlt,
+        MoveSouthAlt,
+        MoveWestAlt,
+        MoveEastAlt,
+        //
     }
 }

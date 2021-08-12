@@ -35,6 +35,61 @@
 		</OverridePart>
 
 	</Object>
+
+	<Object Name="Branch" InheritsFrom="MeleeWeapon">
+
+		<DisplayName>Ashen Branch</DisplayName>
+
+		<Description>A heavy limb of dead wood. Could be used as a makeshift weapon.</Description>
+
+		<OverridePart Name="MeleeWeapon">
+			<Var Name="InitAttacks">Tier1Bludgeon:1</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">Branch</Var>
+		</OverridePart>
+
+	</Object>
+
+
+	<Object Name="RustyDagger" InheritsFrom="MeleeWeapon">
+
+		<DisplayName>Rust-Eaten Dagger</DisplayName>
+
+		<Description>Oxidation has coated this dagger in a thick mire of rust. Could still be used as a makeshift weapon.</Description>
+
+		<OverridePart Name="MeleeWeapon">
+			<Var Name="InitAttacks">Tier1Slash:1,Tier1Shank:2</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">RustyDagger</Var>
+		</OverridePart>
+
+	</Object>
+
+	<!-- Throwable -->
+
+	<Object Name="Throwable" InheritsFrom="MeleeWeapon">
+
+	</Object>
+
+	<Object Name="ThrowingRock" InheritsFrom="Throwable">
+
+		<DisplayName>Small Rock</DisplayName>
+
+		<Description>A small, heavy stone. Could be thrown as a weapon.</Description>
+
+		<OverridePart Name="MeleeWeapon">
+			<Var Name="InitAttacks">Tier1Bludgeon:1</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">ThrowingRock</Var>
+		</OverridePart>
+
+	</Object>
 	
 	<!-- Ranged -->
 	

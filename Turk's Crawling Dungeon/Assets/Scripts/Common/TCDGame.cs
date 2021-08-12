@@ -10,13 +10,17 @@ using TCD.UI.Notifications;
 
 namespace TCD
 {
-    public class Rawgue : MonoBehaviour
-    {
+    public class TCDGame : MonoBehaviour
+    { 
+        [SerializeField] private GameObject startupScreen;
+
         private GameStartup gameStartup = new GameStartup();
         
         private IEnumerator Start()
         {
+            startupScreen = Instantiate(startupScreen, ParentManager.Canvas);
             yield return StartCoroutine(gameStartup.StartGame());
+            Destroy(startupScreen);
             yield return ViewManager.OpenAndWaitForViewRoutine("Loading View");
             yield return ViewManager.OpenAndWaitForViewRoutine("Help View");
             NotificationHandler.Notify("Enter the Crawling Dungeon", "It is said that the mind can " +

@@ -115,7 +115,8 @@ namespace TCD.Objects.Parts
 
         public void PlayAudioClip(AudioClip audioClip)
         {
-            AudioPlayer.Play(audioClip);
+            if (!parent.parts.TryGet(out Visible visible) || visible.IsVisibleToPlayer())
+                AudioPlayer.Play(audioClip);
         } 
     }
 }

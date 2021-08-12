@@ -1,5 +1,5 @@
 # Turk's Crawling Dungeon
-A roguelike by Noah Sotolongo (Mangosauce).
+A roguelike by Noah Sotolongo (Mangosauce). https://mangosauce.itch.io/turks-crawling-dungeon
 
 ## Premise
 
@@ -12,6 +12,3 @@ CONTENT WARNING: Violence, strong language, themes of mental illness, mentions o
 Turk is on the verge of destruction. An obstinate darkness has descended upon him, ravaging his mind, body, and spirit. Inside him grows a yawning emptiness that threatens to swallow his entire being. Only a single ember of hope remains; a pinprick of light in the vast dark. What hope could such a meager spark have to banish oblivion?
 
 Take up arms against the sinister forces that plague him: guide Turk to salvation!
-
-## Main Page
-https://mangosauce.itch.io/turks-crawling-dungeon

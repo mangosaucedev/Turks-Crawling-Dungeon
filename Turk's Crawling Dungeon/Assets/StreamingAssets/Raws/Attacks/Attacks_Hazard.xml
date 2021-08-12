@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Attacks>
+	
+	<Attack Name="RoseThorns">
+		<Verb>rasp</Verb>
+		<VerbPastTense>rasped</VerbPastTense>
+		<MinDamage>5</MinDamage>
+		<MaxDamage>10</MaxDamage>
+		<DamageType>Cut</DamageType>
+	</Attack>
+		
+</Attacks>

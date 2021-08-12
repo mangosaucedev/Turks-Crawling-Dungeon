@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Objects>
+
+	<!-- Walls -->
+
+	<Object Name="Wall" InheritsFrom="PhysicalObject">
+
+		<DisplayName>Wall</DisplayName>
+
+		<Description>A sturdy construction.</Description>
+		
+		<OverridePart Name="Render">
+			<Var Name="Sprite">WallGeneric</Var>
+		</OverridePart>
+		
+		<Part Name="Obstacle">
+			<Var Name="IsImpassable">True</Var>
+			<Var Name="OccludesLineOfSight">True</Var>
+		</Part>
+
+		<Part Name="Invulnerable"/>
+		
+	</Object>
+
+	<!-- Doors -->
+
+	<Object Name="Door" InheritsFrom="PhysicalObject">
+
+		<DisplayName>Door</DisplayName>
+
+		<Description>A solid door.</Description>
+		
+		<OverridePart Name="Render">
+			<Var Name="Sprite">DoorGenericClosed</Var>
+		</OverridePart>
+		
+		<Part Name="Door">
+			<Var Name="CanClose">True</Var>
+			<Var Name="OpenSprite">DoorGenericOpen</Var>
+		</Part>
+		
+		<Part Name="Obstacle">
+			<Var Name="IsImpassable">True</Var>
+			<Var Name="OccludesLineOfSight">True</Var>
+		</Part>
+		
+	</Object>
+
+	<!-- Foliage -->
+	
+	<Object Name="Foliage" InheritsFrom="PhysicalObject">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">DeadBush</Var>
+			<Var Name="RenderOrder">-1</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="DeadBush" InheritsFrom="Foliage">
+
+		<DisplayName>Dead Bush</DisplayName>
+
+		<Description>A gnarled bunch of dry limbs.</Description>
+		
+	</Object>
+
+	<Object Name="RoseThorns" InheritsFrom="Foliage">
+
+		<DisplayName>Rose Thorns</DisplayName>
+
+		<Description>Barbed stalks of coiling vegetation.</Description>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">RoseThorns</Var>	
+		</OverridePart>
+
+		<Part Name="Hazard">
+			<Var Name="Attack">RoseThorns</Var>
+		</Part>
+		
+	</Object>
+	
+	<!-- Foliage Obstacles -->
+
+	<Object Name="FoliageObstacle" InheritsFrom="Foliage">
+
+		<Part Name="Obstacle">
+			<Var Name="IsImpassable">True</Var>
+			<Var Name="OccludesLineOfSight">True</Var>
+		</Part>
+		
+		<OverridePart Name="Render">
+			<Var Name="Sprite">Trunk0</Var>
+			<Var Name="RenderOrder">0</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="Trunk0" InheritsFrom="FoliageObstacle">
+
+		<DisplayName>Tree</DisplayName>
+
+		<Description>A gnarled trunk, roots firmly planted in the ground, standing around 5 feet tall before ending abruptly, as if cut.</Description>
+		
+	</Object>
+
+	<Object Name="DeadTree0" InheritsFrom="FoliageObstacle">
+
+		<DisplayName>Dead Tree</DisplayName>
+
+		<Description>An old, dead tree.</Description>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">DeadTree0</Var>
+		</OverridePart>
+	</Object>
+
+	<Object Name="DeadTree1" InheritsFrom="FoliageObstacle">
+
+		<DisplayName>Dead Tree</DisplayName>
+
+		<Description>An old, dead tree.</Description>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">DeadTree1</Var>
+		</OverridePart>
+	</Object>
+
+	<Object Name="DeadTree2" InheritsFrom="FoliageObstacle">
+
+		<DisplayName>Dead Tree</DisplayName>
+
+		<Description>An old, dead tree.</Description>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">DeadTree2</Var>
+		</OverridePart>
+	</Object>
+	
+	<!-- Grasses -->
+
+	<Object Name="DeadGrassLarge" InheritsFrom="Object">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">DeadGrassLarge</Var>
+			<Var Name="RenderOrder">-1</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="DeadGrassMedium" InheritsFrom="DeadGrassLarge">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">DeadGrassMedium</Var>
+		</OverridePart>
+
+	</Object>
+
+	
+	<!-- Tiles -->
+
+	<Object Name="Tile" InheritsFrom="Object">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">Grass</Var>
+			<Var Name="RenderOrder">-99</Var>
+		</OverridePart>
+
+		<Part Name="Invulnerable"/>
+
+	</Object>
+
+	<Object Name="GrassTile" InheritsFrom="Tile">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">Grass</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="GrassTileYellow" InheritsFrom="Tile">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">GrassYellow</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="BlackTile0" InheritsFrom="Tile">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">BlackTile0</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="BlackTile1" InheritsFrom="Tile">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">BlackTile1</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="CheckerTile" InheritsFrom="Tile">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">CheckerTile</Var>
+		</OverridePart>
+
+	</Object>
+	
+	<!-- Stairs -->
+
+	<Object Name="DownStairs" InheritsFrom="PhysicalObject">
+
+		<Part Name="DownStairs"/>
+
+		<Part Name="Invulnerable"/>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">DownStairs</Var>
+			<Var Name="RenderOrder">-1</Var>
+		</OverridePart>
+		
+	</Object>
+
+</Objects>

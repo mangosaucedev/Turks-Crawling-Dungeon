@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Objects>
+
+	<!-- Liquid -->
+
+	<Object Name="Liquid" InheritsFrom="PhysicalObject">
+
+		<Part Name="Tiling3x3">
+			<Var Name="UpperLeft">LiquidUpperLeft</Var>
+			<Var Name="UpperMiddle">LiquidUpperMiddle</Var>
+			<Var Name="UpperRight">LiquidUpperRight</Var>
+			<Var Name="CenterLeft">LiquidCenterLeft</Var>
+			<Var Name="Center">Liquid</Var>
+			<Var Name="CenterRight">LiquidCenterRight</Var>
+			<Var Name="LowerLeft">LiquidLowerLeft</Var>
+			<Var Name="LowerMiddle">LiquidLowerMiddle</Var>
+			<Var Name="LowerRight">LiquidLowerRight</Var>
+			<Var Name="Up">LiquidUp</Var>
+			<Var Name="Down">LiquidDown</Var>
+			<Var Name="Left">LiquidLeft</Var>
+			<Var Name="Right">LiquidRight</Var>
+			<Var Name="Horizontal">LiquidHorizontal</Var>
+			<Var Name="Vertical">LiquidVertical</Var>
+			<Var Name="Single">LiquidSingle</Var>
+		</Part>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">Liquid</Var>
+			<Var Name="RenderOrder">-2</Var>
+		</OverridePart>
+		
+	</Object>
+
+	<Object Name="Water10" InheritsFrom="Liquid">
+
+		<DisplayName>Water</DisplayName>
+
+		<Description>A pool of water. Probably not safe to drink as-is...</Description>
+		
+		<Part Name="Water">
+			<Var Name="LiquidColor">#19affa</Var>
+		</Part>
+		
+	</Object>
+
+
+	<Object Name="Acid10" InheritsFrom="Liquid">
+
+		<DisplayName>Acid</DisplayName>
+
+		<Description>A pool of roiling green acid. Extremely caustic. Strong acids aren't typically green, but you get a feeling your disbelief won't make this hazard any less potent.</Description>
+		
+		<Part Name="Acid">
+			<Var Name="LiquidColor">#BFFF00</Var>
+		</Part>
+
+	</Object>
+
+</Objects>

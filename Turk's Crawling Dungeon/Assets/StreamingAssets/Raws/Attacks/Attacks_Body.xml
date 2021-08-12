@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Attacks>
+
+	<Attack Name="WeakShove">
+		<Verb>shove</Verb>
+		<VerbPastTense>shoved</VerbPastTense>
+		<MinDamage>5</MinDamage>
+		<MaxDamage>15</MaxDamage>
+		<DamageType>Blunt</DamageType>
+	</Attack>
+
+	<Attack Name="UnarmedClaw">
+		<Verb>claw</Verb>
+		<VerbPastTense>clawed</VerbPastTense>
+		<MinDamage>10</MinDamage>
+		<MaxDamage>20</MaxDamage>
+		<DamageType>Cut</DamageType>
+	</Attack>
+		
+</Attacks>

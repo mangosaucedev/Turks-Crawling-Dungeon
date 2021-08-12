@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Objects>
+
+	<Object Name="Item" InheritsFrom="PhysicalObject">
+
+		<Part Name="Item"/>
+
+		<OverridePart Name="Render">
+			<Var Name="RenderOrder">-1</Var>
+		</OverridePart>
+
+	</Object>
+
+	<!-- Money -->
+
+	<Object Name="Money" InheritsFrom="Item">
+
+		<Part Name="AutoGet"/>
+
+		<Part Name="Money"/>
+
+		<OverridePart Name="Audio">
+			<Var Name="Death"></Var>
+		</OverridePart>
+		
+		<OverridePart Name="Render">
+			<Var Name="Sprite">Money</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="LooseChange" InheritsFrom="Money">
+
+		<DisplayName>Loose Change</DisplayName>
+
+		<DisplayNamePlural>Loose Change</DisplayNamePlural>
+
+		<Description>A few shiny coins.</Description>
+		
+		<OverridePart Name="Money">
+			<Var Name="MinStartingValue">0.01</Var>
+			<Var Name="MaxStartingValue">1</Var>
+		</OverridePart>
+		
+	</Object>
+
+	<Object Name="LooseBills" InheritsFrom="Money">
+
+		<DisplayName>Loose Bills</DisplayName>
+
+		<Description>Some crumpled dollar bills.</Description>
+		
+		<OverridePart Name="Money">
+			<Var Name="MinStartingValue">1</Var>
+			<Var Name="MaxStartingValue">5</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="Spinel" InheritsFrom="Money">
+
+		<DisplayName>Spinel</DisplayName>
+
+		<Description>A cut gemstone.</Description>
+
+		<OverridePart Name="Money">
+			<Var Name="BaseValue">5</Var>
+		</OverridePart>
+
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">Spinel</Var>
+		</OverridePart>
+	</Object>
+	
+	<Object Name="Zircon" InheritsFrom="Money">
+
+		<DisplayName>Zircon</DisplayName>
+
+		<Description>A cut gemstone.</Description>
+
+		<OverridePart Name="Money">
+			<Var Name="BaseValue">5</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">Zircon</Var>
+		</OverridePart>
+
+	</Object>
+	
+	<!-- Health -->
+
+	<Object Name="HealthPotion" InheritsFrom="Item">
+
+		<Part Name="AutoGet"/>
+
+		<Part Name="HpPotion">
+			<Var Name="Heal">40</Var>
+		</Part>
+
+		<OverridePart Name="Audio">
+			<Var Name="Death"></Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">HealthPotion</Var>
+		</OverridePart>
+
+	</Object>
+
+	<!-- Readable -->
+
+	<Object Name="Readable" InheritsFrom="Item">
+
+		<Part Name="Readable"/>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">TornPage</Var>
+		</OverridePart>
+		
+	</Object>
+
+	<Object Name="JournalEntryA" InheritsFrom="Readable">
+
+		<DisplayName>Journal Entry 1</DisplayName>
+
+		<Description>A scrap of paper, stained and crumpled, torn from Turk's journal. A few small drawings dot the margins. The largest of these is a life-drawing of the back of Turk's hand, its dimensions are tastefully rendered in finely crosshatched shadow. Next to it is scrawled: "MED REFILL APPTMT 9 AM SATURDAY!!!"</Description>
+		
+		<OverridePart Name="Readable">
+			<Var Name="Text">JournalEntryA</Var>
+		</OverridePart>
+		
+	</Object>
+
+	<Object Name="JournalEntryB" InheritsFrom="Readable">
+
+		<DisplayName>Journal Entry 2</DisplayName>
+
+		<Description></Description>
+
+		<OverridePart Name="Readable">
+			<Var Name="Text">JournalEntryB</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="JournalEntryC" InheritsFrom="Readable">
+
+		<DisplayName>Journal Entry 3</DisplayName>
+
+		<Description></Description>
+
+		<OverridePart Name="Readable">
+			<Var Name="Text">JournalEntryC</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="JournalEntryD" InheritsFrom="Readable">
+
+		<DisplayName>Journal Entry 4</DisplayName>
+
+		<Description></Description>
+
+		<OverridePart Name="Readable">
+			<Var Name="Text">JournalEntryD</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="JournalEntryE" InheritsFrom="Readable">
+
+		<DisplayName>Journal Entry 5</DisplayName>
+
+		<Description></Description>
+
+		<OverridePart Name="Readable">
+			<Var Name="Text">JournalEntryE</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="JournalEntryF" InheritsFrom="Readable">
+
+		<DisplayName>Journal Entry 6</DisplayName>
+
+		<Description></Description>
+
+		<OverridePart Name="Readable">
+			<Var Name="Text">JournalEntryF</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="JournalEntryG" InheritsFrom="Readable">
+
+		<DisplayName>Journal Entry 7</DisplayName>
+
+		<Description></Description>
+
+		<OverridePart Name="Readable">
+			<Var Name="Text">JournalEntryG</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="JournalEntryH" InheritsFrom="Readable">
+
+		<DisplayName>Journal Entry 8</DisplayName>
+
+		<Description></Description>
+
+		<OverridePart Name="Readable">
+			<Var Name="Text">JournalEntryH</Var>
+		</OverridePart>
+
+	</Object>
+
+</Objects>

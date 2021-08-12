@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DialogueNodes>
+
+	<!--Dialogue 1-->
+
+	<DialogueNode Name="PhoneDad0" Speaker="Dad" GoToNode="PhoneDad1">
+		<Text>Hello?</Text>
+	</DialogueNode>
+
+	<DialogueNode Name="PhoneDad1" Speaker="Turk" GoToNode="PhoneDad2">
+		<Text>Papa?</Text>
+	</DialogueNode>
+
+	<DialogueNode Name="PhoneDad2" Speaker="Dad" GoToNode="PhoneDad3">
+		<Text>Who is this?</Text>
+	</DialogueNode>
+
+	<DialogueNode Name="PhoneDad3" Speaker="Turk" GoToNode="PhoneDad4">
+		<Text>Papa, it's me, it's Christopher.</Text>
+	</DialogueNode>
+	
+	<DialogueNode Name="PhoneDad4" Speaker="Dad">
+		<Text>Fucking kids. (Hangs up.)</Text>
+	</DialogueNode>
+
+	<!--Dialogue 2-->
+
+	<DialogueNode Name="PhoneDad5" Speaker="Dad" GoToNode="PhoneDad6">
+		<Text>What the fuck could possibly be so important?</Text>
+		<Response GoToNode="PhoneDad6a">It's me, Chris.</Response>
+		<Response GoToNode="PhoneDad6b">I love you, Papa.</Response>
+		<Response GoToNode="PhoneDad6c">Your son, you son of a bitch.</Response>
+	</DialogueNode>
+
+	<DialogueNode Name="PhoneDad6a" Speaker="Turk" GoToNode="PhoneDad7a">
+		<Text>It's me, Chris. I love you, Papa.</Text>
+	</DialogueNode>
+
+	<DialogueNode Name="PhoneDad6b" Speaker="Turk" GoToNode="PhoneDad7a">
+		<Text>I love you, Dad.</Text>
+	</DialogueNode>
+
+	<DialogueNode Name="PhoneDad6c" Speaker="Turk" GoToNode="PhoneDad7b">
+		<Text>It's me, you son of a bitch. Your son. Now listen to me-</Text>
+	</DialogueNode>
+
+	<DialogueNode Name="PhoneDad7a" Speaker="Dad">
+		<Text>Stop wasting my time. (Hangs up.)</Text>
+	</DialogueNode>
+
+	<DialogueNode Name="PhoneDad7b" Speaker="Dad">
+		<Text>(Hangs up.)</Text>
+	</DialogueNode>
+	
+</DialogueNodes>

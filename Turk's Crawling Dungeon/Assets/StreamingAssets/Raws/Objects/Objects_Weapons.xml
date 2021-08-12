@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Objects>
+
+	<!-- Melee -->
+	
+	<Object Name="MeleeWeapon" InheritsFrom="Item">
+	
+		<Part Name="MeleeWeapon">
+			<Var Name="Slot">RightHand</Var>
+			<Var Name="OffSlot">LeftHand</Var>
+		</Part>
+
+	</Object>
+
+	<Object Name="TwoHandedMeleeWeapon" InheritsFrom="MeleeWeapon">
+		
+		<OverridePart Name="MeleeWeapon">
+			<Var Name="RequiresSecondSlot">True</Var>
+		</OverridePart>
+		
+	</Object>
+
+	<Object Name="SharpStone" InheritsFrom="MeleeWeapon">
+
+		<DisplayName>Sharp Stone</DisplayName>
+
+		<Description>An exceptionally sharp flake of glassy stone. Could be used as a makeshift weapon.</Description>
+		
+		<OverridePart Name="MeleeWeapon">
+			<Var Name="InitAttacks">Tier1Slash:1,Tier1Shank:2</Var>
+		</OverridePart>
+		
+		<OverridePart Name="Render">
+			<Var Name="Sprite">SharpStone</Var>
+		</OverridePart>
+
+	</Object>
+	
+	<!-- Ranged -->
+	
+</Objects>

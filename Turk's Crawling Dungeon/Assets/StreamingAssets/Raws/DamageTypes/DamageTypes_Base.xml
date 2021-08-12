@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DamageTypes>
+	
+	<!-- EXAMPLE: 20 Pure damage vs ANY Armor = 20 final damage -->
+	<DamageType Name="Pure"/>
+	
+	<!--
+		EXAMPLE: 20 Cut damage vs 20 Armor
+		
+		1) SOAK		 : Damage - ( Soak * Min( Damage, Armor)) ::  20 - (0.8 * 20) = 4
+		2) REDUCTION : Damage * ( (1 - Reduction) ^ Armor)    ::  4 * ((1 - 0.02) ^ 20) = 2.7 final damage
+		
+		EXAMPLE: 20 Cut damage vs 30 Armor
+		
+		1) SOAK	     : Damage - ( Soak * Min( Damage, Armor)) ::  20 - (0.8 * 20) = 4
+		2) REDUCTION : Damage * ( (1 - Reduction) ^ Armor)    ::  4 * ((1 - 0.02) ^ 30) = 2.2 final damage
+	-->
+	<DamageType Name="Cut" ArmorSoak="0.8" ArmorReduction="0.02"/>
+	
+	<!-- EXAMPLE: 20 Pierce damage vs 20 Armor = 5.7 final damage -->
+	<DamageType Name="Pierce" ArmorSoak="0.65" ArmorReduction="0.01"/>
+
+	<!-- EXAMPLE: 20 Blunt damage vs 20 Armor = 9.8 final damage -->
+	<DamageType Name="Blunt" ArmorSoak="0.4" ArmorReduction="0.01"/>
+
+	<!-- EXAMPLE: 20 Burn damage vs 20 Armor = 8.7 final damage -->
+	<DamageType Name="Burn" ArmorSoak="0.2" ArmorReduction="0.03"/>
+
+	<!-- EXAMPLE: 20 Acid damage vs 20 Armor = 7.2 final damage -->
+	<DamageType Name="Acid" ArmorSoak="0" ArmorReduction="0.05"/>
+
+</DamageTypes>

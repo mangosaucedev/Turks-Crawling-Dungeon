@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Objects>
+
+	<!-- Furniture -->
+
+	<Object Name="Furniture" InheritsFrom="PhysicalObject">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">TurkVessel</Var>
+		</OverridePart>
+
+		<Part Name="Obstacle">
+			<Var Name="IsImpassable">True</Var>
+		</Part>
+
+	</Object>
+
+	<Object Name="EyeTv" InheritsFrom="Furniture">
+
+		<DisplayName>Strange Eyeball</DisplayName>
+
+		<Description>The slimy organ fixes its gaze on Turk. In the depths of its dark pupil, a light begins to flicker and dance. Turk can only stare back in horror, the sound of blood rushing in his ears.</Description>
+		
+		<OverridePart Name="Render">
+			<Var Name="Sprite">EyeTv</Var>
+		</OverridePart>
+
+		<Part Name="EyeTv"/>
+		
+	</Object>
+
+	<Object Name="TurkArm" InheritsFrom="Furniture">
+
+		<DisplayName>Strange Sculpture</DisplayName>
+
+		<Description>A bizarre stone sculpture of an arm grasping for the ceiling. White slices score its length, no doubt in mockery of Turk's own scar-riddled skin.</Description>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">TurkArm</Var>
+		</OverridePart>
+
+	</Object>
+
+	<!-- Table -->
+
+	<Object Name="GenericTable" InheritsFrom="Furniture">
+
+		<DisplayName>Table</DisplayName>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">GenericTable</Var>
+		</OverridePart>
+
+	</Object>
+	
+	<!-- Chair -->
+
+	<Object Name="GenericChair" InheritsFrom="Furniture">
+
+		<DisplayName>Chair</DisplayName>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">GenericChair</Var>
+		</OverridePart>
+
+	</Object>
+
+	<!-- Container -->
+
+	<Object Name="Container" InheritsFrom="Furniture">
+
+		<Part Name="Inventory">
+			<Var Name="BaseMaxWeight">100</Var>
+		</Part>
+		
+	</Object>
+
+	<Object Name="TurkVessel" InheritsFrom="Container">
+		
+		<DisplayName>Strange Vessel</DisplayName>
+
+		<Description>A strange sculpture in the image of Turk. Large pieces of it have broken off, revealing it to be a hollow vessel made of brittle stone.</Description>
+		
+	</Object>
+
+	<Object Name="MetalBarrel" InheritsFrom="Container">
+
+		<DisplayName>Metal Barrel</DisplayName>
+
+		<Description>A rusted barrel. Judging from the thick coating of soot, it was recently used to burn something.</Description>
+		
+		<OverridePart Name="Render">
+			<Var Name="Sprite">MetalBarrel</Var>
+		</OverridePart>
+		
+	</Object>
+
+	<Object Name="MetalShelves" InheritsFrom="Container">
+
+		<DisplayName>Metal Shelves</DisplayName>
+
+		<Description>A sturdy shelving unit.</Description>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">MetalShelves</Var>
+		</OverridePart>
+
+	</Object>
+
+</Objects>

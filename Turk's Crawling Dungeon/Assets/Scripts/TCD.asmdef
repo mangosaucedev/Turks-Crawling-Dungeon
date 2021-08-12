@@ -1,0 +1,16 @@
+{
+    "name": "TCD",
+    "rootNamespace": "TCD",
+    "references": [
+        "GUID:374d62203b6a5da4b9f53877b1530332"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

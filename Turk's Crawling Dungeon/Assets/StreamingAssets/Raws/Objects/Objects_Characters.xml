@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Objects>
+
+	<Object Name="Character" InheritsFrom="PhysicalObject">
+		
+		<OverridePart Name="PhysicsSim">
+			<Var Name="BaseWeight">150</Var>
+		</OverridePart>
+
+		<OverridePart Name="Hitpoints">
+			<Var Name="BaseHpMax">20</Var>
+		</OverridePart>
+		
+		<Part Name="Actor"/>
+
+		<Part Name="Combat"/>
+		
+		<Part Name="Dodge"/>
+
+		<Part Name="Equipment"/>
+
+		<Part Name="Movement"/>
+
+		<Part Name="Wallet"/>
+
+		<Part Name="Brain">
+			<Var Name="SightRadius">8</Var>
+		</Part>
+
+		<Part Name="Inventory">
+			<Var Name="BaseMaxWeight">200</Var>
+		</Part>
+		
+		<Part Name="Obstacle">
+			<Var Name="IsImpassable">True</Var>
+		</Part>
+
+		<Part Name="Stats">
+			<Var Name="InitStats">Strength:8,Agility:8,Constitution:8,Cunning:8,Willpower:8,Charm:8,HitAccuracy:90,Dodge:5,PhysicalSave:10,MentalSave:10</Var>
+		</Part>
+
+	</Object>
+	
+	<Object Name="Player" InheritsFrom="Character">
+
+		<DisplayName>Turk</DisplayName>
+
+		<Description>Christopher "Turk" Turkinopoulos, the youngest son of immigrants Vasilis and Dora Turkinopoulos. Passionate and sensitive, Turk frequently finds himself at the mercy of his own turbulent emotions.</Description>
+
+		<Faction>Player</Faction>
+
+		<RemovePart Name="Brain"/>
+
+		<RemovePart Name="Movement"/>
+		
+		<RemovePart Name="Wallet"/>
+
+		<OverridePart Name="Hitpoints">
+			<Var Name="BaseHpMax">120</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">Player</Var>
+		</OverridePart>
+
+		<OverridePart Name="Stats">
+			<Var Name="InitStats">Strength:12,Agility:12,Constitution:12,Cunning:12,Willpower:12,Charm:12,HitAccuracy:95,Dodge:5, Armor:5,PhysicalSave:10,MentalSave:10</Var>
+		</OverridePart>
+
+		<Part Name="GameResetOnDestroy"/>
+		
+		<Part Name="Invulnerable"/>
+
+		<Part Name="PlayerMovement"/>
+		
+		<Part Name="PlayerUnarmed"/>
+
+		<Part Name="PlayerWallet"/>
+		
+		<Part Name="Talents.Tackle"/>
+	</Object>
+
+	<!-- Enemies -->
+	
+	<Object Name="Enemy" InheritsFrom="Character">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">GenericEnemy</Var>
+		</OverridePart>
+
+		<Part Name="ScoreOnDeath">
+			<Var Name="Score">100</Var>
+		</Part>
+
+	</Object>
+
+	<Object Name="GenericEnemy" InheritsFrom="Enemy">
+
+		<DisplayName>Tabula Rasa</DisplayName>
+
+		<Description>Nothing to see here.</Description>
+
+		<Faction>Enemy</Faction>
+
+		<OverridePart Name="Visible">
+			<Var Name="VisibilityRadius">1</Var>
+		</OverridePart>
+	
+	</Object>
+
+	<Object Name="Tarantula" InheritsFrom="Enemy">
+
+		<DisplayName>Tarantula</DisplayName>
+
+		<Description>Nothing to see here.</Description>
+
+		<Faction>Enemy</Faction>
+
+		<OverridePart Name="Hitpoints">
+			<Var Name="BaseHpMax">35</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">Tarantula</Var>
+		</OverridePart>
+
+		<OverridePart Name="ScoreOnDeath">
+			<Var Name="Score">250</Var>
+		</OverridePart>
+
+	</Object>
+
+</Objects>

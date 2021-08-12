@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Environments>
+
+	<Environment Name="Mundane">
+		<FurnishingDensity>0.35</FurnishingDensity>
+		<Furnishers>
+			<Furnisher Name="TableAndChairs" Weight="2"/>
+			<Furnisher Name="RandomFurniture" Weight="4"/>
+			<Furnisher Name="Bush"/>
+			<Furnisher Name="Lake"/>
+		</Furnishers>
+		<Furnishings>
+			<Furnishing Name="GenericTable" Category="Table,Random"/>
+			<Furnishing Name="GenericChair" Category="Chair,Random"/>
+			<Furnishing Name="DeadBush" Category="Bush"/>
+			<Furnishing Name="RoseThorns" Category="Bush"/>
+			<Furnishing Name="DeadGrassLarge" Category="Bush"/>
+			<Furnishing Name="DeadGrassMedium" Category="Bush"/>
+			<Furnishing Name="DeadTree0" Category="Bush"/>
+			<Furnishing Name="DeadTree1" Category="Bush"/>
+			<Furnishing Name="DeadTree2" Category="Bush"/>
+			<Furnishing Name="Water10" Category="Lake" Weight="8"/>
+			<Furnishing Name="Acid10" Category="Lake"/>
+			<Furnishing Name="EyeTv" Category="Random" Weight="2"/>
+			<Furnishing Name="TurkVessel" Category="Random" Weight="2"/>
+			<Furnishing Name="TurkArm" Category="Random" Weight="2"/>
+		</Furnishings>
+	</Environment>
+
+	<Environment Name="Rest">
+		<FurnishingDensity>0.35</FurnishingDensity>
+		<Furnishers>
+			<Furnisher Name="RandomFurniture" Weight="2"/>
+			<Furnisher Name="Bush" Weight="2"/>
+			<Furnisher Name="Lake"/>
+			<Furnisher Name="Level0FinalChamber" Forced="True" Exclusive="True"/>
+			<Furnisher Name="Grass" Exclusive="True"/>
+		</Furnishers>
+		<Furnishings>
+			<Furnishing Name="Water10" Category="Lake"/>
+			<Furnishing Name="GrassTile" Category="Grass" Weight="3"/>
+			<Furnishing Name="GrassTileYellow" Category="Grass"/>
+			<Furnishing Name="DeadBush" Category="Bush"/>
+			<Furnishing Name="RoseThorns" Category="Bush"/>
+			<Furnishing Name="DeadTree0" Category="Bush,Random"/>
+			<Furnishing Name="DeadTree1" Category="Bush,Random"/>
+			<Furnishing Name="DeadTree2" Category="Bush,Random"/>
+			<Furnishing Name="DeadGrassLarge" Category="Bush"/>
+			<Furnishing Name="DeadGrassMedium" Category="Bush"/>
+		</Furnishings>
+	</Environment>
+
+	<Environment Name="Zoo">
+		<FurnishingDensity>0.3</FurnishingDensity>
+		<Furnishers>
+			<Furnisher Name="Grass" Exclusive="True"/>
+			<Furnisher Name="Bush"/>
+		</Furnishers>
+		<Furnishings>
+			<Furnishing Name="EyeTv" Category="Bush"/>
+			<Furnishing Name="BlackTile0" Category="Grass" Weight="3"/>
+			<Furnishing Name="BlackTile1" Category="Grass"/>
+		</Furnishings>
+	</Environment>
+
+	<Environment Name="SafetyChamber">
+		<FurnishingDensity>0.4</FurnishingDensity>
+		<Furnishers>
+			<Furnisher Name="Bush"/>
+		</Furnishers>
+		<Furnishings>
+			<Furnishing Name="RoseThorns" Category="Bush"/>
+		</Furnishings>
+	</Environment>
+
+	<Environment Name="FinalChamber">
+		<FurnishingDensity>0.3</FurnishingDensity>
+		<Furnishers>
+			<Furnisher Name="Level0FinalChamber" Exclusive="True"/>
+			<Furnisher Name="Bush" Weight="2"/>
+			<Furnisher Name="Grass" Forced="True" Exclusive="True"/>
+		</Furnishers>
+		<Furnishings>
+			<Furnishing Name="DeadTree0" Category="Bush"/>
+			<Furnishing Name="DeadTree1" Category="Bush"/>
+			<Furnishing Name="DeadTree2" Category="Bush"/>
+			<Furnishing Name="CheckerTile" Category="Grass"/>
+		</Furnishings>
+	</Environment>
+	
+</Environments>

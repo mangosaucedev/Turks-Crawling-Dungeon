@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Objects>
+	
+	<Object Name="Object">
+
+		<Faction>Neutral</Faction>
+		
+		<Part Name="Render">
+			<Var Name="Sprite">PlaceholderGuy</Var>
+		</Part>
+	
+	</Object>
+
+	<Object Name="PhysicalObject" InheritsFrom="Object">
+
+		<Part Name="Audio">
+			<Var Name="Death">GlassBreak</Var>
+			<Var Name="PickedUp">PickupItem0</Var>
+			<Var Name="Dropped">GlassBreak</Var>
+			<Var Name="DoorOpened">DoorOpen0</Var>
+			<Var Name="DoorClosed">DoorClose0</Var>
+			<Var Name="Hit0">HitSplat0</Var>
+			<Var Name="Hit1">HitSplat1</Var>
+			<Var Name="Hit2">HitSplat2</Var>
+		</Part>
+
+		<Part Name="Inspectable" />
+		
+		<Part Name="Visible" />
+			
+		<Part Name="PhysicsSim">
+			<Var Name="BaseWeight">0.1</Var>
+		</Part>
+
+		<Part Name="Hitpoints">
+			<Var Name="BaseHpMax">1</Var>
+		</Part>
+
+
+	</Object>
+
+</Objects>

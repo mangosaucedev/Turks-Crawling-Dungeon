@@ -32,7 +32,7 @@ namespace TCD.Objects.Parts
 
         }
 
-        public virtual bool IsFinished() => true;
+        public virtual bool IsFinished() => false;
 
         protected virtual void PushGoal() => brain.goals.Push(this);
         

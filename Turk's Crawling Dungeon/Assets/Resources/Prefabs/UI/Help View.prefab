@@ -88,11 +88,12 @@ MonoBehaviour:
 
 
     Press Space and a direction key
-    to interact with an object adjacent to you.
+    to interact with an object adjacent to you. Press I to open your inventory and
+    see your carried and equipped items.
 
 
-    Press Escape to cancel an action
-    and close most menus. Escape also brings up the options menu.
+    Press Escape to cancel an action and
+    close most menus. Escape also brings up the options menu.
 
 
     Use the mouse

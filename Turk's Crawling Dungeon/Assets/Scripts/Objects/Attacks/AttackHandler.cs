@@ -44,6 +44,8 @@ namespace TCD.Objects.Attacks
             {
                 if (currentAttacker == PlayerInfo.currentPlayer)
                     MessageLog.Add($"Your attack against {currentDefender.display.GetDisplayName()} {e.Result}!");
+                if (currentDefender == PlayerInfo.currentPlayer)
+                    MessageLog.Add($"{currentAttacker.display.GetDisplayName()}'s attack against you {e.Result}!");
                 return false;
             }
             return true;
@@ -72,6 +74,8 @@ namespace TCD.Objects.Attacks
             {
                 if (currentAttacker == PlayerInfo.currentPlayer)
                     MessageLog.Add($"Your attack against {currentDefender.display.GetDisplayName()} failed to penetrate!");
+                if (currentDefender == PlayerInfo.currentPlayer)
+                    MessageLog.Add($"{currentAttacker.display.GetDisplayName()}'s attack against you failed to penetrate!");
                 return false;
             }
 

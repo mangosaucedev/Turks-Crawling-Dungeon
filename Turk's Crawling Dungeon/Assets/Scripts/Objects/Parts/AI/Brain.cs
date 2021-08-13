@@ -75,9 +75,9 @@ namespace TCD.Objects.Parts
         private void PerformSequentialActions()
         {
             int actionsPerformed = 0;
+            int energySpent = 0;
             while (goals.Count > 0 && energy > 0)
             {
-                PopFinishedGoals();
                 if (goals.Count > 0)
                 {
                     Goal goal = goals.Peek();
@@ -85,12 +85,13 @@ namespace TCD.Objects.Parts
                     goal.PerformAction();
                     actionsPerformed++;
                     energy -= cost;
-                    if (cost <= 0)
-                        goto Exit;
+                    energySpent += cost;
                 }
+                PopFinishedGoals();
             }
-            Exit:
-            Think($"Performed {actionsPerformed} actions this turn.");
+            if (energy > 0)
+                energy = 0;
+            Think($"Performed {actionsPerformed} actions this turn for {energySpent} energy.");
         }
 
         public void Think(string thought)

@@ -25,7 +25,8 @@ namespace TCD.Objects.Parts
 
         public bool IsInAttackRange(BaseObject target)
         {
-            return false;
+            int distance = brain.query.distance.GetDistanceToInstanceInCells(target);
+            return distance <= GetMaxAttackRange();
         }
     }
 }

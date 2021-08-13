@@ -77,5 +77,25 @@ namespace TCD.Objects.Parts
             Transform spriteTransform = parent.SpriteRenderer.transform;
             spriteTransform.localPosition = Vector2.zero;
         }
+
+        public int GetCostToMove()
+        {
+            GetMoveCostEvent getMoveCostEvent = LocalEvent.Get<GetMoveCostEvent>();
+            getMoveCostEvent.obj = parent;
+            getMoveCostEvent.cost = TimeInfo.TIME_PER_STANDARD_TURN;
+            FireEvent(parent, getMoveCostEvent);
+            return getMoveCostEvent.cost;
+        }
+
+        public int GetMoveCostToCell(Cell cell)
+        {
+            GetMoveCostToCellEvent getMoveCostToCellEvent = LocalEvent.Get<GetMoveCostToCellEvent>();
+            getMoveCostToCellEvent.obj = parent;
+            getMoveCostToCellEvent.cell = cell;
+            FireEvent(cell, getMoveCostToCellEvent);
+            if (getMoveCostToCellEvent.CanMoveToCell())
+                return getMoveCostToCellEvent.cost;
+            return 999;
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace TCD
     {
         public List<Interaction> interactions = new List<Interaction>();
 
-        public static new readonly string id = "Get Move Cost";
+        public static new readonly string id = "Get Interactions";
 
         public override string Id => id;
 

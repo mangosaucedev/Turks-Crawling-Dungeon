@@ -47,5 +47,10 @@ namespace TCD.Objects.Parts
             lastDamagedBy = e.attacker;
             lastDamagedByDisplayName = lastDamagedBy.display.GetDisplayName();
         }
+
+        public int GetAttackCost(BaseObject target)
+        {
+            return TimeInfo.TIME_PER_STANDARD_TURN;
+        }
     }
 }

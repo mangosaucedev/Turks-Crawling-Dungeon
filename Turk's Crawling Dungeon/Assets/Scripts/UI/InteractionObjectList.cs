@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TCD.Objects;
+using TCD.Objects.Parts;
 
 namespace TCD.UI
 {
@@ -24,7 +25,10 @@ namespace TCD.UI
         private void SetupButtons()
         {
             foreach (BaseObject obj in objects)
-                CreateButton(obj);
+            {
+                if (obj.parts.Get<Inspectable>())
+                    CreateButton(obj);
+            }
             ViewButton closeButton = ViewButton.Create<ViewButton>("View Button", content);
             closeButton.onClick.AddListener(CloseView);
             closeButton.SetText("Close");

@@ -38,7 +38,7 @@ namespace TCD
                 if (e != null)
                 {
                     e.context = context;
-                    pool.RemoveAt(0);
+                    pool.Remove(e);
                     return e;
                 }
             }

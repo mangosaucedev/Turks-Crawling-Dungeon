@@ -29,6 +29,7 @@ namespace TCD.Objects.Parts
             energy += turnEnergy;
             e.energy = energy;
             FireEvent(parent, e);
+            energy = e.energy;
         }
     }
 }

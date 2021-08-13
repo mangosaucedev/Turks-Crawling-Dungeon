@@ -11,12 +11,7 @@ namespace TCD.Objects.Parts
 
         }
 
-        public override int GetTimeCost()
-        {
-            if (obj.parts.TryGet(out Actor actor))
-                return actor.energy;
-            return 0;
-        }
+        public override int GetTimeCost() => 0;
 
         public override void PerformAction()
         {
@@ -44,6 +39,6 @@ namespace TCD.Objects.Parts
             return false;
         }
 
-        public override bool IsFinished() => false;
+        public override bool IsFinished() => true;
     }
 }

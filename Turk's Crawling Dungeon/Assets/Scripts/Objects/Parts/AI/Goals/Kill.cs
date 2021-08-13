@@ -9,12 +9,28 @@ namespace TCD.Objects.Parts
     {
         private BaseObject target;
 
+        private Combat Combat => brain.parent.parts.Get<Combat>();
+
         public Kill(Brain brain, BaseObject target) : base(brain)
         {
             this.target = target;
         }
 
-        public override int GetTimeCost() => 0;
+        public override int GetTimeCost()
+        {
+            if (IsInAttackRange())
+                return Combat?.GetAttackCost(target) ?? 0;
+            return 0;
+        }
+
+        private bool IsInAttackRange()
+        {
+            int distanceToTarget =
+                Query.distance.GetDistanceToInstanceInCells(target);
+            int maxAttackRange =
+                Query.attack.GetMaxAttackRange();
+            return distanceToTarget <= maxAttackRange;
+        }
 
         public override void PerformAction()
         {
@@ -45,12 +61,8 @@ namespace TCD.Objects.Parts
 
         private bool TryToCloseIntoAttackDistance()
         {
-            int distanceToTarget = 
-                Query.distance.GetDistanceToInstanceInCells(target);
-            int maxAttackRange = 
-                Query.attack.GetMaxAttackRange();
-
-            if (distanceToTarget > maxAttackRange)
+            bool isIsInAttackRange = IsInAttackRange();
+            if (!isIsInAttackRange)
             {
                 Think("I am out of range to attack target; closing distance.");
                 PushChildGoal(new MoveInRangeOfTarget(brain, target));
@@ -65,7 +77,7 @@ namespace TCD.Objects.Parts
 
         private bool TryToAttackTarget()
         {
-            if (!obj.parts.TryGet(out Combat combat))
+            if (!Combat)
             {
                 Think("I am incapable of combat!");
                 return false;

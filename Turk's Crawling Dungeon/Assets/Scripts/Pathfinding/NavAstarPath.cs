@@ -73,8 +73,8 @@ namespace TCD.Pathfinding
         }
 
         private bool NodeCanBeEvaluated(NavNode node) =>
-            !((!evaluator.IsPassable(node) && node.position != targetPosition && node.position != startPosition) || 
-            closedSet.Contains(node));
+            (evaluator.IsPassable(node) && !closedSet.Contains(node)) || 
+            node == startNode || node == targetNode;
 
 
         private void EvaluateNode(NavNode node)

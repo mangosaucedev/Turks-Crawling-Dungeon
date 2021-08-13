@@ -24,7 +24,11 @@ namespace TCD.Objects.Parts
 
         public int Count => collection.Count;
 
-        public void Push(Goal goal) => collection.Add(goal);
+        public void Push(Goal goal)
+        {
+            brain.Think("pushing goal " + goal.Name);
+            collection.Add(goal);
+        }
 
         public GoalCollection(Brain brain)
         {
@@ -37,6 +41,7 @@ namespace TCD.Objects.Parts
             {
                 Goal goal = collection[Count - 1];
                 collection.Remove(goal);
+                brain.Think("popping goal " + goal.Name);
                 return goal;
             } 
             return null;

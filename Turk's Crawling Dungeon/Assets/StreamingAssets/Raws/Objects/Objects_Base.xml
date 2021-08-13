@@ -14,9 +14,7 @@
 	<Object Name="PhysicalObject" InheritsFrom="Object">
 
 		<Part Name="Audio">
-			<Var Name="Death">GlassBreak</Var>
 			<Var Name="PickedUp">PickupItem0</Var>
-			<Var Name="Dropped">GlassBreak</Var>
 			<Var Name="DoorOpened">DoorOpen0</Var>
 			<Var Name="DoorClosed">DoorClose0</Var>
 			<Var Name="Hit0">HitSplat0</Var>

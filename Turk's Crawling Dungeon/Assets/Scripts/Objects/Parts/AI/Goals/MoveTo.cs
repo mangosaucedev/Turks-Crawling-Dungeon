@@ -22,43 +22,26 @@ namespace TCD.Objects.Parts
             this.targetPosition = targetPosition;
         }
 
-        protected override void OnInstantiation()
-        {
-            base.OnInstantiation();
-            TryToFindPathToTarget();
-        }
-
         public override int GetTimeCost()
         {
-            if (path == null || !path.isValid)
+            if (path == null || path.GetTargetPosition() != GetTargetPosition())
+                path = new NavAstarPath(Position, GetTargetPosition(), new ObjectPathEvaluator());
+                
+            if (!path.isValid)
             {
                 FailToParent();
                 return 0;
             }
 
-            GetMoveCostEvent getMoveCostEvent = LocalEvent.Get<GetMoveCostEvent>();
-            getMoveCostEvent.obj = brain.parent;
-            getMoveCostEvent.cost = TimeInfo.TIME_PER_STANDARD_TURN;
-            brain.FireEvent(brain.parent, getMoveCostEvent);
-            int cost = getMoveCostEvent.cost;
-
-            GetMoveCostToCellEvent getMoveCostToCellEvent = LocalEvent.Get<GetMoveCostToCellEvent>();
-            getMoveCostToCellEvent.obj = brain.parent;
             Cell cell = GetNextCellInPath();
             if (cell == null)
                 return 0;
-            getMoveCostToCellEvent.cell = cell;
-            getMoveCostToCellEvent.cost = cost;
-            brain.FireEvent(cell, getMoveCostToCellEvent);
-            if (getMoveCostToCellEvent.CanMoveToCell())
-                return getMoveCostToCellEvent.cost;
-            Think("Moving is too time-expensive!");
-            return 0;
+            return Movement.GetCostToMove() + Movement.GetMoveCostToCell(cell);
         }
 
         protected Cell GetNextCellInPath()
         {
-            if (path == null || !path.isValid)
+            if ((path == null || path.GetTargetPosition() != GetTargetPosition()) && !TryToFindPathToTarget())
                 return null;
 
             Vector2Int nextPosition = Position;
@@ -80,7 +63,7 @@ namespace TCD.Objects.Parts
 
             Think("I am moving to a target position.");
 
-            if (!TryToFindPathToTarget())
+            if ((path == null || path.GetTargetPosition() != GetTargetPosition()) && !TryToFindPathToTarget())
                 return;
 
             if (Movement)

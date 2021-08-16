@@ -12,7 +12,7 @@ namespace TCD.UI
         [SerializeField] private Transform content;
         private Cell cell;
         private List<BaseObject> objects;
-
+        private int buttonIndex;
         protected override string ViewName => gameObject.name;
 
         private void Start()
@@ -24,12 +24,19 @@ namespace TCD.UI
 
         private void SetupButtons()
         {
+            buttonIndex = 0;
             foreach (BaseObject obj in objects)
             {
                 if (obj.parts.Get<Inspectable>())
+                {
                     CreateButton(obj);
+                    buttonIndex++;
+                }
             }
             ViewButton closeButton = ViewButton.Create<ViewButton>("View Button", content);
+            ButtonInputKey inputKey = ButtonInputKeys.GetInputKey(buttonIndex);
+            if (inputKey != null)
+                closeButton.key = inputKey.str;
             closeButton.onClick.AddListener(CloseView);
             closeButton.SetText("Close");
         }
@@ -37,6 +44,9 @@ namespace TCD.UI
         private void CreateButton(BaseObject obj)
         {
             ViewButton button = ViewButton.Create<ViewButton>("View Button", content);
+            ButtonInputKey inputKey = ButtonInputKeys.GetInputKey(buttonIndex);
+            if (inputKey != null)
+                button.key = inputKey.str;
             button.onClick.AddListener(() => { OnObjectButtonClick(obj); });
             button.SetText(obj.display.GetDisplayName());
         }

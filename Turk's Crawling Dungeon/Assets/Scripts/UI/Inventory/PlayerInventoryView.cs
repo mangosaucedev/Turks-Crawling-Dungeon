@@ -11,6 +11,8 @@ namespace TCD.UI
     {
         [SerializeField] private Transform carriedItemsParent;
 
+        private int buttonIndex;
+
         protected override void Awake()
         {
             base.Awake();
@@ -33,8 +35,12 @@ namespace TCD.UI
 
         private void UpdateCarriedItems()
         {
+            buttonIndex = 0;
             foreach (BaseObject item in currentInventory.items)
+            {
                 CreateButton(item);
+                buttonIndex++;
+            }
         }
 
         private void UpdateEquippedItems()
@@ -45,6 +51,9 @@ namespace TCD.UI
         private void CreateButton(BaseObject item)
         {
             ViewButton button = ViewButton.Create<ViewButton>("Item Button", carriedItemsParent);
+            ButtonInputKey inputKey = ButtonInputKeys.GetInputKey(buttonIndex);
+            if (inputKey != null)
+                button.key = inputKey.str;
             button.onClick.AddListener(() => { OnItemButtonClick(item); });
             button.SetText(item.display.GetDisplayName());
             inventoryElements.Add(button.gameObject);

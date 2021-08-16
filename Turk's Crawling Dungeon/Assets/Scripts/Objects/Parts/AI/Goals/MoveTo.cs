@@ -57,19 +57,24 @@ namespace TCD.Objects.Parts
             return CurrentZoneInfo.grid[nextPosition];
         }
 
-        public override void PerformAction()
+        public override bool PerformAction()
         {
-            base.PerformAction();
+            if (!base.PerformAction())
+                return false;
 
             Think("I am moving to a target position.");
 
             if ((path == null || path.GetTargetPosition() != GetTargetPosition()) && !TryToFindPathToTarget())
-                return;
+                return false;
 
             if (Movement)
+            {
                 MoveTowardsTargetPosition();
+                return true;
+            }
             else
                 Think("I can't move!");
+            return false;
         }
 
         protected virtual Vector2Int GetTargetPosition() =>

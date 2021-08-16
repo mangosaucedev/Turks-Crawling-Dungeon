@@ -13,6 +13,7 @@ namespace TCD.UI
         [SerializeField] private Transform content;
         private BaseObject obj;
         private List<Interaction> interactions;
+        private int buttonIndex;
 
         protected override string ViewName => gameObject.name;
 
@@ -26,9 +27,16 @@ namespace TCD.UI
         private void SetupButtons()
         {
             GetInteractions();
+            buttonIndex = 0;
             foreach (Interaction interaction in interactions)
+            {
                 CreateButton(interaction);
+                buttonIndex++;
+            }
             ViewButton closeButton = ViewButton.Create<ViewButton>("View Button", content);
+            ButtonInputKey inputKey = ButtonInputKeys.GetInputKey(buttonIndex);
+            if (inputKey != null)
+                closeButton.key = inputKey.str;
             closeButton.onClick.AddListener(CloseView);
             closeButton.SetText("Close");
         }
@@ -43,6 +51,9 @@ namespace TCD.UI
         private void CreateButton(Interaction interaction)
         {
             ViewButton button = ViewButton.Create<ViewButton>("View Button", content);
+            ButtonInputKey inputKey = ButtonInputKeys.GetInputKey(buttonIndex);
+            if (inputKey != null)
+                button.key = inputKey.str;
             button.onClick.AddListener(() => { OnInteractionButtonClick(interaction); });
             button.SetText(interaction.name);
         }

@@ -27,9 +27,9 @@ namespace TCD.Objects.Parts
 
         public abstract int GetTimeCost();
 
-        public virtual void PerformAction()
+        public virtual bool PerformAction()
         {
-
+            return true;
         }
 
         public virtual bool IsFinished() => false;

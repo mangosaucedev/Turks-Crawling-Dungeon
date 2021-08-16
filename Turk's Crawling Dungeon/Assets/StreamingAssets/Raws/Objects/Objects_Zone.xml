@@ -22,6 +22,22 @@
 		
 	</Object>
 
+	<Object Name="MossyWall" InheritsFrom="Wall">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">MossyWall</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="BoneWall" InheritsFrom="Wall">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">BoneWall</Var>
+		</OverridePart>
+
+	</Object>
+
 	<!-- Doors -->
 
 	<Object Name="Door" InheritsFrom="PhysicalObject">

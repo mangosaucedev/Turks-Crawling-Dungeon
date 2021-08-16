@@ -5,6 +5,8 @@
 
 		<Part Name="Item"/>
 
+		<Part Name="ItemGraphic"/>
+		
 		<OverridePart Name="Render">
 			<Var Name="RenderOrder">-1</Var>
 		</OverridePart>

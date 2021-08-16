@@ -9,6 +9,7 @@ namespace TCD.Zones
     {
         private IZoneParams zoneParams;
         private ZoneEnvironments zoneEnvironments; 
+        private ZoneTerrain zoneTerrain; 
         private List<IFeature> features = new List<IFeature>();
         private List<IChamber> chambers = new List<IChamber>();
         private List<ICorridor> corridors = new List<ICorridor>();
@@ -25,6 +26,12 @@ namespace TCD.Zones
         {
             get => zoneEnvironments;
             set => zoneEnvironments = value;
+        }
+
+        public ZoneTerrain ZoneTerrain
+        {
+            get => zoneTerrain;
+            set => zoneTerrain = value;
         }
 
         public int Width => ZoneParams.Width;

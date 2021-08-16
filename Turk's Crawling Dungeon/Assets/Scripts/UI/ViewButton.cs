@@ -10,10 +10,12 @@ namespace TCD.UI
 {
     public class ViewButton : Selectable, IElement, IPointerClickHandler, IEventSystemHandler, ISubmitHandler
     {
-        [SerializeField] private View view;
-        [SerializeField] private Text text;
-
+        public string key;
         public UnityEvent onClick;
+
+        [SerializeField] private View view;
+        [SerializeField] private Text keyText;
+        [SerializeField] private Text text;
 
         public string ViewName
         {
@@ -30,12 +32,11 @@ namespace TCD.UI
             }
         }
 
-        protected override void Awake()
+        protected override void Start()
         {
-            base.Awake();
-
-            if (!text)
-                text = GetComponentInChildren<Text>();
+            base.Start();
+            if (!string.IsNullOrEmpty(key))
+                keyText.text = key + ")";
         }
 
         protected override void OnEnable()
@@ -52,15 +53,24 @@ namespace TCD.UI
             View.UpdateEvent -= OnSetInactive;
         }
 
-        public static T Create<T>(string prefabName, Transform parent) where T : ViewButton
+        protected virtual void Update()
         {
-            return Create<T>(Assets.Get<GameObject>(prefabName), parent);
+            CheckIfKeyPressed();
         }
 
-        public static T Create<T>(GameObject prefab, Transform parent) where T : ViewButton
+        public static T Create<T>(string prefabName, Transform parent, string key = "") 
+            where T : ViewButton
+        {
+            return Create<T>(Assets.Get<GameObject>(prefabName), parent, key);
+        }
+
+        public static T Create<T>(GameObject prefab, Transform parent, string key = "") 
+            where T : ViewButton
         {
             GameObject gameObject = Instantiate(prefab, parent);
-            return gameObject.GetComponent<T>();
+            T button = gameObject.GetComponent<T>();
+            button.key = key;
+            return button;
         }
 
         public virtual void OnSetActive() => interactable = IsInteractive();
@@ -89,6 +99,14 @@ namespace TCD.UI
         public void SetText(string str)
         {
             text.text = str;
+        }
+
+        private void CheckIfKeyPressed()
+        {
+            if (string.IsNullOrEmpty(key))
+                return;
+            if (ButtonInputKeys.IsKeyDown(key) && interactable)
+                onClick?.Invoke();
         }
     }
 }

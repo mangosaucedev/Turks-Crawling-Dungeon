@@ -32,20 +32,23 @@ namespace TCD.Objects.Parts
             return distanceToTarget <= maxAttackRange;
         }
 
-        public override void PerformAction()
+        public override bool PerformAction()
         {
-            base.PerformAction();
+            if (!base.PerformAction())
+                return false;
 
             Think($"I'm trying to kill {target.display.GetDisplayName()}!");
 
             if (FailIfTargetDoesNotExist())
-                return;
+                return false;
 
             if (TryToCloseIntoAttackDistance())
-                return;
+                return true;
 
             if (TryToAttackTarget())
-                return;
+                return true;
+
+            return false;
         }
 
         private bool FailIfTargetDoesNotExist()

@@ -1,0 +1,16 @@
+{
+    "name": "TCDEditor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:957270ce8fc7e9643bb9388273ff240d"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

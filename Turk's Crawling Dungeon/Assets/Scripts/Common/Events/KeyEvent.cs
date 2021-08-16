@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,15 +33,29 @@ namespace TCD
 
         public static KeyEvent FromPool(KeyEventContext context)
         {
-            if (pool.Count > 0)
+            KeyEvent e = null;
+            try
             {
-                KeyEvent e = pool[0];
-                if (e != null)
+                if (pool.Count > 0)
                 {
-                    e.context = context;
-                    pool.Remove(e);
-                    return e;
+                    e = pool[0];
+                    if (e != null)
+                    {
+                        e.context = context;
+                        if (pool.Contains(e))
+                            pool.Remove(e);
+                        return e;
+                    }
                 }
+            }
+            catch (IndexOutOfRangeException exception)
+            {
+                DebugLogger.LogError($"Input exception: Command {e?.context.command} (State {e?.context.state}) " +
+                    $"could not be gotten from pool. " + exception.Message);
+            }
+            catch (Exception exception)
+            {
+                DebugLogger.LogError($"Input exception: " + exception.Message);
             }
             return new KeyEvent(context);
         }

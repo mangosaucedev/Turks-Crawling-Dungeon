@@ -13,14 +13,17 @@ namespace TCD.Objects.Parts
 
         public override int GetTimeCost() => 0;
 
-        public override void PerformAction()
+        public override bool PerformAction()
         {
-            base.PerformAction();
+            if (!base.PerformAction())
+                return false;
 
             Think("I'm idle.");
 
             if (TryToGetEnemyTarget())
-                return;
+                return true;
+
+            return true;
         }
 
         private bool TryToGetEnemyTarget()

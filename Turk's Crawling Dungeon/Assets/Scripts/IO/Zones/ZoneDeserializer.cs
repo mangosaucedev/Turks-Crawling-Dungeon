@@ -12,6 +12,7 @@ namespace TCD.IO
     {
         private string currentZoneName;
         private ZoneEnvironments currentZoneEnvironments;
+        private ZoneTerrain currentZoneTerrain;
 
         public override string RawPath => "Zones";
 
@@ -30,6 +31,8 @@ namespace TCD.IO
             DeserializeParams(paramsNode);
             XmlNode environmentsNode = node.SelectSingleNode("Environments");
             DeserializeEnvironments(environmentsNode);
+            XmlNode terrainNode = node.SelectSingleNode("Terrain");
+            DeserializeTerrain(terrainNode);
         }
 
         private void DeserializeParams(XmlNode node)
@@ -69,6 +72,38 @@ namespace TCD.IO
             bool exclusive = bool.Parse(EvaluateAttribute(node, "Exclusive") ?? "False");
             bool forced = bool.Parse(EvaluateAttribute(node, "Forced") ?? "False");
             currentZoneEnvironments.AddEnvironmentReference(name, weight, placement, exclusive, forced);
+        }
+
+        private void DeserializeTerrain(XmlNode node)
+        {
+            currentZoneTerrain = new ZoneTerrain();
+            XmlNode wallRoot = node.SelectSingleNode("Walls");
+            XmlNodeList wallNodes = wallRoot.SelectNodes("Wall");
+            foreach (XmlNode wallNode in wallNodes)
+                DeserializeWall(wallNode);
+            XmlNode floorRoot = node.SelectSingleNode("Floors");
+            XmlNodeList floorNodes = floorRoot.SelectNodes("Floor");
+            foreach (XmlNode floorNode in floorNodes)
+                DeserializeFloor(floorNode);
+            Assets.Add(currentZoneName, currentZoneTerrain);
+        }
+
+        private void DeserializeWall(XmlNode node)
+        {
+            Wall wall = new Wall();
+            wall.name = EvaluateAttribute(node, "Name", true);
+            wall.surface = int.Parse(EvaluateAttribute(node, "Surface") ?? "0");
+            wall.weight = float.Parse(EvaluateAttribute(node, "Weight") ?? "1");
+            currentZoneTerrain.walls.Add(wall);
+        }
+
+        private void DeserializeFloor(XmlNode node)
+        {
+            Floor floor = new Floor();
+            floor.name = EvaluateAttribute(node, "Name", true);
+            floor.surface = int.Parse(EvaluateAttribute(node, "Surface") ?? "0");
+            floor.weight = float.Parse(EvaluateAttribute(node, "Weight") ?? "1");
+            currentZoneTerrain.floors.Add(floor);
         }
     }
 }

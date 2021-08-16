@@ -8,17 +8,21 @@ namespace TCD
     {
         [SerializeField] private AudioSource audioSource;
 
-        private void Awake()
+        protected AudioSource AudioSource
         {
-            if (!audioSource)
-                audioSource = GetComponentInChildren<AudioSource>();
+            get
+            {
+                if (!audioSource)
+                    audioSource = GetComponentInChildren<AudioSource>();
+                return audioSource;
+            }
         }
 
         public void Play(AudioClip audioClip)
         {
             if (!audioClip)
                 return;
-            audioSource.PlayOneShot(audioClip);
+            AudioSource.PlayOneShot(audioClip);
         }
     }
 }

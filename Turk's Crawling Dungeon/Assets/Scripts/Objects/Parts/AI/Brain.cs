@@ -8,6 +8,7 @@ namespace TCD.Objects.Parts
     public class Brain : Part
     {
         private const int MAX_THOUGHTS = 32;
+        private const int MAX_ACTIONS_PER_TURN = 64;
 
         [Header("AI Parameters")]
         [SerializeField] private int sightRadius;
@@ -76,18 +77,27 @@ namespace TCD.Objects.Parts
         {
             int actionsPerformed = 0;
             int energySpent = 0;
+            int i = 0;
             while (goals.Count > 0 && energy > 0)
             {
                 if (goals.Count > 0)
                 {
                     Goal goal = goals.Peek();
                     int cost = goal.GetTimeCost();
-                    goal.PerformAction();
+                    bool successful = goal.PerformAction();
                     actionsPerformed++;
                     energy -= cost;
                     energySpent += cost;
+                    if (!successful)
+                        break;
                 }
                 PopFinishedGoals();
+                i++;
+                if (i > MAX_ACTIONS_PER_TURN)
+                {
+                    DebugLogger.LogError($"Brain of {parent.display.GetDisplayName()} caught in endless loop!");
+                    break;
+                }
             }
             if (energy > 0)
                 energy = 0;

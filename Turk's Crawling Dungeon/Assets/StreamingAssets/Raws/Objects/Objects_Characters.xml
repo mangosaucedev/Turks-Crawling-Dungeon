@@ -24,7 +24,7 @@
 		<Part Name="Wallet"/>
 
 		<Part Name="Brain">
-			<Var Name="SightRadius">8</Var>
+			<Var Name="SightRadius">24</Var>
 		</Part>
 
 		<Part Name="Inventory">
@@ -88,6 +88,8 @@
 			<Var Name="Sprite">GenericEnemy</Var>
 		</OverridePart>
 
+		<Part Name="EnemyGraphic"/>
+		
 		<Part Name="ScoreOnDeath">
 			<Var Name="Score">100</Var>
 		</Part>

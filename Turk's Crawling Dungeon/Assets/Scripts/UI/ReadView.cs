@@ -21,7 +21,7 @@ namespace TCD.UI
         protected override string ViewName => gameObject.name;
 
         private void Start()
-        {
+        {   
             obj = SelectionHandler.SelectedObject;
             Readable readable = obj.parts.Get<Readable>();
             currentText = Assets.Get<GameText>(readable.Text);

@@ -13,7 +13,7 @@ namespace TCD
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            T[] resources = Resources.LoadAll<T>(ResourcePath);
+            T[] resources = UnityEngine.Resources.LoadAll<T>(ResourcePath);
             foreach (T resource in resources)
             {
                 Assets.Add(resource.name, resource);

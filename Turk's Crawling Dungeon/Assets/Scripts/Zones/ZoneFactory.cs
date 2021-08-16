@@ -15,8 +15,10 @@ namespace TCD.Zones
             ZoneEnvironments zoneEnvironments = Assets.Get<ZoneEnvironments>(blueprintName);
             if (zoneEnvironments.environments.Count == 0)
                 SetupZoneEnvironments(zoneEnvironments);
+            ZoneTerrain zoneTerrain = Assets.Get<ZoneTerrain>(blueprintName);
             currentZone = new Zone(zoneParams);
             currentZone.ZoneEnvironments = zoneEnvironments;
+            currentZone.ZoneTerrain = zoneTerrain;
             return currentZone;
         }
 

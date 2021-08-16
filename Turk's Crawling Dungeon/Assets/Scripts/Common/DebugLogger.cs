@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 namespace TCD
@@ -12,6 +13,15 @@ namespace TCD
         public static List<string> log = new List<string>();
         public static DebugLoggerVerbosity verbosity =
             DebugLoggerVerbosity.TimeAndFrame;
+
+        private static string LogFilePath => Application.persistentDataPath + "/TCDLog.txt";
+
+        static DebugLogger()
+        {
+            if (File.Exists(LogFilePath))
+                File.WriteAllText(LogFilePath, string.Empty);
+            WriteToLog(InsertFrameTimeInfo("New Session Started!", true));
+        }
 
         public static void Log(string message)
         {
@@ -45,7 +55,7 @@ namespace TCD
         {
             TrimLog();
             string finalMessage = InsertFrameTimeInfo(message, true);
-            log.Add(finalMessage);
+            WriteToLog(finalMessage);
         }
 
         private static void LogErrorMessage(string message)
@@ -53,7 +63,7 @@ namespace TCD
             TrimLog();
             string finalMessage = InsertFrameTimeInfo(message, true);
             finalMessage = finalMessage.Insert(0, "(!!! ERROR !!!) ");
-            log.Add(finalMessage);
+            WriteToLog(finalMessage);
         }
 
         private static void TrimLog()
@@ -61,5 +71,15 @@ namespace TCD
             while (log.Count >= MAX_LOG_MESSAGES)
                 log.RemoveAt(0);
         }
+
+        private static void WriteToLog(string message)
+        {
+            Debug.Log("Logging message - " + message);
+            using (StreamWriter writer = GetLogFileWriter())
+                writer.WriteLine(message);
+            log.Add(message);
+        }
+
+        private static StreamWriter GetLogFileWriter() => new StreamWriter(LogFilePath, true);
     }
 }

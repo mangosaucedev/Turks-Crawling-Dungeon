@@ -14,15 +14,16 @@ namespace TCD.Objects.Parts
             this.target = target;
         }
 
-        public override void PerformAction()
+        public override bool PerformAction()
         {
             if (target == null)
             {
                 Think("My target no longer exists!");
                 FailToParent();
-                return;
+                return false;
             }
-            base.PerformAction();
+           
+            return base.PerformAction();
         }
 
         protected override Vector2Int GetTargetPosition() =>

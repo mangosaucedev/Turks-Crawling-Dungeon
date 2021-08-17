@@ -13,6 +13,7 @@ namespace TCD.IO
         private string currentZoneName;
         private ZoneEnvironments currentZoneEnvironments;
         private ZoneTerrain currentZoneTerrain;
+        private ZoneEncounters currentZoneEncounters;
 
         public override string RawPath => "Zones";
 
@@ -33,6 +34,8 @@ namespace TCD.IO
             DeserializeEnvironments(environmentsNode);
             XmlNode terrainNode = node.SelectSingleNode("Terrain");
             DeserializeTerrain(terrainNode);
+            XmlNode encountersNode = node.SelectSingleNode("Encounters");
+            DeserializeEncounters(encountersNode);
         }
 
         private void DeserializeParams(XmlNode node)
@@ -104,6 +107,13 @@ namespace TCD.IO
             floor.surface = int.Parse(EvaluateAttribute(node, "Surface") ?? "0");
             floor.weight = float.Parse(EvaluateAttribute(node, "Weight") ?? "1");
             currentZoneTerrain.floors.Add(floor);
+        }
+
+        private void DeserializeEncounters(XmlNode node)
+        {
+            currentZoneEncounters = new ZoneEncounters();
+
+            Assets.Add(currentZoneName, currentZoneEncounters);
         }
     }
 }

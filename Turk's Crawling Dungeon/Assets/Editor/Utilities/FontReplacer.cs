@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -71,6 +72,7 @@ public class FontReplacer : EditorWindow
         for (var i = 0; i < SceneManager.sceneCount; i++)
         {
             var scene = SceneManager.GetSceneAt(i);
+            EditorSceneManager.MarkSceneDirty(scene);
             var gos = new List<GameObject>(scene.GetRootGameObjects());
             foreach (var go in gos)
             {
@@ -86,6 +88,7 @@ public class FontReplacer : EditorWindow
                     .Select(guid => AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GUIDToAssetPath(guid)));
             foreach (var prefab in prefabs)
             {
+                EditorUtility.SetDirty(prefab);
                 prefabMatches += ReplaceFonts(src, dest, prefab.GetComponentsInChildren<Text>(true));
             }
 

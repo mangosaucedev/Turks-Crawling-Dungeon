@@ -13,6 +13,8 @@ namespace TCD.Zones
 
         ZoneTerrain ZoneTerrain { get; set; }
 
+        ZoneEncounters ZoneEncounters { get; set; }
+
         int Width { get; }
 
         int Height { get; }

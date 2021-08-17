@@ -27,9 +27,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 661293478792679864, guid: 332d721240bd70a47919fbf236cd0141, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 714734405497157028, guid: 332d721240bd70a47919fbf236cd0141, type: 3}
       propertyPath: m_FontData.m_Alignment
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 748072964084813600, guid: 332d721240bd70a47919fbf236cd0141, type: 3}
+      propertyPath: m_ChildAlignment
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 748072964084813600, guid: 332d721240bd70a47919fbf236cd0141, type: 3}
+      propertyPath: m_Padding.m_Left
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 3746192202431563683, guid: 332d721240bd70a47919fbf236cd0141, type: 3}
+      propertyPath: m_Text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4576982811130770959, guid: 332d721240bd70a47919fbf236cd0141, type: 3}
       propertyPath: m_Pivot.x
@@ -118,6 +134,30 @@ PrefabInstance:
     - target: {fileID: 7382421887300894990, guid: 332d721240bd70a47919fbf236cd0141, type: 3}
       propertyPath: m_Name
       value: Item Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 7626585980713772787, guid: 332d721240bd70a47919fbf236cd0141, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7626585980713772787, guid: 332d721240bd70a47919fbf236cd0141, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7626585980713772787, guid: 332d721240bd70a47919fbf236cd0141, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7626585980713772787, guid: 332d721240bd70a47919fbf236cd0141, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7626585980713772787, guid: 332d721240bd70a47919fbf236cd0141, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 7626585980713772787, guid: 332d721240bd70a47919fbf236cd0141, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 332d721240bd70a47919fbf236cd0141, type: 3}

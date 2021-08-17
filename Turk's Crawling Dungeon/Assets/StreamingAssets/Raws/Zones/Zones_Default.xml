@@ -33,7 +33,7 @@
 			</Floors>
 		</Terrain>
 		<Encounters>
-			
+			<Encounter Name="DungeonEnemyPatrolsTier0" Type="EnemyPatrol" Weight="1" />
 		</Encounters>
 	</Zone>
 
@@ -74,7 +74,7 @@
 			</Floors>
 		</Terrain>
 		<Encounters>
-
+			<Encounter Name="DungeonEnemyPatrolsTier0" Type="EnemyPatrol" Weight="1" />
 		</Encounters>
 	</Zone>
 
@@ -113,7 +113,7 @@
 			</Floors>
 		</Terrain>
 		<Encounters>
-
+			<Encounter Name="DungeonEnemyPatrolsTier0" Type="EnemyPatrol" Weight="1" />
 		</Encounters>
 	</Zone>
 	

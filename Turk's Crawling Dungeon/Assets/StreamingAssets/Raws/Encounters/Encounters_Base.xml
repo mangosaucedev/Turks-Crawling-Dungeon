@@ -1,12 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Encounters>
-	
-	<Encounter Name="DebugEncounter0">
-		<Object Name="Object" Count="1-4" Chance="20"/>
-	</Encounter>
 
-	<Encounter Name="Player">
-		<Object Name="Player" Count="1" Chance="100"/>
+	<Encounter Name="DungeonEnemyPatrolsTier0" Density="Loose">
+		<Object Name="GenericEnemy" Count="1" ChanceIn100="20" Exclusive="True"/>
+		<Object Name="Tarantula" Count="1" ChanceIn100="20" Exclusive="True"/>
+		<Object Name="Shrunk" Count="1-4" ChanceIn100="20" Exclusive="True"/>
+		<Object Name="WhiteHand" Count="1-2" ChanceIn100="20" Exclusive="True"/>
 	</Encounter>
 
 </Encounters>

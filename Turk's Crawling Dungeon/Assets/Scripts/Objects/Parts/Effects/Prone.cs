@@ -11,6 +11,8 @@ namespace TCD.Objects.Parts.Effects
 
         public override string Name => "Prone";
 
+        public override Sprite Icon => Assets.Get<Sprite>("ProneIcon");
+
         public override EffectStacking Stacking => EffectStacking.None;
 
         public override string GetDescription() => $"Characters that are prone suffer a " +

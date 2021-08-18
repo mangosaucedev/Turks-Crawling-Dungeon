@@ -22,6 +22,8 @@
 			<Var Name="Hit2">HitSplat2</Var>
 		</Part>
 
+		<Part Name="Effects.Effects" />
+		
 		<Part Name="Inspectable" />
 		
 		<Part Name="Visible" />

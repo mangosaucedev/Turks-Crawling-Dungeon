@@ -92,6 +92,9 @@ namespace TCD.Zones
             PlayerPlacer playerPlacer = new PlayerPlacer();
             yield return playerPlacer.Generate();
 
+            StairsPlacer stairsPlacer = new StairsPlacer();
+            yield return stairsPlacer.Generate();
+
             EnvironmentFurnisher environmentFurnisher = new EnvironmentFurnisher();
             yield return environmentFurnisher.Generate();
 

@@ -33,7 +33,6 @@
 			<Furnisher Name="RandomFurniture" Weight="2"/>
 			<Furnisher Name="Bush" Weight="2"/>
 			<Furnisher Name="Lake"/>
-			<Furnisher Name="Level0FinalChamber" Forced="True" Exclusive="True"/>
 			<Furnisher Name="Grass" Exclusive="True"/>
 		</Furnishers>
 		<Furnishings>
@@ -76,7 +75,6 @@
 	<Environment Name="FinalChamber">
 		<FurnishingDensity>0.3</FurnishingDensity>
 		<Furnishers>
-			<Furnisher Name="Level0FinalChamber" Exclusive="True"/>
 			<Furnisher Name="Bush" Weight="2"/>
 			<Furnisher Name="Grass" Forced="True" Exclusive="True"/>
 		</Furnishers>

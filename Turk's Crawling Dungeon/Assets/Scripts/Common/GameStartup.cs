@@ -25,6 +25,9 @@ namespace TCD
 
             ObjectsDeserializer objectsDeserializer = new ObjectsDeserializer();
             yield return objectsDeserializer.DeserializeRawsAtPath();
+            
+            EncountersDeserializer encountersDeserializer = new EncountersDeserializer();
+            yield return encountersDeserializer.DeserializeRawsAtPath();
 
             AttackDeserializer attackDeserializer = new AttackDeserializer();
             yield return attackDeserializer.DeserializeRawsAtPath();

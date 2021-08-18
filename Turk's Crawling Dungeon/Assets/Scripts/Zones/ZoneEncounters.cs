@@ -8,15 +8,20 @@ namespace TCD.Zones
 {
     public class ZoneEncounters : ICloneable
     {
-        public List<string> buildEncounters = new List<string>();
+        public float density;
+        public List<ZoneEncounter> buildEncounters = new List<ZoneEncounter>();
         public List<Encounter> encounters = new List<Encounter>();
         public Dictionary<Encounter, bool> placedEncounters = new Dictionary<Encounter, bool>();
 
         public void BuildEncounters()
         {
-            foreach (string e in buildEncounters)
+            foreach (ZoneEncounter e in buildEncounters)
             {
-                Encounter encounter = (Encounter) Assets.Get<Encounter>(e).Clone();
+                Encounter encounter = EncounterFactory.BuildFromBlueprint(e.name);
+                encounter.weight = e.weight;
+                encounter.type = e.type;
+                encounter.forced = e.forced;
+                encounter.exclusive = e.exclusive;
                 encounters.Add(encounter);
             }
         }
@@ -28,11 +33,24 @@ namespace TCD.Zones
             {
                 foreach (Encounter encounter in nonExcludedEncounters)
                 {
-                    if (encounter.type == type && encounter.tier == tier)
+                    int maxTier = GetMaxTier();
+                    bool isMaxTier = (encounter.tier == maxTier && tier > maxTier);
+                    if (encounter.type == type && (encounter.tier == tier || isMaxTier))
                         bag.AddItem(encounter, encounter.weight);
                 }
                 return bag.Grab();
             }
+        }
+
+        private int GetMaxTier()
+        {
+            int tier = 0;
+            foreach (Encounter encounter in encounters)
+            {
+                if (encounter.tier > tier)
+                    tier = encounter.tier;
+            }
+            return tier;
         }
 
         public List<Encounter> GetForcedEncounters()
@@ -73,8 +91,11 @@ namespace TCD.Zones
         public object Clone()
         {
             ZoneEncounters zoneEncounters = (ZoneEncounters) MemberwiseClone();
-            foreach (Encounter encounter in encounters)
-                zoneEncounters.encounters.Add(encounter);
+            for (int i = encounters.Count - 1; i >= 0; i--)
+            {
+                Encounter encounter = encounters[i];
+                zoneEncounters.encounters[i] = encounter;
+            }
             return zoneEncounters;
         }
     }

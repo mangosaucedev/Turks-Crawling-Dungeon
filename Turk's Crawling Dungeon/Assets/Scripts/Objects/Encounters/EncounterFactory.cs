@@ -2,20 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TCD
+namespace TCD.Objects.Encounters
 {
-    public class EncounterFactory : MonoBehaviour
+    public static class EncounterFactory 
     {
-        // Start is called before the first frame update
-        void Start()
+        public static Encounter BuildFromBlueprint(string blueprintName)
         {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
+            Encounter blueprint = Assets.Get<Encounter>(blueprintName);
+            Encounter encounter = (Encounter) blueprint.Clone();
+            return encounter;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
+using TCD.Objects.Encounters;
 using TCD.Zones;
 using TCD.Zones.Environments;
 
@@ -112,8 +113,23 @@ namespace TCD.IO
         private void DeserializeEncounters(XmlNode node)
         {
             currentZoneEncounters = new ZoneEncounters();
-
+            currentZoneEncounters.density = float.Parse(EvaluateAttribute(node, "Density") ?? "1");
+            XmlNodeList encounterNodes = node.SelectNodes("Encounter");
+            foreach (XmlNode encounterNode in encounterNodes)
+                DeserializeEncounter(encounterNode);
             Assets.Add(currentZoneName, currentZoneEncounters);
+        }
+
+        private void DeserializeEncounter(XmlNode node)
+        {
+            ZoneEncounter encounter = new ZoneEncounter();
+            encounter.name = EvaluateAttribute(node, "Name", true);
+            encounter.weight = float.Parse(EvaluateAttribute(node, "Weight") ?? "1");
+            string type = EvaluateAttribute(node, "Type") ?? "Random";
+            encounter.type = (EncounterType) Enum.Parse(typeof(EncounterType), type);
+            encounter.forced = bool.Parse(EvaluateAttribute(node, "Forced") ?? "False");
+            encounter.exclusive = bool.Parse(EvaluateAttribute(node, "Exclusive") ?? "False");
+            currentZoneEncounters.buildEncounters.Add(encounter);
         }
     }
 }

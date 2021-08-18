@@ -15,5 +15,20 @@ namespace TCD
             Vector2Int playerPosition = currentPlayer.cell.Position;
             return Mathf.FloorToInt(Vector2Int.Distance(position, playerPosition));
         }
+
+        public static int GetDistanceToPlayer(Vector3Int position)
+        {
+            Vector2Int playerPosition = currentPlayer.cell.Position;
+            return Mathf.FloorToInt(Vector2Int.Distance((Vector2Int) position, playerPosition));
+        }
+
+        public static int GetDistanceToPlayer(Vector2Int position)
+        {
+            Vector2Int playerPosition = currentPlayer.cell.Position;
+            return Mathf.FloorToInt(Vector2Int.Distance(position, playerPosition));
+        }
+
+
+        public static int GetTier() => ScoreHandler.level / 3;
     }
 }

@@ -32,7 +32,7 @@
 				<Floor Name="TileFloor"/>
 			</Floors>
 		</Terrain>
-		<Encounters>
+		<Encounters Density="1.35">
 			<Encounter Name="DungeonEnemyPatrolsTier0" Type="EnemyPatrol" Weight="1" />
 		</Encounters>
 	</Zone>
@@ -73,7 +73,7 @@
 				<Floor Name="GrassyStoneFloor" Surface="2" Weight="1"/>
 			</Floors>
 		</Terrain>
-		<Encounters>
+		<Encounters Density="1.35">
 			<Encounter Name="DungeonEnemyPatrolsTier0" Type="EnemyPatrol" Weight="1" />
 		</Encounters>
 	</Zone>
@@ -112,7 +112,7 @@
 				<Floor Name="MyceliumFloor" Surface="1" Weight="1"/>
 			</Floors>
 		</Terrain>
-		<Encounters>
+		<Encounters Density="1.35">
 			<Encounter Name="DungeonEnemyPatrolsTier0" Type="EnemyPatrol" Weight="1" />
 		</Encounters>
 	</Zone>

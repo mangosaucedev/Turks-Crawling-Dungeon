@@ -24,6 +24,12 @@
 			<Var Name="Single">LiquidSingle</Var>
 		</Part>
 
+		<OverridePart Name="Audio">
+			<Var Name="SteppedOn0">Wade0</Var>
+			<Var Name="SteppedOn1">Wade1</Var>
+			<Var Name="SteppedOn2">Wade2</Var>
+		</OverridePart>
+		
 		<OverridePart Name="Render">
 			<Var Name="Sprite">Liquid</Var>
 			<Var Name="RenderOrder">-2</Var>

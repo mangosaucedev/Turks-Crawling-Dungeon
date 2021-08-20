@@ -29,6 +29,6 @@ namespace TCD
         }
 
 
-        public static int GetTier() => ScoreHandler.level / 3;
+        public static int GetTier() => Mathf.FloorToInt(ScoreHandler.level / 3f);
     }
 }

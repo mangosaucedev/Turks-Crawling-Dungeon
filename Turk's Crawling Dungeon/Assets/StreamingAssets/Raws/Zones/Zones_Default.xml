@@ -9,10 +9,10 @@
 			<MinChamberHeight>6</MinChamberHeight>
 			<MaxChamberWidth>18</MaxChamberWidth>
 			<MaxChamberHeight>18</MaxChamberHeight>
-			<MaxChambers>18</MaxChambers>
+			<MaxChambers>8</MaxChambers>
 			<MinChamberChildDistance>8</MinChamberChildDistance>
 			<MinChamberBufferDistance>2</MinChamberBufferDistance>
-			<MinCorridorWidth>2</MinCorridorWidth>
+			<MinCorridorWidth>1</MinCorridorWidth>
 			<MaxCorridorWidth>4</MaxCorridorWidth>
 			<GenerateCaves>False</GenerateCaves>
 			<CavePenetrationChance>0</CavePenetrationChance>
@@ -32,8 +32,12 @@
 				<Floor Name="TileFloor"/>
 			</Floors>
 		</Terrain>
-		<Encounters Density="1.35">
+		<Encounters Density="1.5">
 			<Encounter Name="DungeonEnemyPatrolsTier0" Type="EnemyPatrol" Weight="1" />
+			<Encounter Name="DungeonEnemyPatrolsTier1" Type="EnemyPatrol" Weight="3"/>
+			<Encounter Name="DungeonEnemyPatrolsTier1B" Type="EnemyPatrol" Weight="1"/>
+			<Encounter Name="DungeonEnemyPatrolsTier2" Type="EnemyPatrol" Weight="3"/>
+			<Encounter Name="DungeonEnemyPatrolsTier2B" Type="EnemyPatrol" Weight="1"/>
 		</Encounters>
 	</Zone>
 
@@ -45,10 +49,10 @@
 			<MinChamberHeight>6</MinChamberHeight>
 			<MaxChamberWidth>18</MaxChamberWidth>
 			<MaxChamberHeight>18</MaxChamberHeight>
-			<MaxChambers>18</MaxChambers>
+			<MaxChambers>8</MaxChambers>
 			<MinChamberChildDistance>8</MinChamberChildDistance>
 			<MinChamberBufferDistance>2</MinChamberBufferDistance>
-			<MinCorridorWidth>2</MinCorridorWidth>
+			<MinCorridorWidth>1</MinCorridorWidth>
 			<MaxCorridorWidth>4</MaxCorridorWidth>
 			<GenerateCaves>False</GenerateCaves>
 			<CavePenetrationChance>0</CavePenetrationChance>
@@ -73,8 +77,12 @@
 				<Floor Name="GrassyStoneFloor" Surface="2" Weight="1"/>
 			</Floors>
 		</Terrain>
-		<Encounters Density="1.35">
+		<Encounters Density="1.5">
 			<Encounter Name="DungeonEnemyPatrolsTier0" Type="EnemyPatrol" Weight="1" />
+			<Encounter Name="DungeonEnemyPatrolsTier1" Type="EnemyPatrol" Weight="3"/>
+			<Encounter Name="DungeonEnemyPatrolsTier1B" Type="EnemyPatrol" Weight="1"/>
+			<Encounter Name="DungeonEnemyPatrolsTier2" Type="EnemyPatrol" Weight="3"/>
+			<Encounter Name="DungeonEnemyPatrolsTier2B" Type="EnemyPatrol" Weight="1"/>
 		</Encounters>
 	</Zone>
 
@@ -86,10 +94,10 @@
 			<MinChamberHeight>6</MinChamberHeight>
 			<MaxChamberWidth>18</MaxChamberWidth>
 			<MaxChamberHeight>18</MaxChamberHeight>
-			<MaxChambers>18</MaxChambers>
+			<MaxChambers>8</MaxChambers>
 			<MinChamberChildDistance>8</MinChamberChildDistance>
 			<MinChamberBufferDistance>2</MinChamberBufferDistance>
-			<MinCorridorWidth>2</MinCorridorWidth>
+			<MinCorridorWidth>1</MinCorridorWidth>
 			<MaxCorridorWidth>4</MaxCorridorWidth>
 			<GenerateCaves>False</GenerateCaves>
 			<CavePenetrationChance>0</CavePenetrationChance>
@@ -112,8 +120,12 @@
 				<Floor Name="MyceliumFloor" Surface="1" Weight="1"/>
 			</Floors>
 		</Terrain>
-		<Encounters Density="1.35">
+		<Encounters Density="1.5">
 			<Encounter Name="DungeonEnemyPatrolsTier0" Type="EnemyPatrol" Weight="1" />
+			<Encounter Name="DungeonEnemyPatrolsTier1" Type="EnemyPatrol" Weight="3"/>
+			<Encounter Name="DungeonEnemyPatrolsTier1B" Type="EnemyPatrol" Weight="1"/>
+			<Encounter Name="DungeonEnemyPatrolsTier2" Type="EnemyPatrol" Weight="3"/>
+			<Encounter Name="DungeonEnemyPatrolsTier2B" Type="EnemyPatrol" Weight="1"/>
 		</Encounters>
 	</Zone>
 	

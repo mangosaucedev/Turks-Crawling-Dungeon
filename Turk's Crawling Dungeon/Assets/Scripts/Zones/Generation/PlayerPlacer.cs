@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using TCD.Objects;
-using TCD.Objects.Parts;
+using TCD.Objects.Parts.Effects;
 using Random = UnityEngine.Random;
 
 namespace TCD.Zones

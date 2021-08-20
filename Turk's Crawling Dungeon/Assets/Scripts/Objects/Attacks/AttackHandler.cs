@@ -91,12 +91,18 @@ namespace TCD.Objects.Attacks
                 $"{currentAttack.damageType.name.ToLower()} damage!";
             MessageLog.Add(message);
             defenderHitpoints.ModifyHp(-damage);
-            AttackedEvent e = LocalEvent.Get<AttackedEvent>();
-            e.obj = currentDefender;
-            e.attacker = currentAttacker;
-            e.attack = currentAttack;
-            e.damage = damage;
-            currentDefender.HandleEvent(e);
+            AttackEvent attackEvent = LocalEvent.Get<AttackEvent>();
+            attackEvent.obj = currentAttacker;
+            attackEvent.defender = currentDefender;
+            attackEvent.attack = currentAttack;
+            attackEvent.damage = damage;
+            currentAttacker.HandleEvent(attackEvent);
+            AttackedEvent attackedEvent = LocalEvent.Get<AttackedEvent>();
+            attackedEvent.obj = currentDefender;
+            attackedEvent.attacker = currentAttacker;
+            attackedEvent.attack = currentAttack;
+            attackedEvent.damage = damage;
+            currentDefender.HandleEvent(attackedEvent);
             return true;
         }
     }

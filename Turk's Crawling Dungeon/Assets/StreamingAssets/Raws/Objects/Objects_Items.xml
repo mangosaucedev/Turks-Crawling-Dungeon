@@ -6,6 +6,10 @@
 		<Part Name="Item"/>
 
 		<Part Name="ItemGraphic"/>
+
+		<OverridePart Name="Audio">
+			<Var Name="PickedUp">PickupItem0</Var>
+		</OverridePart>
 		
 		<OverridePart Name="Render">
 			<Var Name="RenderOrder">-1</Var>
@@ -22,7 +26,7 @@
 		<Part Name="Money"/>
 
 		<OverridePart Name="Audio">
-			<Var Name="Death"></Var>
+			<Var Name="PickedUp">Coin0</Var>
 		</OverridePart>
 		
 		<OverridePart Name="Render">

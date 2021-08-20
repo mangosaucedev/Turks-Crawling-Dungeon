@@ -74,7 +74,6 @@ namespace TCD
 
         private static void WriteToLog(string message)
         {
-            Debug.Log("Logging message - " + message);
             using (StreamWriter writer = GetLogFileWriter())
                 writer.WriteLine(message);
             log.Add(message);

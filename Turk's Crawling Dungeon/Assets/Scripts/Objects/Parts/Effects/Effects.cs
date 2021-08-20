@@ -70,7 +70,7 @@ namespace TCD.Objects.Parts.Effects
                         activeEffects.Add(effect);
                         return AddedEffect(effect);
                     }
-                    RefreshTime(effect.Name);
+                    RefreshTime(effect.Name, time);
                     return false;
                 case EffectStacking.StackDoNotRefreshCooldown:
                     activeEffects.Add(effect);
@@ -101,9 +101,9 @@ namespace TCD.Objects.Parts.Effects
             return false;
         }
 
-        private void RefreshTime(string effectName)
+        private void RefreshTime(string effectName, int refreshingEffectTime = 0)
         {
-            int time = GetMaxTimeOfEffect(effectName);
+            int time = Mathf.Max(GetMaxTimeOfEffect(effectName), refreshingEffectTime);
             foreach (Effect effect in activeEffects)
             {
                 if (effect.Name == effectName)
@@ -204,6 +204,17 @@ namespace TCD.Objects.Parts.Effects
                 }
             }
             return false;
+        }
+
+        public int GetEffectStacks(string effectName)
+        {
+            int count = 0;
+            foreach (Effect effect in activeEffects)
+            {
+                if (effect.Name == effectName)
+                    count++;
+            }
+            return count;
         }
     }
 }

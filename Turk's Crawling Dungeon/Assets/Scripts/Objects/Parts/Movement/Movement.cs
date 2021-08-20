@@ -21,6 +21,10 @@ namespace TCD.Objects.Parts
         {
             movementVector = direction;
             MoveSpriteToOrigin();
+
+            if (!CanMove() || !CanExitCurrentCell())
+                return false;
+
             Vector2Int newPosition = Position + direction;
             if (CurrentZoneInfo.grid.IsWithinBounds(newPosition))
             {
@@ -35,6 +39,21 @@ namespace TCD.Objects.Parts
                 return true;
             }
             return FailMove();
+        }
+
+        private bool CanMove()
+        {
+            BeforeMoveEvent e = LocalEvent.Get<BeforeMoveEvent>();
+            e.obj = parent;
+            return FireEvent(parent, e);
+        }
+
+        private bool CanExitCurrentCell()
+        {
+            CanExitCellEvent e = LocalEvent.Get<CanExitCellEvent>();
+            e.obj = parent;
+            e.cell = parent.cell.CurrentCell;
+            return FireEvent(e.cell, e);
         }
 
         private bool CanEnterCell(Vector2Int position)

@@ -84,6 +84,10 @@
 	
 	<Object Name="Enemy" InheritsFrom="Character">
 
+		<OverridePart Name="Audio">
+			<Var Name="Death">MonsterDie</Var>
+		</OverridePart>
+		
 		<OverridePart Name="Render">
 			<Var Name="Sprite">GenericEnemy</Var>
 		</OverridePart>
@@ -168,6 +172,92 @@
 
 		<OverridePart Name="Render">
 			<Var Name="Sprite">WhiteHand</Var>
+		</OverridePart>
+	</Object>
+
+
+	<Object Name="PeeledMan" InheritsFrom="Enemy">
+
+		<DisplayName>Peeled Man</DisplayName>
+
+		<Description>Nothing to see here.</Description>
+
+		<Faction>Enemy</Faction>
+
+		<OverridePart Name="Hitpoints">
+			<Var Name="BaseHpMax">80</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">PeeledMan</Var>
+		</OverridePart>
+	</Object>
+
+	<Object Name="BuriedAlive" InheritsFrom="Enemy">
+
+		<DisplayName>Buried Alive</DisplayName>
+
+		<Description>Nothing to see here.</Description>
+
+		<Faction>Enemy</Faction>
+
+		<OverridePart Name="Hitpoints">
+			<Var Name="BaseHpMax">50</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">BuriedAlive</Var>
+		</OverridePart>
+	</Object>
+
+	<Object Name="Tumbleweed" InheritsFrom="Enemy">
+
+		<DisplayName>Tumbleweed</DisplayName>
+
+		<Description>Nothing to see here.</Description>
+
+		<Faction>Enemy</Faction>
+
+		<OverridePart Name="Hitpoints">
+			<Var Name="BaseHpMax">25</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">Tumbleweed</Var>
+		</OverridePart>
+	</Object>
+
+	<Object Name="Crawler" InheritsFrom="Enemy">
+
+		<DisplayName>Crawler</DisplayName>
+
+		<Description>Nothing to see here.</Description>
+
+		<Faction>Enemy</Faction>
+
+		<OverridePart Name="Hitpoints">
+			<Var Name="BaseHpMax">60</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">Crawler</Var>
+		</OverridePart>
+	</Object>
+
+	<Object Name="Knucklewalker" InheritsFrom="Enemy">
+
+		<DisplayName>Knucklewalker</DisplayName>
+
+		<Description>Nothing to see here.</Description>
+
+		<Faction>Enemy</Faction>
+
+		<OverridePart Name="Hitpoints">
+			<Var Name="BaseHpMax">100</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">Knucklewalker</Var>
 		</OverridePart>
 	</Object>
 

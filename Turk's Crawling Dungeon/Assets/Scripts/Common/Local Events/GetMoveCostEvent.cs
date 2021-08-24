@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using TCD.Objects;
 
 namespace TCD
 {
+    [Obsolete("Use Stats.GetStat")]
     public class GetMoveCostEvent : ObjectEvent
     {
         public BaseObject obj;

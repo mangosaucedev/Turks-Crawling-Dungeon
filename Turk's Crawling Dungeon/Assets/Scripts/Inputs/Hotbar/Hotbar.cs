@@ -7,8 +7,7 @@ namespace TCD.Inputs.Hotbar
     public static class Hotbar
     {
         public static List<HotbarAction> actions = new List<HotbarAction>();
-        
-        private static KeyCommand[] hotbarCommands;
+        public static KeyCommand[] hotbarCommands;
 
         static Hotbar()
         {

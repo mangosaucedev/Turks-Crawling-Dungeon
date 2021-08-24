@@ -7,8 +7,24 @@
 			<Var Name="BaseWeight">150</Var>
 		</OverridePart>
 
-		<OverridePart Name="Hitpoints">
-			<Var Name="BaseHpMax">20</Var>
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">100</Var>
+			<Var Name="HitpointRegen">1</Var>
+			<Var Name="HitpointRegenPoint">1</Var>
+			<Var Name="Stamina">100</Var>
+			<Var Name="StaminaRegen">0.3</Var>
+			<Var Name="StaminaRegenPoint">1</Var>
+			<Var Name="Psi">50</Var>
+			<Var Name="Oxygen">100</Var>
+			<Var Name="OxygenRegen">10</Var>
+			<Var Name="OxygenRegenPoint">1</Var>
+			<Var Name="Hunger">50</Var>
+			<Var Name="Thirst">50</Var>
+			<Var Name="Morale">50</Var>
+			<Var Name="MoraleRegen">0.1</Var>
+			<Var Name="MoraleRegenPoint">0.5</Var>
+			<Var Name="Stimulation">50</Var>
+			<Var Name="StimulationRegenPoint">0.5</Var>
 		</OverridePart>
 		
 		<Part Name="Actor"/>
@@ -36,7 +52,7 @@
 		</Part>
 
 		<Part Name="Stats">
-			<Var Name="InitStats">Strength:8,Agility:8,Constitution:8,Cunning:8,Willpower:8,Charm:8,HitAccuracy:90,Dodge:5,PhysicalSave:10,MentalSave:10</Var>
+			<Var Name="InitStats">Strength:8,Agility:8,Constitution:8,Cunning:8,Willpower:8,Charm:8,HitAccuracy:90,Dodge:5,PhysicalSave:10,MentalSave:10,MoveCost:12,AttackCost:12</Var>
 		</Part>
 
 	</Object>
@@ -55,8 +71,8 @@
 		
 		<RemovePart Name="Wallet"/>
 
-		<OverridePart Name="Hitpoints">
-			<Var Name="BaseHpMax">120</Var>
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">120</Var>
 		</OverridePart>
 
 		<OverridePart Name="Render">
@@ -64,7 +80,7 @@
 		</OverridePart>
 
 		<OverridePart Name="Stats">
-			<Var Name="InitStats">Strength:12,Agility:12,Constitution:12,Cunning:12,Willpower:12,Charm:12,HitAccuracy:95,Dodge:5, Armor:5,PhysicalSave:10,MentalSave:10</Var>
+			<Var Name="InitStats">Strength:12,Agility:12,Constitution:12,Cunning:12,Willpower:12,Charm:12,HitAccuracy:95,Dodge:5, Armor:5,PhysicalSave:10,MentalSave:10,MoveCost:12,AttackCost:12</Var>
 		</OverridePart>
 
 		<Part Name="GameResetOnDestroy"/>
@@ -76,8 +92,18 @@
 		<Part Name="PlayerUnarmed"/>
 
 		<Part Name="PlayerWallet"/>
-		
+
 		<Part Name="Talents.Tackle"/>
+		
+		<Part Name="Talents.Strangle"/>
+	
+		<Part Name="Talents.Sprint"/>
+
+		<Part Name="Talents.Maul"/>
+
+		<Part Name="Talents.BloodCrazed"/>
+
+		<Part Name="Talents.FearfulPin"/>
 	</Object>
 
 	<!-- Enemies -->
@@ -122,8 +148,8 @@
 
 		<Faction>Enemy</Faction>
 
-		<OverridePart Name="Hitpoints">
-			<Var Name="BaseHpMax">35</Var>
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">45</Var>
 		</OverridePart>
 
 		<OverridePart Name="Render">
@@ -133,6 +159,8 @@
 		<OverridePart Name="ScoreOnDeath">
 			<Var Name="Score">250</Var>
 		</OverridePart>
+
+		<Part Name="Talents.Tackle"/>
 
 	</Object>
 
@@ -144,8 +172,8 @@
 
 		<Faction>Enemy</Faction>
 
-		<OverridePart Name="Hitpoints">
-			<Var Name="BaseHpMax">10</Var>
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">20</Var>
 		</OverridePart>
 
 		<OverridePart Name="Render">
@@ -155,6 +183,8 @@
 		<OverridePart Name="ScoreOnDeath">
 			<Var Name="Score">50</Var>
 		</OverridePart>
+
+		<Part Name="Talents.Multiply"/>
 
 	</Object>
 
@@ -166,13 +196,15 @@
 
 		<Faction>Enemy</Faction>
 
-		<OverridePart Name="Hitpoints">
-			<Var Name="BaseHpMax">25</Var>
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">40</Var>
 		</OverridePart>
-
+		
 		<OverridePart Name="Render">
 			<Var Name="Sprite">WhiteHand</Var>
 		</OverridePart>
+
+		<Part Name="Talents.Strangle"/>
 	</Object>
 
 
@@ -184,13 +216,15 @@
 
 		<Faction>Enemy</Faction>
 
-		<OverridePart Name="Hitpoints">
-			<Var Name="BaseHpMax">80</Var>
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">80</Var>
 		</OverridePart>
 
 		<OverridePart Name="Render">
 			<Var Name="Sprite">PeeledMan</Var>
 		</OverridePart>
+
+		<Part Name="Talents.Maul"/>
 	</Object>
 
 	<Object Name="BuriedAlive" InheritsFrom="Enemy">
@@ -201,13 +235,15 @@
 
 		<Faction>Enemy</Faction>
 
-		<OverridePart Name="Hitpoints">
-			<Var Name="BaseHpMax">50</Var>
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">60</Var>
 		</OverridePart>
 
 		<OverridePart Name="Render">
 			<Var Name="Sprite">BuriedAlive</Var>
 		</OverridePart>
+
+		<Part Name="Talents.FearfulPin"/>
 	</Object>
 
 	<Object Name="Tumbleweed" InheritsFrom="Enemy">
@@ -218,13 +254,17 @@
 
 		<Faction>Enemy</Faction>
 
-		<OverridePart Name="Hitpoints">
-			<Var Name="BaseHpMax">25</Var>
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">35</Var>
 		</OverridePart>
 
 		<OverridePart Name="Render">
 			<Var Name="Sprite">Tumbleweed</Var>
 		</OverridePart>
+
+		<Part Name="Talents.Multiply">
+			<Var Name="Level">5</Var>
+		</Part>
 	</Object>
 
 	<Object Name="Crawler" InheritsFrom="Enemy">
@@ -235,8 +275,8 @@
 
 		<Faction>Enemy</Faction>
 
-		<OverridePart Name="Hitpoints">
-			<Var Name="BaseHpMax">60</Var>
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">60</Var>
 		</OverridePart>
 
 		<OverridePart Name="Render">
@@ -251,14 +291,26 @@
 		<Description>Nothing to see here.</Description>
 
 		<Faction>Enemy</Faction>
-
-		<OverridePart Name="Hitpoints">
-			<Var Name="BaseHpMax">100</Var>
+		
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">125</Var>
 		</OverridePart>
 
 		<OverridePart Name="Render">
 			<Var Name="Sprite">Knucklewalker</Var>
 		</OverridePart>
+
+		<Part Name="Talents.Tackle">
+			<Var Name="Level">5</Var>
+		</Part>
+
+		<Part Name="Talents.Maul">
+			<Var Name="Level">2</Var>
+		</Part>
+
+		<Part Name="Talents.BloodCrazed">
+			<Var Name="Level">2</Var>
+		</Part>
 	</Object>
 
 </Objects>

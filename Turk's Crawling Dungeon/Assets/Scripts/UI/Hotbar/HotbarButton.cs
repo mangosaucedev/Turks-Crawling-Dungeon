@@ -1,21 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TCD.Inputs;
+using TCD.Inputs.Actions;
+using TCD.Objects.Parts.Talents;
 
-namespace TCD
+namespace TCD.UI
 {
-    public class HotbarButton : MonoBehaviour
+    public class HotbarButton : ImageButton
     {
-        // Start is called before the first frame update
-        void Start()
+        public Talent talent;
+        public KeyCommand keyCommand;
+
+        protected override void Awake()
         {
-        
+            base.Awake();
+            onClick.AddListener(UseTalentAction);
         }
 
-        // Update is called once per frame
-        void Update()
+        protected override void Start()
         {
-        
+            base.Start();
+            icon.sprite = talent.Icon;
+            keyText.text = keyCommand == KeyCommand.None ? "" : keyCommand.ToString().Replace("Hotbar", "");
+            float activeCooldown = ((float) talent.activeCooldown / TimeInfo.TIME_PER_STANDARD_TURN).RoundToDecimal(1);
+            SetText(activeCooldown <= 0 ? "" : activeCooldown.ToString());
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+            if (Keys.GetCommand(keyCommand, KeyState.PressedThisFrame))
+                onClick?.Invoke();
+        }
+
+        private void UseTalentAction()
+        {
+            PlayerActionManager actionManager = ServiceLocator.Get<PlayerActionManager>();
+            actionManager.TryStartAction(new UseTalent(talent));
         }
     }
 }

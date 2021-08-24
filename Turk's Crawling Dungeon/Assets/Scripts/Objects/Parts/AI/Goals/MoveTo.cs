@@ -98,6 +98,12 @@ namespace TCD.Objects.Parts
             Cell cell = GetNextCellInPath();
             if (cell == null)
                 return;
+            AIBeforeMoveEvent e = LocalEvent.Get<AIBeforeMoveEvent>();
+            e.obj = obj;
+            e.nextCell = cell;
+            e.targetPosition = GetTargetPosition();
+            if (!obj.HandleEvent(e))
+                return;
             Vector2Int direction = GetDirectionToCell(cell);
             Think($"I am moving towards my target in direction: {direction}.");
             Movement.TryToMove(direction);

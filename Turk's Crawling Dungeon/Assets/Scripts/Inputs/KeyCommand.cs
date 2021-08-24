@@ -6,6 +6,7 @@ namespace TCD.Inputs
 {
     public enum KeyCommand
     {
+        None,
         MoveNorthwest,
         MoveNorth,
         MoveNortheast,

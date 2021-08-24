@@ -87,7 +87,7 @@ namespace TCD.Objects.Parts
 
         public int RollStat(Stat stat)
         {
-            int max = GetStatLevel(stat);
+            int max = Mathf.Max(GetStatLevel(stat), 0);
             return RandomInfo.Random.Next(0, max);
         }
 

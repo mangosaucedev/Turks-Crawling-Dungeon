@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TCD.Objects;
 using TCD.Objects.Parts;
+using Resources = TCD.Objects.Parts.Resources;
 
 namespace TCD.UI
 {
@@ -11,16 +12,16 @@ namespace TCD.UI
     {
         [SerializeField] private Image bar;
 
-        private Hitpoints playerHitpoints;
+        private Resources playerResources;
         private WaitForSecondsRealtime wait = new WaitForSecondsRealtime(0.1f);
 
-        private Hitpoints PlayerHitpoints
+        private Resources PlayerResources
         {
             get
             {
-                if (!playerHitpoints)
-                    playerHitpoints = PlayerInfo.currentPlayer?.parts.Get<Hitpoints>();
-                return playerHitpoints;
+                if (!playerResources)
+                    playerResources = PlayerInfo.currentPlayer?.parts.Get<Resources>();
+                return playerResources;
             }
         }
 
@@ -40,8 +41,8 @@ namespace TCD.UI
             {
                 if (PlayerInfo.currentPlayer)
                 {
-                    float hp = Mathf.Max(PlayerHitpoints.GetHp(), 0);
-                    float hpMax = Mathf.Max(PlayerHitpoints.GetHpMax(), 1);
+                    float hp = Mathf.Max(PlayerResources.GetResource(Resource.Hitpoints), 0);
+                    float hpMax = Mathf.Max(PlayerResources.GetMaxResource(Resource.Hitpoints), 1);
                     float fill = hp / hpMax;
                     bar.fillAmount = fill;
                 }

@@ -38,6 +38,36 @@ namespace TCD.Inputs
             Add(KeyCommand.MoveWestAlt, KeyCode.LeftArrow);
             Add(KeyCommand.MoveEastAlt, KeyCode.RightArrow);
             //
+            Add(KeyCommand.Hotbar0, KeyCode.Alpha0);
+            Add(KeyCommand.Hotbar1, KeyCode.Alpha1);
+            Add(KeyCommand.Hotbar2, KeyCode.Alpha2);
+            Add(KeyCommand.Hotbar3, KeyCode.Alpha3);
+            Add(KeyCommand.Hotbar4, KeyCode.Alpha4);
+            Add(KeyCommand.Hotbar5, KeyCode.Alpha5);
+            Add(KeyCommand.Hotbar6, KeyCode.Alpha6);
+            Add(KeyCommand.Hotbar7, KeyCode.Alpha7);
+            Add(KeyCommand.Hotbar8, KeyCode.Alpha8);
+            Add(KeyCommand.Hotbar9, KeyCode.Alpha9);
+            Add(KeyCommand.HotbarC0, KeyCode.Alpha0, KeyCode.LeftControl);
+            Add(KeyCommand.HotbarC1, KeyCode.Alpha1, KeyCode.LeftControl);
+            Add(KeyCommand.HotbarC2, KeyCode.Alpha2, KeyCode.LeftControl);
+            Add(KeyCommand.HotbarC3, KeyCode.Alpha3, KeyCode.LeftControl);
+            Add(KeyCommand.HotbarC4, KeyCode.Alpha4, KeyCode.LeftControl);
+            Add(KeyCommand.HotbarC5, KeyCode.Alpha5, KeyCode.LeftControl);
+            Add(KeyCommand.HotbarC6, KeyCode.Alpha6, KeyCode.LeftControl);
+            Add(KeyCommand.HotbarC7, KeyCode.Alpha7, KeyCode.LeftControl);
+            Add(KeyCommand.HotbarC8, KeyCode.Alpha8, KeyCode.LeftControl);
+            Add(KeyCommand.HotbarC9, KeyCode.Alpha9, KeyCode.LeftControl);
+            Add(KeyCommand.HotbarS0, KeyCode.Alpha0, KeyCode.LeftShift);
+            Add(KeyCommand.HotbarS1, KeyCode.Alpha1, KeyCode.LeftShift);
+            Add(KeyCommand.HotbarS2, KeyCode.Alpha2, KeyCode.LeftShift);
+            Add(KeyCommand.HotbarS3, KeyCode.Alpha3, KeyCode.LeftShift);
+            Add(KeyCommand.HotbarS4, KeyCode.Alpha4, KeyCode.LeftShift);
+            Add(KeyCommand.HotbarS5, KeyCode.Alpha5, KeyCode.LeftShift);
+            Add(KeyCommand.HotbarS6, KeyCode.Alpha6, KeyCode.LeftShift);
+            Add(KeyCommand.HotbarS7, KeyCode.Alpha7, KeyCode.LeftShift);
+            Add(KeyCommand.HotbarS8, KeyCode.Alpha8, KeyCode.LeftShift);
+            Add(KeyCommand.HotbarS9, KeyCode.Alpha9, KeyCode.LeftShift);
         }
 
         private static void Add(KeyCommand command, KeyCode key, KeyCode primaryModifier = KeyCode.None, 

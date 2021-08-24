@@ -12,11 +12,28 @@ namespace TCD.Objects.Parts.Effects
 
         public abstract string Name { get; }
 
+        public virtual Color Color => Color.red;
+
         public abstract Sprite Icon { get; }
 
         public abstract EffectStacking Stacking { get; }
 
         protected BaseObject EffectedObject => effects?.parent;
+
+        public virtual void OnApply()
+        {
+            EventManager.Listen<AfterTurnTickEvent>(this, OnAfterTurnTick);
+        }
+
+        public virtual void OnRemove()
+        {
+            EventManager.StopListening<AfterTurnTickEvent>(this);
+        }
+
+        protected virtual void OnAfterTurnTick(AfterTurnTickEvent e)
+        {
+
+        }
 
         public virtual bool FireEvent<T>(ILocalEventHandler target, T e) where T : LocalEvent => 
             target.HandleEvent(e);

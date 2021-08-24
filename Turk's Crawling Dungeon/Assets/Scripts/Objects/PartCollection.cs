@@ -86,5 +86,16 @@ namespace TCD.Objects
             part = Get<T>();
             return part;
         }
+
+        public bool TryGetList<T>(out List<T> partList) where T : Part
+        {
+            partList = new List<T>();
+            foreach (Part part in parts)
+            {
+                if (part is T)
+                    partList.Add((T) part);
+            }
+            return partList.Count > 0;
+        }
     }
 }

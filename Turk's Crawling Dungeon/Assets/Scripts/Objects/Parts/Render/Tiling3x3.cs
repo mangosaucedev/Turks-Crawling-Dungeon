@@ -191,6 +191,7 @@ namespace TCD.Objects.Parts
                 UpdateOtherSprite(X, Y - 1, e);
                 UpdateOtherSprite(X - 1, Y, e);
                 UpdateOtherSprite(X + 1, Y, e);
+                UpdateOtherSprite(X, Y, e);
             }
         }
 

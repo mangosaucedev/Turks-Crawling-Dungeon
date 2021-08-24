@@ -22,5 +22,7 @@ namespace TCD.Objects
         T Get<T>() where T : Part;
 
         bool TryGet<T>(out T part) where T : Part;
+
+        bool TryGetList<T>(out List<T> partList) where T : Part;
     }
 }

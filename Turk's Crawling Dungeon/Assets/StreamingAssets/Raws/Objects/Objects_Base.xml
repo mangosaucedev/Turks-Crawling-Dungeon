@@ -32,10 +32,9 @@
 			<Var Name="BaseWeight">0.1</Var>
 		</Part>
 
-		<Part Name="Hitpoints">
-			<Var Name="BaseHpMax">1</Var>
+		<Part Name="Resources">
+			<Var Name="Hitpoints">1</Var>
 		</Part>
-
 
 	</Object>
 

@@ -11,7 +11,7 @@ namespace TCD.Objects.Parts.Effects
 
         public override string Name => "Off-Balance";
 
-        public override Sprite Icon => Assets.Get<Sprite>("OffBalanceIcon");
+        public override Sprite Icon => Assets.Get<Sprite>("TackleIcon");
 
         public override EffectStacking Stacking => EffectStacking.RefreshCooldown;
 

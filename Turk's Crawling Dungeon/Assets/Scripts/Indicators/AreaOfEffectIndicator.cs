@@ -4,8 +4,11 @@ using UnityEngine;
 
 namespace TCD.Indicators
 {
-    public class AreaOfEffectIndicator : MonoBehaviour
+    public class AreaOfEffectIndicator : Indicator
     {
-
+        protected override void UpdateIndicator()
+        {
+            base.UpdateIndicator();
+        }
     }
 }

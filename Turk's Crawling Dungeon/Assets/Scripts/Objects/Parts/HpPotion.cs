@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Resources = TCD.Objects.Parts.Resources;
 
 namespace TCD.Objects.Parts
 {
@@ -27,9 +28,9 @@ namespace TCD.Objects.Parts
         {
             Item item = parent.parts.Get<Item>();
             BaseObject obj = item.Owner;
-            if (obj.parts.TryGet(out Hitpoints hitpoints))
+            if (obj.parts.TryGet(out Resources resources))
             {
-                hitpoints.ModifyHp(Heal);
+                resources.ModifyResource(Resource.Hitpoints, Heal);
                 if (obj == PlayerInfo.currentPlayer)
                     MessageLog.Add("You feel refreshed and full of life.");
                 parent.Destroy();

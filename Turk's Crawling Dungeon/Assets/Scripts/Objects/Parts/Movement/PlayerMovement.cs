@@ -14,7 +14,9 @@ namespace TCD.Objects.Parts
             if (success)
             {
                 EventManager.Send(new PlayerMovedEvent());
-                TimeScheduler.Tick(TimeInfo.TIME_PER_STANDARD_TURN);
+                GameGrid grid = CurrentZoneInfo.grid;
+                Cell cell = grid[Position];
+                TimeScheduler.Tick(GetCostToMove() + GetMoveCostToCell(cell));
             }
             else
             {

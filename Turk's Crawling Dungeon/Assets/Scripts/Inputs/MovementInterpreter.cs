@@ -73,8 +73,6 @@ namespace TCD.Inputs
         private void TryMove()
         {
             MovementDelegate movementDelegate = TryGetMovementDelegate();
-            if (movementDelegate != PointAction && !InputManager.IsActive)
-                return;
             movementTimer = TIME_BETWEEN_MOVES;
             movementDelegate?.Invoke(movementInputVector, false);
         }
@@ -132,6 +130,9 @@ namespace TCD.Inputs
             {
                 case MovementMode.Point:
                     return PointAction;
+                case MovementMode.Cursor:
+                case MovementMode.CursorFast:
+                    return MoveCursor;
                 default:
                     return MovePlayer;
             }
@@ -149,10 +150,20 @@ namespace TCD.Inputs
             return true;
         }
 
+        private bool MoveCursor(Vector2Int direction, bool isForced = false)
+        {
+            MainCursor mainCursor = ServiceLocator.Get<MainCursor>();
+            return mainCursor.Move(direction, isForced);
+        }
+
         private bool MovePlayer(Vector2Int direction, bool isForced = false)
         {
-            Movement movement = Player.parts.Get<Movement>();
-            return movement.TryToMove(direction, isForced);
+            if (InputManager.IsActive)
+            {
+                Movement movement = Player.parts.Get<Movement>();
+                return movement.TryToMove(direction, isForced);
+            }
+            return false;
         }
     }
 }

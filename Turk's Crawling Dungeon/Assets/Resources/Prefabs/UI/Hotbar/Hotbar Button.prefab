@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 5472845594041571735}
   - component: {fileID: 5472845594041571732}
   - component: {fileID: 5472845594041571733}
-  - component: {fileID: 5472845594041571734}
+  - component: {fileID: 4481481707304281909}
   m_Layer: 5
   m_Name: Hotbar Button
   m_TagString: Untagged
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5472845594041571734
+--- !u!114 &4481481707304281909
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5472845594041571720}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 099e2dd9e80dfee4c8b1795ddb421fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -214,9 +214,15 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 5472845594041571733}
-  m_OnClick:
+  key: 
+  onClick:
     m_PersistentCalls:
       m_Calls: []
+  view: {fileID: 0}
+  keyText: {fileID: 503761504283137907}
+  text: {fileID: 5472845594788771452}
+  icon: {fileID: 5472845594041571733}
+  talent: {fileID: 0}
 --- !u!1 &5472845594788771454
 GameObject:
   m_ObjectHideFlags: 0

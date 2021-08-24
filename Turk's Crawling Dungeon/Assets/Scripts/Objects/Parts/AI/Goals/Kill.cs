@@ -85,6 +85,11 @@ namespace TCD.Objects.Parts
                 Think("I am incapable of combat!");
                 return false;
             }
+            AIBeforeAttackEvent e = LocalEvent.Get<AIBeforeAttackEvent>();
+            e.obj = obj;
+            e.target = target;
+            if (!obj.HandleEvent(e))
+                return false;
             return AttackHandler.AutoAttack(obj, target);
         }
 

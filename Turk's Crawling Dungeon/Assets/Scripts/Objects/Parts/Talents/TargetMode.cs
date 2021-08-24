@@ -7,6 +7,7 @@ namespace TCD.Objects.Parts.Talents
     public enum TargetMode 
     {
         None,
+        Attack,
         Object,
         Cell
     }

@@ -19,7 +19,7 @@ namespace TCD
                 T e = (T)pool[0];
                 if (e != null)
                 {
-                    pool.RemoveAt(0);
+                    pool.Remove(e);
                     return e;
                 }
             }

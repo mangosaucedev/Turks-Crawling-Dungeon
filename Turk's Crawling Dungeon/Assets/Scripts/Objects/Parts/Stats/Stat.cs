@@ -22,6 +22,7 @@ namespace TCD.Objects.Parts
         PhysicalSave,
         MentalSave,
         MoveCost,
+        AttackCost,
         Luck
     }
 }

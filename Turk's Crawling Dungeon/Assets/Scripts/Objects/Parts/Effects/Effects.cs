@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TCD.Texts;
 
 namespace TCD.Objects.Parts.Effects
 {
@@ -13,13 +14,13 @@ namespace TCD.Objects.Parts.Effects
         protected override void OnEnable()
         {
             base.OnEnable();
-            EventManager.Listen<AfterTurnTickEvent>(this, OnAfterTurnTick);
+            EventManager.Listen<BeforeTurnTickEvent>(this, OnBeforeTurnTick);
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
-            EventManager.StopListening<AfterTurnTickEvent>(this);
+            EventManager.StopListening<BeforeTurnTickEvent>(this);
         }
 
         public override bool HandleEvent<T>(T e)
@@ -36,7 +37,7 @@ namespace TCD.Objects.Parts.Effects
             return base.HandleEvent(e);
         }
 
-        public void OnAfterTurnTick(AfterTurnTickEvent e)
+        public void OnBeforeTurnTick(BeforeTurnTickEvent e)
         {
             for (int i = activeEffects.Count - 1; i >= 0; i--)
             {
@@ -128,6 +129,9 @@ namespace TCD.Objects.Parts.Effects
             e.obj = parent;
             e.effect = effect;
             FireEvent(parent, e);
+            if (parent.parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer())
+                FloatingTextHandler.Draw(parent.transform.position, "+" + effect.Name, effect.Color);
+            effect.OnApply();
             return true;
         }
 
@@ -164,6 +168,9 @@ namespace TCD.Objects.Parts.Effects
             EffectRemovedEvent e = LocalEvent.Get<EffectRemovedEvent>();
             e.obj = parent;
             e.effect = effect;
+            if (parent.parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer())
+                FloatingTextHandler.Draw(parent.transform.position, "-" + effect.Name, Color.red);
+            effect.OnRemove();
             FireEvent(parent, e);
         }
 

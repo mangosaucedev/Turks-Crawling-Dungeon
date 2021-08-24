@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TCD.Objects.Parts;
+using Resources = TCD.Objects.Parts.Resources;
 
 namespace TCD.Objects.Attacks
 {
     public static class AttackHandler
     {
+        public static float lastDamage;
+
         private static BaseObject currentAttacker;
         private static BaseObject currentDefender;
         private static Attack currentAttack;
@@ -63,14 +66,14 @@ namespace TCD.Objects.Attacks
 
         private static bool AttackTarget()
         {
-            float damage = Random.Range(currentAttack.minDamage, currentAttack.maxDamage);
+            lastDamage = Random.Range(currentAttack.minDamage, currentAttack.maxDamage);
             if (currentAttack.attackType == AttackType.Physical)
-                damage = DamageHandler.AddPhysicalPowerToDamage(damage, currentAttacker);
+                lastDamage = DamageHandler.AddPhysicalPowerToDamage(lastDamage, currentAttacker);
             else if (currentAttack.attackType == AttackType.Mental)
-                damage = DamageHandler.AddMentalPowerToDamage(damage, currentAttacker);
-            damage = DamageHandler.PerformReductionsOnDamage(damage, currentAttack.damageType, currentDefender);
+                lastDamage = DamageHandler.AddMentalPowerToDamage(lastDamage, currentAttacker);
+            lastDamage = DamageHandler.PerformReductionsOnDamage(lastDamage, currentAttack.damageType, currentDefender);
 
-            if (damage <= 0)
+            if (lastDamage <= 0)
             {
                 if (currentAttacker == PlayerInfo.currentPlayer)
                     MessageLog.Add($"Your attack against {currentDefender.display.GetDisplayName()} failed to penetrate!");
@@ -79,7 +82,7 @@ namespace TCD.Objects.Attacks
                 return false;
             }
 
-            if (!currentDefender.parts.TryGet(out Hitpoints defenderHitpoints))
+            if (!currentDefender.parts.TryGet(out Resources defenderResources))
             {
                 if (currentAttacker == PlayerInfo.currentPlayer)
                     MessageLog.Add($"{currentDefender.display.GetDisplayName()} cannot be attacked.");
@@ -87,21 +90,21 @@ namespace TCD.Objects.Attacks
             }
 
             string message = $"{currentAttacker.display.GetDisplayName()} {currentAttack.verbPastTense} " +
-                $"{currentDefender.display.GetDisplayName()} for {damage.RoundToDecimal(1)} " +
+                $"{currentDefender.display.GetDisplayName()} for {lastDamage.RoundToDecimal(1)} " +
                 $"{currentAttack.damageType.name.ToLower()} damage!";
             MessageLog.Add(message);
-            defenderHitpoints.ModifyHp(-damage);
+            defenderResources.ModifyResource(Resource.Hitpoints, -lastDamage);
             AttackEvent attackEvent = LocalEvent.Get<AttackEvent>();
             attackEvent.obj = currentAttacker;
             attackEvent.defender = currentDefender;
             attackEvent.attack = currentAttack;
-            attackEvent.damage = damage;
+            attackEvent.damage = lastDamage;
             currentAttacker.HandleEvent(attackEvent);
             AttackedEvent attackedEvent = LocalEvent.Get<AttackedEvent>();
             attackedEvent.obj = currentDefender;
             attackedEvent.attacker = currentAttacker;
             attackedEvent.attack = currentAttack;
-            attackedEvent.damage = damage;
+            attackedEvent.damage = lastDamage;
             currentDefender.HandleEvent(attackedEvent);
             return true;
         }

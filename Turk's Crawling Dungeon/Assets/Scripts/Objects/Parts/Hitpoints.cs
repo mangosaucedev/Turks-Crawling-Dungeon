@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace TCD.Objects.Parts
 {
+    [Obsolete("Use Resources part!")]
     public class Hitpoints : Part
     {
         [SerializeField] private float baseHp;

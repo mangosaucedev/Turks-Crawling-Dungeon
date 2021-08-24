@@ -13,9 +13,9 @@ namespace TCD.UI
         public string key;
         public UnityEvent onClick;
 
-        [SerializeField] private View view;
-        [SerializeField] private Text keyText;
-        [SerializeField] private Text text;
+        [SerializeField] protected View view;
+        [SerializeField] protected Text keyText;
+        [SerializeField] protected Text text;
 
         public string ViewName
         {

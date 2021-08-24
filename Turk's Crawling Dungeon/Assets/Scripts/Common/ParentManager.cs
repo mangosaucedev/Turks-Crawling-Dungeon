@@ -8,13 +8,17 @@ namespace TCD
     {
         private const string OBJECTS = "--- Objects ---";
         private const string CANVAS = "Main Canvas";
+        private const string TEMP = "--- Temp ---";
 
         private static Transform objects;
         private static Transform canvas;
+        private static Transform temp;
 
         public static Transform Objects => Find(ref objects, OBJECTS);
 
         public static Transform Canvas => Find(ref canvas, CANVAS);
+
+        public static Transform Temp => Find(ref temp, TEMP);
 
         private void OnEnable()
         {

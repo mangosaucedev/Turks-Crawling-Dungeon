@@ -18,6 +18,7 @@ namespace TCD.Inputs
 #endif
 
         private MovementInterpreter movementInterpreter = new MovementInterpreter();  
+        private MouseInterpreter mouseInterpreter = new MouseInterpreter();  
 
         public static bool IsActive => deactivatingConditions.Count == 0;
 
@@ -28,12 +29,14 @@ namespace TCD.Inputs
             KeyEventManager.Subscribe(KeyCommand.OpenInventory, KeyState.PressedThisFrame, e => { OpenView("Player Inventory View"); });
             KeyEventManager.Subscribe(KeyCommand.Cancel, KeyState.PressedThisFrame, e => { OpenView("Escape View"); });
             KeyEventManager.Subscribe(KeyCommand.OpenHelp, KeyState.PressedThisFrame, e => { OpenView("Help View"); });
+            KeyEventManager.Subscribe(KeyCommand.Enter, KeyState.PressedThisFrame, e => { ConfirmAction(); });
         }
 
         private void Update()
         {
             UpdateActivationState();
             movementInterpreter.UpdateMovement();
+            mouseInterpreter.UpdateMouse();
         }
 
         private void OnEnable()
@@ -100,6 +103,21 @@ namespace TCD.Inputs
         {
             if (IsActive)
                 ViewManager.Open(viewName);
+        }
+
+        private void ConfirmAction()
+        {
+            PlayerActionManager playerActionManager = ServiceLocator.Get<PlayerActionManager>();
+            if (playerActionManager.currentAction != null)
+            {
+                MainCursor mainCursor = ServiceLocator.Get<MainCursor>();
+                Vector2Int position = mainCursor.GetGridPosition();
+                if (!CurrentZoneInfo.grid.IsWithinBounds(position))
+                    return;
+                Cell cell = CurrentZoneInfo.grid[position];
+                playerActionManager.OnCell(cell);
+                playerActionManager.doNotActivateActionForFrames += 2;
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using TCD.Pathfinding;
 
 namespace TCD.Objects.Parts
 {
@@ -22,7 +23,7 @@ namespace TCD.Objects.Parts
             movementVector = direction;
             MoveSpriteToOrigin();
 
-            if (!CanMove() || !CanExitCurrentCell())
+            if (!CanMoveAndExitCurrentCell())
                 return false;
 
             Vector2Int newPosition = Position + direction;
@@ -31,9 +32,7 @@ namespace TCD.Objects.Parts
                 if (!CanEnterCell(newPosition))
                     return FailMove();
 
-                BeforeEnterCell(newPosition);
-                EnterCell(newPosition);
-                parent.cell.SetPosition(newPosition);
+                SetPosition(newPosition);
 
                 //visualizer.StartVizualization(visualizer.MoveVisualizationRoutine());
                 return true;
@@ -41,6 +40,9 @@ namespace TCD.Objects.Parts
             return FailMove();
         }
 
+
+        public bool CanMoveAndExitCurrentCell() => CanMove() && CanExitCurrentCell();
+        
         private bool CanMove()
         {
             BeforeMoveEvent e = LocalEvent.Get<BeforeMoveEvent>();
@@ -74,6 +76,13 @@ namespace TCD.Objects.Parts
             return false;
         }
 
+        public void SetPosition(Vector2Int position)
+        {
+            BeforeEnterCell(position);
+            EnterCell(position);
+            parent.cell.SetPosition(position);
+        }
+
         private void BeforeEnterCell(Vector2Int position)
         {
             Cell cell = CurrentZoneInfo.grid[position];
@@ -99,11 +108,9 @@ namespace TCD.Objects.Parts
 
         public int GetCostToMove()
         {
-            GetMoveCostEvent getMoveCostEvent = LocalEvent.Get<GetMoveCostEvent>();
-            getMoveCostEvent.obj = parent;
-            getMoveCostEvent.cost = TimeInfo.TIME_PER_STANDARD_TURN;
-            FireEvent(parent, getMoveCostEvent);
-            return getMoveCostEvent.cost;
+            if (parent.parts.TryGet(out Stats stats))
+                return stats.GetStatLevel(Stat.MoveCost);
+            return TimeInfo.TIME_PER_STANDARD_TURN;
         }
 
         public int GetMoveCostToCell(Cell cell)
@@ -115,6 +122,48 @@ namespace TCD.Objects.Parts
             if (getMoveCostToCellEvent.CanMoveToCell())
                 return getMoveCostToCellEvent.cost;
             return 999;
+        }
+
+        public virtual bool TryMoveToPosition(Vector2Int targetPosition)
+        {
+            GridRay ray = GridRaycaster.Raycast(Position, targetPosition, new BlockedByObstaclesEvaluator()).ray;
+            for (int i = 1; i < ray.positions.Count; i++)
+            { 
+                Vector2Int nextPosition = ray.positions[i];
+                Vector2Int unclampedDirection = nextPosition - Position;
+                float roundedX = Mathf.Round(unclampedDirection.x);
+                float roundedY = Mathf.Round(unclampedDirection.y);
+                int xDirection = (int)Mathf.Clamp(roundedX, -1, 1);
+                int yDirection = (int)Mathf.Clamp(roundedY, -1, 1);
+                movementVector = new Vector2Int(xDirection, yDirection);
+                if (CanMoveAndExitCurrentCell())
+                    SetPosition(nextPosition);
+                if (Position == targetPosition)
+                    return true;
+            }
+            return false;
+        }
+
+        public bool TryToNavigatePath(NavAstarPath path)
+        {
+            if (!path.isValid || path.path.Count == 0)
+                return false;
+            for (int i = 0; i < path.path.Count; i++)
+            {
+                Vector2Int nextPosition = path.path[i];
+                Vector2Int unclampedDirection = nextPosition - Position;
+                float roundedX = Mathf.Round(unclampedDirection.x);
+                float roundedY = Mathf.Round(unclampedDirection.y);
+                int xDirection = (int)Mathf.Clamp(roundedX, -1, 1);
+                int yDirection = (int)Mathf.Clamp(roundedY, -1, 1);
+                movementVector = new Vector2Int(xDirection, yDirection);
+                if (!TryToMove(movementVector))
+                {
+                    DebugLogger.Log("Could not move in direction " + movementVector);
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

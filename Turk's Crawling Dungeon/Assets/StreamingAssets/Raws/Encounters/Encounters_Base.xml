@@ -2,6 +2,7 @@
 <Encounters>
 
 	<Encounter Name="DungeonEnemyPatrolsTier0" Density="Loose">
+		<Object Name="Tumbleweed" Count="1" ChanceIn100="100"/>
 		<Object Name="GenericEnemy" Count="1-2" ChanceIn100="30"/>
 		<Object Name="Tarantula" Count="1-2" ChanceIn100="30"/>
 		<Object Name="Shrunk" Count="1-5" ChanceIn100="30"/>

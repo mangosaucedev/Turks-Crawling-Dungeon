@@ -12,7 +12,7 @@
 			<Var Name="HitpointRegen">1</Var>
 			<Var Name="HitpointRegenPoint">1</Var>
 			<Var Name="Stamina">100</Var>
-			<Var Name="StaminaRegen">0.3</Var>
+			<Var Name="StaminaRegen">1</Var>
 			<Var Name="StaminaRegenPoint">1</Var>
 			<Var Name="Psi">50</Var>
 			<Var Name="Oxygen">100</Var>
@@ -207,6 +207,108 @@
 		<Part Name="Talents.Strangle"/>
 	</Object>
 
+	<Object Name="Mandrake" InheritsFrom="Enemy">
+
+		<DisplayName>Mandrake</DisplayName>
+
+		<Description>Nothing to see here.</Description>
+
+		<Faction>Enemy</Faction>
+
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">40</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">Mandrake</Var>
+		</OverridePart>
+	</Object>
+
+	<Object Name="Screamer" InheritsFrom="Enemy">
+
+		<DisplayName>Screamer</DisplayName>
+
+		<Description>Nothing to see here.</Description>
+
+		<Faction>Enemy</Faction>
+
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">40</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">Screamer</Var>
+		</OverridePart>
+	</Object>
+
+
+	<Object Name="Sprinter" InheritsFrom="Enemy">
+
+		<DisplayName>Sprinter</DisplayName>
+
+		<Description>Nothing to see here.</Description>
+
+		<Faction>Enemy</Faction>
+
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">40</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">Sprinter</Var>
+		</OverridePart>
+	</Object>
+
+	<Object Name="Eel" InheritsFrom="Enemy">
+
+		<DisplayName>Eel</DisplayName>
+
+		<Description>Nothing to see here.</Description>
+
+		<Faction>Enemy</Faction>
+
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">40</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">Eel</Var>
+		</OverridePart>
+	</Object>
+
+	<Object Name="Tenderfoot" InheritsFrom="Enemy">
+
+		<DisplayName>Tenderfoot</DisplayName>
+
+		<Description>Nothing to see here.</Description>
+
+		<Faction>Enemy</Faction>
+
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">40</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">Tenderfoot</Var>
+		</OverridePart>
+	</Object>
+
+	<Object Name="Gawker" InheritsFrom="Enemy">
+
+		<DisplayName>Gawker</DisplayName>
+
+		<Description>Nothing to see here.</Description>
+
+		<Faction>Enemy</Faction>
+
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">40</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">Gawker</Var>
+		</OverridePart>
+	</Object>
 
 	<Object Name="PeeledMan" InheritsFrom="Enemy">
 

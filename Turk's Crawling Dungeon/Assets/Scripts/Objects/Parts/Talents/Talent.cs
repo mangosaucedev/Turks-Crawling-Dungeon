@@ -43,16 +43,16 @@ namespace TCD.Objects.Parts.Talents
 
         protected virtual void OnBeforeTurnTick(BeforeTurnTickEvent e)
         {
+            if (!isActive && activeCooldown >= 0)
+                activeCooldown -= e.timeElapsed;
             if (isActive && parent.parts.TryGet(out Resources resources))
             {
-                float timeMultiplier = e.timeElapsed / TimeInfo.TIME_PER_STANDARD_TURN;
+                float timeMultiplier = (float) e.timeElapsed / TimeInfo.TIME_PER_STANDARD_TURN;
                 float sustainCost = -GetSustainResourceCost() * timeMultiplier;
-                if (resources.GetResource(Resource) <= sustainCost)          
+                if (resources.GetResource(Resource) <= Mathf.Abs(sustainCost))
                     Deactivate();
                 resources.ModifyResource(Resource, sustainCost);
             }
-            if (!isActive && activeCooldown >= 0)
-                activeCooldown -= e.timeElapsed;
         }
 
         public abstract IEnumerator OnObjectRoutine(BaseObject obj);
@@ -61,6 +61,8 @@ namespace TCD.Objects.Parts.Talents
 
         public virtual bool Activate()
         {
+            if (parent.parts.TryGet(out Resources resources))
+                resources.ModifyResource(Resource, -GetActivationResourceCost());
             isActive = true;
             return true;
         }

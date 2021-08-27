@@ -52,7 +52,7 @@ namespace TCD.Zones
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            string zone = Choose.Random("Level0", "Overgrown", "Decomposition");
+            string zone = Choose.Random("Level0", "Overgrown", "Decomposition", "Fungus");
             CurrentZoneInfo.zone = ZoneFactory.BuildFromBlueprint(zone);
             CurrentZoneInfo.grid = 
                 new GameGrid(CurrentZoneInfo.zone.Width, CurrentZoneInfo.zone.Height);

@@ -34,7 +34,7 @@ namespace TCD.Objects.Parts.Talents
         public override string GetDescription() => $"Each time you make an attack " +
             $"against a bleeding enemy, you go into a Blood Craze, increasing your " +
             $"physical power by {GetPhysicalPowerBonus()} and your attack speed by " +
-            $"{1 - GetAttackCostMultiplier()}% for 2 turns.";
+            $"{(1 - GetAttackCostMultiplier()) * 100}% for 2 turns.";
 
         private int GetPhysicalPowerBonus()
         {

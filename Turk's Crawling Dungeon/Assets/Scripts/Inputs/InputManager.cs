@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ using TCD.Objects;
 using TCD.Objects.Parts;
 using TCD.TimeManagement;
 using TCD.UI;
+using Resources = TCD.Objects.Parts.Resources;
 
 namespace TCD.Inputs
 {
@@ -30,6 +32,7 @@ namespace TCD.Inputs
             KeyEventManager.Subscribe(KeyCommand.Cancel, KeyState.PressedThisFrame, e => { OpenView("Escape View"); });
             KeyEventManager.Subscribe(KeyCommand.OpenHelp, KeyState.PressedThisFrame, e => { OpenView("Help View"); });
             KeyEventManager.Subscribe(KeyCommand.Enter, KeyState.PressedThisFrame, e => { ConfirmAction(); });
+            KeyEventManager.Subscribe(KeyCommand.Rest, KeyState.PressedThisFrame, e => { Rest(); });
         }
 
         private void Update()
@@ -118,6 +121,40 @@ namespace TCD.Inputs
                 playerActionManager.OnCell(cell);
                 playerActionManager.doNotActivateActionForFrames += 2;
             }
+        }
+
+        private void Rest()
+        {
+            MessageLog.Add("You begin resting.");
+            PlayerLongAction longAction = new PlayerLongAction(DoRest, IsRestComplete, OnRestComplete);
+            PlayerActionManager playerActionManager = ServiceLocator.Get<PlayerActionManager>();
+            playerActionManager.TryStartAction(longAction);
+        }
+        
+        private bool DoRest()
+        {
+            TimeScheduler.Tick(TimeInfo.TIME_PER_STANDARD_TURN * 4);
+            return true;
+        }
+
+        private bool IsRestComplete()
+        {
+            Resources resources = PlayerInfo.currentPlayer.parts.Get<Resources>();
+            foreach (Resource resource in Enum.GetValues(typeof(Resource)))
+            {
+                float value = resources.GetResource(resource);
+                float max = resources.GetMaxResource(resource);
+                float percent = (float) value / max;
+                float regenPoint = resources.GetBaseResourceRegenPoint(resource);
+                if (percent < regenPoint)
+                    return false;
+            }
+            return true;
+        }
+
+        private void OnRestComplete()
+        {
+            MessageLog.Add("You finished resting.");
         }
     }
 }

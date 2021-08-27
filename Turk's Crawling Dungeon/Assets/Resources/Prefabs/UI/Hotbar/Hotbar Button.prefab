@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 5472845594041571732}
   - component: {fileID: 5472845594041571733}
   - component: {fileID: 4481481707304281909}
+  - component: {fileID: 5221638357074998798}
   m_Layer: 5
   m_Name: Hotbar Button
   m_TagString: Untagged
@@ -223,6 +224,22 @@ MonoBehaviour:
   text: {fileID: 5472845594788771452}
   icon: {fileID: 5472845594041571733}
   talent: {fileID: 0}
+  keyCommand: 0
+--- !u!114 &5221638357074998798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5472845594041571720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea0d474a2280e6e4f9a7becad2b9a8e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: 
+  body: 
+  button: {fileID: 4481481707304281909}
 --- !u!1 &5472845594788771454
 GameObject:
   m_ObjectHideFlags: 0

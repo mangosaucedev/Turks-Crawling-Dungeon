@@ -376,11 +376,7 @@ namespace TCD.Objects.Parts
         {
             if (!CanModifyResource(resource, amount))
                 return false;
-            if (!resources.TryGetValue(resource, out float value))
-            {
-                value = 0;
-                resources[resource] = value;
-            }
+            float value = GetResource(resource);
             resources[resource] = Mathf.Clamp(value + amount, 0, GetMaxResource(resource));
             OnModifyResource(resource, amount);
             return true;

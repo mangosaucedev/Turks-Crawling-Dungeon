@@ -16,7 +16,9 @@ namespace TCD.Objects.Parts
             graphicRenderer.drawMode = SpriteDrawMode.Sliced;
             Vector2 spriteSize = parent.SpriteRenderer.sprite.rect.size;
             spriteSize /= parent.SpriteRenderer.sprite.pixelsPerUnit;
-            graphicRenderer.size = spriteSize;
+            float xSize = Mathf.Max(spriteSize.x, 2);
+            float ySize = Mathf.Max(spriteSize.y, 2);
+            graphicRenderer.size = new Vector2(xSize, ySize);
         }
     }
 }

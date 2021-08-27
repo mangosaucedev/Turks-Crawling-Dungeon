@@ -80,33 +80,32 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 2
   m_Text: 'Use the arrows keys or numpad to move <b>(make sure NumLock is enabled!)</b>
+    You can now also use the mouse to move; simply click on the cell you''d like
+    to move to.
 
 
-    Press
-    2, 4, 6, and 8 on the numpad to move orthogonally, and 1, 3, 7, and 9 to move
-    diagonally. Press 5 to pass your turn.
+    Press 2, 4, 6, and 8 on the numpad to move orthogonally, and
+    1, 3, 7, and 9 to move diagonally. Press 5 to pass your turn.
 
 
-    Press Space and a direction key
-    to interact with an object adjacent to you. Press I to open your inventory and
-    see your carried and equipped items.
+    Press Space
+    and a direction key to interact with an object adjacent to you, or double-tap
+    Space to interact with objects on the same cell as you. Press I to open your
+    inventory and see your carried and equipped items. Press Z to rest until your
+    resources (such as hitpoints) are finished regenerating.
 
 
-    Press Escape to cancel an action and
-    close most menus. Escape also brings up the options menu.
+    Press Escape to
+    cancel an action and close most menus. Escape also brings up the options menu.
+    Use the mouse or keyboard to interact with menus.
 
 
-    Use the mouse
-    to interact with menus.
+    Use your talents (listed
+    on the hotbar at the bottom of the screen) to defeat enemies.
 
 
-    Gather coins and gems to increase your score. Killing
-    enemies by "bumping" into them also adds to your score, as does descending to
-    a lower level of the dungeon.
-
-
-    You can access this screen any time by pressing
-    "?" (shift + ''/'') or through the options menu.'
+    You can access
+    this screen any time by pressing "?" (shift + ''/'') or through the options menu.'
 --- !u!114 &5097654017798703301
 MonoBehaviour:
   m_ObjectHideFlags: 0

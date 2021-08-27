@@ -69,6 +69,8 @@ namespace TCD.Objects.Parts.Talents
                     MessageLog.Add($"{parent.display.GetDisplayName()} has mauled you for {AttackHandler.lastDamage} damage!");
             }
             activeCooldown += GetCooldown();
+            if (parent.parts.TryGet(out Resources resources))
+                resources.ModifyResource(Resource, -GetActivationResourceCost());
             if (parent == PlayerInfo.currentPlayer)
                 TimeScheduler.Tick(GetEnergyCost());
             yield break;
@@ -102,7 +104,9 @@ namespace TCD.Objects.Parts.Talents
 
         public override string GetDescription() => $"Make an attack against an opponent. " +
             $"If it hits, make another free attack that will cause bleed for 50% attack damage " +
-            $"per turn for {GetBleedDuration()} turns (totalling {50 * GetBleedDuration()}% bleed damage).";
+            $"per turn for {((float)GetBleedDuration() / TimeInfo.TIME_PER_STANDARD_TURN).RoundToDecimal(1)} " +
+            $"turns (totalling {50 * ((float) GetBleedDuration() / TimeInfo.TIME_PER_STANDARD_TURN).RoundToDecimal(1)}% " +
+            $"bleed damage).";
 
         protected override bool OnAIBeforeAttack(AIBeforeAttackEvent e)
         {

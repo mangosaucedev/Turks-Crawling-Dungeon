@@ -38,6 +38,38 @@
 
 	</Object>
 
+	<Object Name="ShroomWall0" InheritsFrom="Wall">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">ShroomWall0</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="ShroomWall1" InheritsFrom="Wall">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">ShroomWall1</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="ShroomWall2" InheritsFrom="Wall">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">ShroomWall2</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="ShroomWall3" InheritsFrom="Wall">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">ShroomWall3</Var>
+		</OverridePart>
+
+	</Object>
+
 	<!-- Doors -->
 
 	<Object Name="Door" InheritsFrom="PhysicalObject">

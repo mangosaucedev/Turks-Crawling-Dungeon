@@ -28,7 +28,7 @@ namespace TCD.Zones
 
         public override IEnumerator Generate()
         {
-            surfaceMap = new PerlinNoiseGrid(Width, Height, 5);
+            surfaceMap = new PerlinNoiseGrid(Width, Height, 1);
             for (int x = 0; x < Width; x++)
                 for (int y = 0; y < Height; y++)
                 {

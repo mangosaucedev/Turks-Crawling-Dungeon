@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using TCD.Inputs.Actions;
 
 namespace TCD.Inputs
@@ -13,6 +14,7 @@ namespace TCD.Inputs
         private MouseCursor MouseCursor =>
             ServiceLocator.Get<MouseCursor>();
 
+        private EventSystem EventSystem => EventSystem.current;
 
         public void UpdateMouse()
         {
@@ -24,6 +26,8 @@ namespace TCD.Inputs
 
         private void OnLeftMouseButtonDown()
         {
+            if (EventSystem.IsPointerOverGameObject())
+                return;
             if (PlayerActionManager.currentAction == null)
             {
                 PlayerActionManager.TryStartAction(new MoveToMouse());

@@ -4,6 +4,7 @@ using UnityEngine;
 using TCD.Inputs;
 using TCD.Inputs.Actions;
 using TCD.Objects.Parts.Talents;
+using TCD.Texts;
 
 namespace TCD.UI
 {
@@ -36,6 +37,11 @@ namespace TCD.UI
 
         private void UseTalentAction()
         {
+            if (!talent.CanUseTalent())
+            {
+                FloatingTextHandler.Draw(PlayerInfo.currentPlayer.transform.position, "Can't use that talent.");
+                return;
+            }
             PlayerActionManager actionManager = ServiceLocator.Get<PlayerActionManager>();
             actionManager.TryStartAction(new UseTalent(talent));
         }

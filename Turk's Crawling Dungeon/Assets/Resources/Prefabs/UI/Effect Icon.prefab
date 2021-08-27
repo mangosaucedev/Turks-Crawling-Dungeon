@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 5569240231216797351}
   - component: {fileID: 1379339366046427626}
   - component: {fileID: 3704155860012429639}
+  - component: {fileID: 2557749816048911537}
   m_Layer: 0
   m_Name: Effect Icon
   m_TagString: Untagged
@@ -189,6 +190,21 @@ MonoBehaviour:
   icon: {fileID: 1379339366046427626}
   stacks: {fileID: 4649815102517010958}
   timeRemaining: {fileID: 8706226137445702848}
+--- !u!114 &2557749816048911537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2388159186216529172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4480f59d322abd4ca607e9f294b18ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  header: 
+  body: 
+  icon: {fileID: 3704155860012429639}
 --- !u!1 &5917404597422243750
 GameObject:
   m_ObjectHideFlags: 0

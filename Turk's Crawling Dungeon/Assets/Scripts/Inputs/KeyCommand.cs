@@ -7,6 +7,7 @@ namespace TCD.Inputs
     public enum KeyCommand
     {
         None,
+        // Movement
         MoveNorthwest,
         MoveNorth,
         MoveNortheast,
@@ -16,14 +17,19 @@ namespace TCD.Inputs
         MoveSouthwest,
         MoveSouth,
         MoveSoutheast,
+        //
         Enter,
         Cancel,
+        // Actions
         Interact,
         InteractAdvanced,
+        Rest,
+        // UI
         OpenInventory,
         OpenStatus,
         OpenHealth,
         OpenHelp,
+        // Hotbar
         Hotbar1,
         Hotbar2,
         Hotbar3,

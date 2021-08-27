@@ -2,11 +2,16 @@
 <Encounters>
 
 	<Encounter Name="DungeonEnemyPatrolsTier0" Density="Loose">
-		<Object Name="Tumbleweed" Count="1" ChanceIn100="100"/>
 		<Object Name="GenericEnemy" Count="1-2" ChanceIn100="30"/>
-		<Object Name="Tarantula" Count="1-2" ChanceIn100="30"/>
-		<Object Name="Shrunk" Count="1-5" ChanceIn100="30"/>
-		<Object Name="WhiteHand" Count="1-3" ChanceIn100="30"/>
+		<Object Name="Tarantula" Count="1" ChanceIn100="30"/>
+		<Object Name="Shrunk" Count="1-2" ChanceIn100="30"/>
+		<Object Name="WhiteHand" Count="1-2" ChanceIn100="30"/>
+		<Object Name="Mandrake" Count="1-3" ChanceIn100="30"/>
+		<Object Name="Screamer" Count="1" ChanceIn100="30"/>
+		<Object Name="Sprinter" Count="1-3" ChanceIn100="30"/>
+		<Object Name="Eel" Count="1-2" ChanceIn100="30"/>
+		<Object Name="Tenderfoot" Count="1" ChanceIn100="30"/>
+		<Object Name="Gawker" Count="1" ChanceIn100="30"/>
 	</Encounter>
 
 	<Encounter Name="DungeonEnemyPatrolsTier1" Density="Loose" Tier="1" >

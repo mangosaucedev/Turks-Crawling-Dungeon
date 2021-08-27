@@ -22,7 +22,6 @@ namespace TCD.Zones
 
         public override IEnumerator Generate()
         {
-            Debug.Log(PlayerInfo.GetTier());
             PopulateZoneWithForcedEncounters();
             yield return PopulateZoneWithEnemyPatrols();
             yield return PopulateZoneWithEncounters(EncounterType.OpenLoot);

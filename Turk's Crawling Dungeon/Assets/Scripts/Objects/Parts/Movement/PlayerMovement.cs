@@ -23,7 +23,10 @@ namespace TCD.Objects.Parts
                 GameGrid grid = CurrentZoneInfo.grid;
                 Cell cell = grid[Position + direction];
                 if (TryGetObjectToAttack(cell, out BaseObject target) && parent.parts.TryGet(out Combat combat))
+                {
                     AttackHandler.AutoAttack(parent, target);
+                    TimeScheduler.Tick(combat.GetAttackCost(target));
+                }
             }
             return success;
         }

@@ -95,6 +95,8 @@ namespace TCD.Objects.Parts.Talents
                     }
                 }
                 activeCooldown += GetCooldown();
+                if (parent.parts.TryGet(out Resources resources))
+                    resources.ModifyResource(Resource, -GetActivationResourceCost());
                 if (parent == PlayerInfo.currentPlayer)
                     TimeScheduler.Tick(GetEnergyCost());
             }

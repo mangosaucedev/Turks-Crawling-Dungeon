@@ -75,7 +75,7 @@ namespace TCD.Inputs.Actions
                     (!target || obj.parts.Get<Combat>()))
                     target = obj;
             }
-            if (talent.TargetMode == TargetMode.Object)
+            if (talent.TargetMode != TargetMode.Cell)
             {
                 if (!target)
                 {

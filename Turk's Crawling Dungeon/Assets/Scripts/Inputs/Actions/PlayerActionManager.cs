@@ -109,6 +109,7 @@ namespace TCD.Inputs.Actions
         {
             if (currentAction == null)
                 return;
+            StopAllCoroutines();
             DebugLogger.Log($"Player has cancelled action '{currentAction.Name}'.");
             OnActionEnded();
         }

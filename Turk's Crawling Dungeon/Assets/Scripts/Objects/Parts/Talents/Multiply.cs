@@ -29,15 +29,15 @@ namespace TCD.Objects.Parts.Talents
             switch (level)
             {
                 default:
-                    return 5 * TimeInfo.TIME_PER_STANDARD_TURN;
+                    return 7 * TimeInfo.TIME_PER_STANDARD_TURN;
                 case 2:
-                    return 5 * TimeInfo.TIME_PER_STANDARD_TURN;
+                    return 6 * TimeInfo.TIME_PER_STANDARD_TURN;
                 case 3:
-                    return 4 * TimeInfo.TIME_PER_STANDARD_TURN;
+                    return 6 * TimeInfo.TIME_PER_STANDARD_TURN;
                 case 4:
-                    return 3 * TimeInfo.TIME_PER_STANDARD_TURN;
+                    return 5 * TimeInfo.TIME_PER_STANDARD_TURN;
                 case 5:
-                    return 2 * TimeInfo.TIME_PER_STANDARD_TURN;
+                    return 5 * TimeInfo.TIME_PER_STANDARD_TURN;
             }
         }
 

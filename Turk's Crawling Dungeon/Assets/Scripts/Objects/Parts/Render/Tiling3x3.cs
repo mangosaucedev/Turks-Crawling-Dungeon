@@ -184,15 +184,11 @@ namespace TCD.Objects.Parts
         protected override void UpdateSurroundingSprites()
         {
             UpdateTilingEvent e = LocalEvent.Get<UpdateTilingEvent>();
-            if (e != null)
-            {
-                e.tiling = this;
-                UpdateOtherSprite(X, Y + 1, e);
-                UpdateOtherSprite(X, Y - 1, e);
-                UpdateOtherSprite(X - 1, Y, e);
-                UpdateOtherSprite(X + 1, Y, e);
-                UpdateOtherSprite(X, Y, e);
-            }
+            e.tiling = this;
+            UpdateOtherSprite(X, Y + 1, e);
+            UpdateOtherSprite(X, Y - 1, e);
+            UpdateOtherSprite(X - 1, Y, e);
+            UpdateOtherSprite(X + 1, Y, e);    
         }
 
         private void UpdateOtherSprite(int x, int y, UpdateTilingEvent e)

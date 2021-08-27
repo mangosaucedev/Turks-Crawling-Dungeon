@@ -18,7 +18,9 @@ namespace TCD.Objects.Parts.Talents
 
         public override TargetMode TargetMode => TargetMode.Attack;
 
-        public override int GetSustainResourceCost() => 38;
+        public override int GetActivationResourceCost() => 20;
+
+        public override int GetSustainResourceCost() => 18;
 
         public override IEnumerator OnObjectRoutine(BaseObject obj)
         {

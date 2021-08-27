@@ -58,6 +58,8 @@ namespace TCD.Objects.Parts.Talents
                     MessageLog.Add($"{parent.display.GetDisplayName()} failed to pin you!");
             }
             activeCooldown += GetCooldown();
+            if (parent.parts.TryGet(out Resources resources))
+                resources.ModifyResource(Resource, -GetActivationResourceCost());
             if (parent == PlayerInfo.currentPlayer)
                 TimeScheduler.Tick(GetEnergyCost());
             yield break;

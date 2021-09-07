@@ -5,6 +5,7 @@ using UnityEngine.Diagnostics;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+using TCD.IO.Serialization;
 using TCD.UI;
 using TCD.UI.Notifications;
 
@@ -29,6 +30,7 @@ namespace TCD
                 "by terrible pain. Traumas fester in his brain like worms, eating him alive from the " +
                 "inside out.\n\nIs it possible to return from the brink of annihilation? Can Turk " +
                 "banish the darkness inside, or is he doomed to succumb to his misery?");
+            SaveHandler.SaveGame();
         }
 
         private void OnEnable()

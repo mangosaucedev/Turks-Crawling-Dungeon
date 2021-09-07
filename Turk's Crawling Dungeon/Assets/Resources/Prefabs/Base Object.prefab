@@ -184,12 +184,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b1440b9e17960f4181b445379727710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayName: 
-  displayNamePlural: 
-  description: 
-  faction: 
-  hp: 0
-  hpMax: 0
-  value: 0
   partsParent: {fileID: 1911370165469430447}
   spriteRenderer: {fileID: 0}

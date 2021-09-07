@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using TCD.Objects.Attacks;
 
 namespace TCD.Objects.Parts
 {
+    [Serializable]
     public class Dodge : Statistic
     {
         public override string Name => "Dodge";

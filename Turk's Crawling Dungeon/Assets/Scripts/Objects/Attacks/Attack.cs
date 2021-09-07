@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace TCD.Objects.Attacks
 {
+    [Serializable]
     public class Attack : ICloneable
     {
         public string name;

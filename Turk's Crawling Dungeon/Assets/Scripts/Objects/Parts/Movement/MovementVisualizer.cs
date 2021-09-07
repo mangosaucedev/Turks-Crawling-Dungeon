@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace TCD.Objects.Parts
 {
+    [Serializable]
     public class MovementVisualizer
     {
         private const float VISUALIZATION_SPEED = 24f;

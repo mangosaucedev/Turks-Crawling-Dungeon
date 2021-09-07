@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts
 {
+    [Serializable]
     public class PlayerMovement : Movement
     {
         public override bool TryToMove(Vector2Int direction, bool isForced = false)

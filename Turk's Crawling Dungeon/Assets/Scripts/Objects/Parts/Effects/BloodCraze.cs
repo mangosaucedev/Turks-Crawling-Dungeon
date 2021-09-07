@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 
 namespace TCD.Objects.Parts.Effects
 {
+    [Serializable]
     public class BloodCraze : Effect
     {
         public int physicalPowerBonus;

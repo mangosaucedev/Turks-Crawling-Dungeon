@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace TCD.Objects.Parts
 {
+    [Serializable]
     public class Inventory : Part
     {
         public List<BaseObject> items = new List<BaseObject>();

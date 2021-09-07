@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ using TCD.UI;
 
 namespace TCD.Objects.Parts
 {
+    [Serializable]
     public class Throwable : Part
     {
         [SerializeField] private int range;

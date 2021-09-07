@@ -6,19 +6,12 @@ using TCD.Objects.Parts;
 
 namespace TCD.Objects
 {
+    [Serializable]
     public class BaseObject : MonoBehaviour, ILocalEventHandler
     {
-        [Obsolete] public string displayName;
-        [Obsolete] public string displayNamePlural;
-        [Obsolete] public string description;
-        [Obsolete("Use Brain/Faction")] public string faction;
-        [Obsolete] public float hp;
-        [Obsolete] public float hpMax;
-        [Obsolete] public float value;
-        public ICellObject cell;
-        public IDeactivator deactivator;
-        [Obsolete] public IHp health;
-        public IPartCollection parts;
+        public CellObject cell;
+        public Deactivator deactivator;
+        public PartCollection parts;
         public Transform partsParent;
         [SerializeField] private SpriteRenderer spriteRenderer;
 

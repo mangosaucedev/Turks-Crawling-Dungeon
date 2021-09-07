@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace TCD.Objects.Parts.Effects
 {
+    [Serializable]
     public class OffBalance : Effect
     {
         private const int DODGE_PENALTY = 10;

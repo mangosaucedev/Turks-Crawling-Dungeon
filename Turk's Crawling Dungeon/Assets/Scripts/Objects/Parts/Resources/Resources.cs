@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace TCD.Objects.Parts
 {
+    [Serializable]
     public class Resources : Part 
     {
         [SerializeField] private float hitpoints;
@@ -30,11 +32,10 @@ namespace TCD.Objects.Parts
         [SerializeField] private float stimulation;
         [SerializeField] private float stimulationRegen;
         [SerializeField] private float stimulationRegenPoint;
-
-        private Dictionary<Resource, float> resources = new Dictionary<Resource, float>();
-        private Dictionary<Resource, float> maxResources = new Dictionary<Resource, float>();
-        private Dictionary<Resource, float> regen = new Dictionary<Resource, float>();
-        private Dictionary<Resource, float> regenPoint = new Dictionary<Resource, float>();
+        [SerializeField] private Dictionary<Resource, float> resources = new Dictionary<Resource, float>();
+        [SerializeField] private Dictionary<Resource, float> maxResources = new Dictionary<Resource, float>();
+        [SerializeField] private Dictionary<Resource, float> regen = new Dictionary<Resource, float>();
+        [SerializeField] private Dictionary<Resource, float> regenPoint = new Dictionary<Resource, float>();
 
         public float Hitpoints
         {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ using TCD.Texts;
 
 namespace TCD.Objects.Parts
 {
+    [Serializable]
     public class Combat : Part
     {
         public BaseObject lastDamagedBy;
@@ -13,7 +15,7 @@ namespace TCD.Objects.Parts
         public Attack lastAttackRecieved;
         public float lastAttackDamageRecieved;
         
-        private Attack lastAttemptedAttack;
+        [SerializeField] private Attack lastAttemptedAttack;
         
         public override string Name => "Combat";
 

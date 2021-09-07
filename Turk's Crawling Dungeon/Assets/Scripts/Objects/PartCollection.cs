@@ -7,6 +7,7 @@ using Object = UnityEngine.Object;
 
 namespace TCD.Objects
 {
+    [Serializable]
     public class PartCollection : ObjectComponent, IPartCollection
     {
         private List<Part> parts;

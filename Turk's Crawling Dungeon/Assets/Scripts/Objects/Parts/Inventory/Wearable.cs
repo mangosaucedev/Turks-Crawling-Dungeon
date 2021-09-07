@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace TCD.Objects.Parts
 {
+    [Serializable]
     public class Wearable : Equippable
     {
         [SerializeField] private int armor;

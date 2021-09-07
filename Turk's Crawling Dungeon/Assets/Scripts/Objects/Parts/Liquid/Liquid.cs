@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using TCD.Objects.Parts.Effects;
 
 namespace TCD.Objects.Parts
 {
+    [Serializable]
     public abstract class Liquid : Part
     {
         private const int COLOR_CHANGE_DEPTH = 900;
@@ -19,8 +21,8 @@ namespace TCD.Objects.Parts
         public bool isFlowing;
 
         [SerializeField] protected string liquidColor;
-        private Vector2Int tilePosition;
-        private List<Cell> unoccupiedAdjacentCells = new List<Cell>();
+        [SerializeField] private Vector2Int tilePosition;
+        [SerializeField] private List<Cell> unoccupiedAdjacentCells = new List<Cell>();
 
         public string LiquidColor
         {

@@ -6,6 +6,7 @@ using TCD.Objects.Attacks;
 
 namespace TCD.Objects.Parts
 {
+    [Serializable]
     public class MeleeWeapon : Equippable
     {
         public List<Attack> attacks = new List<Attack>();

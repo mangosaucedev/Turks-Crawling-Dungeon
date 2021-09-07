@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace TCD.Objects.Parts
 {
+    [Serializable]
     public abstract class Statistic : Part
     {
         [SerializeField] private int baseLevel;

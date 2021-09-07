@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using Resources = TCD.Objects.Parts.Resources;
 
 namespace TCD.Objects.Parts
 {
+    [Serializable]
     public class HpPotion : Part
     {
         public override string Name => "Hp Potion";

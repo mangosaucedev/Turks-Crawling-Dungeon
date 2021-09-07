@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace TCD.Objects
 {
+    [Serializable]
     public class Deactivator : ObjectComponent, IDeactivator
     {
         private List<object> conditions = new List<object>();

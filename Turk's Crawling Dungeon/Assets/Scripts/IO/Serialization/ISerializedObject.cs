@@ -8,5 +8,7 @@ namespace TCD.IO.Serialization
     public interface ISerializedObject 
     {
         Guid Guid { get; set; }
+
+        bool Load();
     }
 }

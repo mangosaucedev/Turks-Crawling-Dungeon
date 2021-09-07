@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace TCD.Objects
 {
+    [Serializable]
     public class CellObject : ObjectComponent, ICellObject
     {
         private int x;

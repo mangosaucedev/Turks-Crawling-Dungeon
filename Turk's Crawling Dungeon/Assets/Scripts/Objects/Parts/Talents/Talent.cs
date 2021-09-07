@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using Resources = TCD.Objects.Parts.Resources;
 
 namespace TCD.Objects.Parts.Talents
 {
+    [Serializable]
     public abstract class Talent : Part
     { 
         public int level = 1;

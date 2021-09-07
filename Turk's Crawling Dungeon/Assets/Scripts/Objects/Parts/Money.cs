@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace TCD.Objects.Parts
 {
+    [Serializable]
     public class Money : Part
     {
         public override string Name => "Money";

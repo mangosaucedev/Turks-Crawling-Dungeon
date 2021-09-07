@@ -1,14 +1,16 @@
+using System;
 using UnityEngine;
 using TCD.Pathfinding;
 
 namespace TCD.Objects.Parts
 {
+    [Serializable]
     public class Movement : Part
     { 
         public const int MIN_MOVE_TIME = 40;
 
         public Vector2Int movementVector;
-        private MovementVisualizer visualizer;
+        [SerializeField] private MovementVisualizer visualizer;
 
         public override string Name => "Movement";
 

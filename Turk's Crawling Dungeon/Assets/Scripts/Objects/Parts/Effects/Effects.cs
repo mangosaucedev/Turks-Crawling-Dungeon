@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using TCD.Texts;
 
 namespace TCD.Objects.Parts.Effects
 {
+    [Serializable]
     public class Effects : Part
     {
         public List<Effect> activeEffects = new List<Effect>();

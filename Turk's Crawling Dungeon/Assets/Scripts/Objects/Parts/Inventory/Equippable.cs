@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace TCD.Objects.Parts
 {
+    [Serializable]
     public abstract class Equippable : Part 
     {
         public Equipment equipment;

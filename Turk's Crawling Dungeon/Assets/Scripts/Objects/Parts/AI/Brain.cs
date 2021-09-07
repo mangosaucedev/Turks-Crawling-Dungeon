@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace TCD.Objects.Parts
 {
+    [Serializable]
     public class Brain : Part
     {
         private const int MAX_THOUGHTS = 32;
@@ -25,7 +26,8 @@ namespace TCD.Objects.Parts
         [Header("Thoughts")]
         [SerializeField] private List<string> thoughts = new List<string>();
 
-        private int energy;
+        [Header("Energy")]
+        [SerializeField] private int energy;
 
         public int SightRadius
         {

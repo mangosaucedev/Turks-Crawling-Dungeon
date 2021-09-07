@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace TCD.Objects.Parts
 {
+    [Serializable]
     public class Stats : Part
     { 
         [SerializeField] private string initStats;

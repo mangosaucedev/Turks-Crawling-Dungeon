@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts
 {
+    [Serializable]
     public class Door : Part
     {
         [SerializeField] private bool isOpen;

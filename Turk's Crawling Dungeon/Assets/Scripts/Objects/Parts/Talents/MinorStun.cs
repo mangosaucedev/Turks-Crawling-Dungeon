@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts.Talents
 {
+    [Serializable]
     public class MinorStun : Talent
     {
         public override string Name => "Minor Stun";

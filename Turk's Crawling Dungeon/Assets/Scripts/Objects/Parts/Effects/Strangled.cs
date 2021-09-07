@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace TCD.Objects.Parts.Effects
 {
+    [Serializable]
     public class Strangled : Effect
     {
         public override string Name => "Strangled";

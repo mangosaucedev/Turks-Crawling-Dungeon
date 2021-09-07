@@ -6,6 +6,7 @@ namespace TCD.Zones.Environments
 {
     public class ZoneEnvironments
     {
+        public string name;
         public List<Environment> environments = new List<Environment>();
         public List<ZoneEnvironment> environmentReferences = new List<ZoneEnvironment>();
         private Dictionary<Environment, bool> hasBeenPlaced = new Dictionary<Environment, bool>();

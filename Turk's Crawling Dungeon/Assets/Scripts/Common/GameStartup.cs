@@ -41,7 +41,6 @@ namespace TCD
             EnvironmentDeserializer environmentDeserializer = new EnvironmentDeserializer();
             yield return environmentDeserializer.DeserializeRawsAtPath();
 
-            /*
             ZoneEncountersDeserializer zoneEncountersDeserializer = new ZoneEncountersDeserializer();
             yield return zoneEncountersDeserializer.DeserializeRawsAtPath();
 
@@ -50,7 +49,6 @@ namespace TCD
 
             ZoneParamsDeserializer zoneParamsDeserializer = new ZoneParamsDeserializer();
             yield return zoneParamsDeserializer.DeserializeRawsAtPath();
-            */
 
             ZoneDeserializer zoneDeserializer = new ZoneDeserializer();
             yield return zoneDeserializer.DeserializeRawsAtPath();

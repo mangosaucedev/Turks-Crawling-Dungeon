@@ -2,7 +2,6 @@
 <ZoneParams>
 
 	<ZoneParam Name="Generic">
-		<Type>Generic</Type>
 		<Width>128</Width>
 		<Height>128</Height>
 		<MinChamberWidth>6</MinChamberWidth>
@@ -18,10 +17,9 @@
 		<CavePenetrationChance>0</CavePenetrationChance>
 	</ZoneParam>
 
-	<ZoneParam Name="Cavern">
-		<Type>Cavern</Type>
-		<Width>100</Width>
-		<Height>100</Height>
+	<ZoneParam Name="Cavern" Type="Cavern">
+		<Width>80</Width>
+		<Height>80</Height>
 	</ZoneParam>
 	
 </ZoneParams>

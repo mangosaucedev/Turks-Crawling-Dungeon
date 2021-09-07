@@ -11,12 +11,14 @@ namespace TCD.Zones
 
         public static IZone BuildFromBlueprint(string blueprintName)
         {
-            IZoneParams zoneParams = Assets.Get<IZoneParams>(blueprintName);
-            ZoneEnvironments zoneEnvironments = Assets.Get<ZoneEnvironments>(blueprintName);
+            Zone blueprint = Assets.Get<Zone>(blueprintName);
+            IZoneParams zoneParams = Assets.Get<IZoneParams>(blueprint.zoneParamsName);
+            ZoneEnvironments zoneEnvironments = Assets.Get<ZoneEnvironments>(blueprint.zoneEnvironmentsName);
             if (zoneEnvironments.environments.Count == 0)
                 SetupZoneEnvironments(zoneEnvironments);
             ZoneTerrain zoneTerrain = Assets.Get<ZoneTerrain>(blueprintName);
-            ZoneEncounters zoneEncounters = (ZoneEncounters) Assets.Get<ZoneEncounters>(blueprintName).Clone();
+            ZoneEncounters zoneEncounters = (ZoneEncounters) Assets.Get<ZoneEncounters>(blueprint.zoneEncountersName).Clone();
+            zoneEncounters.density = blueprint.encounterDensity;
             zoneEncounters.BuildEncounters();
             currentZone = new Zone(zoneParams);
             currentZone.ZoneEnvironments = zoneEnvironments;

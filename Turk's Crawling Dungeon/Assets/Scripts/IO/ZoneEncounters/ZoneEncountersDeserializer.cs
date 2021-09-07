@@ -1,13 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
+using TCD.Objects.Encounters;
 using TCD.Zones;
 
 namespace TCD.IO
 {
     public class ZoneEncountersDeserializer : RawDeserializer
     {
+        ZoneEncounters currentZoneEncounters;
+
         public override string RawPath => "ZoneEncounters";
 
         protected override void DeserializeXmlDocument(XmlDocument xml)
@@ -20,9 +24,23 @@ namespace TCD.IO
 
         private void DeserializeZoneEncounter(XmlNode node)
         {
-            ZoneEncounters zoneEncounters = new ZoneEncounters();
-            zoneEncounters.name = EvaluateAttribute(node, "Name", true);
-            Assets.Add(zoneEncounters.name, zoneEncounters);
+            currentZoneEncounters = new ZoneEncounters();
+            currentZoneEncounters.name = EvaluateAttribute(node, "Name", true);
+            XmlNodeList encounterNodes = node.SelectNodes("Encounter");
+            foreach (XmlNode encounterNode in encounterNodes)
+                DeserializeEncounter(encounterNode);
+            Assets.Add(currentZoneEncounters.name, currentZoneEncounters);
+        }
+
+        private void DeserializeEncounter(XmlNode node)
+        {
+            ZoneEncounter zoneEncounter = new ZoneEncounter();
+            zoneEncounter.name = EvaluateAttribute(node, "Name", true);
+            string typeName = EvaluateAttribute(node, "Type", true);
+            EncounterType type = (EncounterType) Enum.Parse(typeof(EncounterType), typeName);
+            zoneEncounter.type = type;
+            zoneEncounter.weight = int.Parse(EvaluateAttribute(node, "Weight") ?? "1");
+            currentZoneEncounters.buildEncounters.Add(zoneEncounter);
         }
     }
 }

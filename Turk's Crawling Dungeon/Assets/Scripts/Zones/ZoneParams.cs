@@ -8,6 +8,8 @@ namespace TCD.Zones
     [Serializable]
     public class ZoneParams : IZoneParams
     {
+        public string name;
+
         [Header("Zone")]
         [SerializeField] private ZoneGeneratorType type;
         [SerializeField] private int width;

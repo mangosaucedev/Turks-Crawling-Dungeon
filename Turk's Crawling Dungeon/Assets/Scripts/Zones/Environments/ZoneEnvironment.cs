@@ -13,7 +13,12 @@ namespace TCD.Zones.Environments
         public bool exclusive;
         public Environment environment;
 
-        public ZoneEnvironment(string name, float weight, EnvironmentPlacement placement, bool forced, bool exclusive)
+        public ZoneEnvironment()
+        {
+
+        }
+
+        public ZoneEnvironment(string name, float weight, EnvironmentPlacement placement, bool forced, bool exclusive) : this()
         {
             this.name = name;
             this.weight = weight;

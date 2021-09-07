@@ -7,6 +7,12 @@ namespace TCD.Zones
 {
     public class Zone : IZone
     {
+        public string name;
+        public string zoneParamsName;
+        public string zoneEncountersName;
+        public float encounterDensity;
+        public string zoneEnvironmentsName;
+
         private IZoneParams zoneParams;
         private ZoneEnvironments zoneEnvironments; 
         private ZoneTerrain zoneTerrain; 
@@ -55,7 +61,12 @@ namespace TCD.Zones
 
         public TGrid<Environment> Environments => environments;
 
-        public Zone(IZoneParams zoneParams)
+        public Zone()
+        {
+
+        }
+
+        public Zone(IZoneParams zoneParams) : this()
         {
             this.zoneParams = zoneParams;
             cellTypes = new TGrid<ChamberCellType>(Width, Height);

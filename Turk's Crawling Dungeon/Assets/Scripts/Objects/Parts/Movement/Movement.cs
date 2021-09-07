@@ -32,6 +32,7 @@ namespace TCD.Objects.Parts
                 if (!CanEnterCell(newPosition))
                     return FailMove();
 
+                ExitCell(Position);
                 SetPosition(newPosition);
 
                 //visualizer.StartVizualization(visualizer.MoveVisualizationRoutine());
@@ -95,6 +96,15 @@ namespace TCD.Objects.Parts
         {
             Cell cell = CurrentZoneInfo.grid[position];
             EnteredCellEvent e = LocalEvent.Get<EnteredCellEvent>();
+            e.obj = parent;
+            e.cell = cell;
+            FireEvent(cell, e);
+        }
+
+        public void ExitCell(Vector2Int position)
+        {
+            Cell cell = CurrentZoneInfo.grid[position];
+            ExitedCellEvent e = LocalEvent.Get<ExitedCellEvent>();
             e.obj = parent;
             e.cell = cell;
             FireEvent(cell, e);

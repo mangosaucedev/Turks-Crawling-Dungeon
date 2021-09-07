@@ -10,6 +10,12 @@
 			<Var Name="OffSlot">LeftHand</Var>
 		</Part>
 
+		<OverridePart Name="Render">
+			<Part Name="DisplayName">Weapon</Part>
+			<Part Name="DisplayNamePlural">Weapons</Part>
+			<Part Name="Description">A weapon.</Part>
+		</OverridePart>
+
 	</Object>
 
 	<Object Name="TwoHandedMeleeWeapon" InheritsFrom="MeleeWeapon">
@@ -22,15 +28,14 @@
 
 	<Object Name="SharpStone" InheritsFrom="MeleeWeapon">
 
-		<DisplayName>Sharp Stone</DisplayName>
-
-		<Description>An exceptionally sharp flake of glassy stone. Could be used as a makeshift weapon.</Description>
-		
 		<OverridePart Name="MeleeWeapon">
-			<Var Name="InitAttacks">Tier1Slash:1,Tier1Shank:2</Var>
+			<Var Name="InitAttacks">Tier0Slash:1,Tier0Shank:2</Var>
 		</OverridePart>
 		
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Sharp Stone</Var>
+			<Var Name="DisplayNamePlural">Sharp Stones</Var>
+			<Var Name="Description">An exceptionally sharp flake of glassy stone. Could be used as a makeshift weapon.</Var>
 			<Var Name="Sprite">SharpStone</Var>
 		</OverridePart>
 
@@ -38,33 +43,109 @@
 
 	<Object Name="Branch" InheritsFrom="MeleeWeapon">
 
-		<DisplayName>Ashen Branch</DisplayName>
+		<OverridePart Name="MeleeWeapon">
+			<Var Name="InitAttacks">Tier0Bludgeon:1</Var>
+		</OverridePart>
 
-		<Description>A heavy limb of dead wood. Could be used as a makeshift weapon.</Description>
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Ashen Branch</Var>
+			<Var Name="DisplayNamePlural">Ashen Branches</Var>
+			<Var Name="Description">A heavy limb of dead wood. Could be used as a makeshift weapon.</Var>
+			<Var Name="Sprite">Branch</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="Hammer" InheritsFrom="MeleeWeapon">
 
 		<OverridePart Name="MeleeWeapon">
 			<Var Name="InitAttacks">Tier1Bludgeon:1</Var>
 		</OverridePart>
 
 		<OverridePart Name="Render">
-			<Var Name="Sprite">Branch</Var>
+			<Var Name="DisplayName">Rusty Claw Hammer</Var>
+			<Var Name="DisplayNamePlural">Rusty Claw Hammers</Var>
+			<Var Name="Description"></Var>
+			<Var Name="Sprite">Hammer</Var>
 		</OverridePart>
 
 	</Object>
 
-
-	<Object Name="RustyDagger" InheritsFrom="MeleeWeapon">
-
-		<DisplayName>Rust-Eaten Dagger</DisplayName>
-
-		<Description>Oxidation has coated this dagger in a thick mire of rust. Could still be used as a makeshift weapon.</Description>
+	<Object Name="RustyHatchet" InheritsFrom="MeleeWeapon">
 
 		<OverridePart Name="MeleeWeapon">
-			<Var Name="InitAttacks">Tier1Slash:1,Tier1Shank:2</Var>
+			<Var Name="InitAttacks">Tier1Slash:3,Tier1Bludgeon:1</Var>
 		</OverridePart>
 
 		<OverridePart Name="Render">
-			<Var Name="Sprite">RustyDagger</Var>
+			<Var Name="DisplayName">Rusty Hatchet</Var>
+			<Var Name="DisplayNamePlural">Rusty Hatchets</Var>
+			<Var Name="Description"></Var>
+			<Var Name="Sprite">RustyHatchet</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="Rebar" InheritsFrom="MeleeWeapon">
+
+		<OverridePart Name="MeleeWeapon">
+			<Var Name="InitAttacks">Tier1Bludgeon:1</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Rebar</Var>
+			<Var Name="DisplayNamePlural">Rebar</Var>
+			<Var Name="Description"></Var>
+			<Var Name="Sprite">Rebar</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="JadePsyscourge" InheritsFrom="MeleeWeapon">
+
+		<OverridePart Name="MeleeWeapon">
+			<Var Name="InitAttacks">Tier1Bludgeon:1</Var>
+		</OverridePart>
+
+		<OverridePart Name="PhysicsSim">
+			<Var Name="BaseWeight">1</Var>
+		</OverridePart>
+		
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Jade Psyscourge</Var>
+			<Var Name="DisplayNamePlural">Jade Psyscourges</Var>
+			<Var Name="Description">Psyscourges are the crystallized fragments of Turk's ego. When wielded with a high level of Cunning, they become devastating weapons.</Var>
+			<Var Name="Sprite">JadePsyscourge</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="RottingWoodRod" InheritsFrom="MeleeWeapon">
+
+		<OverridePart Name="MeleeWeapon">
+			<Var Name="InitAttacks">Tier1Bludgeon:1</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Rottingwood Rod</Var>
+			<Var Name="DisplayNamePlural">Rottingwood Rods</Var>
+			<Var Name="Description">Rods are wands used to harness the lethal potential of one's Willpower.</Var>
+			<Var Name="Sprite">RottingWoodRod</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="RottingWoodScepter" InheritsFrom="TwoHandedMeleeWeapon">
+
+		<OverridePart Name="MeleeWeapon">
+			<Var Name="InitAttacks">Tier1Bludgeon:1</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Rottingwood Scepter</Var>
+			<Var Name="DisplayNamePlural">Rottingwood Scepters</Var>
+			<Var Name="Description">Scepters are staves used to harness the lethal potential of one's Willpower.</Var>
+			<Var Name="Sprite">RottingWoodRod</Var>
 		</OverridePart>
 
 	</Object>
@@ -72,20 +153,60 @@
 	<!-- Throwable -->
 
 	<Object Name="Throwable" InheritsFrom="MeleeWeapon">
-
+		
+		<Part Name="Throwable">
+			<Var Name="Range">8</Var>
+			<Var Name="Attack">Tier0ThrowBlunt</Var>
+		</Part>
+		
 	</Object>
 
-	<Object Name="ThrowingRock" InheritsFrom="Throwable">
-
-		<DisplayName>Small Rock</DisplayName>
-
-		<Description>A small, heavy stone. Could be thrown as a weapon.</Description>
+	<Object Name="RustyDagger" InheritsFrom="Throwable">
 
 		<OverridePart Name="MeleeWeapon">
-			<Var Name="InitAttacks">Tier1Bludgeon:1</Var>
+			<Var Name="InitAttacks">Tier0Slash:1,Tier0Shank:2</Var>
 		</OverridePart>
 
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Rust-Eaten Dagger</Var>
+			<Var Name="DisplayNamePlural">Rust-Eaten Daggers</Var>
+			<Var Name="Description">Oxidation and decay have eaten away this most of this blade's edge.</Var>
+			<Var Name="Sprite">RustyDagger</Var>
+		</OverridePart>
+
+		<OverridePart Name="Throwable">
+			<Var Name="Attack">Tier0ThrowPierce</Var>
+		</OverridePart>
+	</Object>
+
+	<Object Name="CombatKnife" InheritsFrom="Throwable">
+
+		<OverridePart Name="MeleeWeapon">
+			<Var Name="InitAttacks">Tier1Slash:1,Tier1Shank:2</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Rusty Combat Knife</Var>
+			<Var Name="DisplayNamePlural">Rusty Combat Knives</Var>
+			<Var Name="Description">A tetanus jab won't be enough to save you from this monstrosity.</Var>
+			<Var Name="Sprite">CombatKnife</Var>
+		</OverridePart>
+
+		<OverridePart Name="Throwable">
+			<Var Name="Attack">Tier1ThrowPierce</Var>
+		</OverridePart>
+	</Object>
+	
+	<Object Name="ThrowingRock" InheritsFrom="Throwable">
+		
+		<OverridePart Name="MeleeWeapon">
+			<Var Name="InitAttacks">Tier0Bludgeon:1</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Small Rock</Var>
+			<Var Name="DisplayNamePlural">Small Rocks</Var>
+			<Var Name="Description">A small, heavy stone. Could be thrown as a weapon.</Var>
 			<Var Name="Sprite">ThrowingRock</Var>
 		</OverridePart>
 

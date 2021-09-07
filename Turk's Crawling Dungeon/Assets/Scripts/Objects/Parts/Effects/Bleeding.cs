@@ -24,14 +24,16 @@ namespace TCD.Objects.Parts.Effects
         protected override void OnAfterTurnTick(AfterTurnTickEvent e)
         {
             base.OnAfterTurnTick(e);
+            /*
             if (effects.parent.parts.TryGet(out Resources resources))
             {
                 float multiplier = e.timeElapsed / TimeInfo.TIME_PER_STANDARD_TURN;
                 float damageThisTurn = -damage * multiplier;
                 resources.ModifyResource(Resource.Hitpoints, -damage);
             }
+            */
         }
 
-        public override string GetDescription() => $"Bleeding characters take damage per turn.";
+        public override string GetDescription() => $"Bleeding does nothing right now.";
     }
 }

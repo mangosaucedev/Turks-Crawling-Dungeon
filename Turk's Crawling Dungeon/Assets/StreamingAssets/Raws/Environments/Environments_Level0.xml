@@ -19,8 +19,8 @@
 			<Furnishing Name="DeadTree0" Category="Bush"/>
 			<Furnishing Name="DeadTree1" Category="Bush"/>
 			<Furnishing Name="DeadTree2" Category="Bush"/>
-			<Furnishing Name="Water10" Category="Lake" Weight="8"/>
-			<Furnishing Name="Acid10" Category="Lake"/>
+			<Furnishing Name="WaterFull" Category="Lake" Weight="8"/>
+			<Furnishing Name="AcidFull" Category="Lake"/>
 			<Furnishing Name="EyeTv" Category="Random" Weight="2"/>
 			<Furnishing Name="TurkVessel" Category="Random" Weight="2"/>
 			<Furnishing Name="TurkArm" Category="Random" Weight="2"/>
@@ -36,7 +36,7 @@
 			<Furnisher Name="Grass" Exclusive="True"/>
 		</Furnishers>
 		<Furnishings>
-			<Furnishing Name="Water10" Category="Lake"/>
+			<Furnishing Name="WaterFull" Category="Lake"/>
 			<Furnishing Name="GrassTile" Category="Grass" Weight="3"/>
 			<Furnishing Name="GrassTileYellow" Category="Grass"/>
 			<Furnishing Name="DeadBush" Category="Bush"/>

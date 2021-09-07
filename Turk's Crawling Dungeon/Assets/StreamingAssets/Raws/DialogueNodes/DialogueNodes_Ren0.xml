@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DialogueNodes>
+
+	<DialogueNode Name="Ren00" Speaker="Turk" GoToNode="Ren01">
+		<Text></Text>
+	</DialogueNode>
+	
+</DialogueNodes>

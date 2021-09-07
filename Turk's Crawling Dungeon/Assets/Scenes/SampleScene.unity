@@ -635,6 +635,7 @@ GameObject:
   - component: {fileID: 665449641}
   - component: {fileID: 665449644}
   - component: {fileID: 665449645}
+  - component: {fileID: 665449646}
   m_Layer: 0
   m_Name: Game Logic
   m_TagString: Untagged
@@ -847,6 +848,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da303c0667e790546b69d6480055a70a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &665449646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665449630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b176707c2bebfd14b8b3f8ed8b7d57cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &797838110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1015,7 +1028,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1178.82, y: -704}
+  m_AnchoredPosition: {x: -1178.8198, y: -704}
   m_SizeDelta: {x: -2389.64, y: -1728}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &894911741
@@ -2001,7 +2014,7 @@ GameObject:
   - component: {fileID: 2009574160}
   - component: {fileID: 2009574159}
   m_Layer: 0
-  m_Name: Indicator
+  m_Name: Liquid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2058,9 +2071,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1427442191
-  m_SortingLayer: 5
-  m_SortingOrder: -1
+  m_SortingLayerID: 2079481429
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -2120,6 +2133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 2009574160}
+  liquidTile: {fileID: 11400000, guid: f4de0a61b42a53c4aa1384dd4e6d08bd, type: 2}
 --- !u!1 &2019009238
 GameObject:
   m_ObjectHideFlags: 0

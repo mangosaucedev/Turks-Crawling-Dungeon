@@ -18,6 +18,8 @@ namespace TCD.Objects.Parts.Effects
 
         public abstract EffectStacking Stacking { get; }
 
+        public virtual bool ShowFloatingText => true;
+
         protected BaseObject EffectedObject => effects?.parent;
 
         public virtual void OnApply()

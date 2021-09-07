@@ -33,6 +33,8 @@ namespace TCD.Objects.Parts
         {
             if (e.Id == EnteredCellEvent.id)
                 OnEnteredCell(e);
+            if (e.Id == GetDescriptionEvent.id)
+                OnGetDescription(e);
             return base.HandleEvent(e);
         }
 
@@ -47,6 +49,12 @@ namespace TCD.Objects.Parts
             if (!e.Object.parts.TryGet(out Movement movement))
                 return;
             AttackHandler.AttackTarget(parent, e.Object, attack);
+        }
+
+        protected virtual void OnGetDescription(LocalEvent e)
+        {
+            GetDescriptionEvent getDescriptionEvent = (GetDescriptionEvent)e;
+            getDescriptionEvent.AddToSuffix("<i><color=red>Hazardous to navigate.</color></i>");
         }
     }
 }

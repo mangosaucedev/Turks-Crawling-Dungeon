@@ -10,6 +10,9 @@
 	<Object Name="PierrotBlouse" InheritsFrom="Wearable">
 		
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Blouse</Var>
+			<Var Name="DisplayNamePlural">Blouses</Var>
+			<Var Name="Description">A light blouse woven of fine silk.</Var>
 			<Var Name="Sprite">PierrotBlouse</Var>
 		</OverridePart>
 
@@ -23,6 +26,9 @@
 	<Object Name="PierrotPants" InheritsFrom="Wearable">
 
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Trousers</Var>
+			<Var Name="DisplayNamePlural">Trousers</Var>
+			<Var Name="Description">A fine pair of silk trousers.</Var>
 			<Var Name="Sprite">PierrotPants</Var>
 		</OverridePart>
 
@@ -36,6 +42,9 @@
 	<Object Name="NeckRuff" InheritsFrom="Wearable">
 
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Ruff</Var>
+			<Var Name="DisplayNamePlural">Ruffs</Var>
+			<Var Name="Description">A ruff, worn around the neck.</Var>
 			<Var Name="Sprite">NeckRuff</Var>
 		</OverridePart>
 
@@ -49,6 +58,9 @@
 	<Object Name="GoldBand" InheritsFrom="Wearable">
 
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Gold Band</Var>
+			<Var Name="DisplayNamePlural">Gold Bands</Var>
+			<Var Name="Description">An unadorned golden ring.</Var>
 			<Var Name="Sprite">GoldBand</Var>
 		</OverridePart>
 

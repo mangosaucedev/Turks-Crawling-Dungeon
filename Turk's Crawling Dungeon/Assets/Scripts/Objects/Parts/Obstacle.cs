@@ -44,6 +44,8 @@ namespace TCD.Objects.Parts
                 IsImpassable = true;
                 OccludesLineOfSight = true;
             }
+            if (e.Id == GetDescriptionEvent.id)
+                OnGetDescription(e);
             return base.HandleEvent(e);
         }
 
@@ -55,6 +57,15 @@ namespace TCD.Objects.Parts
                     (CanEnterCellEvent)e;
                 canEnterCellEvent.obstacles.Add(parent);
             }
+        }
+
+        private void OnGetDescription(LocalEvent e)
+        {
+            GetDescriptionEvent getDescriptionEvent = (GetDescriptionEvent) e;
+            if (IsImpassable)
+                getDescriptionEvent.AddToSuffix("<i>Impassable.</i>");
+            else
+                getDescriptionEvent.AddToSuffix("<i>Difficult to navigate.</i>");
         }
     }
 }

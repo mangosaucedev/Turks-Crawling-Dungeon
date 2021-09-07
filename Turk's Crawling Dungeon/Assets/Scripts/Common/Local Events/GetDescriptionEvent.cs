@@ -12,7 +12,8 @@ namespace TCD
 
         public BaseObject obj;
         public string description;
-        private StringBuilder stringBuilder = new StringBuilder();
+        private StringBuilder prefixBuilder = new StringBuilder();
+        private StringBuilder suffixBuilder = new StringBuilder();
 
         public override BaseObject Object => obj;
 
@@ -22,7 +23,9 @@ namespace TCD
 
         public string GetDescription()
         {
-            return description;
+            if (prefixBuilder.Length > 0)
+                prefixBuilder.Append("\n");
+            return prefixBuilder.ToString() + " " + description + " " + suffixBuilder.ToString();
         }
 
         public string GetDescriptionShort()
@@ -30,11 +33,25 @@ namespace TCD
             return description;
         }
 
+        public void AddToPrefix(string str)
+        {
+            if (prefixBuilder.Length > 0)
+                prefixBuilder.Append("\n");
+            prefixBuilder.Append(str);
+        }
+
+        public void AddToSuffix(string str)
+        {
+            suffixBuilder.Append("\n");
+            suffixBuilder.Append(str);
+        }
+
         protected override void Reset()
         {
             obj = null;
             description = "";
-            stringBuilder.Clear();
+            prefixBuilder.Clear();
+            suffixBuilder.Clear();
         }
     }
 }

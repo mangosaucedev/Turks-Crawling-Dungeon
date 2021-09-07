@@ -9,6 +9,7 @@ namespace TCD.Zones
     public class ZoneParams : IZoneParams
     {
         [Header("Zone")]
+        [SerializeField] private ZoneGeneratorType type;
         [SerializeField] private int width;
         [SerializeField] private int height;
         
@@ -28,6 +29,12 @@ namespace TCD.Zones
         [Header("Caves")]
         [SerializeField] private bool generateCaves;
         [SerializeField] private int cavePenetrationChance;
+
+        public ZoneGeneratorType Type
+        {
+            get => type;
+            set => type = value;
+        }
 
         public int Width
         {

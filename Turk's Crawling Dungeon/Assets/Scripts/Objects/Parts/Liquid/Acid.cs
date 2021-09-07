@@ -7,5 +7,10 @@ namespace TCD.Objects.Parts
     public class Acid : Liquid
     {
         public override string Name => "Acid";
+
+        protected override void OnDrink()
+        {
+            base.OnDrink();
+        }
     }
 }

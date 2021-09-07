@@ -1,22 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TCD.Objects.Parts;
 
 namespace TCD.Objects
 {
     public class BaseObject : MonoBehaviour, ILocalEventHandler
     {
-        public string displayName;
-        public string displayNamePlural;
-        public string description;
-        public string faction;
-        public float hp;
-        public float hpMax;
-        public float value;
+        [Obsolete] public string displayName;
+        [Obsolete] public string displayNamePlural;
+        [Obsolete] public string description;
+        [Obsolete("Use Brain/Faction")] public string faction;
+        [Obsolete] public float hp;
+        [Obsolete] public float hpMax;
+        [Obsolete] public float value;
         public ICellObject cell;
         public IDeactivator deactivator;
-        public IDisplayInfo display;
-        public IHp health;
+        [Obsolete] public IHp health;
         public IPartCollection parts;
         public Transform partsParent;
         [SerializeField] private SpriteRenderer spriteRenderer;
@@ -35,8 +36,6 @@ namespace TCD.Objects
         {
             cell = new CellObject(this); 
             deactivator = new Deactivator(this);
-            display = new DisplayInfo(this);
-            health = new Hp(this);
             parts = new PartCollection(this);
             if (!partsParent)
                 FindPartsParentTransform();
@@ -81,6 +80,51 @@ namespace TCD.Objects
             cell.SetPosition(0, 0);
             Destroy(gameObject);
             return true;
+        }
+
+        public string GetDescription()
+        {
+            GetDescriptionEvent e = GetDescriptionEvent();
+            return e.GetDescription();
+        }
+
+        private GetDescriptionEvent GetDescriptionEvent()
+        {
+            GetDescriptionEvent e = LocalEvent.Get<GetDescriptionEvent>();
+            e.obj = this;
+            Render render = parts.Get<Render>();
+            e.description = render.Description;
+            HandleEvent(e);
+            return e;
+        }
+
+        public string GetDescriptionShort()
+        {
+            GetDescriptionEvent e = GetDescriptionEvent();
+            return e.GetDescriptionShort();
+        }
+
+        public string GetDisplayName()
+        {
+            GetDisplayNameEvent e = GetDisplayNameEvent();
+            return e.GetDisplayName();
+        }
+
+        private GetDisplayNameEvent GetDisplayNameEvent()
+        {
+            GetDisplayNameEvent e = LocalEvent.Get<GetDisplayNameEvent>();
+            e.obj = this;
+            Render render = parts.Get<Render>();
+            e.displayName = render.DisplayName;
+            e.displayNamePlural = render.DisplayNamePlural;
+            HandleEvent(e);
+            return e;
+        }
+
+        public string GetDisplayNamePlural()
+        {
+            GetDisplayNameEvent e = GetDisplayNameEvent();
+            return e.GetDisplayNamePlural();
         }
     }
 }

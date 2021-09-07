@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Encounters>
 
+	<!-- Enemy Patrols -->
+	
 	<Encounter Name="DungeonEnemyPatrolsTier0" Density="Loose">
 		<Object Name="GenericEnemy" Count="1-2" ChanceIn100="30"/>
 		<Object Name="Tarantula" Count="1" ChanceIn100="30"/>
@@ -17,26 +19,51 @@
 	<Encounter Name="DungeonEnemyPatrolsTier1" Density="Loose" Tier="1" >
 		<Object Name="PeeledMan" Count="1-2" ChanceIn100="30"/>
 		<Object Name="BuriedAlive" Count="1" ChanceIn100="30"/>
-		<Object Name="Tumbleweed" Count="1-5" ChanceIn100="30"/>
+		<Object Name="Tumbleweed" Count="1-2" ChanceIn100="30"/>
 		<Object Name="Crawler" Count="1-3" ChanceIn100="30"/>
 	</Encounter>
 	
 	<Encounter Name="DungeonEnemyPatrolsTier1B" Density="Loose" Tier="1">
 		<Object Name="GenericEnemy" Count="2-5" ChanceIn100="30"/>
 		<Object Name="Tarantula" Count="2-3" ChanceIn100="30"/>
-		<Object Name="Shrunk" Count="2-6" ChanceIn100="30"/>
+		<Object Name="Shrunk" Count="1-3" ChanceIn100="30"/>
 		<Object Name="WhiteHand" Count="2-4" ChanceIn100="30"/>
 	</Encounter>
 
 	<Encounter Name="DungeonEnemyPatrolsTier2" Density="Loose" Tier="2">
-		<Object Name="Knucklewalker" Count="1-2" ChanceIn100="60"/>
+		<Object Name="Knucklewalker" Count="1-2" ChanceIn100="25"/>
+		<Object Name="Intruder" Count="1" ChanceIn100="25"/>
+		<Object Name="Gnasher" Count="1-2" ChanceIn100="25"/>
+		<Object Name="Torso" Count="1-2" ChanceIn100="25"/>
+		<Object Name="Haunt" Count="1-3" ChanceIn100="25"/>
+		<Object Name="Charlatan" Count="1-3" ChanceIn100="25"/>
 	</Encounter>
 	
 	<Encounter Name="DungeonEnemyPatrolsTier2B" Density="Loose" Tier="2" >
 		<Object Name="PeeledMan" Count="2-3" ChanceIn100="30"/>
 		<Object Name="BuriedAlive" Count="1-3" ChanceIn100="30"/>
-		<Object Name="Tumbleweed" Count="2-6" ChanceIn100="30"/>
+		<Object Name="Tumbleweed" Count="1-3" ChanceIn100="30"/>
 		<Object Name="Crawler" Count="2-4" ChanceIn100="30"/>
+	</Encounter>
+
+	<!-- Enemy Hordes -->
+	
+	<!-- Loot -->
+	
+	<Encounter Name="MeleeWeaponsTier0" Density="Adjacent">
+		<Object Name="SharpStone" Count="1" ChanceIn100="20"/>
+		<Object Name="Branch" Count="1" ChanceIn100="20"/>
+		<Object Name="ThrowingRock" Count="1" ChanceIn100="20"/>
+		<Object Name="RustyDagger" Count="1" ChanceIn100="20"/>
+	</Encounter>
+
+	<Encounter Name="MeleeWeaponsTier1" Density="Adjacent" Tier="1"	>
+		<Object Name="Hammer" Count="1" ChanceIn100="20"/>
+		<Object Name="RustyHatchet" Count="1" ChanceIn100="20"/>
+		<Object Name="Rebar" Count="1" ChanceIn100="20"/>
+		<Object Name="JadePsyscourge" Count="1" ChanceIn100="20"/>
+		<Object Name="RottingWoodRod" Count="1" ChanceIn100="20"/>
+		<Object Name="CombatKnife" Count="1" ChanceIn100="20"/>
 	</Encounter>
 
 </Encounters>

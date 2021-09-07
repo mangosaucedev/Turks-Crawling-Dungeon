@@ -56,6 +56,8 @@ namespace TCD.Objects.Parts
         {
             if (e.Id == GetAttacksEvent.id && IsEquipped)
                 OnGetAttacks(e);
+            if (e.Id == GetDescriptionEvent.id)
+                OnGetDescription(e);
             return base.HandleEvent(e);
         }
 
@@ -84,6 +86,56 @@ namespace TCD.Objects.Parts
             if (equipment.GetEquippedItem(EquipSlot.LeftHand))
                 return true;
             return false;
+        }
+
+        private void OnGetDescription(LocalEvent e)
+        {
+            GetDescriptionEvent getDescriptionEvent = (GetDescriptionEvent)e;
+            if (getDescriptionEvent.Object != parent)
+                return;
+            getDescriptionEvent.AddToPrefix($"<i><color=#039be5>Melee Damage:</color> {GetMinDamage()}-{GetMaxDamage()}</i>");
+            getDescriptionEvent.AddToPrefix($"<i><color=#039be5>Melee Damage Types:</color> {GetDamageTypesString()}</i>");
+            if (RequiresSecondSlot)
+                getDescriptionEvent.AddToPrefix($"<i><color=#039be5>Requires both hands to use.</color></i>");
+        }
+
+        public float GetMinDamage()
+        {
+            float minDamage = 9999;
+            foreach (Attack attack in attacks)
+            {
+                if (attack.minDamage < minDamage)
+                    minDamage = attack.minDamage;
+            }
+            return minDamage;
+        }
+
+        public float GetMaxDamage()
+        {
+            float maxDamage = 0;
+            foreach (Attack attack in attacks)
+            {
+                if (attack.maxDamage > maxDamage)
+                    maxDamage = attack.maxDamage;
+            }
+            return maxDamage;
+        }
+
+        private string GetDamageTypesString()
+        {
+            string damageTypes = "";
+            List<DamageType> listedDamageTypes = new List<DamageType>();
+            foreach (Attack attack in attacks)
+            {
+                if (!listedDamageTypes.Contains(attack.damageType))
+                {
+                    if (damageTypes.Length > 0)
+                        damageTypes += " / ";
+                    damageTypes += attack.damageTypeName;
+                    listedDamageTypes.Add(attack.damageType);
+                }
+            }
+            return damageTypes;
         }
     }
 }

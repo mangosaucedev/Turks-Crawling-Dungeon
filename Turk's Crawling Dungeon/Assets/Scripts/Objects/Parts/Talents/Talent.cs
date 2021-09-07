@@ -17,6 +17,8 @@ namespace TCD.Objects.Parts.Talents
             set => level = value;
         }
 
+        public abstract string TalentTree { get; }
+
         public abstract Sprite Icon { get; }
 
         public abstract int MaxLevel { get; }

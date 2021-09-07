@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 197, y: 0}
+  m_AnchoredPosition: {x: 175.5, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7627749298876387265
@@ -359,6 +359,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCancellable: 1
   canvasGroup: {fileID: 6115468305407462756}
+  refreshOnStart: 1
+  refreshOnUpdate: 0
   isActive: 0
 --- !u!1 &6406104047788859439
 GameObject:
@@ -395,7 +397,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 102.5, y: 0}
+  m_AnchoredPosition: {x: 74.5, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6406104047788859427

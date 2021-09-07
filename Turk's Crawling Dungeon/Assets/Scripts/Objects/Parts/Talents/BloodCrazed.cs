@@ -13,6 +13,8 @@ namespace TCD.Objects.Parts.Talents
     {
         public override string Name => "Blood-Crazed";
 
+        public override string TalentTree => "Bloodthirst";
+
         public override Sprite Icon => Assets.Get<Sprite>("BloodCrazedIcon");
 
         public override int MaxLevel => 5;

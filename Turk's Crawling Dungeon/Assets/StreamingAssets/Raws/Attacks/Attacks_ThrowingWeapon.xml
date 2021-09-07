@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Attacks>
+	
+	<Attack Name="Tier0ThrowBlunt">
+		<Verb>wallop</Verb>
+		<VerbPastTense>walloped</VerbPastTense>
+		<MinDamage>15</MinDamage>
+		<MaxDamage>20</MaxDamage>
+		<DamageType>Blunt</DamageType>
+	</Attack>
+
+	<Attack Name="Tier0ThrowPierce">
+		<Verb>pierce</Verb>
+		<VerbPastTense>pierced</VerbPastTense>
+		<MinDamage>15</MinDamage>
+		<MaxDamage>20</MaxDamage>
+		<DamageType>Pierce</DamageType>
+	</Attack>
+
+	<Attack Name="Tier1ThrowBlunt">
+		<Verb>wallop</Verb>
+		<VerbPastTense>walloped</VerbPastTense>
+		<MinDamage>25</MinDamage>
+		<MaxDamage>35</MaxDamage>
+		<DamageType>Blunt</DamageType>
+	</Attack>
+
+	<Attack Name="Tier1ThrowPierce">
+		<Verb>pierce</Verb>
+		<VerbPastTense>pierced</VerbPastTense>
+		<MinDamage>25</MinDamage>
+		<MaxDamage>35</MaxDamage>
+		<DamageType>Pierce</DamageType>
+	</Attack>
+		
+</Attacks>

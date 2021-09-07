@@ -41,6 +41,7 @@
 
 		<Part Name="Brain">
 			<Var Name="SightRadius">24</Var>
+			<Var Name="Faction">Neutral</Var>
 		</Part>
 
 		<Part Name="Inventory">
@@ -59,12 +60,6 @@
 	
 	<Object Name="Player" InheritsFrom="Character">
 
-		<DisplayName>Turk</DisplayName>
-
-		<Description>Christopher "Turk" Turkinopoulos, the youngest son of immigrants Vasilis and Dora Turkinopoulos. Passionate and sensitive, Turk frequently finds himself at the mercy of his own turbulent emotions.</Description>
-
-		<Faction>Player</Faction>
-
 		<RemovePart Name="Brain"/>
 
 		<RemovePart Name="Movement"/>
@@ -76,6 +71,9 @@
 		</OverridePart>
 
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Turk</Var>
+			<Var Name="DisplayNamePlural">Turks</Var>
+			<Var Name="Description">Christopher "Turk" Turkinopoulos, the youngest son of immigrants Vasilis and Dora Turkinopoulos. Passionate and sensitive, Turk frequently finds himself at the mercy of his own turbulent emotions.</Var>
 			<Var Name="Sprite">Player</Var>
 		</OverridePart>
 
@@ -83,6 +81,10 @@
 			<Var Name="InitStats">Strength:12,Agility:12,Constitution:12,Cunning:12,Willpower:12,Charm:12,HitAccuracy:95,Dodge:5, Armor:5,PhysicalSave:10,MentalSave:10,MoveCost:12,AttackCost:12</Var>
 		</OverridePart>
 
+		<Part Name="PlayerBrain">
+			<Var Name="Faction">Player</Var>
+		</Part>
+		
 		<Part Name="GameResetOnDestroy"/>
 		
 		<Part Name="Invulnerable"/>
@@ -113,8 +115,15 @@
 		<OverridePart Name="Audio">
 			<Var Name="Death">MonsterDie</Var>
 		</OverridePart>
+
+		<OverridePart Name="Brain">
+			<Var Name="Faction">Enemy</Var>
+		</OverridePart>
 		
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Tabula Rasa</Var>
+			<Var Name="DisplayNamePlural">Tabula Rasae</Var>
+			<Var Name="Description">Nothing to see here.</Var>
 			<Var Name="Sprite">GenericEnemy</Var>
 		</OverridePart>
 
@@ -128,12 +137,12 @@
 
 	<Object Name="GenericEnemy" InheritsFrom="Enemy">
 
-		<DisplayName>Tabula Rasa</DisplayName>
-
-		<Description>Nothing to see here.</Description>
-
-		<Faction>Enemy</Faction>
-
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Disfigured Visage</Var>
+			<Var Name="DisplayNamePlural">Disfigured Visages</Var>
+			<Var Name="Description">It levitates about four feet off the ground. Pale flesh clods around grotesque features. Its eyelids have collapsed into their sockets like those of an ancient corpse.</Var>
+		</OverridePart>
+		
 		<OverridePart Name="Visible">
 			<Var Name="VisibilityRadius">1</Var>
 		</OverridePart>
@@ -142,17 +151,14 @@
 
 	<Object Name="Tarantula" InheritsFrom="Enemy">
 
-		<DisplayName>Tarantula</DisplayName>
-
-		<Description>Nothing to see here.</Description>
-
-		<Faction>Enemy</Faction>
-
 		<OverridePart Name="Resources">
 			<Var Name="Hitpoints">45</Var>
 		</OverridePart>
 
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Tarantula</Var>
+			<Var Name="DisplayNamePlural">Tarantulas</Var>
+			<Var Name="Description">Emerging quickly from the shadows, its white "face" bears down on you. Countless hooked appendages skitter underneath.</Var>
 			<Var Name="Sprite">Tarantula</Var>
 		</OverridePart>
 
@@ -166,17 +172,14 @@
 
 	<Object Name="Shrunk" InheritsFrom="Enemy">
 
-		<DisplayName>Shrunk</DisplayName>
-
-		<Description>Nothing to see here.</Description>
-
-		<Faction>Enemy</Faction>
-
 		<OverridePart Name="Resources">
 			<Var Name="Hitpoints">20</Var>
 		</OverridePart>
 
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Shrunk</Var>
+			<Var Name="DisplayNamePlural">Shrunks</Var>
+			<Var Name="Description">Its blood-swollen eyes stare unfocused into space as it shuffles about on crumpled, useless legs.</Var>
 			<Var Name="Sprite">Shrunk</Var>
 		</OverridePart>
 
@@ -190,17 +193,14 @@
 
 	<Object Name="WhiteHand" InheritsFrom="Enemy">
 
-		<DisplayName>White Hand</DisplayName>
-
-		<Description>Nothing to see here.</Description>
-
-		<Faction>Enemy</Faction>
-
 		<OverridePart Name="Resources">
 			<Var Name="Hitpoints">40</Var>
 		</OverridePart>
 		
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">White Hand</Var>
+			<Var Name="DisplayNamePlural">White Hands</Var>
+			<Var Name="Description">The pale, gnarled hand of a corpse hovers, grasping, at throat-level.</Var>
 			<Var Name="Sprite">WhiteHand</Var>
 		</OverridePart>
 
@@ -209,34 +209,28 @@
 
 	<Object Name="Mandrake" InheritsFrom="Enemy">
 
-		<DisplayName>Mandrake</DisplayName>
-
-		<Description>Nothing to see here.</Description>
-
-		<Faction>Enemy</Faction>
-
 		<OverridePart Name="Resources">
 			<Var Name="Hitpoints">40</Var>
 		</OverridePart>
 
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Mandrake</Var>
+			<Var Name="DisplayNamePlural">Mandrakes</Var>
+			<Var Name="Description">It gibbers nonsense as it springs towards you, exposing its rows and rows of needle-teeth.</Var>
 			<Var Name="Sprite">Mandrake</Var>
 		</OverridePart>
 	</Object>
 
 	<Object Name="Screamer" InheritsFrom="Enemy">
 
-		<DisplayName>Screamer</DisplayName>
-
-		<Description>Nothing to see here.</Description>
-
-		<Faction>Enemy</Faction>
-
 		<OverridePart Name="Resources">
 			<Var Name="Hitpoints">40</Var>
 		</OverridePart>
 
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Screamer</Var>
+			<Var Name="DisplayNamePlural">Screamers</Var>
+			<Var Name="Description">A cacophony of screams issues from its gaping maw, which, though it bares no teeth, is easily large and muscular enough to swallow you whole.</Var>
 			<Var Name="Sprite">Screamer</Var>
 		</OverridePart>
 	</Object>
@@ -244,51 +238,43 @@
 
 	<Object Name="Sprinter" InheritsFrom="Enemy">
 
-		<DisplayName>Sprinter</DisplayName>
-
-		<Description>Nothing to see here.</Description>
-
-		<Faction>Enemy</Faction>
 
 		<OverridePart Name="Resources">
 			<Var Name="Hitpoints">40</Var>
 		</OverridePart>
 
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Sprinter</Var>
+			<Var Name="DisplayNamePlural">Sprinters</Var>
+			<Var Name="Description">It gallops from the shadows, icepick teeth ready to clamp on your brain.</Var>
 			<Var Name="Sprite">Sprinter</Var>
 		</OverridePart>
 	</Object>
 
 	<Object Name="Eel" InheritsFrom="Enemy">
 
-		<DisplayName>Eel</DisplayName>
-
-		<Description>Nothing to see here.</Description>
-
-		<Faction>Enemy</Faction>
-
 		<OverridePart Name="Resources">
 			<Var Name="Hitpoints">40</Var>
 		</OverridePart>
 
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Eel</Var>
+			<Var Name="DisplayNamePlural">Eels</Var>
+			<Var Name="Description">Writhing piteously on the ground, snapping its jaws at anything that comes too close, this Eel is a sad specimen, indeed.</Var>
 			<Var Name="Sprite">Eel</Var>
 		</OverridePart>
 	</Object>
 
 	<Object Name="Tenderfoot" InheritsFrom="Enemy">
 
-		<DisplayName>Tenderfoot</DisplayName>
-
-		<Description>Nothing to see here.</Description>
-
-		<Faction>Enemy</Faction>
-
 		<OverridePart Name="Resources">
 			<Var Name="Hitpoints">40</Var>
 		</OverridePart>
 
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Tenderfoot</Var>
+			<Var Name="DisplayNamePlural">Tenderfoots</Var>
+			<Var Name="Description">The thing's engorged head radiates awful heat... Perhaps it's a sensory organ of some kind?</Var>
 			<Var Name="Sprite">Tenderfoot</Var>
 		</OverridePart>
 	</Object>
@@ -306,23 +292,23 @@
 		</OverridePart>
 
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Gawker</Var>
+			<Var Name="DisplayNamePlural">Gawkers</Var>
+			<Var Name="Description">Using its latent psionic abilities, the Gawker swims through the air like a squid through seawater.</Var>
 			<Var Name="Sprite">Gawker</Var>
 		</OverridePart>
 	</Object>
 
 	<Object Name="PeeledMan" InheritsFrom="Enemy">
 
-		<DisplayName>Peeled Man</DisplayName>
-
-		<Description>Nothing to see here.</Description>
-
-		<Faction>Enemy</Faction>
-
 		<OverridePart Name="Resources">
 			<Var Name="Hitpoints">80</Var>
 		</OverridePart>
 
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Peeled Man</Var>
+			<Var Name="DisplayNamePlural">Peeled Men</Var>
+			<Var Name="Description">The Peeled Man chatters its teeth as if laughing at you.</Var>
 			<Var Name="Sprite">PeeledMan</Var>
 		</OverridePart>
 
@@ -331,17 +317,14 @@
 
 	<Object Name="BuriedAlive" InheritsFrom="Enemy">
 
-		<DisplayName>Buried Alive</DisplayName>
-
-		<Description>Nothing to see here.</Description>
-
-		<Faction>Enemy</Faction>
-
 		<OverridePart Name="Resources">
 			<Var Name="Hitpoints">60</Var>
 		</OverridePart>
 
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Buried Alive</Var>
+			<Var Name="DisplayNamePlural">Buried Alive</Var>
+			<Var Name="Description">It emerges from the ground, reaching for you with decaying fingers. Its tongue is wet and lashes over its teeth in violent apprehension.</Var>
 			<Var Name="Sprite">BuriedAlive</Var>
 		</OverridePart>
 
@@ -350,17 +333,15 @@
 
 	<Object Name="Tumbleweed" InheritsFrom="Enemy">
 
-		<DisplayName>Tumbleweed</DisplayName>
-
-		<Description>Nothing to see here.</Description>
-
-		<Faction>Enemy</Faction>
 
 		<OverridePart Name="Resources">
 			<Var Name="Hitpoints">35</Var>
 		</OverridePart>
 
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Tumbleweed</Var>
+			<Var Name="DisplayNamePlural">Tumbleweeds</Var>
+			<Var Name="Description">The Tumbleweed rolls, arm over arm, face over face. Pieces slough off and form their own Tumbleweeds, and on and on they roll.</Var>
 			<Var Name="Sprite">Tumbleweed</Var>
 		</OverridePart>
 
@@ -382,23 +363,23 @@
 		</OverridePart>
 
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Crawler</Var>
+			<Var Name="DisplayNamePlural">Crawlers</Var>
+			<Var Name="Description">A hideous croak issues forth from its distended maw. It scrapes along the rough ground, ragged, after you.</Var>
 			<Var Name="Sprite">Crawler</Var>
 		</OverridePart>
 	</Object>
 
 	<Object Name="Knucklewalker" InheritsFrom="Enemy">
-
-		<DisplayName>Knucklewalker</DisplayName>
-
-		<Description>Nothing to see here.</Description>
-
-		<Faction>Enemy</Faction>
 		
 		<OverridePart Name="Resources">
 			<Var Name="Hitpoints">125</Var>
 		</OverridePart>
 
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Knucklewalker</Var>
+			<Var Name="DisplayNamePlural">Knucklewalkers</Var>
+			<Var Name="Description">All black fur draped over bulging muscle, this beast pounds along on its knuckles in search of fresh meat.</Var>
 			<Var Name="Sprite">Knucklewalker</Var>
 		</OverridePart>
 
@@ -414,5 +395,81 @@
 			<Var Name="Level">2</Var>
 		</Part>
 	</Object>
+
+	<Object Name="Intruder" InheritsFrom="Enemy">
+
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">150</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Intruder</Var>
+			<Var Name="DisplayNamePlural">Intruders</Var>
+			<Var Name="Description">It towers over you, balled fists clenched at its sides. It lumbers forward, intent to strike.</Var>
+			<Var Name="Sprite">Intruder</Var>
+		</OverridePart>
+		
+	</Object>
+
+	<Object Name="Gnasher" InheritsFrom="Enemy">
+
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">80</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Gnasher</Var>
+			<Var Name="DisplayNamePlural">Gnashers</Var>
+			<Var Name="Description">The thing salivates as it hovers closer. Snapping yellow teeth, it stinks of death.</Var>
+			<Var Name="Sprite">Gnasher</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="Torso" InheritsFrom="Enemy">
+
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">100</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Torso</Var>
+			<Var Name="DisplayNamePlural">Torsos</Var>
+			<Var Name="Description">It gurgles hungrily, fixing bulbous yellow eyes on its prey.</Var>
+			<Var Name="Sprite">Torso</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="Haunt" InheritsFrom="Enemy">
+
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">100</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Haunt</Var>
+			<Var Name="DisplayNamePlural">Haunts</Var>
+			<Var Name="Description">A black cloud coalesces. Eyes emerge, then teeth, as it glides towards fresh meat.</Var>
+			<Var Name="Sprite">Haunt</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="Charlatan" InheritsFrom="Enemy">
+
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">100</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Charlatan</Var>
+			<Var Name="DisplayNamePlural">Charlatans</Var>
+			<Var Name="Description">It chitters to itself noisily.</Var>
+			<Var Name="Sprite">Charlatan</Var>
+		</OverridePart>
+
+	</Object>
+
 
 </Objects>

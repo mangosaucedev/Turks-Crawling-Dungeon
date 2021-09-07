@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace TCD.Zones.Environments
 {
-    public class EnvironmentPlanner : GeneratorObject
+    public class EnvironmentPlanner : ZoneGeneratorMachine
     {
         private ZoneEnvironments ZoneEnvironments => Zone.ZoneEnvironments;
 
@@ -35,11 +35,17 @@ namespace TCD.Zones.Environments
                     SetFeatureEnvironment(feature, zoneEnvironment);
                     break;
                 case EnvironmentPlacement.Start:
-                    feature = Zone.Chambers[0];
+                    if (Zone.Chambers.Count > 0)
+                        feature = Zone.Chambers[0];
+                    else 
+                        feature = Zone.Features[0];
                     SetFeatureEnvironment(feature, zoneEnvironment);
                     break;
                 case EnvironmentPlacement.Final:
-                    feature = Zone.Chambers[Zone.Chambers.Count - 1];
+                    if (Zone.Chambers.Count > 0)
+                        feature = Zone.Chambers[Zone.Chambers.Count - 1];
+                    else
+                        feature = Zone.Features[Zone.Features.Count - 1];
                     SetFeatureEnvironment(feature, zoneEnvironment);
                     break;
             }    

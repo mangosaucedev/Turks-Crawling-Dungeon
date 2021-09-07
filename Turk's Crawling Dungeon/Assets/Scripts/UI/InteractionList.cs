@@ -20,7 +20,7 @@ namespace TCD.UI
         private void Start()
         {
             obj = SelectionHandler.SelectedObject;
-            title.text = $"/ Interact with {obj.display.GetDisplayName()}... /";
+            title.text = $"/ Interact with {obj.GetDisplayName()}... /";
             SetupButtons();
         }
 
@@ -44,6 +44,7 @@ namespace TCD.UI
         private void GetInteractions()
         {
             GetInteractionsEvent e = LocalEvent.Get<GetInteractionsEvent>();
+            e.obj = obj;
             obj.HandleEvent(e);
             interactions = e.interactions;
         }

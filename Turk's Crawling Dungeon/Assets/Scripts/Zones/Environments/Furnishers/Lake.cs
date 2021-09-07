@@ -11,17 +11,22 @@ namespace TCD.Zones.Environments
         public override void Furnish(IFeature feature, int x, int y)
         {
             base.Furnish(feature, x, y);
-            int width = RandomInfo.Random.Next(8, 15);
-            int height = RandomInfo.Random.Next(8, 15);
-            GameGrid grid = CurrentZoneInfo.grid;
-            CellularAutomataGrid cellularAutomataGrid = new CellularAutomataGrid(width, height, 55f, 3);
+            Vector2Int position = new Vector2Int(x, y);
             string liquid = environment.GetRandomFurnishing("Lake");
-            HashSet<Vector2Int> shape = CellularAutomataUtility.GetLargestContiguousShape(cellularAutomataGrid);
-            foreach (Vector2Int lakePosition in shape)
+            if (string.IsNullOrEmpty(liquid))
+                return;
+            int size = RandomInfo.Random.Next(6, 14);
+            for (int i = 0; i <= size; i++)
             {
-                Vector2Int position = new Vector2Int(x, y) + lakePosition;
-                if (PositionChecker.IsEmpty(position))
+                if (!PositionChecker.IsObstacle(position) && PositionChecker.IsFloored(position))
                     ObjectFactory.BuildFromBlueprint(liquid, position);
+                int xOffset = RandomInfo.Random.Next(-1, 1);
+                int yOffset = RandomInfo.Random.Next(-1, 1);
+                Vector2Int offset = new Vector2Int(xOffset, yOffset);
+                if ((xOffset == 0 && yOffset == 0) || 
+                    !CurrentZoneInfo.grid.IsWithinBounds(position + offset))
+                    continue;
+                position += offset;
             }
         }
     }

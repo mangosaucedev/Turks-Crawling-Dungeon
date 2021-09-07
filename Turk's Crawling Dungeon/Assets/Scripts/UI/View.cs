@@ -12,12 +12,20 @@ namespace TCD.UI
         public event Action SetActiveEvent = delegate { };
         public event Action SetInactiveEvent = delegate { };
         public event Action UpdateEvent = delegate { };
-
+        public bool isActive;
         [SerializeField] private bool isCancellable;
         [SerializeField] private CanvasGroup canvasGroup;
-        [SerializeField] private bool isActive;
+        [SerializeField] private bool refreshOnStart;
+        [SerializeField] private bool refreshOnUpdate;
+        
 
         private string ViewName => gameObject.name;
+
+        private void Start()
+        {
+            if (refreshOnStart)
+                Refresh();
+        }
 
         private void Update()
         {
@@ -27,6 +35,8 @@ namespace TCD.UI
         private void OnEnable()
         {
             SetActiveEvent += UpdateEvent.Invoke;
+            if (refreshOnUpdate)
+                UpdateEvent += Refresh;
             EventManager.Listen<ViewOpenedEvent>(this, OnViewOpened);
             EventManager.Listen<ViewClosedEvent>(this, OnViewClosed);
             EventManager.Listen<KeyEvent>(this, OnKey);
@@ -35,6 +45,8 @@ namespace TCD.UI
         private void OnDisable()
         {
             SetActiveEvent -= UpdateEvent.Invoke;
+            if (refreshOnUpdate)
+                UpdateEvent -= Refresh;            
             EventManager.StopListening<ViewOpenedEvent>(this);
             EventManager.StopListening<ViewClosedEvent>(this);
             EventManager.StopListening<KeyEvent>(this);
@@ -42,7 +54,6 @@ namespace TCD.UI
 
         public void UpdateIsViewActive() => SetActive(ViewManager.GetActiveView() == ViewName);
         
-
         public void SetActive(bool value)
         {
             if (value)
@@ -69,6 +80,22 @@ namespace TCD.UI
             KeyState state = context.state;
             if (isCancellable && isActive && command == KeyCommand.Cancel && state == KeyState.PressedThisFrame)
                 ViewManager.Close(ViewName);
+        }
+
+        private void Refresh()
+        {
+            if (!canvasGroup)
+                return;
+            StopAllCoroutines();
+            StartCoroutine(RefreshRoutine());
+        }
+
+        private IEnumerator RefreshRoutine()
+        {
+            Canvas.ForceUpdateCanvases();
+            canvasGroup.alpha = 0;
+            yield return null;
+            canvasGroup.alpha = 1;
         }
     }
 }

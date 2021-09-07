@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ZoneParams>
+
+	<ZoneParam Name="Generic">
+		<Type>Generic</Type>
+		<Width>128</Width>
+		<Height>128</Height>
+		<MinChamberWidth>6</MinChamberWidth>
+		<MinChamberHeight>6</MinChamberHeight>
+		<MaxChamberWidth>18</MaxChamberWidth>
+		<MaxChamberHeight>18</MaxChamberHeight>
+		<MaxChambers>8</MaxChambers>
+		<MinChamberChildDistance>8</MinChamberChildDistance>
+		<MinChamberBufferDistance>2</MinChamberBufferDistance>
+		<MinCorridorWidth>1</MinCorridorWidth>
+		<MaxCorridorWidth>4</MaxCorridorWidth>
+		<GenerateCaves>False</GenerateCaves>
+		<CavePenetrationChance>0</CavePenetrationChance>
+	</ZoneParam>
+
+	<ZoneParam Name="Cavern">
+		<Type>Cavern</Type>
+		<Width>100</Width>
+		<Height>100</Height>
+	</ZoneParam>
+	
+</ZoneParams>

@@ -20,6 +20,7 @@ namespace TCD.Inputs.Actions
             if (target == null)
                 yield break;
             GetInteractionsEvent e = LocalEvent.Get<GetInteractionsEvent>();
+            e.obj = target;
             target.HandleEvent(e);
             if (e.interactions.Count == 0)
                 yield break;

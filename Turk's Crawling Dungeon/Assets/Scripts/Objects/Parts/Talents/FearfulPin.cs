@@ -13,6 +13,8 @@ namespace TCD.Objects.Parts.Talents
     {
         public override string Name => "Fearful Pin";
 
+        public override string TalentTree => "FearfulTechniques";   
+
         public override Sprite Icon => Assets.Get<Sprite>("FearfulPinIcon");
 
         public override int MaxLevel => 5;
@@ -46,16 +48,16 @@ namespace TCD.Objects.Parts.Talents
                 targetEffects.AddEffect(new Pinned(), TimeInfo.TIME_PER_STANDARD_TURN * GetEffectDuration()))
             {
                 if (parent == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"You have pinned {obj.display.GetDisplayName()}!");
+                    MessageLog.Add($"You have pinned {obj.GetDisplayName()}!");
                 if (obj == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"{obj.display.GetDisplayName()} has pinned you!");
+                    MessageLog.Add($"{obj.GetDisplayName()} has pinned you!");
             }
             else if (!madeSuccessfulAttackAgainstTarget)
             {
                 if (parent == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"You failed to pin {obj.display.GetDisplayName()}!");
+                    MessageLog.Add($"You failed to pin {obj.GetDisplayName()}!");
                 if (obj == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"{parent.display.GetDisplayName()} failed to pin you!");
+                    MessageLog.Add($"{parent.GetDisplayName()} failed to pin you!");
             }
             activeCooldown += GetCooldown();
             if (parent.parts.TryGet(out Resources resources))
@@ -99,7 +101,7 @@ namespace TCD.Objects.Parts.Talents
             if (CanUseTalent() && !e.hasActed)
             {
                 if (parent.parts.TryGet(out Brain brain))
-                    brain.Think("Decided to use fearul pin on " + e.target.display.GetDisplayName() + " instead.");
+                    brain.Think("Decided to use fearul pin on " + e.target.GetDisplayName() + " instead.");
                 StopAllCoroutines();
                 StartCoroutine(OnObjectRoutine(e.target));
                 e.hasActed = true;

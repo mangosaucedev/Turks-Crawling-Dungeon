@@ -31,7 +31,7 @@ namespace TCD.UI
         private void CountNames()
         {
             foreach (BaseObject obj in objects)
-                AddName(obj.display.GetDisplayName());
+                AddName(obj.GetDisplayName());
         }
 
         private void AddName(string name)

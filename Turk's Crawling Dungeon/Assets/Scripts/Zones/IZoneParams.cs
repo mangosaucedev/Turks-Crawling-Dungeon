@@ -6,6 +6,8 @@ namespace TCD.Zones
 {
     public interface IZoneParams
     {
+        ZoneGeneratorType Type { get; set; }
+
         int Width { get; set; }
         
         int Height { get; set; }

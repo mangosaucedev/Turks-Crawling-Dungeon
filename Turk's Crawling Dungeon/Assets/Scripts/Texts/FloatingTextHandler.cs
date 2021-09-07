@@ -18,5 +18,18 @@ namespace TCD.Texts
             floatingText.text.text = text;
             floatingText.text.color = color;
         }
+
+        public static void DrawFlying(Vector3 position, string text) =>
+            DrawFlying(position, text, Color.yellow);
+
+        public static void DrawFlying(Vector3 position, string text, Color color)
+        {
+            GameObject gameObject = FloatingTextFlying.FromPool();
+            gameObject.transform.position = position;
+            FloatingText floatingText = gameObject.GetComponent<FloatingText>();
+            floatingText.duration = 1f;
+            floatingText.text.text = text;
+            floatingText.text.color = color;
+        }
     }
 }

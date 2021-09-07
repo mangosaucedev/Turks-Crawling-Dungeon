@@ -44,7 +44,11 @@ namespace TCD.Objects.Parts.Effects
                 Effect effect = activeEffects[i];
                 effect.timeRemaining -= e.timeElapsed;
                 if (effect.timeRemaining <= 0)
+                {
                     activeEffects.RemoveAt(i);
+                    if (parent == PlayerInfo.currentPlayer)
+                        DebugLogger.Log("Removing " + effect.Name);
+                }
             }
         }
 
@@ -129,7 +133,7 @@ namespace TCD.Objects.Parts.Effects
             e.obj = parent;
             e.effect = effect;
             FireEvent(parent, e);
-            if (parent.parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer())
+            if (parent.parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer() && effect.ShowFloatingText)
                 FloatingTextHandler.Draw(parent.transform.position, "+" + effect.Name, effect.Color);
             effect.OnApply();
             return true;
@@ -168,7 +172,7 @@ namespace TCD.Objects.Parts.Effects
             EffectRemovedEvent e = LocalEvent.Get<EffectRemovedEvent>();
             e.obj = parent;
             e.effect = effect;
-            if (parent.parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer())
+            if (parent.parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer() && effect.ShowFloatingText)
                 FloatingTextHandler.Draw(parent.transform.position, "-" + effect.Name, Color.red);
             effect.OnRemove();
             FireEvent(parent, e);

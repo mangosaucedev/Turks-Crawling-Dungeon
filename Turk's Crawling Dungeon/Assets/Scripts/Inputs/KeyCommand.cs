@@ -24,6 +24,8 @@ namespace TCD.Inputs
         Interact,
         InteractAdvanced,
         Rest,
+        Look,
+        Throw,
         // UI
         OpenInventory,
         OpenStatus,

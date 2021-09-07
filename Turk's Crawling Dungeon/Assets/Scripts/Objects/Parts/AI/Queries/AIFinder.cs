@@ -50,9 +50,8 @@ namespace TCD.Objects.Parts
             Vector2Int targetPosition = obj.cell.Position;
             float distance = Vector2Int.Distance(position, targetPosition);
             BaseObject parent = brain.parent;
-            if (distance < minDistance && 
-                obj.faction != parent.faction &&
-                obj.faction != "Neutral")
+            Brain otherBrain = obj.parts.Get<Brain>();
+            if (distance < minDistance && otherBrain && otherBrain.Faction != brain.Faction)
             {
                 minDistance = distance;
                 target = obj;

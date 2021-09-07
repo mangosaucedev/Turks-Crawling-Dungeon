@@ -52,11 +52,15 @@ namespace TCD.Zones
         private static Vector2Int FindDownStairsPosition()
         {
             IZone zone = CurrentZoneInfo.zone;
-            IChamber chamber = zone.Chambers[zone.Chambers.Count - 1];
-            int xMin = chamber.BoundsInt.xMin;
-            int xMax = chamber.BoundsInt.xMax;
-            int yMin = chamber.BoundsInt.yMin;
-            int yMax = chamber.BoundsInt.yMax;
+            IFeature feature;
+            if (zone.Chambers.Count > 0)
+                feature = zone.Chambers[zone.Chambers.Count - 1];
+            else 
+                feature = zone.Features[zone.Features.Count - 1];
+            int xMin = feature.BoundsInt.xMin;
+            int xMax = feature.BoundsInt.xMax;
+            int yMin = feature.BoundsInt.yMin;
+            int yMax = feature.BoundsInt.yMax;
             for (int x = xMin; x < xMax; x++)
                 for (int y = yMin; y < yMax; y++)
                 {

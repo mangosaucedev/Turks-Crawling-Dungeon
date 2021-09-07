@@ -12,6 +12,7 @@ namespace TCD.Objects.Parts
 
         [Header("AI Parameters")]
         [SerializeField] private int sightRadius;
+        [SerializeField] private string faction;
 
         public AIQuery query;
         public GoalCollection goals;
@@ -30,6 +31,12 @@ namespace TCD.Objects.Parts
         {
             get => sightRadius;
             set => sightRadius = value;
+        }
+
+        public string Faction
+        {
+            get => faction;
+            set => faction = value;
         }
 
         public override string Name => "Brain";
@@ -95,7 +102,7 @@ namespace TCD.Objects.Parts
                 i++;
                 if (i > MAX_ACTIONS_PER_TURN)
                 {
-                    DebugLogger.LogError($"Brain of {parent.display.GetDisplayName()} caught in endless loop!");
+                    DebugLogger.LogError($"Brain of {parent.GetDisplayName()} caught in endless loop!");
                     break;
                 }
             }
@@ -135,7 +142,7 @@ namespace TCD.Objects.Parts
             catch (Exception e)
             {
                 throw new BrainException(
-                    this, $"{parent.display.GetDisplayName()} could not update path debug info: {e.Message}");
+                    this, $"{parent.GetDisplayName()} could not update path debug info: {e.Message}");
             }
         }
 

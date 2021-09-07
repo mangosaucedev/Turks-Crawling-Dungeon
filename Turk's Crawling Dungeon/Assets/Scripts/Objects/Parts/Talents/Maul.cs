@@ -13,6 +13,8 @@ namespace TCD.Objects.Parts.Talents
     {
         public override string Name => "Maul";
 
+        public override string TalentTree => "Mangle";
+
         public override Sprite Icon => Assets.Get<Sprite>("MaulIcon");
 
         public override int MaxLevel => 5;
@@ -64,9 +66,9 @@ namespace TCD.Objects.Parts.Talents
                 parentHasStats && targetEffects.AddEffect(new Bleeding(AttackHandler.lastDamage / 2f, parentStats.RollStat(Stat.PhysicalPower)), GetBleedDuration()))
             {
                 if (parent == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"You have mauled {obj.display.GetDisplayName()} for {AttackHandler.lastDamage} damage!");
+                    MessageLog.Add($"You have mauled {obj.GetDisplayName()} for {AttackHandler.lastDamage} damage!");
                 if (obj == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"{parent.display.GetDisplayName()} has mauled you for {AttackHandler.lastDamage} damage!");
+                    MessageLog.Add($"{parent.GetDisplayName()} has mauled you for {AttackHandler.lastDamage} damage!");
             }
             activeCooldown += GetCooldown();
             if (parent.parts.TryGet(out Resources resources))
@@ -113,7 +115,7 @@ namespace TCD.Objects.Parts.Talents
             if (CanUseTalent() && !e.hasActed)
             {
                 if (parent.parts.TryGet(out Brain brain))
-                    brain.Think("Decided to maul " + e.target.display.GetDisplayName() + " instead.");
+                    brain.Think("Decided to maul " + e.target.GetDisplayName() + " instead.");
                 StopAllCoroutines();
                 StartCoroutine(OnObjectRoutine(e.target));
                 e.hasActed = true;

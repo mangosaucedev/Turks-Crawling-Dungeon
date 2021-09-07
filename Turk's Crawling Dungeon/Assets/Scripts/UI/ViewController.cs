@@ -5,7 +5,7 @@ using UnityEngine;
 namespace TCD.UI
 {
     public abstract class ViewController : MonoBehaviour
-    {
+    { 
         private View view;
 
         protected View View

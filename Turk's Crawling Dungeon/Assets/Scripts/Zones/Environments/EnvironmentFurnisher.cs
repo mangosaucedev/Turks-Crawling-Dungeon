@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TCD.Zones.Environments
 {
-    public class EnvironmentFurnisher : GeneratorObject
+    public class EnvironmentFurnisher : ZoneGeneratorMachine
     {
         private IFeature currentFeature;
         private Environment currentEnvironment;

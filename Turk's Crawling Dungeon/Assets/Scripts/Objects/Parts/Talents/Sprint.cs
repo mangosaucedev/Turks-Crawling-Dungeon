@@ -10,6 +10,8 @@ namespace TCD.Objects.Parts.Talents
     {
         public override string Name => "Sprint";
 
+        public override string TalentTree => "BasicAthletics";
+
         public override Sprite Icon => Assets.Get<Sprite>("SprintIcon");
 
         public override int MaxLevel => 5;

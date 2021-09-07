@@ -38,21 +38,21 @@ namespace TCD
         private void Update() => assets = viewableAssets;
 #endif
 
-        public static T Get<T>(string name) where T : class
+        public static T Get<T>(string name)
         {
             Type type = typeof(T);
             AssetCollection collection = GetAssetCollection(type);
             return collection.Get<T>(name);
         }
 
-        public static bool Exists<T>(string name) where T : class
+        public static bool Exists<T>(string name)
         {
             Type type = typeof(T);
             AssetCollection collection = GetAssetCollection(type);
             return collection.Exists(name);
         }
 
-        public static void Add<T>(string name, T obj) where T : class
+        public static void Add<T>(string name, T obj)
         {
             Type type = typeof(T);
             AssetCollection collection = GetAssetCollection(type);

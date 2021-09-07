@@ -13,6 +13,8 @@ namespace TCD.Objects.Parts.Talents
     {
         public override string Name => "Strangle";
 
+        public override string TalentTree => "FearfulTechniques";
+
         public override Sprite Icon => Assets.Get<Sprite>("StrangleIcon");
 
         public override int MaxLevel => 5;
@@ -64,16 +66,16 @@ namespace TCD.Objects.Parts.Talents
                 targetEffects.AddEffect(new Strangled(), TimeInfo.TIME_PER_STANDARD_TURN * 2))
             {
                 if (parent == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"You are strangling {obj.display.GetDisplayName()}!");
+                    MessageLog.Add($"You are strangling {obj.GetDisplayName()}!");
                 if (obj == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"{obj.display.GetDisplayName()} is strangling you!");
+                    MessageLog.Add($"{obj.GetDisplayName()} is strangling you!");
             }
             else if (madeSuccessfulAttackAgainstTarget && !targetFailedSavingThrow)
             {
                 if (parent == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"You failed to strangle {obj.display.GetDisplayName()}!");
+                    MessageLog.Add($"You failed to strangle {obj.GetDisplayName()}!");
                 if (obj == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"{parent.display.GetDisplayName()} failed to strangle you!");
+                    MessageLog.Add($"{parent.GetDisplayName()} failed to strangle you!");
             }
             activeCooldown += GetCooldown();
             if (parent.parts.TryGet(out Resources resources))
@@ -120,7 +122,7 @@ namespace TCD.Objects.Parts.Talents
             if (CanUseTalent() && !e.hasActed)
             {
                 if (parent.parts.TryGet(out Brain brain))
-                    brain.Think("Decided to strangle " + e.target.display.GetDisplayName() + " instead.");
+                    brain.Think("Decided to strangle " + e.target.GetDisplayName() + " instead.");
                 StopAllCoroutines();
                 StartCoroutine(OnObjectRoutine(e.target));
                 e.hasActed = true;

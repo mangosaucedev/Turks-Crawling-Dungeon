@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TCD.Texts;
 using TCD.Objects.Parts;
 using Resources = TCD.Objects.Parts.Resources;
 
@@ -46,9 +47,9 @@ namespace TCD.Objects.Attacks
             if (!currentDefender.HandleEvent(e) || !currentAttacker.HandleEvent(e))
             {
                 if (currentAttacker == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"Your attack against {currentDefender.display.GetDisplayName()} {e.Result}!");
+                    MessageLog.Add($"Your attack against {currentDefender.GetDisplayName()} {e.Result}!");
                 if (currentDefender == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"{currentAttacker.display.GetDisplayName()}'s attack against you {e.Result}!");
+                    MessageLog.Add($"{currentAttacker.GetDisplayName()}'s attack against you {e.Result}!");
                 return false;
             }
             return true;
@@ -76,24 +77,23 @@ namespace TCD.Objects.Attacks
             if (lastDamage <= 0)
             {
                 if (currentAttacker == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"Your attack against {currentDefender.display.GetDisplayName()} failed to penetrate!");
+                    MessageLog.Add($"Your attack against {currentDefender.GetDisplayName()} failed to penetrate!");
                 if (currentDefender == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"{currentAttacker.display.GetDisplayName()}'s attack against you failed to penetrate!");
+                    MessageLog.Add($"{currentAttacker.GetDisplayName()}'s attack against you failed to penetrate!");
                 return false;
             }
 
             if (!currentDefender.parts.TryGet(out Resources defenderResources))
             {
                 if (currentAttacker == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"{currentDefender.display.GetDisplayName()} cannot be attacked.");
+                    MessageLog.Add($"{currentDefender.GetDisplayName()} cannot be attacked.");
                 return false;
             }
 
-            string message = $"{currentAttacker.display.GetDisplayName()} {currentAttack.verbPastTense} " +
-                $"{currentDefender.display.GetDisplayName()} for {lastDamage.RoundToDecimal(1)} " +
+            string message = $"{currentAttacker.GetDisplayName()} {currentAttack.verbPastTense} " +
+                $"{currentDefender.GetDisplayName()} for {lastDamage.RoundToDecimal(1)} " +
                 $"{currentAttack.damageType.name.ToLower()} damage!";
             MessageLog.Add(message);
-            defenderResources.ModifyResource(Resource.Hitpoints, -lastDamage);
             AttackEvent attackEvent = LocalEvent.Get<AttackEvent>();
             attackEvent.obj = currentAttacker;
             attackEvent.defender = currentDefender;
@@ -106,6 +106,13 @@ namespace TCD.Objects.Attacks
             attackedEvent.attack = currentAttack;
             attackedEvent.damage = lastDamage;
             currentDefender.HandleEvent(attackedEvent);
+            if (currentDefender.parts.TryGet(out Render render))
+                render.RenderEffect("Standard Render Effect", Choose.Random("EnemyHitGraphic", "EnemyHitGraphic1", "EnemyHitGraphic2"), 0.2f);
+            if (currentDefender == PlayerInfo.currentPlayer)
+                FloatingTextHandler.DrawFlying(currentDefender.transform.position, $"{lastDamage.RoundToDecimal(1)}", Color.red);
+            else
+                FloatingTextHandler.DrawFlying(currentDefender.transform.position, $"{lastDamage.RoundToDecimal(1)}", Color.green);
+            defenderResources.ModifyResource(Resource.Hitpoints, -lastDamage);
             return true;
         }
     }

@@ -8,7 +8,7 @@ namespace TCD
 {
     public class GetDisplayNameEvent : ObjectEvent
     {
-        public static new readonly string id = "Get Description";
+        public static new readonly string id = "Get Display Name";
 
         public BaseObject obj;
         public string displayName;

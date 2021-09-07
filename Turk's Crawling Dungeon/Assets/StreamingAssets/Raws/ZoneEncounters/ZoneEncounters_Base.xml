@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ZoneEncounters>
+
+	<ZoneEncounter Name="Generic">
+		<Encounter Name="DungeonEnemyPatrolsTier0" Type="EnemyPatrol" Weight="1" />
+		<Encounter Name="DungeonEnemyPatrolsTier1" Type="EnemyPatrol" Weight="3"/>
+		<Encounter Name="DungeonEnemyPatrolsTier1B" Type="EnemyPatrol" Weight="1"/>
+		<Encounter Name="DungeonEnemyPatrolsTier2" Type="EnemyPatrol" Weight="3"/>
+		<Encounter Name="DungeonEnemyPatrolsTier2B" Type="EnemyPatrol" Weight="1"/>
+		<Encounter Name="MeleeWeaponsTier0" Type="OpenLoot" Weight="1"/>
+		<Encounter Name="MeleeWeaponsTier1" Type="OpenLoot" Weight="1"/>
+	</ZoneEncounter>
+	
+</ZoneEncounters>

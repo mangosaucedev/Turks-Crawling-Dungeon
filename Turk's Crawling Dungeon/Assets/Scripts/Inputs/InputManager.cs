@@ -33,6 +33,7 @@ namespace TCD.Inputs
             KeyEventManager.Subscribe(KeyCommand.OpenHelp, KeyState.PressedThisFrame, e => { OpenView("Help View"); });
             KeyEventManager.Subscribe(KeyCommand.Enter, KeyState.PressedThisFrame, e => { ConfirmAction(); });
             KeyEventManager.Subscribe(KeyCommand.Rest, KeyState.PressedThisFrame, e => { Rest(); });
+            KeyEventManager.Subscribe(KeyCommand.Throw, KeyState.PressedThisFrame, e => { OpenView("Throw Object List"); });
         }
 
         private void Update()

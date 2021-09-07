@@ -8,6 +8,7 @@ namespace TCD.Zones
 {
     public class ZoneEncounters : ICloneable
     {
+        public string name;
         public float density;
         public List<ZoneEncounter> buildEncounters = new List<ZoneEncounter>();
         public List<Encounter> encounters = new List<Encounter>();

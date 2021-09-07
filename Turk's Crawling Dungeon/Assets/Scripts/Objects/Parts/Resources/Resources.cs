@@ -293,7 +293,10 @@ namespace TCD.Objects.Parts
         private void OnGetResource(LocalEvent e)
         {
             GetResourceEvent getResourceEvent = (GetResourceEvent) e;
-            getResourceEvent.amount += GetBaseResource(getResourceEvent.resource);
+            if (getResourceEvent.obj != parent)
+                return;
+            getResourceEvent.amount = GetBaseResource(getResourceEvent.resource);
+            getResourceEvent.amount = Mathf.Clamp(getResourceEvent.amount, 0, GetMaxResource(getResourceEvent.resource));
         }
 
         public float GetBaseResource(Resource resource)
@@ -309,6 +312,8 @@ namespace TCD.Objects.Parts
         private void OnGetMaxResource(LocalEvent e)
         {
             GetMaxResourceEvent getMaxResourceEvent = (GetMaxResourceEvent) e;
+            if (getMaxResourceEvent.obj != parent)
+                return;
             getMaxResourceEvent.amount += GetBaseMaxResource(getMaxResourceEvent.resource);
         }
 

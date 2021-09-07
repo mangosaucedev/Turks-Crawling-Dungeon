@@ -101,6 +101,9 @@ namespace TCD.Objects.Parts
 
         public bool EquipToSlot(BaseObject equipment, EquipSlot slot)
         {
+            BaseObject currentlyEquipped = GetEquippedItem(slot);
+            if (currentlyEquipped && !TryUnequip(currentlyEquipped))
+                return false;
             equippedItems.Add(equipment);
             equippedItemsBySlot[slot] = equipment;
             Equippable equippable = equipment.parts.Get<Equippable>();

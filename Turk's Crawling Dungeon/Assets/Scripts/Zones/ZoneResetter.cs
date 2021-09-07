@@ -58,8 +58,8 @@ namespace TCD.Zones
 
         private IEnumerator GenerateNewZone()
         {
-            ZoneGenerator zoneGenerator = ServiceLocator.Get<ZoneGenerator>();
-            yield return zoneGenerator.GenerateZoneRoutine();
+            ZoneGeneratorManager zoneGenerator = ServiceLocator.Get<ZoneGeneratorManager>();
+            yield return zoneGenerator.GenerateZoneRoutine(ZoneGeneratorType.Cavern);
         }
     }
 }

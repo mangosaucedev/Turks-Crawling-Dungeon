@@ -7,7 +7,7 @@ namespace TCD.Texts
 {
     public class FloatingText : MonoBehaviour
     {
-        private const float SPEED = 0.4f;
+        private const float SPEED = 1.5f;
 
         private static List<GameObject> pool = new List<GameObject>();
 
@@ -27,7 +27,12 @@ namespace TCD.Texts
             return Instantiate(prefab, ParentManager.Canvas);
         }
 
-        private void FixedUpdate()
+        protected virtual void OnEnable()
+        {
+
+        }
+
+        protected virtual void FixedUpdate()
         {
             transform.position += Vector3.up * Time.fixedDeltaTime * SPEED;
             if (duration > 0)

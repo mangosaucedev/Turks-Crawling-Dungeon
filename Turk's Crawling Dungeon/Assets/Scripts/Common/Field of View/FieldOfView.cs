@@ -162,7 +162,7 @@ namespace TCD
 
         public static void WipeScreen()
         {
-            float padding = 0.25f;
+            float padding = 0.5f;
             Vector2 cameraMin = MainCamera.ViewportToWorldPoint(new Vector2(-padding, -padding));
             Vector2 cameraMax = MainCamera.ViewportToWorldPoint(new Vector2(1 + padding, 1 + padding));
             Vector3Int cellMin = Tilemap.WorldToCell(cameraMin);

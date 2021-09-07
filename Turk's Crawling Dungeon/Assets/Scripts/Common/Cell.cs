@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TCD.Objects;
+using TCD.Objects.Parts;
 
 namespace TCD
 {
@@ -81,6 +82,17 @@ namespace TCD
                 if (obj == null)
                     objects.RemoveAt(i);
             }
+        }
+
+        public List<BaseObject> GetVisibleObjects()
+        {
+            List<BaseObject> visibleObjects = new List<BaseObject>();
+            foreach (BaseObject obj in objects)
+            {
+                if (obj.parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer())
+                    visibleObjects.Add(obj);
+            }
+            return visibleObjects;
         }
     }
 }

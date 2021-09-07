@@ -10,7 +10,7 @@ namespace TCD
         public Dictionary<string, object> collection =
             new Dictionary<string, object>();
 
-        public T Get<T>(string name) where T : class
+        public T Get<T>(string name)
         {
             if (string.IsNullOrEmpty(name))
                 throw new Exception(

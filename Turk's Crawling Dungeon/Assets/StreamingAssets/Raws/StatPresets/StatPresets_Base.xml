@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<StatPresets>
+
+	<StatPreset Name="Base">
+		<Strength>10</Strength>
+		<Agility>10</Agility>
+		<Constitution>10</Constitution>
+		<Cunning>10</Cunning>
+		<Willpower>10</Willpower>
+		<Charm>10</Charm>
+	</StatPreset>
+
+	<StatPreset Name="Hellion" InheritsFrom="Base">
+		<Strength>14</Strength>
+		<Agility>10</Agility>
+		<Constitution>12</Constitution>
+		<Cunning>8</Cunning>
+		<Willpower>8</Willpower>
+		<Charm>8</Charm>
+	</StatPreset>
+
+</StatPresets>

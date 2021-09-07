@@ -17,8 +17,8 @@ namespace TCD.UI
         private void Start()
         {
             obj = SelectionHandler.SelectedObject;
-            title.text = $"/ Inspecting {obj.display.GetDisplayName()} /";
-            description.text = obj.display.GetDescription();
+            title.text = $"/ Inspecting {obj.GetDisplayName()} /";
+            description.text = obj.GetDescription();
         }
     }
 }

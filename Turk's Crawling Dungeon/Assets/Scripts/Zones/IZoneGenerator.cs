@@ -8,6 +8,6 @@ namespace TCD.Zones
     {
         IZoneParams ZoneParams { get; }
 
-        IEnumerator GenerateZoneRoutine();
+        IEnumerator GenerateZoneRoutine(ZoneGeneratorType type);
     }
 }

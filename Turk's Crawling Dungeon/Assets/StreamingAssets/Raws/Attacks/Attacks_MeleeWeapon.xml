@@ -1,6 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Attacks>
-	
+
+	<Attack Name="Tier0Slash">
+		<Verb>slash</Verb>
+		<VerbPastTense>slashed</VerbPastTense>
+		<MinDamage>17</MinDamage>
+		<MaxDamage>27</MaxDamage>
+		<DamageType>Cut</DamageType>
+	</Attack>
+
+	<Attack Name="Tier0Shank">
+		<Verb>shank</Verb>
+		<VerbPastTense>shanked</VerbPastTense>
+		<MinDamage>15</MinDamage>
+		<MaxDamage>22</MaxDamage>
+		<DamageType>Pierce</DamageType>
+	</Attack>
+
+	<Attack Name="Tier0Bludgeon">
+		<Verb>bludgeon</Verb>
+		<VerbPastTense>bludgeoned</VerbPastTense>
+		<MinDamage>15</MinDamage>
+		<MaxDamage>22</MaxDamage>
+		<DamageType>Blunt</DamageType>
+	</Attack>
+
 	<Attack Name="Tier1Slash">
 		<Verb>slash</Verb>
 		<VerbPastTense>slashed</VerbPastTense>

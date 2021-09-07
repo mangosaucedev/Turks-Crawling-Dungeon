@@ -23,6 +23,9 @@ namespace TCD
             SpriteLoader spriteLoader = new SpriteLoader();
             yield return spriteLoader.LoadCoreSprites();
 
+            ColorDeserializer colorDeserializer = new ColorDeserializer();
+            yield return colorDeserializer.DeserializeRawsAtPath();
+
             ObjectsDeserializer objectsDeserializer = new ObjectsDeserializer();
             yield return objectsDeserializer.DeserializeRawsAtPath();
             
@@ -37,6 +40,17 @@ namespace TCD
 
             EnvironmentDeserializer environmentDeserializer = new EnvironmentDeserializer();
             yield return environmentDeserializer.DeserializeRawsAtPath();
+
+            /*
+            ZoneEncountersDeserializer zoneEncountersDeserializer = new ZoneEncountersDeserializer();
+            yield return zoneEncountersDeserializer.DeserializeRawsAtPath();
+
+            ZoneEnvironmentsDeserializer zoneEnvironmentsDeserializer = new ZoneEnvironmentsDeserializer();
+            yield return zoneEnvironmentsDeserializer.DeserializeRawsAtPath();
+
+            ZoneParamsDeserializer zoneParamsDeserializer = new ZoneParamsDeserializer();
+            yield return zoneParamsDeserializer.DeserializeRawsAtPath();
+            */
 
             ZoneDeserializer zoneDeserializer = new ZoneDeserializer();
             yield return zoneDeserializer.DeserializeRawsAtPath();

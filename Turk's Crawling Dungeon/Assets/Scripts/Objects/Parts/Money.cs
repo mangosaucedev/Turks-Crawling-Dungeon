@@ -51,7 +51,7 @@ namespace TCD.Objects.Parts
             if (obj.parts.TryGet(out Wallet wallet))
             {
                 wallet.AddMoney((decimal) BaseValue.RoundToDecimal(2));
-                parent.Destroy();
+                Destroy(parent.gameObject);
             }
         }
     }

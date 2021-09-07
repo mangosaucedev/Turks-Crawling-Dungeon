@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TCD.Objects.Attacks;
+using TCD.Texts;
 
 namespace TCD.Objects.Parts
 {
@@ -9,9 +10,11 @@ namespace TCD.Objects.Parts
     {
         public BaseObject lastDamagedBy;
         public string lastDamagedByDisplayName;
+        public Attack lastAttackRecieved;
+        public float lastAttackDamageRecieved;
         
         private Attack lastAttemptedAttack;
-
+        
         public override string Name => "Combat";
 
         public override bool HandleEvent<T>(T e)
@@ -20,6 +23,8 @@ namespace TCD.Objects.Parts
                 OnGetAttacks(e);
             if (e.Id == AttackedEvent.id)
                 OnAttacked(e);
+            if (e.Id == DestroyObjectEvent.id)
+                OnDestroyObject();
             return base.HandleEvent(e);
         }
 
@@ -33,7 +38,7 @@ namespace TCD.Objects.Parts
         {
             Attack defaultAttack = AttackFactory.BuildFromBlueprint("WeakShove");
             defaultAttack.weapon = parent;
-            e.AddAttack(defaultAttack, 0.1f);
+            e.AddAttack(defaultAttack, 0.001f);
         }
 
         private void OnAttacked(LocalEvent e)
@@ -44,8 +49,22 @@ namespace TCD.Objects.Parts
 
         private void OnAttacked(AttackedEvent e)
         {
+            lastAttackRecieved = e.attack;
+            lastAttackDamageRecieved = e.damage;
             lastDamagedBy = e.attacker;
-            lastDamagedByDisplayName = lastDamagedBy.display.GetDisplayName();
+            lastDamagedByDisplayName = lastDamagedBy.GetDisplayName();
+        }
+
+        private void OnDestroyObject()
+        {
+            if (lastDamagedBy == PlayerInfo.currentPlayer && parent != PlayerInfo.currentPlayer)
+            {
+                Color killedMessageColor = new Color(1, 0.2f, 0.78f);
+                if (lastAttackDamageRecieved > 0)
+                    FloatingTextHandler.DrawFlying(parent.transform.position, $"Killed! ({lastAttackDamageRecieved.RoundToDecimal(1)})", killedMessageColor);
+                else
+                    FloatingTextHandler.DrawFlying(parent.transform.position, $"Killed!", killedMessageColor);
+            }
         }
 
         public int GetAttackCost(BaseObject target)

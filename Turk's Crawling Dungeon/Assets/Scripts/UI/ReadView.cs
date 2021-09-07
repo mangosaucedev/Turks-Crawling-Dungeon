@@ -25,7 +25,7 @@ namespace TCD.UI
             obj = SelectionHandler.SelectedObject;
             Readable readable = obj.parts.Get<Readable>();
             currentText = Assets.Get<GameText>(readable.Text);
-            title.text = $"/ Reading {obj.display.GetDisplayName()} /";
+            title.text = $"/ Reading {obj.GetDisplayName()} /";
             GoToPage(0);
         }
 

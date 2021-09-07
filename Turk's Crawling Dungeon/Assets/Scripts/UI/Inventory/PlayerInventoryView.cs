@@ -55,14 +55,21 @@ namespace TCD.UI
             if (inputKey != null)
                 button.key = inputKey.str;
             button.onClick.AddListener(() => { OnItemButtonClick(item); });
-            button.SetText(item.display.GetDisplayName());
+            button.SetText(item.GetDisplayName());
             inventoryElements.Add(button.gameObject);
         }
 
         private void OnItemButtonClick(BaseObject item)
         {
+            StopAllCoroutines();
+            StartCoroutine(OnItemButtonClickRoutine(item));
+        }
+
+        private IEnumerator OnItemButtonClickRoutine(BaseObject item)
+        {
             SelectionHandler.SetSelectedObject(item);
-            ViewManager.Open("Interaction List");
+            yield return ViewManager.OpenAndWaitForViewRoutine("Interaction List");
+            UpdateInventories();
         }
     }
 }

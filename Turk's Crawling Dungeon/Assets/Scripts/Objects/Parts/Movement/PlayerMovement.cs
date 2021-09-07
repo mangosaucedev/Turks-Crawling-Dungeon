@@ -36,7 +36,8 @@ namespace TCD.Objects.Parts
             target = null;
             foreach (BaseObject obj in cell.objects)
             {
-                if (obj.parts.Get<Combat>() && obj.faction != "Neutral" && obj.faction != "Player")
+                Brain brain = obj.parts.Get<Brain>();
+                if (obj.parts.Get<Combat>() && brain?.Faction != "Neutral" && brain?.Faction != "Player")
                 {
                     target = obj;
                     return true;

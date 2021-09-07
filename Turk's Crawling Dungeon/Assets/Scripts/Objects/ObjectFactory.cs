@@ -70,10 +70,6 @@ namespace TCD.Objects
             gameObject.name = blueprint.name;
 
             BaseObject obj = gameObject.GetComponent<BaseObject>();
-            obj.displayName = blueprint.displayName;
-            obj.displayNamePlural = blueprint.displayNamePlural;
-            obj.description = blueprint.description;
-            obj.faction = blueprint.faction;
 
             AttachPartsFromBlueprint(obj, blueprint);
             OverridePartsFromBlueprint(obj, blueprint);

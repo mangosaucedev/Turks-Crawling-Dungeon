@@ -101,6 +101,8 @@ namespace TCD.Objects.Parts
         private void OnGetStat(LocalEvent e)
         {
             GetStatEvent getStatEvent = (GetStatEvent) e;
+            if (getStatEvent.obj != parent)
+                return;
             if (getStatEvent.stat == Stat.Dodge)
                 GetDodgeFromStats(getStatEvent);
             if (getStatEvent.stat == Stat.PhysicalSave)

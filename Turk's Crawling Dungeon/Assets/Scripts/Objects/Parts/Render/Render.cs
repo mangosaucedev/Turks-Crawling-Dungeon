@@ -8,6 +8,9 @@ namespace TCD.Objects.Parts
     {
         [SerializeField] private string sprite;
         [SerializeField] private int renderOrder;
+        [SerializeField] private string displayName;
+        [SerializeField] private string displayNamePlural;
+        [SerializeField] private string description;
         private Dictionary<string, Color> colorLayersByName = new Dictionary<string, Color>();
         private List<Color> colorLayers = new List<Color>();
         private string baseColor;
@@ -28,6 +31,24 @@ namespace TCD.Objects.Parts
         {
             get => renderOrder;
             set => renderOrder = value;
+        }
+
+        public string DisplayName
+        {
+            get => displayName;
+            set => displayName = value;
+        }
+
+        public string DisplayNamePlural
+        {
+            get => displayNamePlural;
+            set => displayNamePlural = value;
+        }
+
+        public string Description
+        {
+            get => description;
+            set => description = value;
         }
 
         public override string Name => "Render";
@@ -105,5 +126,21 @@ namespace TCD.Objects.Parts
             if (parent)
                 parent.SpriteRenderer.sortingOrder = (-cell?.Y ?? 0) + RenderOrder;
         } 
+
+        public void RenderEffect(string effectName, string spriteName, float duration)
+        {
+            StartCoroutine(RenderEffectRoutine(effectName, spriteName, duration));
+        }
+
+        private IEnumerator RenderEffectRoutine(string effectName, string spriteName, float duration)
+        {
+            GameObject prefab = Assets.Get<GameObject>(effectName);
+            Sprite sprite = Assets.Get<Sprite>(spriteName);
+            GameObject obj = Instantiate(prefab, transform);
+            RenderEffect renderEffect = obj.GetComponent<RenderEffect>();
+            renderEffect.SetSprite(sprite);
+            yield return new WaitForSeconds(duration);
+            Destroy(obj);
+        }
     }
 }

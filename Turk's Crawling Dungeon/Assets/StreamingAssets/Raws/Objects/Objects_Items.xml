@@ -37,59 +37,59 @@
 
 	<Object Name="LooseChange" InheritsFrom="Money">
 
-		<DisplayName>Loose Change</DisplayName>
-
-		<DisplayNamePlural>Loose Change</DisplayNamePlural>
-
-		<Description>A few shiny coins.</Description>
 		
 		<OverridePart Name="Money">
 			<Var Name="MinStartingValue">0.01</Var>
 			<Var Name="MaxStartingValue">1</Var>
 		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Loose Change</Var>
+			<Var Name="DisplayNamePlural">Loose Change</Var>
+			<Var Name="Description">A few shiny coins.</Var>
+		</OverridePart>
 		
 	</Object>
 
 	<Object Name="LooseBills" InheritsFrom="Money">
-
-		<DisplayName>Loose Bills</DisplayName>
-
-		<Description>Some crumpled dollar bills.</Description>
 		
 		<OverridePart Name="Money">
 			<Var Name="MinStartingValue">1</Var>
 			<Var Name="MaxStartingValue">5</Var>
 		</OverridePart>
 
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Loose Bills</Var>
+			<Var Name="DisplayNamePlural">Loose Bills</Var>
+			<Var Name="Description">Some crumpled dollar bills.</Var>
+		</OverridePart>
+
 	</Object>
 
 	<Object Name="Spinel" InheritsFrom="Money">
-
-		<DisplayName>Spinel</DisplayName>
-
-		<Description>A cut gemstone.</Description>
 
 		<OverridePart Name="Money">
 			<Var Name="BaseValue">5</Var>
 		</OverridePart>
 
-
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Spinel</Var>
+			<Var Name="DisplayNamePlural">Spinels</Var>
+			<Var Name="Description">A cut gemstone.</Var>
 			<Var Name="Sprite">Spinel</Var>
 		</OverridePart>
 	</Object>
 	
 	<Object Name="Zircon" InheritsFrom="Money">
 
-		<DisplayName>Zircon</DisplayName>
-
-		<Description>A cut gemstone.</Description>
-
 		<OverridePart Name="Money">
 			<Var Name="BaseValue">5</Var>
 		</OverridePart>
 
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Zircon</Var>
+			<Var Name="DisplayNamePlural">Zircons</Var>
+			<Var Name="Description">A cut gemstone.</Var>
 			<Var Name="Sprite">Zircon</Var>
 		</OverridePart>
 
@@ -110,6 +110,9 @@
 		</OverridePart>
 
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Health Potion</Var>
+			<Var Name="DisplayNamePlural">Health Potions</Var>
+			<Var Name="Description">A concoction of vital essences distilled into a syrupy red fluid. Down the hatch!</Var>
 			<Var Name="Sprite">HealthPotion</Var>
 		</OverridePart>
 

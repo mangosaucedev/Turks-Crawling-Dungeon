@@ -23,6 +23,7 @@ namespace TCD.Inputs.Actions
             KeyEventManager.Subscribe(KeyCommand.Cancel, KeyState.PressedThisFrame, e => { CancelCurrentAction(); });
             Add(new Interact(), KeyCommand.Interact);
             Add(new InteractAdvanced(), KeyCommand.InteractAdvanced);
+            Add(new Look(), KeyCommand.Look);
         }
 
         private void Update()
@@ -79,18 +80,18 @@ namespace TCD.Inputs.Actions
             return null;
         }
 
-        public void TryStartAction(string actionName)
+        public void TryStartAction(string actionName, bool forced = false)
         {
             if (!InputManager.IsActive || doNotActivateActionForFrames > 0)
                 return;
             PlayerAction action = Get(actionName);
             if (action != null)
-                TryStartAction(action);
+                TryStartAction(action, forced);
         }
 
-        public void TryStartAction(PlayerAction action)
+        public void TryStartAction(PlayerAction action, bool forced = false)
         {
-            if (!InputManager.IsActive || doNotActivateActionForFrames > 0)
+            if ((!InputManager.IsActive || doNotActivateActionForFrames > 0) && !forced)
                 return;
             if (currentAction != null)
                 CancelCurrentAction();

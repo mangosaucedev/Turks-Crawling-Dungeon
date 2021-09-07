@@ -24,7 +24,8 @@ namespace TCD.Indicators
         protected override void UpdateIndicator()
         {
             base.UpdateIndicator();
-            GridRaycastResult result = GridRaycaster.Raycast(startPosition, targetPosition, new BlockedByObstaclesEvaluator());
+            GridRaycastEvaluator evaluator = (blockedByObstacles) ? (GridRaycastEvaluator) new BlockedByObstaclesEvaluator() : new FreeEvaluator();
+            GridRaycastResult result = GridRaycaster.Raycast(startPosition, targetPosition, evaluator);
             GridRay ray = result.ray;
             bool isBlocked = false;
             for (int i = 0; i < ray.positions.Count; i++)

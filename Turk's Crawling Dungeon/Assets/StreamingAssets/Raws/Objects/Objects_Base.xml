@@ -6,6 +6,9 @@
 		<Faction>Neutral</Faction>
 		
 		<Part Name="Render">
+			<Var Name="DisplayName">Nameless Object</Var>
+			<Var Name="DisplayNamePlural">Nameless Objects</Var>
+			<Var Name="Description">Nothing to see here.</Var>
 			<Var Name="Sprite">PlaceholderGuy</Var>
 		</Part>
 	

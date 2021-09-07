@@ -5,7 +5,7 @@ using TCD.Objects.Parts;
 
 namespace TCD
 {
-    public class GetInteractionsEvent : LocalEvent
+    public class GetInteractionsEvent : ActOnObjectEvent
     {
         public List<Interaction> interactions = new List<Interaction>();
 
@@ -17,6 +17,7 @@ namespace TCD
 
         protected override void Reset()
         {
+            base.Reset();
             interactions.Clear();
         }
     }

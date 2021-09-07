@@ -32,8 +32,11 @@ namespace TCD
 
         public void CenterOn(BaseObject obj)
         {
-            Vector3 position = obj.transform.position;
-            MoveToPosition(position);
+            if (obj)
+            {
+                Vector3 position = obj.transform.position;
+                MoveToPosition(position);
+            }
         }
 
         private void MoveToPosition(Vector3 position)

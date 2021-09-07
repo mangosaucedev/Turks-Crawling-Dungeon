@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TCD.Objects;
+using TCD.Objects.Parts;
 using TCD.Texts;
 using UnityEngine;
 
@@ -65,7 +66,7 @@ namespace TCD.Inputs.Actions
             foreach (Vector2Int position in FieldOfView.visiblePositions)
             {
                 Cell cell = CurrentZoneInfo.grid[position];
-                if (cell.objects.Find(o => o.faction == "Enemy"))
+                if (cell.objects.Find(o => o.parts.Get<Brain>()?.Faction == "Enemy"))
                     return true;
             }
             return false;

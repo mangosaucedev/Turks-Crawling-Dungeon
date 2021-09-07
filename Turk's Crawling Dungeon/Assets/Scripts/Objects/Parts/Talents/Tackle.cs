@@ -12,6 +12,8 @@ namespace TCD.Objects.Parts.Talents
     {
         public override string Name => "Tackle";
 
+        public override string TalentTree => "RecklessCombat";
+
         public override Sprite Icon => Assets.Get<Sprite>("TackleIcon");
 
         public override string Indicator => "Player To Cursor Indicator";
@@ -72,7 +74,7 @@ namespace TCD.Objects.Parts.Talents
             if (count > 2 && result.collision && result.collisionIndex - 1 <= GetRange())
             { 
                 Vector2Int position = ray.positions[result.collisionIndex - 1];
-                if (movement.TryMoveToPosition(position))
+                if (movement.TryMoveToPosition(position) && (Mathf.FloorToInt(Vector2Int.Distance(Position, position)) <= 1))
                 {
                     if (AttackHandler.AutoAttack(parent, obj) && obj.parts.TryGet(out Effects.Effects targetEffects))
                     {
@@ -80,17 +82,17 @@ namespace TCD.Objects.Parts.Talents
                         {
                             targetEffects.AddEffect(new Prone(), TimeInfo.TIME_PER_STANDARD_TURN * 2);
                             if (parent == PlayerInfo.currentPlayer)
-                                MessageLog.Add($"You tackled {obj.display.GetDisplayName()} to the ground!");
+                                MessageLog.Add($"You tackled {obj.GetDisplayName()} to the ground!");
                             if (obj == PlayerInfo.currentPlayer)
-                                MessageLog.Add($"You were tackled to the ground by {parent.display.GetDisplayName()}!");
+                                MessageLog.Add($"You were tackled to the ground by {parent.GetDisplayName()}!");
                         }
                         else if (parent.parts.TryGet(out Effects.Effects attackerEffects))
                         {
                             attackerEffects.AddEffect(new OffBalance(), TimeInfo.TIME_PER_STANDARD_TURN * 2);
                             if (parent == PlayerInfo.currentPlayer)
-                                MessageLog.Add($"You failed to tackle {obj.display.GetDisplayName()}, and are knocked off-balance!");
+                                MessageLog.Add($"You failed to tackle {obj.GetDisplayName()}, and are knocked off-balance!");
                             if (obj == PlayerInfo.currentPlayer)
-                                MessageLog.Add($"{parent.display.GetDisplayName()} failed to tackle you, and is knocked off-balance!");
+                                MessageLog.Add($"{parent.GetDisplayName()} failed to tackle you, and is knocked off-balance!");
                         }
                     }
                 }

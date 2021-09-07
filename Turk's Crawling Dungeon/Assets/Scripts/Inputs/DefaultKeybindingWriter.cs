@@ -29,6 +29,8 @@ namespace TCD.Inputs
             Add(KeyCommand.Interact, KeyCode.Space);
             Add(KeyCommand.InteractAdvanced, KeyCode.Space, KeyCode.LeftShift);
             Add(KeyCommand.Rest, KeyCode.Z);
+            Add(KeyCommand.Look, KeyCode.L);
+            Add(KeyCommand.Throw, KeyCode.T);
             Add(KeyCommand.OpenInventory, KeyCode.I);
             Add(KeyCommand.OpenHealth, KeyCode.H);
             Add(KeyCommand.OpenHelp, KeyCode.Slash, KeyCode.LeftShift);

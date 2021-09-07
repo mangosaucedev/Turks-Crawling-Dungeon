@@ -43,14 +43,16 @@ namespace TCD.UI
         {
             base.OnEnable();
             View.SetActiveEvent += OnSetActive;
-            View.UpdateEvent += OnSetInactive;
+            View.SetInactiveEvent += OnSetInactive;
+            View.UpdateEvent += RefreshOnUpdate;
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
             View.SetActiveEvent -= OnSetActive;
-            View.UpdateEvent -= OnSetInactive;
+            View.SetInactiveEvent -= OnSetInactive;
+            View.UpdateEvent -= RefreshOnUpdate;
         }
 
         protected virtual void Update()
@@ -73,7 +75,7 @@ namespace TCD.UI
             return button;
         }
 
-        public virtual void OnSetActive() => interactable = IsInteractive();
+        public virtual void OnSetActive() => interactable = true;
         
 
         public virtual void OnSetInactive() => interactable = false;
@@ -81,18 +83,18 @@ namespace TCD.UI
 
         protected virtual bool IsInteractive()
         {
-            return true;
+            return interactable && View.isActive;
         }
 
         public virtual void OnPointerClick(PointerEventData data)
         {
-            if (interactable)
+            if (IsInteractive())
                 onClick?.Invoke();
         }
 
         public virtual void OnSubmit(BaseEventData data)
         {
-            if (interactable)
+            if (IsInteractive())
                 onClick?.Invoke();
         }
 
@@ -105,8 +107,31 @@ namespace TCD.UI
         {
             if (string.IsNullOrEmpty(key))
                 return;
-            if (ButtonInputKeys.IsKeyDown(key) && interactable)
+            if (ButtonInputKeys.IsKeyDown(key) && IsInteractive())
                 onClick?.Invoke();
+        }
+
+        private void RefreshOnUpdate()
+        {
+            StopAllCoroutines();
+            StartCoroutine(RefreshOnUpdateRoutine());
+        }
+
+        private IEnumerator RefreshOnUpdateRoutine()
+        {
+            Canvas.ForceUpdateCanvases();
+            LayoutGroup[] layoutGroups = GetComponentsInChildren<LayoutGroup>();
+            foreach (LayoutGroup layoutGroup in layoutGroups)
+            {
+                if (layoutGroup)
+                    layoutGroup.enabled = false;
+            }
+            yield return null;
+            foreach (LayoutGroup layoutGroup in layoutGroups)
+            {
+                if (layoutGroup)
+                    layoutGroup.enabled = true;
+            }
         }
     }
 }

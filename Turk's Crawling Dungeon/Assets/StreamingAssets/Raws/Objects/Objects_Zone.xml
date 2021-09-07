@@ -5,11 +5,10 @@
 
 	<Object Name="Wall" InheritsFrom="PhysicalObject">
 
-		<DisplayName>Wall</DisplayName>
-
-		<Description>A sturdy construction.</Description>
-		
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Wall</Var>
+			<Var Name="DisplayNamePlural">Walls</Var>
+			<Var Name="Description">A sturdy construction.</Var>
 			<Var Name="Sprite">WallGeneric</Var>
 		</OverridePart>
 		
@@ -25,6 +24,8 @@
 	<Object Name="MossyWall" InheritsFrom="Wall">
 
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Mossy Wall</Var>
+			<Var Name="DisplayNamePlural">Mossy Walls</Var>
 			<Var Name="Sprite">MossyWall</Var>
 		</OverridePart>
 
@@ -33,6 +34,9 @@
 	<Object Name="BoneWall" InheritsFrom="Wall">
 
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Bone Wall</Var>
+			<Var Name="DisplayNamePlural">Bone Walls</Var>
+			<Var Name="Description">A thick slab of porous bone.</Var>
 			<Var Name="Sprite">BoneWall</Var>
 		</OverridePart>
 
@@ -41,12 +45,15 @@
 	<Object Name="ShroomWall0" InheritsFrom="Wall">
 
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Giant Mushroom</Var>
+			<Var Name="DisplayNamePlural">Giant Mushrooms</Var>
+			<Var Name="Description">An impassable, giant fungal growth.</Var>
 			<Var Name="Sprite">ShroomWall0</Var>
 		</OverridePart>
 
 	</Object>
 
-	<Object Name="ShroomWall1" InheritsFrom="Wall">
+	<Object Name="ShroomWall1" InheritsFrom="ShroomWall0">
 
 		<OverridePart Name="Render">
 			<Var Name="Sprite">ShroomWall1</Var>
@@ -54,7 +61,7 @@
 
 	</Object>
 
-	<Object Name="ShroomWall2" InheritsFrom="Wall">
+	<Object Name="ShroomWall2" InheritsFrom="ShroomWall0">
 
 		<OverridePart Name="Render">
 			<Var Name="Sprite">ShroomWall2</Var>
@@ -62,7 +69,7 @@
 
 	</Object>
 
-	<Object Name="ShroomWall3" InheritsFrom="Wall">
+	<Object Name="ShroomWall3" InheritsFrom="ShroomWall0">
 
 		<OverridePart Name="Render">
 			<Var Name="Sprite">ShroomWall3</Var>
@@ -74,11 +81,10 @@
 
 	<Object Name="Door" InheritsFrom="PhysicalObject">
 
-		<DisplayName>Door</DisplayName>
-
-		<Description>A solid door.</Description>
-		
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Door</Var>
+			<Var Name="DisplayNamePlural">Doors</Var>
+			<Var Name="Description">A solid door.</Var>
 			<Var Name="Sprite">DoorGenericClosed</Var>
 		</OverridePart>
 		
@@ -106,20 +112,21 @@
 	</Object>
 
 	<Object Name="DeadBush" InheritsFrom="Foliage">
-
-		<DisplayName>Dead Bush</DisplayName>
-
-		<Description>A gnarled bunch of dry limbs.</Description>
+		
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Dead Bush</Var>
+			<Var Name="DisplayNamePlural">Dead Bushes</Var>
+			<Var Name="Description">A gnarled bunch of dry limbs.</Var>
+		</OverridePart>
 		
 	</Object>
 
 	<Object Name="RoseThorns" InheritsFrom="Foliage">
 
-		<DisplayName>Rose Thorns</DisplayName>
-
-		<Description>Barbed stalks of coiling vegetation.</Description>
-
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Rose Thorns</Var>
+			<Var Name="DisplayNamePlural">Rose Thorns</Var>
+			<Var Name="Description">Barbed stalks of coiling vegetation.</Var>
 			<Var Name="Sprite">RoseThorns</Var>	
 		</OverridePart>
 
@@ -147,39 +154,32 @@
 
 	<Object Name="Trunk0" InheritsFrom="FoliageObstacle">
 
-		<DisplayName>Tree</DisplayName>
-
-		<Description>A gnarled trunk, roots firmly planted in the ground, standing around 5 feet tall before ending abruptly, as if cut.</Description>
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Tree</Var>
+			<Var Name="DisplayNamePlural">Trees</Var>
+			<Var Name="Description"></Var>
+		</OverridePart>
 		
 	</Object>
 
 	<Object Name="DeadTree0" InheritsFrom="FoliageObstacle">
 
-		<DisplayName>Dead Tree</DisplayName>
-
-		<Description>An old, dead tree.</Description>
-
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Dead Tree</Var>
+			<Var Name="DisplayNamePlural">Dead Trees</Var>
+			<Var Name="Description">An old, dead tree.</Var>
 			<Var Name="Sprite">DeadTree0</Var>
 		</OverridePart>
 	</Object>
 
-	<Object Name="DeadTree1" InheritsFrom="FoliageObstacle">
-
-		<DisplayName>Dead Tree</DisplayName>
-
-		<Description>An old, dead tree.</Description>
+	<Object Name="DeadTree1" InheritsFrom="DeadTree0">
 
 		<OverridePart Name="Render">
 			<Var Name="Sprite">DeadTree1</Var>
 		</OverridePart>
 	</Object>
 
-	<Object Name="DeadTree2" InheritsFrom="FoliageObstacle">
-
-		<DisplayName>Dead Tree</DisplayName>
-
-		<Description>An old, dead tree.</Description>
+	<Object Name="DeadTree2" InheritsFrom="DeadTree0">
 
 		<OverridePart Name="Render">
 			<Var Name="Sprite">DeadTree2</Var>
@@ -268,6 +268,9 @@
 		<Part Name="Invulnerable"/>
 
 		<OverridePart Name="Render">
+			<Var Name="DisplayName">Down Stairs</Var>
+			<Var Name="DisplayNamePlural">Down Stairs</Var>
+			<Var Name="Description">A set of stairs leading further into the dungeon.</Var>
 			<Var Name="Sprite">DownStairs</Var>
 			<Var Name="RenderOrder">-1</Var>
 		</OverridePart>

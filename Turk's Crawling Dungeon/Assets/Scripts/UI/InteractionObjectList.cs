@@ -48,7 +48,7 @@ namespace TCD.UI
             if (inputKey != null)
                 button.key = inputKey.str;
             button.onClick.AddListener(() => { OnObjectButtonClick(obj); });
-            button.SetText(obj.display.GetDisplayName());
+            button.SetText(obj.GetDisplayName());
         }
 
         private void OnObjectButtonClick(BaseObject obj)

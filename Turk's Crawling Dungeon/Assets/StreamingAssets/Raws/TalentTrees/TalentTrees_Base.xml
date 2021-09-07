@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TalentTrees>
+	
+	<TalentTree Name="BasicAthletics" DisplayName="Agility/Basic Athletics">
+		<Talent Name="Sprint" />
+		<Talent Name="Weave" />
+	</TalentTree>
+
+	<TalentTree Name="BasicGrappling" DisplayName="Strength/Basic Grappling">
+		<Talent Name="Grapple" />
+		<Talent Name="BreakGrapple" />
+		<Talent Name="Takedown" />
+		<Talent Name="Pin" />
+		<Talent Name="Choke" />
+	</TalentTree>
+
+	<TalentTree Name="RecklessCombat" DisplayName="Strength/Reckless Combat">
+		<Talent Name="Tackle" />
+	</TalentTree>
+
+	<TalentTree Name="Fitness" DisplayName="Constitution/Fitness">
+		<Talent Name="ThickSkin" />
+		<Talent Name="Lifeblood" />
+	</TalentTree>
+
+	<TalentTree Name="Telekinesis" DisplayName="Psionic/Telekinesis">
+		<Talent Name="Beckon" />
+		<Talent Name="Repulse" />
+	</TalentTree>
+
+	<TalentTree Name="Perseverance" DisplayName="Willpower/Perseverance">
+
+	</TalentTree>
+
+	<TalentTree Name="Domination" DisplayName="Charm/Domination">
+
+	</TalentTree>
+
+	<TalentTree Name="Bloodthirst" DisplayName="Savagery/Bloodthirst">
+		<Talent Name="BloodCrazed" />
+	</TalentTree>
+
+	<TalentTree Name="Mangle" DisplayName="Savagery/Mangle Prey">
+		<Talent Name="Maul" />
+	</TalentTree>
+
+	<TalentTree Name="FearfulTechniques" DisplayName="Terror/Fearful Techniques">
+		<Talent Name="FearfulPin" />
+		<Talent Name="Strangle" />
+	</TalentTree>
+
+	<TalentTree Name="StrangeTechniques" DisplayName="Bizarre/Strange Techniques">
+		<Talent Name="Multiply" />
+		<Talent Name="Scream" />
+	</TalentTree>
+
+	<TalentTree Name="Envenomation" DisplayName="Wild/Envenomation">
+		<Talent Name="VenomStrike" />
+	</TalentTree>
+
+
+	<TalentTree Name="RandomPsionics" DisplayName="Psionic/Random Psionics">
+		<Talent Name="MinorFireblast" />
+		<Talent Name="MinorStun" />
+	</TalentTree>
+
+</TalentTrees>

@@ -41,8 +41,8 @@ public class ObjectFactoryPropertyTests
         yield return Startup();
         yield return null;
         BaseObject obj = ObjectFactory.BuildFromBlueprint("DeadBush", Vector2Int.zero);
-        Assert.IsTrue(!string.IsNullOrEmpty(obj.displayName));
-        Assert.IsTrue(!string.IsNullOrEmpty(obj.displayNamePlural));
-        Assert.IsTrue(!string.IsNullOrEmpty(obj.description));
+        Assert.IsTrue(!string.IsNullOrEmpty(obj.GetDisplayName()));
+        Assert.IsTrue(!string.IsNullOrEmpty(obj.GetDisplayNamePlural()));
+        Assert.IsTrue(!string.IsNullOrEmpty(obj.GetDescription()));
     }
 }

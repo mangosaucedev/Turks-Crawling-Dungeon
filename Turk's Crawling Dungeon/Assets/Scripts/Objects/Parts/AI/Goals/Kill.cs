@@ -37,7 +37,7 @@ namespace TCD.Objects.Parts
             if (!base.PerformAction())
                 return false;
 
-            Think($"I'm trying to kill {target.display.GetDisplayName()}!");
+            Think($"I'm trying to kill {target  .GetDisplayName()}!");
 
             if (FailIfTargetDoesNotExist())
                 return false;

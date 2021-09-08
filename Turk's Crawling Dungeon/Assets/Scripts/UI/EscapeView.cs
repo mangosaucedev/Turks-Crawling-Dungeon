@@ -10,6 +10,7 @@ namespace TCD.UI
         [SerializeField] private ViewButton continueButton;
         [SerializeField] private ViewButton helpButton;
         [SerializeField] private ViewButton restartButton;
+        [SerializeField] private ViewButton exitToMainMenuButton;
         [SerializeField] private ViewButton exitToDesktopButton;
 
         protected override string ViewName => gameObject.name;
@@ -19,6 +20,7 @@ namespace TCD.UI
             continueButton.onClick.AddListener(CloseView);
             helpButton.onClick.AddListener(Help);
             restartButton.onClick.AddListener(Restart);
+            exitToMainMenuButton.onClick.AddListener(ExitToMainMenu);
             exitToDesktopButton.onClick.AddListener(ExitToDesktop);
         }
 
@@ -33,6 +35,15 @@ namespace TCD.UI
             CloseView();
             GameResetter.ResetGame();
         }
+
+        private void ExitToMainMenu()
+        {
+            CloseView();
+            ViewManager.Open("Main Menu");
+            ZoneResetter zoneResetter = ServiceLocator.Get<ZoneResetter>();
+            zoneResetter.UnloadZone(true);
+        }
+
 
         private void ExitToDesktop() => TCDGame.ExitToDesktop();
     }

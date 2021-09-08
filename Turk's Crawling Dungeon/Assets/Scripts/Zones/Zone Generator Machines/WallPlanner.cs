@@ -10,6 +10,7 @@ namespace TCD.Zones
 
         public override IEnumerator Generate()
         {
+            DebugLogger.Log($"{Zone.Chambers.Count} chambers found!");
             foreach (IFeature feature in Zone.Features)
             {
                 PlaceWallAroundFeature(feature);
@@ -19,16 +20,8 @@ namespace TCD.Zones
 
         private void PlaceWallAroundFeature(IFeature feature)
         {
-            int xMin = feature.BoundsInt.xMin;
-            int yMin = feature.BoundsInt.yMin;
-            int xMax = feature.BoundsInt.xMax;
-            int yMax = feature.BoundsInt.yMax;
-            for (int x = xMin; x < xMax; x++)
-                for (int y = yMin; y < yMax; y++)
-                {
-                    if (Cells[x, y] == ChamberCellType.Floor)
-                        EvaluateSurroundingCellsToPlaceWall(x, y);
-                }
+            foreach(Vector2Int position in feature.OccupiedPositions)
+                EvaluateSurroundingCellsToPlaceWall(position.x, position.y);
         }
 
         private void EvaluateSurroundingCellsToPlaceWall(int xOrigin, int yOrigin)

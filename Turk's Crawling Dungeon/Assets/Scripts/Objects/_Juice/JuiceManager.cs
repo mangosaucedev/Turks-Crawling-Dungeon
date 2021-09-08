@@ -7,48 +7,66 @@ namespace TCD.Objects.Juice
     public class JuiceManager : MonoBehaviour
     {
         private List<JuiceAnimation> inProgress = new List<JuiceAnimation>();
-        private Queue<JuiceAnimation> queue = new Queue<JuiceAnimation>();
 
         private void OnEnable()
         {
-            EventManager.Listen<AfterTurnTickEvent>(this, OnAfterTurnTick);
+            EventManager.Listen<BeforeTurnTickEvent>(this, OnBeforeTurnTick);
         }
 
         private void OnDisable()
         {
-            EventManager.StopListening<AfterTurnTickEvent>(this);
+            EventManager.StopListening<BeforeTurnTickEvent>(this);
             StopAllCoroutines();
         }
 
         private void Update()
         {
-            
-        }
-
-        private void OnAfterTurnTick(AfterTurnTickEvent e)
-        {
-            inProgress.Clear();
-            PlayQueuedAnimations();
-        }
-
-        public void Enqueue(JuiceAnimation juiceAnimation)
-        {
-            queue.Enqueue(juiceAnimation);
-        }
-
-        private void PlayQueuedAnimations()
-        {
-            while (queue.Count > 0)
-            {
-                JuiceAnimation juice = queue.Dequeue();
-                StartPlaying(juice);
+            for (int i = inProgress.Count - 1; i >= 0; i--)
+            { 
+                JuiceAnimation animation = inProgress[i];
+                UpdateAnimation(animation);
             }
         }
 
-        private void StartPlaying(JuiceAnimation juice)
+        private void UpdateAnimation(JuiceAnimation animation)
+        {           
+            if (animation.CanPerform())
+            {
+                if (!animation.hasStarted)
+                {
+                    animation.hasStarted = true;
+                    animation.Start();
+                }
+                animation.Update();
+                if (animation.IsFinished())
+                    RemoveAnimation(animation);
+            }
+        }
+
+        private void RemoveAnimation(JuiceAnimation animation)
         {
-            inProgress.Add(juice);
-            juice.Start();
+            animation.End();
+            inProgress.Remove(animation);
+        }
+
+        private void OnBeforeTurnTick(BeforeTurnTickEvent e)
+        {
+            RemoveAllAnimations();
+        }
+
+        private void RemoveAllAnimations()
+        {
+            for (int i = inProgress.Count - 1; i >= 0; i--)
+            {
+                JuiceAnimation animation = inProgress[i];
+                RemoveAnimation(animation);
+            }
+            inProgress.Clear();
+        }
+
+        public void AddAnimation(JuiceAnimation juiceAnimation)
+        {
+            inProgress.Add(juiceAnimation);
         }
     }
 }

@@ -31,6 +31,8 @@ namespace TCD.Zones
             ChooseAnchorFromCurrentChamber();
             ChooseAnchorFromParentChamber();
             ICorridor corridor = CorridorFactory.Build(chamberAnchor, parentAnchor);
+            foreach (Vector2Int position in corridor.OccupiedPositions)
+                Zone.CellTypes[position] = ChamberCellType.Floor;
             Zone.Corridors.Add(corridor);
             Zone.Features.Add(corridor);
         }

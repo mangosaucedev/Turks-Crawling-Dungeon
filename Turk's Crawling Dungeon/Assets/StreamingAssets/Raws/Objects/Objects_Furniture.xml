@@ -74,6 +74,8 @@
 		<Part Name="Inventory">
 			<Var Name="BaseMaxWeight">100</Var>
 		</Part>
+
+		<Part Name="Lootable"/>
 		
 	</Object>
 

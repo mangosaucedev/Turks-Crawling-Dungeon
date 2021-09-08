@@ -33,12 +33,9 @@
 			<Furnisher Name="RandomFurniture" Weight="2"/>
 			<Furnisher Name="Bush" Weight="2"/>
 			<Furnisher Name="Lake"/>
-			<Furnisher Name="Grass" Exclusive="True"/>
 		</Furnishers>
 		<Furnishings>
 			<Furnishing Name="WaterFull" Category="Lake"/>
-			<Furnishing Name="GrassTile" Category="Grass" Weight="3"/>
-			<Furnishing Name="GrassTileYellow" Category="Grass"/>
 			<Furnishing Name="DeadBush" Category="Bush"/>
 			<Furnishing Name="RoseThorns" Category="Bush"/>
 			<Furnishing Name="DeadTree0" Category="Bush,Random"/>
@@ -52,13 +49,10 @@
 	<Environment Name="Zoo">
 		<FurnishingDensity>0.3</FurnishingDensity>
 		<Furnishers>
-			<Furnisher Name="Grass" Exclusive="True"/>
 			<Furnisher Name="Bush"/>
 		</Furnishers>
 		<Furnishings>
 			<Furnishing Name="EyeTv" Category="Bush"/>
-			<Furnishing Name="BlackTile0" Category="Grass" Weight="3"/>
-			<Furnishing Name="BlackTile1" Category="Grass"/>
 		</Furnishings>
 	</Environment>
 
@@ -76,13 +70,11 @@
 		<FurnishingDensity>0.3</FurnishingDensity>
 		<Furnishers>
 			<Furnisher Name="Bush" Weight="2"/>
-			<Furnisher Name="Grass" Forced="True" Exclusive="True"/>
 		</Furnishers>
 		<Furnishings>
 			<Furnishing Name="DeadTree0" Category="Bush"/>
 			<Furnishing Name="DeadTree1" Category="Bush"/>
 			<Furnishing Name="DeadTree2" Category="Bush"/>
-			<Furnishing Name="CheckerTile" Category="Grass"/>
 		</Furnishings>
 	</Environment>
 	

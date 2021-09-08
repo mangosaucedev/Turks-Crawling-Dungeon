@@ -8,6 +8,7 @@ using UnityEditor;
 using TCD.IO.Serialization;
 using TCD.UI;
 using TCD.UI.Notifications;
+using TCD.Zones;
 
 namespace TCD
 {
@@ -22,6 +23,7 @@ namespace TCD
             startupScreen = Instantiate(startupScreen, ParentManager.Canvas);
             yield return StartCoroutine(gameStartup.StartGame());
             Destroy(startupScreen);
+            /*
             yield return ViewManager.OpenAndWaitForViewRoutine("Loading View");
             yield return ViewManager.OpenAndWaitForViewRoutine("Help View");
             NotificationHandler.Notify("Enter the Crawling Dungeon", "It is said that the mind can " +
@@ -31,16 +33,10 @@ namespace TCD
                 "inside out.\n\nIs it possible to return from the brink of annihilation? Can Turk " +
                 "banish the darkness inside, or is he doomed to succumb to his misery?");
             SaveHandler.SaveGame();
-        }
-
-        private void OnEnable()
-        {
-            EventManager.Listen<ZoneGenerationFinishedEvent>(this, OnZoneGenerationFinished);
-        }
-
-        private void OnDisable()
-        {
-            EventManager.StopListening<ZoneGenerationFinishedEvent>(this);
+            ZoneResetter zoneResetter = ServiceLocator.Get<ZoneResetter>(); //TODO: Start in main menu
+            yield return zoneResetter.UnloadZone(true); //TODO: Don't unload/generate zone at startup
+            */
+            ViewManager.Open("Main Menu");
         }
 
         public static void ExitToDesktop()
@@ -50,11 +46,6 @@ namespace TCD
 #else
             System.Diagnostics.Process.GetCurrentProcess().Kill();
 #endif
-        }
-
-        private void OnZoneGenerationFinished(ZoneGenerationFinishedEvent e)
-        {
-            ViewManager.Close("Loading View");     
         }
     }
 }

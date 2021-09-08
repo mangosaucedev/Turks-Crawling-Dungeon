@@ -40,9 +40,7 @@ namespace TCD.Zones
                 for (int yOffset = yOffsetMin; yOffset <= yOffsetMax; yOffset++)
                 {
                     Vector2Int position = new Vector2Int(x, y + yOffset);
-                    Vector3Int boundsPosition = new Vector3Int(x, y + yOffset, 0);
-                    if (!FeatureBoundsChecker.OverlapsOtherFeature(boundsPosition, this))
-                        Cells.Add(position);
+                    Cells.Add(position);
                 }
             }
         }
@@ -58,9 +56,7 @@ namespace TCD.Zones
                 for (int xOffset = xOffsetMin; xOffset <= xOffsetMax; xOffset++)
                 {
                     Vector2Int position = new Vector2Int(x + xOffset, y);
-                    Vector3Int boundsPosition = new Vector3Int(x + xOffset, y, 0);
-                    if (!FeatureBoundsChecker.OverlapsOtherFeature(boundsPosition, this))
-                        Cells.Add(position);
+                    Cells.Add(position);
                 }
             }
         }

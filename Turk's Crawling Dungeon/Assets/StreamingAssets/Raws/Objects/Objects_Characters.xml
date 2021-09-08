@@ -28,7 +28,7 @@
 		</OverridePart>
 		
 		<Part Name="Actor"/>
-
+		
 		<Part Name="Combat"/>
 		
 		<Part Name="Dodge"/>
@@ -42,6 +42,10 @@
 		<Part Name="Brain">
 			<Var Name="SightRadius">24</Var>
 			<Var Name="Faction">Neutral</Var>
+		</Part>
+
+		<Part Name="DropsCorpse">
+			<Var Name="Corpse"></Var>
 		</Part>
 
 		<Part Name="Inventory">
@@ -470,6 +474,5 @@
 		</OverridePart>
 
 	</Object>
-
-
+	
 </Objects>

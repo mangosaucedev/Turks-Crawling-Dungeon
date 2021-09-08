@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Objects>
+
+	<Object Name="Readable" InheritsFrom="Item">
+
+		<Part Name="Readable"/>
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">TornPage</Var>
+		</OverridePart>
+
+	</Object>
+	
+	<!-- Turk's Journal -->
+
+	<Object Name="JournalEntryA" InheritsFrom="Readable">
+
+		<DisplayName>Journal Entry 1</DisplayName>
+
+		<Description>A scrap of paper, stained and crumpled, torn from Turk's journal. A few small drawings dot the margins. The largest of these is a life-drawing of the back of Turk's hand, its dimensions are tastefully rendered in finely crosshatched shadow. Next to it is scrawled: "MED REFILL APPTMT 9 AM SATURDAY!!!"</Description>
+
+		<OverridePart Name="Readable">
+			<Var Name="Text">JournalEntryA</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="JournalEntryB" InheritsFrom="Readable">
+
+		<DisplayName>Journal Entry 2</DisplayName>
+
+		<Description></Description>
+
+		<OverridePart Name="Readable">
+			<Var Name="Text">JournalEntryB</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="JournalEntryC" InheritsFrom="Readable">
+
+		<DisplayName>Journal Entry 3</DisplayName>
+
+		<Description></Description>
+
+		<OverridePart Name="Readable">
+			<Var Name="Text">JournalEntryC</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="JournalEntryD" InheritsFrom="Readable">
+
+		<DisplayName>Journal Entry 4</DisplayName>
+
+		<Description></Description>
+
+		<OverridePart Name="Readable">
+			<Var Name="Text">JournalEntryD</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="JournalEntryE" InheritsFrom="Readable">
+
+		<DisplayName>Journal Entry 5</DisplayName>
+
+		<Description></Description>
+
+		<OverridePart Name="Readable">
+			<Var Name="Text">JournalEntryE</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="JournalEntryF" InheritsFrom="Readable">
+
+		<DisplayName>Journal Entry 6</DisplayName>
+
+		<Description></Description>
+
+		<OverridePart Name="Readable">
+			<Var Name="Text">JournalEntryF</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="JournalEntryG" InheritsFrom="Readable">
+
+		<DisplayName>Journal Entry 7</DisplayName>
+
+		<Description></Description>
+
+		<OverridePart Name="Readable">
+			<Var Name="Text">JournalEntryG</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="JournalEntryH" InheritsFrom="Readable">
+
+		<DisplayName>Journal Entry 8</DisplayName>
+
+		<Description></Description>
+
+		<OverridePart Name="Readable">
+			<Var Name="Text">JournalEntryH</Var>
+		</OverridePart>
+
+	</Object>
+	
+	<!-- Readables 2 -->
+	
+</Objects>

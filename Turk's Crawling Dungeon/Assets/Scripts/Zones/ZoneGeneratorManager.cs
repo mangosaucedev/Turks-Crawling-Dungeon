@@ -5,6 +5,7 @@ using System.Diagnostics;
 using UnityEngine;
 using TCD.Pathfinding;
 using TCD.Zones.Environments;
+using TCD.UI;
 
 namespace TCD.Zones
 {
@@ -21,22 +22,6 @@ namespace TCD.Zones
 
         public IZoneParams ZoneParams => zoneParams;
 
-        private void OnEnable()
-        {
-            EventManager.Listen<GameStartupFinishedEvent>(this, OnGameStartupFinished);
-        }
-
-        private void OnDisable()
-        {
-            EventManager.StopListening<GameStartupFinishedEvent>(this);
-        }
-
-        private void OnGameStartupFinished(GameStartupFinishedEvent e)
-        {
-            EventManager.StopListening<GameStartupFinishedEvent>(this);
-            GenerateZone(ZoneGeneratorType.Cavern);
-        }
-
         public void GenerateZone(ZoneGeneratorType type)
         {
             if (!hasBegunGeneratingZone)
@@ -49,6 +34,7 @@ namespace TCD.Zones
 
         public IEnumerator GenerateZoneRoutine(ZoneGeneratorType type)
         {
+            ViewManager.Open("Loading View");
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             string zone = "";
@@ -82,6 +68,7 @@ namespace TCD.Zones
             stopwatch.Stop();
             DebugLogger.Log($"Zone generated in {stopwatch.ElapsedMilliseconds} ms.");
             hasBegunGeneratingZone = false;
+            ViewManager.Close("Loading View");
             EventManager.Send(new ZoneGenerationFinishedEvent());
         }
 

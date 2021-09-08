@@ -22,10 +22,23 @@ namespace TCD.Zones
 
         private IEnumerator ResetZoneRoutine()
         {
+            yield return UnloadZoneRoutine();
+            yield return GenerateNewZone();
+            
+        }
+
+        public void UnloadZone(bool resetPlayer = false)
+        {
+            StopAllCoroutines();
+            StartCoroutine(UnloadZoneRoutine(resetPlayer));
+        }
+
+        public IEnumerator UnloadZoneRoutine(bool resetPlayer = false)
+        {
             ViewManager.Open("Loading View");
+            this.resetPlayer = resetPlayer;
             yield return DestroyAllObjectsRoutine();
             ResetTilemaps();
-            yield return GenerateNewZone();
             ViewManager.Close("Loading View");
         }
 
@@ -59,7 +72,7 @@ namespace TCD.Zones
         private IEnumerator GenerateNewZone()
         {
             ZoneGeneratorManager zoneGenerator = ServiceLocator.Get<ZoneGeneratorManager>();
-            yield return zoneGenerator.GenerateZoneRoutine(ZoneGeneratorType.Cavern);
+            yield return zoneGenerator.GenerateZoneRoutine(ZoneGeneratorType.Generic);
         }
     }
 }

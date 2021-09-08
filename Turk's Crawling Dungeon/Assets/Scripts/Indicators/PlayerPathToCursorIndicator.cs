@@ -12,6 +12,8 @@ namespace TCD.Indicators
         public override void Start()
         {
             MouseCursor mouseCursor = ServiceLocator.Get<MouseCursor>();
+            if (!PlayerInfo.currentPlayer)
+                IndicatorHandler.HideIndicator();
             startPosition = PlayerInfo.currentPlayer.cell.Position;
             targetPosition = mouseCursor.GetGridPosition();
             base.Start();

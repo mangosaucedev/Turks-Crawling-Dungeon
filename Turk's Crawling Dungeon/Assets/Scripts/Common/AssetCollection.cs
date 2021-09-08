@@ -13,12 +13,10 @@ namespace TCD
         public T Get<T>(string name)
         {
             if (string.IsNullOrEmpty(name))
-                throw new Exception(
-                    $"Cannot retrieve asset with no name!");
+                throw new Exception($"Cannot retrieve asset with no name!");
             if (collection.TryGetValue(name, out object obj))
                 return (T) obj;
-            throw new Exception(
-                $"No {typeof(T).Name} asset exists with name {name}!");
+            throw new Exception($"No {typeof(T).Name} asset exists with name {name}!");
         }
 
         public bool Exists(string name) => collection.ContainsKey(name);

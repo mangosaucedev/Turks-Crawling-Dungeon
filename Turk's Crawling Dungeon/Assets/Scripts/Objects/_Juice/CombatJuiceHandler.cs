@@ -8,10 +8,10 @@ namespace TCD.Objects.Juice
     {
         private static JuiceManager JuiceManager => ServiceLocator.Get<JuiceManager>();
 
-        public static void Punch(BaseObject attacker, BaseObject defender)
+        public static void Punch(BaseObject attacker, Vector2Int direction)
         {
-            Punch punch = new Punch(attacker, defender);
-            JuiceManager.Enqueue(punch);
+            Punch punch = new Punch(attacker, direction);
+            JuiceManager.AddAnimation(punch);
         }
     }
 }

@@ -64,9 +64,9 @@ namespace TCD.Objects
         public bool Destroy()
         {
             BeforeDestroyObjectEvent beforeDestroyObjectEvent = LocalEvent.Get<BeforeDestroyObjectEvent>();
-            beforeDestroyObjectEvent.obj = this;
+            beforeDestroyObjectEvent.obj = this;            
             if (!HandleEvent(beforeDestroyObjectEvent))
-                return false;
+                return false;           
             DestroyObjectEvent destroyObjectEvent = LocalEvent.Get<DestroyObjectEvent>();
             destroyObjectEvent.obj = this;
             HandleEvent(destroyObjectEvent);

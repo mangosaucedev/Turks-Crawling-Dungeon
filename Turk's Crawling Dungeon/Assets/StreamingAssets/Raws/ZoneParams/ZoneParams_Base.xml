@@ -8,13 +8,11 @@
 		<MinChamberHeight>6</MinChamberHeight>
 		<MaxChamberWidth>18</MaxChamberWidth>
 		<MaxChamberHeight>18</MaxChamberHeight>
-		<MaxChambers>8</MaxChambers>
+		<MaxChambers>10</MaxChambers>
 		<MinChamberChildDistance>8</MinChamberChildDistance>
 		<MinChamberBufferDistance>2</MinChamberBufferDistance>
 		<MinCorridorWidth>1</MinCorridorWidth>
 		<MaxCorridorWidth>4</MaxCorridorWidth>
-		<GenerateCaves>False</GenerateCaves>
-		<CavePenetrationChance>0</CavePenetrationChance>
 	</ZoneParam>
 
 	<ZoneParam Name="Cavern" Type="Cavern">

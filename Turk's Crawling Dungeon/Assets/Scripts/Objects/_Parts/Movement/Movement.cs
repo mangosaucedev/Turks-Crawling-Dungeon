@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using TCD.Pathfinding;
+using TCD.Objects.Juice;
 
 namespace TCD.Objects.Parts
 {
@@ -36,6 +37,7 @@ namespace TCD.Objects.Parts
 
                 ExitCell(Position);
                 SetPosition(newPosition);
+                AnimateMovement();
 
                 //visualizer.StartVizualization(visualizer.MoveVisualizationRoutine());
                 return true;
@@ -110,6 +112,11 @@ namespace TCD.Objects.Parts
             e.obj = parent;
             e.cell = cell;
             FireEvent(cell, e);
+        }
+
+        private void AnimateMovement()
+        {
+            //CombatJuiceHandler.Punch(parent, movementVector);
         }
 
         public void MoveSpriteToOrigin()

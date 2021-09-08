@@ -4,11 +4,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TCD.Objects;
+using TCD.Objects.Parts;
 
 namespace TCD.IO.Serialization
 {
     public static class SaveHandler
     {
+        public static bool wasLastSaveSuccessful;
+
         private static BinaryFormatter binaryFormatter;
         private static SavedGame currentSavedGame;
 
@@ -21,6 +26,7 @@ namespace TCD.IO.Serialization
             SerializeWorld();
             SerializeObjects();
             WriteSaveGameToFile();
+            wasLastSaveSuccessful = true;
             return true;
         }
 
@@ -31,7 +37,11 @@ namespace TCD.IO.Serialization
 
         private static void SerializeObjects()
         {
-            int objectCount = 0;
+            GameObject root = GameObject.Find("--- Objects ---");
+            BaseObject[] objects = root.GetComponentsInChildren<BaseObject>();
+            foreach (BaseObject obj in objects)
+                currentSavedGame.savedObjects.Add(new SavedObject(obj));
+            int objectCount = objects.Length;
             DebugLogger.Log($"{objectCount} objects successfully serialized!");
         }
 

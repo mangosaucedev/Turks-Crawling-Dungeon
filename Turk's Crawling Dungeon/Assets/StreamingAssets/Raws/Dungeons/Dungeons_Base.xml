@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Dungeons>
-	<Dungeon Name="StartingArea">
-		
+	
+	<Dungeon Name="TestDungeon">
+		<Zone>Level0</Zone>
+		<Zone>Level0</Zone>
+		<Zone>Level0</Zone>
 	</Dungeon>
+	
 </Dungeons>

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TCD.Zones.Dungeons;
 
 namespace TCD.Zones
 {
@@ -8,6 +9,8 @@ namespace TCD.Zones
     {
         IZoneParams ZoneParams { get; }
 
-        IEnumerator GenerateZoneRoutine(ZoneGeneratorType type);
+        IEnumerator GenerateZoneRoutine(Dungeon dungeon, int zoneIndex);
+
+        IEnumerator GenerateZoneRoutine();
     }
 }

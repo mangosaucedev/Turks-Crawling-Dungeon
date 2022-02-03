@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DialogueNodes>
+
+	<DialogueNode Name="Test0" Speaker="PsycheMonologue">
+		<Text>THIS IS PLACEHOLDER DIALOGUE BLAH BLAH BLAH BLAH.</Text>
+		<Response GoToNode="Test0R1A">1</Response>
+		<Response GoToNode="Test0R2A">2</Response>
+		<Response GoToNode="Test0R3A">3</Response>
+	</DialogueNode>
+
+	<DialogueNode Name="Test0R1A" Speaker="PsycheMonologue" GoToNode="Test1">
+		<Text>You clicked 1!</Text>
+	</DialogueNode>
+	
+	<DialogueNode Name="Test0R2A" Speaker="PsycheMonologue" GoToNode="Test1">
+		<Text>You clicked 2!</Text>
+	</DialogueNode>
+
+	<DialogueNode Name="Test0R3A" Speaker="PsycheMonologue" GoToNode="Test1">
+		<Text>You clicked 3!</Text>
+	</DialogueNode>
+
+	<DialogueNode Name="Test1" Speaker="PsycheMonologue">
+		<Text>Thanks for testing me out! Ciao!</Text>
+	</DialogueNode>
+
+</DialogueNodes>

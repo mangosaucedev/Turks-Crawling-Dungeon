@@ -15,7 +15,7 @@ namespace TCD.Objects.Parts
         private const int SWIM_DEPTH = 4000;
         private const int MAX_DEPTH = 6116;
         private const int FLOW_CELLS = 8;
-        private const int FLOW_AMOUNT = 100;
+        private const float FLOW_AMOUNT = 100f;
 
         public float depth;
         public bool isFlowing;
@@ -77,15 +77,15 @@ namespace TCD.Objects.Parts
             GetUnoccupiedAdjacentCells();
             if (unoccupiedAdjacentCells.Count == 0)
                 return false;
-            flowMultiplier *= FLOW_CELLS / unoccupiedAdjacentCells.Count;
-            int maxFlowAmount = Mathf.FloorToInt(FLOW_AMOUNT * flowMultiplier);
-            int minFlowAmount = Mathf.FloorToInt((Depth - FLOW_DEPTH) / unoccupiedAdjacentCells.Count);
-            int flowAmount = Mathf.Min(minFlowAmount, maxFlowAmount);
-            if (flowAmount == 0)
+            flowMultiplier *= (float) FLOW_CELLS / unoccupiedAdjacentCells.Count;
+            float maxFlowAmount = Mathf.Ceil(FLOW_AMOUNT * flowMultiplier);
+            float minFlowAmount = Mathf.Ceil((Depth - FLOW_DEPTH) / unoccupiedAdjacentCells.Count);
+            float flowAmount = Mathf.Min(minFlowAmount, maxFlowAmount);
+            if (flowAmount == 0f)
                 return false;
             foreach (Cell cell in unoccupiedAdjacentCells)
                 FlowToCell(cell, flowAmount);
-            int totalFlow = flowAmount * unoccupiedAdjacentCells.Count;
+            float totalFlow = flowAmount * unoccupiedAdjacentCells.Count;
             AdjustDepth(-totalFlow);
             return true;
         }
@@ -109,7 +109,7 @@ namespace TCD.Objects.Parts
                 }
         }
 
-        private void FlowToCell(Cell cell, int flowAmount)
+        private void FlowToCell(Cell cell, float flowAmount)
         {
             if (cell.Contains(out Liquid liquid))
             {

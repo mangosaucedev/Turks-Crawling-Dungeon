@@ -9,7 +9,7 @@ namespace TCD.UI
     {
         private static List<ActiveView> activeViews = new List<ActiveView>();
 
-        public static string GetActiveView()
+        public static string GetActiveViewName()
         {
             string viewName = "Null";
             if (activeViews.Count > 0)
@@ -25,6 +25,13 @@ namespace TCD.UI
             return viewName;
         }
 
+        public static bool TryGetActiveView(out ActiveView activeView)
+        {
+            if (TryFind(GetActiveViewName(), out activeView))
+                return true;
+            return false;
+        }
+
         public static void Open(string viewName, bool locksInput = true, bool isInteractive = true)
         {
             if (TryFind(viewName, out ActiveView view))
@@ -38,7 +45,7 @@ namespace TCD.UI
             EventManager.Send(new ViewOpenedEvent(view));
         }
 
-        private static bool TryFind(string viewName, out ActiveView foundView)
+        public static bool TryFind(string viewName, out ActiveView foundView)
         {
             foundView = default;
             foreach (ActiveView view in activeViews)

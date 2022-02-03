@@ -10,7 +10,6 @@ namespace TCD.Zones
 
         public override IEnumerator Generate()
         {
-            DebugLogger.Log($"{Zone.Chambers.Count} chambers found!");
             foreach (IFeature feature in Zone.Features)
             {
                 PlaceWallAroundFeature(feature);

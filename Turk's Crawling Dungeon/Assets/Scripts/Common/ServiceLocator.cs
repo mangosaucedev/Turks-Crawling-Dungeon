@@ -16,7 +16,7 @@ namespace TCD
             {
                 service = FindObjectOfType<T>();
                 if (service)
-                    services.Add(type, service);
+                    services[type] = service;
                 else
                     throw new NullReferenceException(
                         string.Format("Service locator not locate service {0}", type.Name));

@@ -2,20 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TCD
+namespace TCD.Objects.Juice
 {
-    public class MovementJuiceHandler : MonoBehaviour
+    public static class MovementJuiceHandler
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
+        private static JuiceManager JuiceManager => ServiceLocator.Get<JuiceManager>();
 
-        // Update is called once per frame
-        void Update()
+        public static void Move(BaseObject mover, Vector2Int direction)
         {
-        
+            MoveToCell moveToCell = new MoveToCell(mover, direction);
+            JuiceManager.AddAnimation(moveToCell);
         }
     }
 }

@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using TCD.Pathfinding;
 using TCD.Objects.Juice;
@@ -10,8 +12,10 @@ namespace TCD.Objects.Parts
     { 
         public const int MIN_MOVE_TIME = 40;
 
+        public bool navigatedPath;
         public Vector2Int movementVector;
         [SerializeField] private MovementVisualizer visualizer;
+        private WaitForSecondsRealtime wait = new WaitForSecondsRealtime(0.15f);
 
         public override string Name => "Movement";
 
@@ -114,9 +118,9 @@ namespace TCD.Objects.Parts
             FireEvent(cell, e);
         }
 
-        private void AnimateMovement()
+        protected void AnimateMovement()
         {
-            //CombatJuiceHandler.Punch(parent, movementVector);
+            MovementJuiceHandler.Move(parent, movementVector);
         }
 
         public void MoveSpriteToOrigin()
@@ -163,10 +167,10 @@ namespace TCD.Objects.Parts
             return false;
         }
 
-        public bool TryToNavigatePath(NavAstarPath path)
+        public IEnumerator TryToNavigatePathRoutine(NavAstarPath path)
         {
             if (!path.isValid || path.path.Count == 0)
-                return false;
+                navigatedPath = false;
             for (int i = 0; i < path.path.Count; i++)
             {
                 Vector2Int nextPosition = path.path[i];
@@ -178,11 +182,17 @@ namespace TCD.Objects.Parts
                 movementVector = new Vector2Int(xDirection, yDirection);
                 if (!TryToMove(movementVector))
                 {
-                    DebugLogger.Log("Could not move in direction " + movementVector);
-                    return false;
+                    navigatedPath = false;
+                }
+                yield return null;
+                if (!navigatedPath)
+                {
+                    if (parent == PlayerInfo.currentPlayer)
+
+                    yield return wait;
                 }
             }
-            return true;
+            navigatedPath = true;
         }
     }
 }

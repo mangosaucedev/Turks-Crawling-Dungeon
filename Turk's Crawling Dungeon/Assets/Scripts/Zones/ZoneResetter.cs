@@ -9,7 +9,7 @@ namespace TCD.Zones
 {
     public class ZoneResetter : MonoBehaviour
     {
-        private bool resetPlayer;
+        public bool resetPlayer;
 
         public static void ResetZone(bool resetPlayer = false)
         {
@@ -71,8 +71,9 @@ namespace TCD.Zones
 
         private IEnumerator GenerateNewZone()
         {
+            Dungeons.Dungeon dungeon = Assets.Get<Dungeons.Dungeon>("TestDungeon");
             ZoneGeneratorManager zoneGenerator = ServiceLocator.Get<ZoneGeneratorManager>();
-            yield return zoneGenerator.GenerateZoneRoutine(ZoneGeneratorType.Generic);
+            yield return zoneGenerator.GenerateZoneRoutine(dungeon, 0);
         }
     }
 }

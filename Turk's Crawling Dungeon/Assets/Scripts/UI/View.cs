@@ -52,7 +52,7 @@ namespace TCD.UI
             EventManager.StopListening<KeyEvent>(this);
         }
 
-        public void UpdateIsViewActive() => SetActive(ViewManager.GetActiveView() == ViewName);
+        public void UpdateIsViewActive() => SetActive(ViewManager.GetActiveViewName() == ViewName);
         
         public void SetActive(bool value)
         {

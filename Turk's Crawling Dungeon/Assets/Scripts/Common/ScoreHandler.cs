@@ -4,12 +4,13 @@ using UnityEngine;
 
 namespace TCD
 {
+    [ContainsGameStatics]
     public static class ScoreHandler 
     {
-        [GameStatic]
+        [GameStatic(0)]
         public static long rawScore;
 
-        [GameStatic]
+        [GameStatic(1)]
         public static int level = 1;
 
         public static void ModifyScore(int value)

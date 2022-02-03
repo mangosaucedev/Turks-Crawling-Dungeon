@@ -19,8 +19,13 @@ namespace TCD.Objects.Parts
 
         private void OnInspect()
         {
-            SelectionHandler.SetSelectedObject(parent);
-            ViewManager.Open("Inspect View");
+            BeforeInspectEvent e = LocalEvent.Get<BeforeInspectEvent>();
+            e.obj = parent;
+            if (FireEvent(parent, e))
+            {
+                SelectionHandler.SetSelectedObject(parent);
+                ViewManager.Open("Inspect View");
+            }
         }
     }
 }

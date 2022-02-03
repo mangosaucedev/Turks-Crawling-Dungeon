@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using TCD.Pathfinding;
+using TCD.Zones.Dungeons;
 using TCD.Zones.Environments;
 using TCD.UI;
 
@@ -12,6 +13,9 @@ namespace TCD.Zones
     public class ZoneGeneratorManager : MonoBehaviour, IZoneGenerator
     {
         private bool hasBegunGeneratingZone;
+        private ZoneGeneratorType currentType;
+        private IZone currentZone;
+        private Coroutine generationRoutine;
 
         [SerializeField] private ZoneParams zoneParams;
 
@@ -22,45 +26,64 @@ namespace TCD.Zones
 
         public IZoneParams ZoneParams => zoneParams;
 
-        public void GenerateZone(ZoneGeneratorType type)
+        public void GenerateZone(IZone zone)
         {
             if (!hasBegunGeneratingZone)
             {
                 hasBegunGeneratingZone = true;
-                StopAllCoroutines();
-                StartCoroutine(GenerateZoneRoutine(type));
+                this.EnsureCoroutineStopped(ref generationRoutine);
+                currentType = zone.ZoneParams.Type;
+                currentZone = zone;
+                generationRoutine = StartCoroutine(GenerateZoneRoutine());
             }
         }
 
-        public IEnumerator GenerateZoneRoutine(ZoneGeneratorType type)
+        public IEnumerator GenerateZoneRoutine(Dungeon dungeon, int zoneIndex)
         {
-            ViewManager.Open("Loading View");
+            if (!hasBegunGeneratingZone)
+            {
+                hasBegunGeneratingZone = true;
+                this.EnsureCoroutineStopped(ref generationRoutine);
+                currentType = ZoneGeneratorType.Generic;
+                currentZone = dungeon.Zones[zoneIndex];
+                yield return generationRoutine = StartCoroutine(GenerateZoneRoutine());
+            }
+        }
+
+        public IEnumerator GenerateZoneRoutine()
+        {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            string zone = "";
-            switch (type)
+
+            ZoneResetter zoneResetter = ServiceLocator.Get<ZoneResetter>();
+            yield return zoneResetter.UnloadZoneRoutine(zoneResetter.resetPlayer);
+            ViewManager.Open("Loading View");
+
+            string zoneName = "";
+            switch (currentType)
             {
                 case ZoneGeneratorType.Cavern:
-                    zone = "Cavern";
+                    zoneName = "Cavern";
                     break;
                 default:
-                    zone = Choose.Random("Level0", "Overgrown", "Decomposition", "Fungus");
+                    zoneName = Choose.Random("Level0", "Overgrown", "Decomposition", "Fungus");
                     break;
             }
-             
-            CurrentZoneInfo.zone = ZoneFactory.BuildFromBlueprint(zone);
-            CurrentZoneInfo.grid = 
+
+            CurrentZoneInfo.zone = currentZone == null ? ZoneFactory.BuildFromBlueprint(zoneName) : currentZone;
+            CurrentZoneInfo.grid =
                 new GameGrid(CurrentZoneInfo.zone.Width, CurrentZoneInfo.zone.Height);
             CurrentZoneInfo.navGrid =
                 new NavGrid(CurrentZoneInfo.zone.Width, CurrentZoneInfo.zone.Height);
 
-            ZoneGenerator zoneGenerator = new GenericZoneGenerator();
-            switch (type)
+            ZoneGenerator zoneGenerator = null;
+            switch (currentType)
             {
                 case ZoneGeneratorType.Cavern:
                     zoneGenerator = new CavernZoneGenerator();
                     break;
                 default:
+                    zoneGenerator = new GenericZoneGenerator();
                     break;
             }
             yield return zoneGenerator.GenerateZoneRoutine();

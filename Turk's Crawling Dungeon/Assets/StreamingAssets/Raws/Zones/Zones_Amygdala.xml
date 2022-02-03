@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Zones>
+
+	<Zone Name="AmygdalaLevel0">
+		<Params>Generic</Params>
+		<Environments>Generic</Environments>
+		<Encounters Density="1.5">Generic</Encounters>
+		<Terrain>
+			<Walls>
+				<Wall Name="Wall"/>
+			</Walls>
+			<Floors>
+				<Floor Name="TileFloor"/>
+			</Floors>
+		</Terrain>
+	</Zone>
+
+	<Zone Name="AmygdalaLevel1">
+		<Params>Generic</Params>
+		<Environments>Generic</Environments>
+		<Encounters Density="1.5">Generic</Encounters>
+		<Terrain>
+			<Walls>
+				<Wall Name="Wall"/>
+			</Walls>
+			<Floors>
+				<Floor Name="TileFloor"/>
+			</Floors>
+		</Terrain>
+	</Zone>
+
+	<Zone Name="AmygdalaLevel2">
+		<Params>Generic</Params>
+		<Environments>Generic</Environments>
+		<Encounters Density="1.5">Generic</Encounters>
+		<Terrain>
+			<Walls>
+				<Wall Name="Wall"/>
+			</Walls>
+			<Floors>
+				<Floor Name="TileFloor"/>
+			</Floors>
+		</Terrain>
+	</Zone>
+
+	<Zone Name="AmygdalaLevel3">
+		<Params>Generic</Params>
+		<Environments>Generic</Environments>
+		<Encounters Density="1.5">Generic</Encounters>
+		<Terrain>
+			<Walls>
+				<Wall Name="Wall"/>
+			</Walls>
+			<Floors>
+				<Floor Name="TileFloor"/>
+			</Floors>
+		</Terrain>
+	</Zone>
+
+	<Zone Name="AmygdalaLevel4">
+		<Params>Generic</Params>
+		<Environments>Generic</Environments>
+		<Encounters Density="1.5">Generic</Encounters>
+		<Terrain>
+			<Walls>
+				<Wall Name="Wall"/>
+			</Walls>
+			<Floors>
+				<Floor Name="TileFloor"/>
+			</Floors>
+		</Terrain>
+	</Zone>
+
+</Zones>

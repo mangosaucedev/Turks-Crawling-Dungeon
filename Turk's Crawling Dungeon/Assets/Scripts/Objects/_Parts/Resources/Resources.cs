@@ -32,6 +32,7 @@ namespace TCD.Objects.Parts
         [SerializeField] private float stimulation;
         [SerializeField] private float stimulationRegen;
         [SerializeField] private float stimulationRegenPoint;
+        [SerializeField] private bool regenerates;
         [SerializeField] private Dictionary<Resource, float> resources = new Dictionary<Resource, float>();
         [SerializeField] private Dictionary<Resource, float> maxResources = new Dictionary<Resource, float>();
         [SerializeField] private Dictionary<Resource, float> regen = new Dictionary<Resource, float>();
@@ -181,6 +182,12 @@ namespace TCD.Objects.Parts
             set => stimulationRegenPoint = value;
         }
 
+        public bool Regenerates
+        {
+            get => regenerates;
+            set => regenerates = value;
+        }
+
         public override string Name => "Resources";
 
         protected override void Start()
@@ -234,6 +241,8 @@ namespace TCD.Objects.Parts
 
         private void OnAfterTurnTickEvent(AfterTurnTickEvent e)
         {
+            if (!Regenerates)
+                return;
             float regenMultiplier = e.timeElapsed / TimeInfo.TIME_PER_STANDARD_TURN;
             Regen(Resource.Hitpoints, regenMultiplier);
             Regen(Resource.Stamina, regenMultiplier);

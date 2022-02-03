@@ -1,8 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DialogueNodes>
 
-	<DialogueNode Name="Ren00" Speaker="Turk" GoToNode="Ren01">
-		<Text></Text>
+	<DialogueNode Name="Ren00" Speaker="Turk" GoToNode="PhoneDad6">
+		<Text>What the fuck could possibly be so important?</Text>
+		<Response GoToNode="PhoneDad6a">It's me, Chris.</Response>
+		<Response GoToNode="PhoneDad6b">I love you, Papa.</Response>
+		<Response GoToNode="PhoneDad6c">Your son, you son of a bitch.</Response>
 	</DialogueNode>
 	
 </DialogueNodes>

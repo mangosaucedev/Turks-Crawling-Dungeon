@@ -5,9 +5,14 @@ using UnityEngine;
 
 namespace TCD
 {
-    [AttributeUsage(AttributeTargets.Field, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Field, Inherited = false)]
     public class GameStaticAttribute : Attribute
     {
-        
+        public object value;
+
+        public GameStaticAttribute(object value)
+        {
+            this.value = value;
+        }
     }
 }

@@ -8,20 +8,19 @@ using UnityEditor;
 using TCD.IO.Serialization;
 using TCD.UI;
 using TCD.UI.Notifications;
-using TCD.Zones;
+using TCD.Zones.Dungeons;
 
 namespace TCD
 {
     public class TCDGame : MonoBehaviour
     { 
+        [SerializeField] private string defaultCampaignName;
         [SerializeField] private GameObject startupScreen;
 
-        private GameStartup gameStartup = new GameStartup();
-        
         private IEnumerator Start()
         {
             startupScreen = Instantiate(startupScreen, ParentManager.Canvas);
-            yield return StartCoroutine(gameStartup.StartGame());
+            yield return GameStartup.StartGame();
             Destroy(startupScreen);
             /*
             yield return ViewManager.OpenAndWaitForViewRoutine("Loading View");
@@ -39,6 +38,20 @@ namespace TCD
             ViewManager.Open("Main Menu");
         }
 
+
+        public static void StartNewGame()
+        {
+            GameResetter.ResetGame();
+            TCDGame game = ServiceLocator.Get<TCDGame>();
+            CampaignHandler.StartCampaign(game.defaultCampaignName);
+        }
+
+        // TODO: REPLACE THIS WITH ENDING?
+        public static void WinGame()
+        {
+
+        }
+
         public static void ExitToDesktop()
         {
 #if UNITY_EDITOR
@@ -46,6 +59,6 @@ namespace TCD
 #else
             System.Diagnostics.Process.GetCurrentProcess().Kill();
 #endif
-        }
+        }   
     }
 }

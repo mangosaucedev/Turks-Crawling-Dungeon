@@ -33,7 +33,7 @@ namespace TCD.UI
         private void Restart()
         {
             CloseView();
-            GameResetter.ResetGame();
+            TCDGame.StartNewGame();
         }
 
         private void ExitToMainMenu()

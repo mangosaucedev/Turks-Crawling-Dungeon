@@ -25,6 +25,7 @@
 			<Var Name="MoraleRegenPoint">0.5</Var>
 			<Var Name="Stimulation">50</Var>
 			<Var Name="StimulationRegenPoint">0.5</Var>
+			<Var Name="Regenerates">True</Var>
 		</OverridePart>
 		
 		<Part Name="Actor"/>

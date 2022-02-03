@@ -27,7 +27,7 @@ namespace TCD.IO
             XmlNodeList pageNodes = node.SelectNodes("Page");
             foreach (XmlNode pageNode in pageNodes)
                 currentText.pages.Add(pageNode.InnerText);
-            Assets.Add<GameText>(currentText.name, currentText);
+            Assets.Add(currentText.name, currentText);
         }
     }
 }

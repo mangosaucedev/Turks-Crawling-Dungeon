@@ -50,7 +50,7 @@ namespace TCD.Objects.Parts
         protected virtual void SetupGraphic()
         {
             GameObject prefab = Assets.Get<GameObject>("Graphic");
-            graphicObject = Instantiate(prefab, parent.transform);
+            graphicObject = Instantiate(prefab, parent.SpriteRenderer.transform);
             graphicRenderer = graphicObject.GetComponent<SpriteRenderer>();
             graphicRenderer.sprite = Sprite;
         }

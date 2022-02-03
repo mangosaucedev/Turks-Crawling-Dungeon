@@ -30,8 +30,7 @@ public class ObjectFactoryPropertyTests
     {
         GameObject objectsParent = new GameObject("--- Objects ---");
         GameObject assetObject = new GameObject("Assets", typeof(Assets), typeof(DebugRawViewer));
-        GameStartup gameStartup = new GameStartup();
-        yield return gameStartup.StartGame();
+        yield return GameStartup.StartGame();
         CurrentZoneInfo.grid = new GameGrid(1, 1);
     }
 

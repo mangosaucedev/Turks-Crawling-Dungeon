@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Zones>
+
+	<Zone Name="HypothalamusLevel0">
+		<Params>Generic</Params>
+		<Environments>Generic</Environments>
+		<Encounters Density="1.5">Generic</Encounters>
+		<Terrain>
+			<Walls>
+				<Wall Name="Wall"/>
+			</Walls>
+			<Floors>
+				<Floor Name="TileFloor"/>
+			</Floors>
+		</Terrain>
+	</Zone>
+
+	<Zone Name="HypothalamusLevel1">
+		<Params>Generic</Params>
+		<Environments>Generic</Environments>
+		<Encounters Density="1.5">Generic</Encounters>
+		<Terrain>
+			<Walls>
+				<Wall Name="Wall"/>
+			</Walls>
+			<Floors>
+				<Floor Name="TileFloor"/>
+			</Floors>
+		</Terrain>
+	</Zone>
+
+	<Zone Name="HypothalamusLevel2">
+		<Params>Generic</Params>
+		<Environments>Generic</Environments>
+		<Encounters Density="1.5">Generic</Encounters>
+		<Terrain>
+			<Walls>
+				<Wall Name="Wall"/>
+			</Walls>
+			<Floors>
+				<Floor Name="TileFloor"/>
+			</Floors>
+		</Terrain>
+	</Zone>
+
+	<Zone Name="HypothalamusLevel3">
+		<Params>Generic</Params>
+		<Environments>Generic</Environments>
+		<Encounters Density="1.5">Generic</Encounters>
+		<Terrain>
+			<Walls>
+				<Wall Name="Wall"/>
+			</Walls>
+			<Floors>
+				<Floor Name="TileFloor"/>
+			</Floors>
+		</Terrain>
+	</Zone>
+
+</Zones>

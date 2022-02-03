@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TCD.Inputs;
 using TCD.Objects;
 using TCD.Objects.Parts;
 
@@ -40,6 +41,7 @@ namespace TCD.TimeManagement
             PassTime(timeElapsedThisTurn);
             if (actors.Count > 0)
                 UpdateActors();
+            ObjectCuller.PerformCulling();
             EventManager.Send(new AfterTurnTickEvent(timeElapsedThisTurn));
         }
 

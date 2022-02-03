@@ -14,8 +14,7 @@ public static class TestStartup
             yield break;
         new GameObject("--- Objects ---");
         new GameObject("Assets", typeof(Assets), typeof(DebugRawViewer));
-        GameStartup gameStartup = new GameStartup();
-        yield return gameStartup.StartGame();
+        yield return GameStartup.StartGame();
         CurrentZoneInfo.grid = new GameGrid(10, 10);
         PlayerInfo.currentPlayer = ObjectFactory.BuildFromBlueprint("Player", Vector2Int.zero);
         hasStartedUp = true;

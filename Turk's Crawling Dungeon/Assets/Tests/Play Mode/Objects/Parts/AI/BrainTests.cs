@@ -19,8 +19,7 @@ public class BrainTests
         new GameObject("Assets", typeof(Assets), typeof(DebugRawViewer));
         new GameObject("FogOfWarTilemap", typeof(FogOfWarTilemapManager), typeof(Tilemap));
         new GameObject("AudioPlayer", typeof(AudioPlayer), typeof(AudioSource));
-        GameStartup gameStartup = new GameStartup();
-        yield return gameStartup.StartGame();
+        yield return GameStartup.StartGame();
         CurrentZoneInfo.grid = new GameGrid(4, 4);
         CurrentZoneInfo.navGrid = new NavGrid(4, 4);
         PlayerInfo.currentPlayer = ObjectFactory.BuildFromBlueprint("Player", new Vector2Int(1, 1));

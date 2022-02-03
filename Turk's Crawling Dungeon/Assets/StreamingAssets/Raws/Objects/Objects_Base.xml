@@ -37,6 +37,7 @@
 
 		<Part Name="Resources">
 			<Var Name="Hitpoints">1</Var>
+			<Var Name="Regenerates">False</Var>
 		</Part>
 
 	</Object>

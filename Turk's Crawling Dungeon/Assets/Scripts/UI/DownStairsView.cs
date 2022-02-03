@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TCD.Zones;
+using TCD.Zones.Dungeons;
 
 namespace TCD.UI
 {
@@ -24,7 +24,7 @@ namespace TCD.UI
             CloseView();
             ScoreHandler.level++;
             ScoreHandler.ModifyScore(1000);
-            ZoneResetter.ResetZone();
+            DungeonHandler.GoToNextZone();
         }
     }
 }

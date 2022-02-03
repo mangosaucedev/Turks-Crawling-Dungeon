@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Campaigns>
+
+	<Campaign Name="TestCampaign">
+		<Dungeon>TestDungeon</Dungeon>
+		<Dungeon>TestDungeon</Dungeon>
+		<Dungeon>TestDungeon</Dungeon>
+	</Campaign>
+
+	<Campaign Name="Limbicum">
+		<Dungeon>Hypothalamus</Dungeon>
+		<Dungeon>Amygdala</Dungeon>
+		<Dungeon>Cingulate</Dungeon>
+	</Campaign>
+	
+</Campaigns>

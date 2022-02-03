@@ -8,13 +8,17 @@ namespace TCD
     {
         private static Dictionary<Type, EventListenerCollection> listeners = 
             new Dictionary<Type, EventListenerCollection>();
+        private static Dictionary<Type, EventOneShotActionCollection> oneShotActions = 
+            new Dictionary<Type, EventOneShotActionCollection>();
 
         public static void Send<T>(T e) where T : Event
         {
             Type type = typeof(T);
-            if (listeners.TryGetValue(
-                type, out EventListenerCollection collection))
+            if (listeners.TryGetValue(type, out EventListenerCollection collection))
+            {
                 collection.Send(e);
+                PerformOneShotActions(type);
+            }
         }
 
         public static void Listen<T>(
@@ -44,6 +48,29 @@ namespace TCD
             EventListenerCollection collection =
                 GetEventListenerCollection(type);
             collection.RemoveListener<T>(listener);
+        }
+
+        private static void PerformOneShotActions(Type type)
+        {
+            EventOneShotActionCollection oneShotActions = GetOneShotActionCollection(type);
+            oneShotActions.PerformOneShotActions();
+        }
+
+        public static void AddOneShotAction<T>(object listener, Action action) where T : Event
+        {
+            Type type = typeof(T);
+            EventOneShotActionCollection oneShotActions = GetOneShotActionCollection(type);
+            oneShotActions.AddOneShotAction(listener, action);
+        }
+
+        private static EventOneShotActionCollection GetOneShotActionCollection(Type type) 
+        {
+            if (!oneShotActions.TryGetValue(type, out var actions))
+            {
+                actions = new EventOneShotActionCollection();
+                oneShotActions[type] = actions;
+            }
+            return actions;
         }
     }
 }

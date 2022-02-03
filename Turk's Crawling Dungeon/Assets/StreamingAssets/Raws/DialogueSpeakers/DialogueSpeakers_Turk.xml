@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DialogueSpeakers>
+
+	<DialogueSpeaker Name="TurkDissociating" DisplayName="..." Color="TurkBlue" Portrait="SpeakerTurkDissociating"/>
+	
+	<DialogueSpeaker Name="TurkNeutral" DisplayName="Turk" Color="TurkBlue" Portrait="SpeakerTurkNeutral"/>
+
+	<DialogueSpeaker Name="TurkDistressed" DisplayName="Turk" Color="TurkBlue" Portrait="SpeakerTurkDistressed"/>
+
+	<DialogueSpeaker Name="TurkCrying" DisplayName="Turk" Color="TurkBlue" Portrait="SpeakerTurkCrying"/>
+
+	<DialogueSpeaker Name="TurkSobbing" DisplayName="Turk" Color="TurkBlue" Portrait="SpeakerTurkSobbing"/>
+
+	<DialogueSpeaker Name="TurkAngry" DisplayName="Turk" Color="TurkBlue" Portrait="SpeakerTurkAngry"/>
+
+	<DialogueSpeaker Name="TurkRage" DisplayName="Turk" Color="TurkBlue" Portrait="SpeakerTurkRage"/>
+
+	<DialogueSpeaker Name="TurkContent" DisplayName="Turk" Color="TurkBlue" Portrait="SpeakerTurkContent"/>
+	
+	<DialogueSpeaker Name="TurkHappy" DisplayName="Turk" Color="TurkBlue" Portrait="SpeakerTurkHappy"/>
+	
+</DialogueSpeakers>

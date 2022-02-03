@@ -36,7 +36,8 @@ namespace TCD.Inputs.Actions
             Vector2Int startPosition = player.cell.Position;
             Vector2Int targetPosition = target.cell.Position;
             NavAstarPath path = new NavAstarPath(startPosition, targetPosition, new PlayerPathEvaluator());
-            bool successful = movement.TryToNavigatePath(path);
+            yield return movement.TryToNavigatePathRoutine(path);
+            bool successful = movement.navigatedPath;
             DebugLogger.Log("Move to mouse was successful?" + successful.ToString());
         }
 
@@ -49,7 +50,8 @@ namespace TCD.Inputs.Actions
             Vector2Int startPosition = player.cell.Position;
             Vector2Int targetPosition = cell.Position;
             NavAstarPath path = new NavAstarPath(startPosition, targetPosition, new PlayerPathEvaluator());
-            bool successful = movement.TryToNavigatePath(path);
+            yield return movement.TryToNavigatePathRoutine(path);
+            bool successful = movement.navigatedPath;
             DebugLogger.Log("Move to mouse was successful?" + successful.ToString());
         }
     }

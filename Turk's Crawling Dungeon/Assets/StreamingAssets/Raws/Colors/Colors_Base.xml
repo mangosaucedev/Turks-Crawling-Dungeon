@@ -1,7 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Colors>
-	
+
+	<!-- Speaker Colors -->
+
 	<Color Name="TurkBlue" Symbol="Tb">#039be5</Color>
+	
+	<Color Name="RenGreen" Symbol="Rg">#039be5</Color>
+
+	<Color Name="PsycheMonologue" Symbol="Pm">#039be5</Color>
+	
+	<Color Name="PsycheLibido" Symbol="Pl">#039be5</Color>
+
+	<Color Name="PsycheDiscipline" Symbol="Pd">#039be5</Color>
+
+	<Color Name="PsycheTorturedArtist" Symbol="Pt">#039be5</Color>
+
+	<Color Name="PsycheWrath" Symbol="Pw">#039be5</Color>
+
+	<Color Name="PsycheVoid" Symbol="Pv">#039be5</Color>
+
+	<Color Name="PsychePlaymate" Symbol="Pp">#039be5</Color>
+	
+	<Color Name="PsycheNeurosis" Symbol="Pn">#039be5</Color>
+	
+	<!-- Interface Colors -->
 	
 	<Color Name="Gold" Symbol="Au">#FFC527</Color>
 	

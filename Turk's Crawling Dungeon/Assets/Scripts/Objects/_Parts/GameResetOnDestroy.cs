@@ -24,7 +24,7 @@ namespace TCD.Objects.Parts
         private IEnumerator OnBeforeDestroyObjectRoutine()
         {
             yield return ViewManager.OpenAndWaitForViewRoutine("Player Death View");
-            GameResetter.ResetGame();
+            TCDGame.StartNewGame();
         }
     }
 }

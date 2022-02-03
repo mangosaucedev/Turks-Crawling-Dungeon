@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dungeons>
+	
+	<Dungeon Name="Hypothalamus">
+		<Zone>HypothalamusLevel0</Zone>
+		<Zone>HypothalamusLevel1</Zone>
+		<Zone>HypothalamusLevel2</Zone>
+		<Zone>HypothalamusLevel3</Zone>
+	</Dungeon>
+
+	<Dungeon Name="Amygdala">
+		<Zone>AmygdalaLevel0</Zone>
+		<Zone>AmygdalaLevel1</Zone>
+		<Zone>AmygdalaLevel2</Zone>
+		<Zone>AmygdalaLevel3</Zone>
+		<Zone>AmygdalaLevel4</Zone>
+	</Dungeon>
+
+	<Dungeon Name="Cingulate">
+		<Zone>CingulateLevel0</Zone>
+		<Zone>CingulateLevel1</Zone>
+		<Zone>CingulateLevel2</Zone>
+	</Dungeon>
+	
+</Dungeons>

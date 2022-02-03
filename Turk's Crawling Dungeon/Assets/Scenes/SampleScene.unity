@@ -682,6 +682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a79c5a338cc9e4cbb1eb3a1a4fa319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultCampaignName: Limbicum
   startupScreen: {fileID: 8413441345987465457, guid: 3522d0bc1ed512344abf52a8ef4d8cfd, type: 3}
 --- !u!114 &665449634
 MonoBehaviour:
@@ -824,6 +825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d54fd3e201160cc4588a64995950991b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resetPlayer: 0
 --- !u!114 &665449644
 MonoBehaviour:
   m_ObjectHideFlags: 0

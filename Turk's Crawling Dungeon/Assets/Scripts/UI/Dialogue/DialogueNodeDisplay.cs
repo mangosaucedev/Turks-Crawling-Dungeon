@@ -1,0 +1,87 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using UnityEngine;
+using UnityEngine.UI;
+using TCD.Cinematics.Dialogue;
+using TCD.Inputs;
+
+namespace TCD.UI
+{
+    public class DialogueNodeDisplay : MonoBehaviour
+    {
+        [SerializeField] private Text text;
+
+        private DialogueNode currentNode;
+        private int index;
+        private WaitForSecondsRealtime printWait;
+        private bool isPrinting;
+        private bool canSkipPrinting;
+        private string fullText;
+        private StringBuilder stringBuilder = new StringBuilder();
+
+        private void OnEnable()
+        {
+            EventManager.Listen<BeforeDialogueUpdatedEvent>(this, OnBeforeDialogueUpdated);
+            EventManager.Listen<KeyEvent>(this, OnKey);
+        }
+
+        private void OnDisable()
+        {
+            EventManager.StopListening<BeforeDialogueUpdatedEvent>(this);
+            EventManager.StopListening<KeyEvent>(this);
+        }
+
+        private void OnBeforeDialogueUpdated(BeforeDialogueUpdatedEvent e) 
+        {
+            DebugLogger.Log($"Dialogue display skipping print: {e.Name} event!");
+            FinishPrinting();
+        }
+        private void FinishPrinting()
+        {
+            if (isPrinting && canSkipPrinting)
+            {
+                isPrinting = false;
+                StopAllCoroutines();
+                text.text = $"{currentNode.speaker.displayName} - {fullText}";
+            }
+        }
+
+        private void OnKey(KeyEvent e)
+        {
+            if (e.context.command == KeyCommand.Interact && e.context.state == KeyState.PressedThisFrame && isPrinting)
+            {
+                DebugLogger.Log("Dialogue display skipping print: Interact button pressed!");
+                FinishPrinting();
+            }  
+        }
+
+        public void DisplayDialogue(DialogueNode node) =>
+            StartCoroutine(DisplayDialogueRoutine(node));
+
+
+        public IEnumerator DisplayDialogueRoutine(DialogueNode node)
+        {
+            currentNode = node;
+            isPrinting = true;
+            printWait = new WaitForSecondsRealtime(0.05f);
+            fullText = currentNode.text.ToString();
+            while (index < fullText.Length)
+            {
+                index++;
+                
+                stringBuilder.Clear();
+                stringBuilder.Append(currentNode.speaker.displayName);
+                stringBuilder.Append(" - ");
+                stringBuilder.Append(currentNode.text.ToString().Substring(0, index));
+                text.text = stringBuilder.ToString();
+
+                if (index > 1 && !canSkipPrinting)
+                    canSkipPrinting = true;
+
+                yield return printWait;
+            }
+            FinishPrinting();
+        }
+    }
+}

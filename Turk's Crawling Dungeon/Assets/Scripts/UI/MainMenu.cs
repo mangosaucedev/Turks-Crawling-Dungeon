@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TCD.Zones;
+using TCD.Zones.Dungeons;
 
 namespace TCD.UI
 {
@@ -12,15 +13,13 @@ namespace TCD.UI
         public void Continue()
         {
             CloseView();
-            ZoneGeneratorManager zoneGeneratorManager = ServiceLocator.Get<ZoneGeneratorManager>();
-            zoneGeneratorManager.GenerateZone(ZoneGeneratorType.Generic);
+            TCDGame.StartNewGame();
         }
         
         public void NewGame()
         {
             CloseView();
-            ZoneGeneratorManager zoneGeneratorManager = ServiceLocator.Get<ZoneGeneratorManager>();
-            zoneGeneratorManager.GenerateZone(ZoneGeneratorType.Generic);
+            TCDGame.StartNewGame();
         }
 
         public void Help()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TCD.Texts;
 using TCD.Objects.Parts;
+using TCD.Objects.Juice;
 using Resources = TCD.Objects.Parts.Resources;
 
 namespace TCD.Objects.Attacks
@@ -67,6 +68,8 @@ namespace TCD.Objects.Attacks
 
         private static bool AttackTarget()
         {
+            CombatJuiceHandler.Punch(currentAttacker, ObjectUtility.GetDirectionToObject(currentAttacker, currentDefender));
+
             lastDamage = Random.Range(currentAttack.minDamage, currentAttack.maxDamage);
             if (currentAttack.attackType == AttackType.Physical)
                 lastDamage = DamageHandler.AddPhysicalPowerToDamage(lastDamage, currentAttacker);

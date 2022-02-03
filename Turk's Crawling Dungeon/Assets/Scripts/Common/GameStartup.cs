@@ -5,11 +5,11 @@ using TCD.IO;
 
 namespace TCD
 {
-    public class GameStartup
+    public static class GameStartup
     {
-        public bool isFinished;
+        public static bool isFinished;
 
-        public IEnumerator StartGame()
+        public static IEnumerator StartGame()
         {
             PrefabLoader prefabLoader = new PrefabLoader();
             yield return prefabLoader.LoadAllAtPath();
@@ -53,8 +53,20 @@ namespace TCD
             ZoneDeserializer zoneDeserializer = new ZoneDeserializer();
             yield return zoneDeserializer.DeserializeRawsAtPath();
 
+            DungeonDeserializer dungeonDeserializer = new DungeonDeserializer();
+            yield return dungeonDeserializer.DeserializeRawsAtPath();
+
+            CampaignDeserializer campaignDeserializer = new CampaignDeserializer();
+            yield return campaignDeserializer.DeserializeRawsAtPath();
+
             GameTextDeserializer gameTextDeserializer = new GameTextDeserializer();
             yield return gameTextDeserializer.DeserializeRawsAtPath();
+
+            DialogueNodeDeserializer dialogueNodeDeserializer = new DialogueNodeDeserializer();
+            yield return dialogueNodeDeserializer.DeserializeRawsAtPath();
+
+            DialogueSpeakerDeserializer dialogueSpeakerDeserializer = new DialogueSpeakerDeserializer();
+            yield return dialogueSpeakerDeserializer.DeserializeRawsAtPath();
 
             KeybindingsLoader keybindingsLoader = new KeybindingsLoader();
             keybindingsLoader.TryToLoad();

@@ -64,6 +64,7 @@ namespace TCD.UI
                 new ButtonInputKey("X", KeyCode.X, KeyCode.LeftShift),
                 new ButtonInputKey("Y", KeyCode.Y, KeyCode.LeftShift),
                 new ButtonInputKey("Z", KeyCode.Z, KeyCode.LeftShift),
+                new ButtonInputKey("Space", KeyCode.Space),
             };
         }
 

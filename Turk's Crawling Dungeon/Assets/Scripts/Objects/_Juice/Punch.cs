@@ -6,9 +6,12 @@ namespace TCD.Objects.Juice
 {
     public class Punch : JuiceAnimation
     {
+        private const float DURATION = 0.3f;
+
         private BaseObject attacker;
         private Vector2Int direction;
-        private float duration = 0.3f;
+        private float duration = DURATION;
+        private bool punched;
 
         public Punch(BaseObject attacker, Vector2Int direction)
         {
@@ -24,7 +27,20 @@ namespace TCD.Objects.Juice
             if (!attacker)
                 return;
             duration -= Time.deltaTime;
-            attacker.transform.Translate((Vector2) direction * 0.5f * Time.deltaTime, Space.World);
+            if (duration <= DURATION / 2 && !punched)
+                punched = true;
+            if (!punched)
+                attacker.SpriteRenderer.transform.localPosition += (Vector3)(Vector2)direction * Cell.SIZE * (Time.deltaTime / DURATION);
+            else
+                attacker.SpriteRenderer.transform.localPosition += (Vector3)(Vector2)(-direction) * Cell.SIZE * (Time.deltaTime / DURATION);           
+        }
+
+        public override void End()
+        {
+            base.End();
+            if (!attacker)
+                return;
+            attacker.SpriteRenderer.transform.localPosition = Vector3.zero;
         }
     }
 }

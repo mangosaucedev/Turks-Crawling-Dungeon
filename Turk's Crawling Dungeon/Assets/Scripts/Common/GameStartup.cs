@@ -59,6 +59,9 @@ namespace TCD
             CampaignDeserializer campaignDeserializer = new CampaignDeserializer();
             yield return campaignDeserializer.DeserializeRawsAtPath();
 
+            TileDeserializer tileDeserializer = new TileDeserializer();
+            yield return tileDeserializer.DeserializeRawsAtPath();
+
             GameTextDeserializer gameTextDeserializer = new GameTextDeserializer();
             yield return gameTextDeserializer.DeserializeRawsAtPath();
 

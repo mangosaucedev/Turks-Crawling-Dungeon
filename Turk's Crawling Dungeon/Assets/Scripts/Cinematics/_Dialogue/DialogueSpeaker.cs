@@ -9,9 +9,11 @@ namespace TCD.Cinematics.Dialogue
         public string name;
         public string displayName;
         public string colorName;
-        public Color color;
+        private Color color;
         public string portraitName;
         public Sprite portrait;
+
+        public Color Color => Assets.Get<Color>(colorName);
 
         public void Initialize()
         {

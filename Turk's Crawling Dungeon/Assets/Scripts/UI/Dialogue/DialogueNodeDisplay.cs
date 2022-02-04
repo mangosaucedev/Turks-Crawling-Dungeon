@@ -43,7 +43,7 @@ namespace TCD.UI
             {
                 isPrinting = false;
                 StopAllCoroutines();
-                text.text = $"{currentNode.speaker.displayName} - {fullText}";
+                text.text = $"{GetSpeakerName()} - {fullText}";
             }
         }
 
@@ -71,7 +71,7 @@ namespace TCD.UI
                 index++;
                 
                 stringBuilder.Clear();
-                stringBuilder.Append(currentNode.speaker.displayName);
+                stringBuilder.Append(GetSpeakerName());
                 stringBuilder.Append(" - ");
                 stringBuilder.Append(currentNode.text.ToString().Substring(0, index));
                 text.text = stringBuilder.ToString();
@@ -83,5 +83,8 @@ namespace TCD.UI
             }
             FinishPrinting();
         }
+
+        private string GetSpeakerName() => 
+            $"<color=#{ColorUtility.ToHtmlStringRGBA(currentNode.speaker.Color)}>{currentNode.speaker.displayName}</color>";
     }
 }

@@ -4,9 +4,15 @@ using UnityEngine;
 
 namespace TCD.Objects.Juice
 {
-    public class JuiceAnimation 
+    public abstract class JuiceAnimation 
     {
         public bool hasStarted;
+        public BaseObject obj;
+
+        public JuiceAnimation(BaseObject obj)
+        {
+            this.obj = obj;
+        }
 
         public virtual bool CanPerform()
         {

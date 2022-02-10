@@ -38,7 +38,8 @@ namespace TCD.Objects.Parts
 
         private void LoadStatsFromTemplate()
         {
-            throw new NotImplementedException("Method TCD.Objects.Parts.Stats.LoadStatsFromTemplate() is not defined!");
+            ExceptionHandler.Handle(
+                new NotImplementedException("Method TCD.Objects.Parts.Stats.LoadStatsFromTemplate() is not defined!"));
         }
 
         private void ParseInitStats()
@@ -51,8 +52,8 @@ namespace TCD.Objects.Parts
             }
             catch (Exception e)
             {
-                throw new StatsException(
-                    this, $"Could not parse initial stats string of {parent.name}: " + e.Message);
+                ExceptionHandler.Handle(new StatsException(
+                    this, $"Could not parse initial stats string of {parent.name}: " + e.Message));
             }
         }
 

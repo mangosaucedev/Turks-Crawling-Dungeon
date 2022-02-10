@@ -20,7 +20,7 @@ namespace TCD.UI
 
         protected abstract string ViewName { get; }
 
-        protected void CloseView() =>
+        protected virtual void CloseView() =>
             ViewManager.Close(ViewName);
 
         protected virtual void Awake()

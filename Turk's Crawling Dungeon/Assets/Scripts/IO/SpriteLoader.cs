@@ -50,7 +50,8 @@ namespace TCD.IO
                 if (texture.LoadImage(bytes))
                     return texture;
             }
-            throw new Exception($"SpriteLoader failed - invalid texture @ {path}!");
+            ExceptionHandler.Handle(new Exception($"SpriteLoader failed - invalid texture @ {path}!"));
+            return null;
         }
 
         private string GetSpriteNameFromPath(string path)

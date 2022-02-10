@@ -26,11 +26,11 @@ namespace TCD
         public TGrid(int width, int height)
         {
             if (width <= 0)
-                throw new Exception(
-                    $"Tried to make grid with invalid width ({width})!");
+                ExceptionHandler.Handle(new Exception(
+                    $"Tried to make grid with invalid width ({width})!"));
             if (height <= 0)
-                throw new Exception(
-                    $"Tried to make grid with invalid height ({height})!");
+                ExceptionHandler.Handle(new Exception(
+                    $"Tried to make grid with invalid height ({height})!"));
             this.width = width;
             this.height = height;
             cells = new T[width, height];
@@ -81,8 +81,8 @@ namespace TCD
         }
 
         private void ThrowIndexOutOfRangeException(int x, int y) =>
-            throw new Exception(
-                $"Index {x}, {y} out of bounds of grid ({width}, {height})!");
+            ExceptionHandler.Handle(new Exception(
+                $"Index {x}, {y} out of bounds of grid ({width}, {height})!"));
 
         protected void CopyFrom(TGrid<T> other)
         {

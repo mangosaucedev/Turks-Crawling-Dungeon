@@ -86,12 +86,12 @@ namespace TCD.Inputs.Actions
 
         public override IEnumerator OnCell(Cell cell)
         {
-            throw new NotImplementedException();
+            yield return null;
         }
 
         public override IEnumerator OnObject(BaseObject target)
         {
-            throw new NotImplementedException();
+            yield return null;
         }
 
         public override int GetRange() => 1;

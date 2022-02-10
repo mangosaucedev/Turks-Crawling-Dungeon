@@ -81,9 +81,9 @@ namespace TCD.Zones
             if (anchorsPlaced == 0)
                 PlaceRandomAnchor();
             if (anchorsPlaced == 0)
-                throw new ChamberException(
+                ExceptionHandler.Handle(new ChamberException(
                     "Chamber Anchor Resolver could not place any anchors " +
-                    "successfully!");
+                    "successfully!"));
         }
 
         private void EvaluateIfValidAnchorPoint()
@@ -173,8 +173,8 @@ namespace TCD.Zones
         private void PlaceRandomAnchors()
         {
             if (validPositions.Count == 0)
-                throw new ChamberException(
-                    "No valid anchor positions found by Chamber Anchor Resolver!");
+                ExceptionHandler.Handle(new ChamberException(
+                    "No valid anchor positions found by Chamber Anchor Resolver!"));
             AssignZeroToAnchorsInDirectionEntries();
             AssignRandomRangeForDirections();
             foreach (Direction direction in validAnchorDirections)
@@ -243,9 +243,10 @@ namespace TCD.Zones
                 return Cardinal.West;
             if (direction == Direction.East)
                 return Cardinal.East;
-            throw new ChamberException(
+            ExceptionHandler.Handle(new ChamberException(
                 "Chamber Anchor Resolver encountered invalid anchor cell " +
-                "direction and could not convert it into a valid cardinal!");
+                "direction and could not convert it into a valid cardinal!"));
+            return Cardinal.North;
         }
 
         private void PlaceRandomAnchor()

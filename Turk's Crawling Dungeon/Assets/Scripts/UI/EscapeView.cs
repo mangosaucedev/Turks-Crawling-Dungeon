@@ -9,6 +9,7 @@ namespace TCD.UI
     {
         [SerializeField] private ViewButton continueButton;
         [SerializeField] private ViewButton helpButton;
+        [SerializeField] private ViewButton settingsButton;
         [SerializeField] private ViewButton restartButton;
         [SerializeField] private ViewButton exitToMainMenuButton;
         [SerializeField] private ViewButton exitToDesktopButton;
@@ -19,6 +20,7 @@ namespace TCD.UI
         {
             continueButton.onClick.AddListener(CloseView);
             helpButton.onClick.AddListener(Help);
+            settingsButton.onClick.AddListener(() => ViewManager.Open("Settings View"));
             restartButton.onClick.AddListener(Restart);
             exitToMainMenuButton.onClick.AddListener(ExitToMainMenu);
             exitToDesktopButton.onClick.AddListener(ExitToDesktop);

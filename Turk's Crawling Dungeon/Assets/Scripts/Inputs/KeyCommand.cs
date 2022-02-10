@@ -68,5 +68,7 @@ namespace TCD.Inputs
         MoveWestAlt,
         MoveEastAlt,
         //
+        Reset,
+        ResetToDefaults
     }
 }

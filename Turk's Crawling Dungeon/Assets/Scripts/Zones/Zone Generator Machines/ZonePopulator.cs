@@ -46,7 +46,7 @@ namespace TCD.Zones
                 currentFeature = GetRandomFeature();
                 i++;
                 if (i > MAX_ATTEMPTS_TO_POPULATE)
-                    throw new Exception("Could not populate any feature with encounter " + currentEncounter.name + "!");
+                    ExceptionHandler.Handle(new Exception("Could not populate any feature with encounter " + currentEncounter.name + "!"));
             }
         }
 

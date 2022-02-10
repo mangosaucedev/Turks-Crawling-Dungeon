@@ -69,7 +69,8 @@ namespace TCD.Zones
                     if (cell.Contains<DownStairs>())
                         return position;
                 }
-            throw new Exception("Could not check player path: down stairs have no been placed in zone.");
+            ExceptionHandler.Handle(new Exception("Could not check player path: down stairs have no been placed in zone."));
+            return default;
         }
     }
 }

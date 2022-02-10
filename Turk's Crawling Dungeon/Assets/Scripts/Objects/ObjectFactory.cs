@@ -32,14 +32,14 @@ namespace TCD.Objects
                 GameObject prefab = Assets.Get<GameObject>(blueprint);
                 return BuildFromPrefab(prefab, position);
             }
-            ObjectBlueprint blueprintInstance;
+            ObjectBlueprint blueprintInstance = null;
             try
             {
                 blueprintInstance = Assets.Get<ObjectBlueprint>(blueprint);
             }
             catch
             {
-                throw new ObjectFactoryException($"Invalid blueprint '{blueprint}'!");
+                ExceptionHandler.Handle(new ObjectFactoryException($"Invalid blueprint '{blueprint}'!"));
             }
             return BuildFromBlueprint(blueprintInstance, position);
         }
@@ -64,7 +64,7 @@ namespace TCD.Objects
             else
                 prefab = Assets.Get<GameObject>("Base Object");
             prefab.SetActive(true);
-            GameObject gameObject = Object.Instantiate(prefab);
+            GameObject gameObject = Object.Instantiate(prefab, ParentManager.Prefabs);
             prefab.SetActive(false);
             gameObject.SetActive(false);
             gameObject.name = blueprint.name;
@@ -132,8 +132,8 @@ namespace TCD.Objects
             }
             catch (Exception e)
             {
-                throw new ObjectFactoryException(
-                    $"{part.Name} failed to write field {property}! - " + e.Message);
+                ExceptionHandler.Handle(new ObjectFactoryException(
+                    $"{part.Name} failed to write field {property}! - " + e.Message));
             }
         }
 

@@ -36,7 +36,7 @@ namespace TCD.Zones
                         positions.Add(position);
                 }
             if (positions.Count == 0)
-                throw new Exception("Could not place down stairs in zone: no valid positions for placement!");
+                ExceptionHandler.Handle(new Exception("Could not place down stairs in zone: no valid positions for placement!"));
             return Choose.Random(positions);
         }
     }

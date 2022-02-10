@@ -6,6 +6,7 @@ namespace TCD.Objects.Juice
 {
     public class JuiceManager : MonoBehaviour
     {
+        private List<BaseObject> animatedObjects = new List<BaseObject>(); 
         private List<JuiceAnimation> inProgress = new List<JuiceAnimation>();
 
         private void OnEnable()
@@ -32,6 +33,11 @@ namespace TCD.Objects.Juice
         {           
             if (animation.CanPerform())
             {
+                if (!animation.obj)
+                {
+                    RemoveAnimation(animation);
+                    return;
+                }
                 if (!animation.hasStarted)
                 {
                     animation.hasStarted = true;
@@ -46,27 +52,31 @@ namespace TCD.Objects.Juice
         private void RemoveAnimation(JuiceAnimation animation)
         {
             animation.End();
+            animatedObjects.Remove(animation.obj);
             inProgress.Remove(animation);
         }
 
-        private void OnBeforeTurnTick(BeforeTurnTickEvent e)
-        {
+        private void OnBeforeTurnTick(BeforeTurnTickEvent e) =>
             RemoveAllAnimations();
-        }
+        
 
         private void RemoveAllAnimations()
         {
             for (int i = inProgress.Count - 1; i >= 0; i--)
             {
                 JuiceAnimation animation = inProgress[i];
-                RemoveAnimation(animation);
+                if (animation.hasStarted)
+                    RemoveAnimation(animation);
             }
-            inProgress.Clear();
         }
 
-        public void AddAnimation(JuiceAnimation juiceAnimation)
+        public void AddAnimation(JuiceAnimation animation)
         {
-            inProgress.Add(juiceAnimation);
+            if (!animatedObjects.Contains(animation.obj))
+            {
+                animatedObjects.Add(animation.obj);
+                inProgress.Add(animation);
+            }
         }
     }
 }

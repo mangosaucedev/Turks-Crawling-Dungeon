@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 8867808499048548175}
+  layoutGroup: {fileID: 6238925915269670072}
 --- !u!114 &395639208446594517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,7 +168,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 8, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 816, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8033516136758419030

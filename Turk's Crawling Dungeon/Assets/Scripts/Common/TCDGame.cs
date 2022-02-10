@@ -17,27 +17,48 @@ namespace TCD
         [SerializeField] private string defaultCampaignName;
         [SerializeField] private GameObject startupScreen;
 
-        private IEnumerator Start()
+        private bool lastSessionCrashed;
+
+        private void Awake()
         {
-            startupScreen = Instantiate(startupScreen, ParentManager.Canvas);
-            yield return GameStartup.StartGame();
-            Destroy(startupScreen);
-            /*
-            yield return ViewManager.OpenAndWaitForViewRoutine("Loading View");
-            yield return ViewManager.OpenAndWaitForViewRoutine("Help View");
-            NotificationHandler.Notify("Enter the Crawling Dungeon", "It is said that the mind can " +
-                "make a hell out of heaven. Turk's life is far from paradise, and the machinations " +
-                "of his psyche can be as perditious as any hellfire. Turk's existence has been marred " +
-                "by terrible pain. Traumas fester in his brain like worms, eating him alive from the " +
-                "inside out.\n\nIs it possible to return from the brink of annihilation? Can Turk " +
-                "banish the darkness inside, or is he doomed to succumb to his misery?");
-            SaveHandler.SaveGame();
-            ZoneResetter zoneResetter = ServiceLocator.Get<ZoneResetter>(); //TODO: Start in main menu
-            yield return zoneResetter.UnloadZone(true); //TODO: Don't unload/generate zone at startup
-            */
-            ViewManager.Open("Main Menu");
+            lastSessionCrashed = DebugCrashHandler.CrashFilePersists();
+
+#if UNITY_EDITOR
+            EditorApplication.playModeStateChanged += state =>
+            {
+                if (state == PlayModeStateChange.ExitingPlayMode)
+                {
+                    DebugLogger.DumpToLog();
+                    DebugCrashHandler.DeleteCrashFile();
+                }
+            };
+#else
+            Application.quitting += DebugLogger.DumpToLog;
+            Application.quitting += DebugCrashHandler.DeleteCrashFile;
+#endif
         }
 
+        private IEnumerator Start()
+        {
+            DebugCrashHandler.CreateCrashFile();
+
+            startupScreen = Instantiate(startupScreen, ParentManager.Canvas);
+
+            yield return GameStartup.StartGame();
+
+            Destroy(startupScreen);
+
+            ViewManager.Open("Main Menu");
+
+            if (lastSessionCrashed)
+            {
+                yield return NotificationHandler.WaitForNotificationToEnd();
+                NotificationHandler.Notify(
+                    "Last Session Failed To Close",
+                    "Your last game session failed to close properly. This may have been caused by a " +
+                    "crash. Be more careful next time!");
+            }
+        }
 
         public static void StartNewGame()
         {
@@ -57,8 +78,11 @@ namespace TCD
 #if UNITY_EDITOR
             EditorApplication.isPlaying = false;
 #else
+            //Application.Quit();
+            DebugLogger.DumpToLog();
+            DebugCrashHandler.DeleteCrashFile();
             System.Diagnostics.Process.GetCurrentProcess().Kill();
 #endif
-        }   
+        }
     }
 }

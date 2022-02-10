@@ -14,9 +14,8 @@ namespace TCD.IO
         {
             XmlNode root = xml.SelectSingleNode("Tiles");
             XmlNodeList tileNodes = root.SelectNodes("Tile");
-          // TODO: UNCOMMENT THIS
-          //  foreach (XmlNode tileNode in tileNodes)
-          //        DeserializeTile(tileNode);
+            foreach (XmlNode tileNode in tileNodes)
+                  DeserializeTile(tileNode);
         }
 
         private void DeserializeTile(XmlNode node)

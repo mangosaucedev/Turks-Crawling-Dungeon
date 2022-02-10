@@ -18,8 +18,8 @@ namespace TCD
                 if (service)
                     services[type] = service;
                 else
-                    throw new NullReferenceException(
-                        string.Format("Service locator not locate service {0}", type.Name));
+                    ExceptionHandler.Handle(new NullReferenceException(
+                        string.Format("Service locator not locate service {0}", type.Name)));
             }
             return (T) service;
         }

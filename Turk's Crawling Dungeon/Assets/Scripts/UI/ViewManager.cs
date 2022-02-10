@@ -1,13 +1,62 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TCD.Inputs;
 
 namespace TCD.UI
 {
     public class ViewManager : MonoBehaviour
     {
-        private static List<ActiveView> activeViews = new List<ActiveView>();
+        public static List<ActiveView> activeViews = new List<ActiveView>();
+
+        private Coroutine selectTopLeftSelectableCoroutine;
+
+        private void OnEnable()
+        {
+            EventManager.Listen<ViewOpenedEvent>(this, OnViewOpened);
+            EventManager.Listen<ViewClosedEvent>(this, OnViewClosed);
+        }
+
+        private void OnDisable()
+        {
+            EventManager.StopListening<ViewOpenedEvent>(this);
+            EventManager.StopListening<ViewClosedEvent>(this);
+        }
+
+        private void OnViewOpened(ViewOpenedEvent e) => SelectTopLeftSelectable();
+
+        private void OnViewClosed(ViewClosedEvent e) => SelectTopLeftSelectable();
+
+
+        public void SelectTopLeftSelectable()
+        {
+            this.EnsureCoroutineStopped(ref selectTopLeftSelectableCoroutine);
+            selectTopLeftSelectableCoroutine = StartCoroutine(SelectTopLeftSelectableRoutine());
+        }
+
+        private IEnumerator SelectTopLeftSelectableRoutine()
+        {
+            yield return null;
+            yield return null; 
+            yield return null;
+            Vector3 topLeft = Camera.main.ViewportToScreenPoint(new Vector3(0, 1, 0));
+            Selectable[] selectables = FindObjectsOfType<Selectable>();
+            float shortestDistanceFromTopLeft = float.MaxValue;
+            GameObject selectedObject = null;
+            foreach (Selectable selectable in selectables)
+            {
+                Vector3 selectablePostion = selectable.transform.position;
+                float distance = Vector3.Distance(selectablePostion, topLeft);
+                if (selectable.interactable && distance < shortestDistanceFromTopLeft)
+                {
+                    selectedObject = selectable.gameObject;
+                    shortestDistanceFromTopLeft = distance;
+                }
+            }
+            EventSystem.current.SetSelectedGameObject(selectedObject);
+        }
 
         public static string GetActiveViewName()
         {
@@ -63,6 +112,7 @@ namespace TCD.UI
         {
             if (!TryFind(viewName, out ActiveView view))
                 return;
+            EventManager.Send(new BeforeViewClosedEvent(view));
             activeViews.Remove(view);
             Destroy(view.gameObject);
             EventManager.Send(new ViewClosedEvent(view));

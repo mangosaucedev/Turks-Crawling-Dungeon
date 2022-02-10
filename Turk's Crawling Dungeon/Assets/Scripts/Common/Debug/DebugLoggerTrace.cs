@@ -4,11 +4,9 @@ using UnityEngine;
 
 namespace TCD
 {
-    public enum DebugLoggerVerbosity
+    public enum DebugLoggerTrace
     {
         None,
-        Time,
-        Frame,
-        TimeAndFrame = Time | Frame
+        Verbose
     }
 }

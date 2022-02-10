@@ -68,15 +68,15 @@ namespace TCD.IO
                 if (value != null || !isRequired)
                     return value;
                 else if (value == null && isRequired)
-                    throw new RawException($"Required node '{nodeName}' not found.");
+                    ExceptionHandler.Handle(new RawException($"Required node '{nodeName}' not found."));
             }
             catch (RawException e)
             {
-                throw e;
+                ExceptionHandler.Handle(e);
             }
             catch (Exception e) when (!(e is RawException))
             {
-                throw new RawException(e.Message);
+                ExceptionHandler.Handle(new RawException(e.Message));
             }
             return null;
         }
@@ -90,15 +90,15 @@ namespace TCD.IO
                 if (value != null || !isRequired)
                     return value;
                 else if (value == null && isRequired)
-                    throw new RawException($"Required attribute '{attributeName}' not found.");
+                    ExceptionHandler.Handle(new RawException($"Required attribute '{attributeName}' not found."));
             }
             catch (RawException e)
             {
-                throw e;
+                ExceptionHandler.Handle(e);
             }
             catch (Exception e) when (!(e is RawException))
             {
-                throw new RawException(e.Message);
+                ExceptionHandler.Handle(new RawException(e.Message));
             }
             return null;
         }

@@ -15,7 +15,7 @@ namespace TCD.Objects.Parts
         protected override void Start()
         {
             base.Start();
-            graphicRenderer.drawMode = SpriteDrawMode.Sliced;
+            graphicRenderer.drawMode = SpriteDrawMode.Simple;
             Vector2 spriteSize = parent.SpriteRenderer.sprite.rect.size;
             spriteSize /= parent.SpriteRenderer.sprite.pixelsPerUnit;
             float xSize = Mathf.Max(spriteSize.x, 2);

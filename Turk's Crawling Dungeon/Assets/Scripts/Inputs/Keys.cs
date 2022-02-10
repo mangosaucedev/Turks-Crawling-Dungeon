@@ -66,8 +66,9 @@ namespace TCD.Inputs
             }
             catch
             {
-                throw new KeyException($"Command {command} is unbound!");
+                ExceptionHandler.Handle(new KeyException($"Command {command} is unbound!"));
             }
+            return null;
         }
 
         private static bool GetCommandConflicts(KeyCommand command)

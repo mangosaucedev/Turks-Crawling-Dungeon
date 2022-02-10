@@ -2,12 +2,6 @@
 <Tiles>
 
 	<!-- Level 0 -->
-	
-	<Tile Name="PeelingPaint0">PeelingPaint0</Tile>
-
-	<Tile Name="PeelingPaint1">PeelingPaint0</Tile>
-
-	<Tile Name="PeelingPaint2">PeelingPaint2</Tile>
 
 	<Tile Name="RottingWoodFloor0">RottingWoodFloor0</Tile>
 

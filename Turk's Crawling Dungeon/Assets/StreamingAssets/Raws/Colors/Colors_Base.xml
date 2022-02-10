@@ -7,21 +7,19 @@
 	
 	<Color Name="RenGreen" Symbol="Rg">#039be5</Color>
 
-	<Color Name="PsycheMonologue" Symbol="Pm">#039be5</Color>
+	<Color Name="PsycheMonologue" Symbol="Pm">#0373e2</Color>
 	
-	<Color Name="PsycheLibido" Symbol="Pl">#039be5</Color>
+	<Color Name="PsycheLibido" Symbol="Pl">3b03e2</Color>
 
-	<Color Name="PsycheDiscipline" Symbol="Pd">#039be5</Color>
+	<Color Name="PsycheWrath" Symbol="Pw">#7303e2</Color>
 
-	<Color Name="PsycheTorturedArtist" Symbol="Pt">#039be5</Color>
+	<Color Name="PsycheDepression" Symbol="Pd">#0303e2</Color>
 
-	<Color Name="PsycheWrath" Symbol="Pw">#039be5</Color>
+	<Color Name="PsycheHappiness" Symbol="Ph">#03aae2</Color>
 
-	<Color Name="PsycheVoid" Symbol="Pv">#039be5</Color>
-
-	<Color Name="PsychePlaymate" Symbol="Pp">#039be5</Color>
+	<Color Name="PsycheFear" Symbol="Pf">#3f3fa6</Color>
 	
-	<Color Name="PsycheNeurosis" Symbol="Pn">#039be5</Color>
+	<Color Name="PsycheCraving" Symbol="Pc">#730bda</Color>
 	
 	<!-- Interface Colors -->
 	

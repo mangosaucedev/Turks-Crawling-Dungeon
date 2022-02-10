@@ -14,16 +14,9 @@ namespace TCD.Objects.Parts
 
         public bool navigatedPath;
         public Vector2Int movementVector;
-        [SerializeField] private MovementVisualizer visualizer;
         private WaitForSecondsRealtime wait = new WaitForSecondsRealtime(0.15f);
 
         public override string Name => "Movement";
-
-        protected override void Awake()
-        {
-            base.Awake();
-            visualizer = new MovementVisualizer(this);
-        }
 
         public virtual bool TryToMove(Vector2Int direction, bool isForced = false)
         {
@@ -81,7 +74,7 @@ namespace TCD.Objects.Parts
 
         private bool FailMove()
         {
-            //visualizer.StartVizualization(visualizer.MoveFailedVizualizationRoutine());
+            CombatJuiceHandler.Punch(parent, movementVector);
             return false;
         }
 

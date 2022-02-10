@@ -44,7 +44,7 @@ namespace TCD.Objects
                     return;
                 }
             }
-            throw new ObjectException($"Could not find parent transform for object '{name}'!");
+            ExceptionHandler.Handle(new ObjectException($"Could not find parent transform for object '{name}'!"));
         }
 
         public bool FireEvent<T>(ILocalEventHandler target, T e) where T : LocalEvent =>

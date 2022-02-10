@@ -62,7 +62,7 @@ namespace TCD.Zones.Environments
         {
             List<ZoneEnvironment> nonExcludedZoneEnvironments = ZoneEnvironments.GetNonExludedZoneEnvironments();
             if (nonExcludedZoneEnvironments.Count == 0)
-                throw new Exception("Not enough non-exclusive environments to furnish Zone! (EnvironmentPlanner)");
+                ExceptionHandler.Handle(new Exception("Not enough non-exclusive environments to furnish Zone! (EnvironmentPlanner)"));
             using (GrabBag<ZoneEnvironment> bag = new GrabBag<ZoneEnvironment>())
             {
                 foreach(ZoneEnvironment zoneEnvironment in nonExcludedZoneEnvironments)

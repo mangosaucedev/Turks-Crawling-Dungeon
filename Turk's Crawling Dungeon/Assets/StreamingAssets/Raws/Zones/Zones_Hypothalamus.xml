@@ -7,10 +7,14 @@
 		<Encounters Density="1.5">Generic</Encounters>
 		<Terrain>
 			<Walls>
-				<Wall Name="Wall"/>
+				<Wall Name="PeelingPaint0"/>
+				<Wall Name="PeelingPaint1"/>
+				<Wall Name="PeelingPaint2"/>
 			</Walls>
 			<Floors>
-				<Floor Name="TileFloor"/>
+				<Floor Name="RottingWoodFloor0"/>
+				<Floor Name="RottingWoodFloor1"/>
+				<Floor Name="RottingWoodFloor2"/>
 			</Floors>
 		</Terrain>
 	</Zone>

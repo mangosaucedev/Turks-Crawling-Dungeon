@@ -29,7 +29,7 @@ namespace TCD.UI
 
         public void Settings()
         {
-
+            ViewManager.Open("Settings View");
         }
 
         public void ExitToDesktop() => TCDGame.ExitToDesktop();

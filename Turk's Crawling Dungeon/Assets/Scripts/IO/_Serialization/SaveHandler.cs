@@ -57,7 +57,7 @@ namespace TCD.IO.Serialization
             }
             catch (Exception e)
             {
-                throw new FormatException("Failed to write save to file! " + e.Message);
+                ExceptionHandler.Handle(new FormatException("Failed to write save to file! " + e.Message));
             }
             DebugLogger.Log("Game successfully saved to file @ " + filePath);
         }

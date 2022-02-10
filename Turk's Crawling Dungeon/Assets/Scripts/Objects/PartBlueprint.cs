@@ -22,7 +22,7 @@ namespace TCD.Objects
             if (type == null)
                 type = TypeResolver.ResolveType("TCD.Objects.Parts." + name);
             if (type == null)
-                throw new Exception("Could not resolve type " + name);
+                ExceptionHandler.Handle(new Exception("Could not resolve type " + name));
             return type;
         }
 

@@ -11,6 +11,7 @@ namespace TCD.UI
     public class DialogueNodeDisplay : MonoBehaviour
     {
         [SerializeField] private Text text;
+        [SerializeField] private VerticalLayoutGroup layoutGroup;
 
         private DialogueNode currentNode;
         private int index;
@@ -19,6 +20,17 @@ namespace TCD.UI
         private bool canSkipPrinting;
         private string fullText;
         private StringBuilder stringBuilder = new StringBuilder();
+        private RectTransform parentRectTransform;
+
+        private RectTransform ParentRectTransform
+        {
+            get
+            {
+                if (!parentRectTransform)
+                    parentRectTransform = (RectTransform) transform.parent;
+                return parentRectTransform;
+             }
+        }
 
         private void OnEnable()
         {
@@ -44,6 +56,8 @@ namespace TCD.UI
                 isPrinting = false;
                 StopAllCoroutines();
                 text.text = $"{GetSpeakerName()} - {fullText}";
+                LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform) layoutGroup.transform);
+                LayoutRebuilder.ForceRebuildLayoutImmediate(ParentRectTransform);
             }
         }
 

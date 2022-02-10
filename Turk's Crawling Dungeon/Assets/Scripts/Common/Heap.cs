@@ -54,8 +54,8 @@ namespace TCD
         public T RemoveFirst()
         {
             if (count == 0)
-                throw new HeapException(
-                    "Cannot remove first item from empty heap!");
+                ExceptionHandler.Handle(new HeapException(
+                    "Cannot remove first item from empty heap!"));
             T firstItem = items[0];
             count--;
             items[0] = items[count];

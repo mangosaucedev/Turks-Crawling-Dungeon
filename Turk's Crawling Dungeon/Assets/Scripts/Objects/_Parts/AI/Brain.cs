@@ -143,8 +143,8 @@ namespace TCD.Objects.Parts
             }
             catch (Exception e)
             {
-                throw new BrainException(
-                    this, $"{parent.GetDisplayName()} could not update path debug info: {e.Message}");
+                ExceptionHandler.Handle(new BrainException(
+                    this, $"{parent.GetDisplayName()} could not update path debug info: {e.Message}"));
             }
         }
 

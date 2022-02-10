@@ -46,7 +46,7 @@ namespace TCD.IO
             }
             catch (Exception e)
             {
-                throw new Exception("Audio clip " + path + " failed to load! " + e.Message);
+                ExceptionHandler.Handle(new Exception("Audio clip " + path + " failed to load! " + e.Message));
             }
             audioLoader.OnLoadingDone += () => { FinishLoadingAudioClip(name, audioLoader); };
             audioLoader.OnLoadingFailed += e => { LoadingAudioClipException(name, e); };
@@ -61,13 +61,13 @@ namespace TCD.IO
         private void LoadingAudioClipException(string name, Exception e)
         {
             Exception exception = new Exception("Failed to load audio file " + name + ". - " + e.Message);
-            throw exception;
+            ExceptionHandler.Handle(exception);
         }
 
         private void LoadingAudioClipAborted(string name)
         {
             Exception exception = new Exception("Failed to load audio file " + name + ". (Process aborted.)");
-            throw exception;
+            ExceptionHandler.Handle(exception);
         }
 
         private string GetAudioClipNameFromPath(string path)

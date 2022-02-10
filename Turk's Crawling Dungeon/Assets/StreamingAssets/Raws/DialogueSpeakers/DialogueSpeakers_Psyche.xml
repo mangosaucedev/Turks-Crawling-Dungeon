@@ -3,4 +3,16 @@
 
 	<DialogueSpeaker Name="PsycheMonologue" DisplayName="Inner Monologue"  Color="PsycheMonologue" Portrait="SpeakerPsycheMonologue"/>
 
+	<DialogueSpeaker Name="PsycheLibido" DisplayName="Kindling Flame"  Color="PsycheLibido" Portrait="SpeakerPsycheLibido"/>
+
+	<DialogueSpeaker Name="PsycheWrath" DisplayName="Gnashing Teeth"  Color="PsycheWrath" Portrait="SpeakerPsycheWrath"/>
+
+	<DialogueSpeaker Name="PsycheDepression" DisplayName="Abyssal Echoes"  Color="PsycheDepression" Portrait="SpeakerPsycheDepression"/>
+
+	<DialogueSpeaker Name="PsycheHappiness" DisplayName="Dancing Sunbeam"  Color="PsycheHappiness" Portrait="SpeakerPsycheHappiness"/>
+
+	<DialogueSpeaker Name="PsycheFear" DisplayName="Trembling Stalk"  Color="PsycheFear" Portrait="SpeakerPsycheFear"/>
+	
+	<DialogueSpeaker Name="PsycheCraving" DisplayName="Chasmal Hunger"  Color="PsycheCraving" Portrait="SpeakerPsycheCraving"/>
+
 </DialogueSpeakers>

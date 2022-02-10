@@ -38,7 +38,8 @@ namespace TCD.Objects.Parts
             }
             catch (Exception e)
             {
-                throw new Exception($"Could not parse initial melee weapon attacks string of {parent.name}: " + e.Message);
+                ExceptionHandler.Handle(
+                    new Exception($"Could not parse initial melee weapon attacks string of {parent.name}: " + e.Message));
             }
         }
 

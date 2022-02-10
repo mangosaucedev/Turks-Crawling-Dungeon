@@ -15,10 +15,11 @@ namespace TCD.Objects.Parts
             {
                 if (Count >= index)
                     return collection[index];
-                throw new BrainException(
+                ExceptionHandler.Handle(new BrainException(
                     brain,
                     $"Index out of range of goal collection: {index} " +
-                    $"({Count} items in collection!)");
+                    $"({Count} items in collection!)"));
+                return null;
             }
         }
 

@@ -50,12 +50,12 @@ namespace TCD
             }
             catch (IndexOutOfRangeException exception)
             {
-                DebugLogger.LogError($"Input exception: Command {e?.context.command} (State {e?.context.state}) " +
+                ExceptionHandler.HandleMessage($"Input exception: Command {e?.context.command} (State {e?.context.state}) " +
                     $"could not be gotten from pool. " + exception.Message);
             }
             catch (Exception exception)
             {
-                DebugLogger.LogError($"Input exception: " + exception.Message);
+                ExceptionHandler.HandleMessage($"Input exception: " + exception.Message);
             }
             return new KeyEvent(context);
         }

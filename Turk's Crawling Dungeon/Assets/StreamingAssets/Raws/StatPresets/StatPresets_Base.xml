@@ -10,7 +10,7 @@
 		<Charm>10</Charm>
 	</StatPreset>
 
-	<StatPreset Name="Hellion" InheritsFrom="Base">
+	<StatPreset Name="Hellion">
 		<Strength>14</Strength>
 		<Agility>10</Agility>
 		<Constitution>12</Constitution>

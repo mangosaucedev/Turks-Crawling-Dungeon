@@ -1,12 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Classes>
 	
-	<Class Name="Hellion">
-		<TalentTrees>
-			<TalentTree Name="BasicAthletics"/>
-			<TalentTree Name="BasicGrappling"/>
-			<TalentTree Name="Fitness"/>
-		</TalentTrees>
+	<Class Name="Hellion" StatPreset="Hellion">
+
+		<StatPreset>Hellion</StatPreset>
+
+		<TalentTree>BasicAthletics</TalentTree>
+		<TalentTree>BasicGrappling</TalentTree>
+		<TalentTree>Fitness</TalentTree>
+		
 	</Class>
 	
 </Classes>

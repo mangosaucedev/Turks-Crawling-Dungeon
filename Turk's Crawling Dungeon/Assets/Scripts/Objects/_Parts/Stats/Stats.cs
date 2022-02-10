@@ -8,8 +8,27 @@ namespace TCD.Objects.Parts
     [Serializable]
     public class Stats : Part
     { 
+        [SerializeField] private string className;
         [SerializeField] private string initStats;
         [SerializeField] private string statTemplate;
+
+        private Class c;
+
+        public string ClassName
+        {
+            get => className;
+            set => className = value;
+        }
+
+        public Class Class
+        {
+            get
+            {
+                if (c == null)
+                    c = Assets.Get<Class>(ClassName);
+                return c;
+            }
+        }
 
         public string InitStats
         {

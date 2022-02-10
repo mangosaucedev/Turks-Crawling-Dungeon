@@ -2,12 +2,14 @@
 <Campaigns>
 
 	<Campaign Name="TestCampaign">
+		<Class>Hellion</Class>
 		<Dungeon>TestDungeon</Dungeon>
 		<Dungeon>TestDungeon</Dungeon>
 		<Dungeon>TestDungeon</Dungeon>
 	</Campaign>
 
 	<Campaign Name="Limbicum">
+		<Class>Hellion</Class>
 		<Dungeon>Hypothalamus</Dungeon>
 		<Dungeon>Amygdala</Dungeon>
 		<Dungeon>Cingulate</Dungeon>

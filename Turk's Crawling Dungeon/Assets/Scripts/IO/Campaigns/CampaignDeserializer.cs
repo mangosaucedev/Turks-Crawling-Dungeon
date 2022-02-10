@@ -23,6 +23,10 @@ namespace TCD.IO
             Campaign campaign = new Campaign();
             campaign.name = EvaluateAttribute(node, "Name", true);
 
+            XmlNodeList classNodeList = node.SelectNodes("Class");
+            foreach (XmlNode classNode in classNodeList)
+                campaign.classNames.Add(classNode.InnerText);
+
             XmlNodeList dungeonNodeList = node.SelectNodes("Dungeon");
             foreach (XmlNode dungeonNode in dungeonNodeList)
                 campaign.dungeonNames.Add(dungeonNode.InnerText);

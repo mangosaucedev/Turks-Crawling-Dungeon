@@ -53,11 +53,13 @@ namespace TCD
         private void OnEnable()
         {
             UpdateSettings();
+            EventManager.Listen<GameStartupFinishedEvent>(this, OnGameStartupFinished);
             EventManager.Listen<SettingChangedEvent>(this, OnSettingChanged);
         }
 
         private void OnDisable()
         {
+            EventManager.StopListening<GameStartupFinishedEvent>(this);
             EventManager.StopListening<SettingChangedEvent>(this);
         }
 
@@ -76,6 +78,8 @@ namespace TCD
                 MusicSource.mute = true;
             }
         }
+
+        private void OnGameStartupFinished(GameStartupFinishedEvent e) => UpdateSettings();
 
         private void OnSettingChanged(SettingChangedEvent e) => UpdateSettings();
 

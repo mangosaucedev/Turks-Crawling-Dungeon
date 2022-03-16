@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TCD.Cinematics.Dialogue;
+using TCD.Cinematics.Dialogues;
 using TCD.UI;
 
 namespace TCD.Objects.Parts

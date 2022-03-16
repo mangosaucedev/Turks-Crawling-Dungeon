@@ -1,0 +1,57 @@
+{
+    "dialogue": [
+        {
+            "name": "test0",
+            "text": "This is test dialogue!",
+            "speakerName": "TurkNeutral",
+            "oneShot": "false",
+            "trigger": "",
+            "transitions": {
+                "transitions": [
+                    {
+                        "node": "",
+                        "when": ""
+                    }
+                ]
+            },
+            "choices": {
+                "choices": [
+                    {
+                        "text": "",
+                        "transitions": {
+                            "transitions": []
+                        },
+                        "prerequisite": ""
+                    }
+                ]
+            }
+        },
+
+        {
+            "name": "test1a",
+            "text": "This is test dialogue!",
+            "speakerName": "TurkNeutral",
+            "oneShot": "false",
+            "trigger": "",
+            "transitions": {
+                "transitions": [
+                    {
+                        "node": "",
+                        "when": ""
+                    }
+                ]
+            },
+            "choices": {
+                "choices": [
+                    {
+                        "text": "",
+                        "transitions": {
+                            "transitions": []
+                        },
+                        "prerequisite": ""
+                    }
+                ]
+            }
+        }
+    ]
+}

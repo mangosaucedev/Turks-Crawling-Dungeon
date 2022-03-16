@@ -1,0 +1,30 @@
+{
+    "dialogue": [
+        {
+            "name": "_Template",
+            "text": "",
+            "speakerName": "",
+            "oneShot": "false",
+            "trigger" :  "",
+            "transitions": {
+                "transitions": [
+                    {
+                        "node": "",
+                        "when": ""
+                    }
+                ]
+            },
+            "choices": {
+                "choices": [
+                    {
+                        "text": "",
+                        "transitions": {
+                            "transitions": []
+                        },
+                        "prerequisite": ""
+                    }
+                ]
+            }
+        }
+    ]
+}

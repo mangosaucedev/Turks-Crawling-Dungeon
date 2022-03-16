@@ -31,17 +31,7 @@ namespace TCD.UI
 
         private void GoToPage(int page)
         {
-            body.text = currentText.pages[page];
-            int pages = currentText.pages.Count;
-            if (page > 0)
-                previousButton.onClick.AddListener(() => { GoToPage(page - 1); });
-            else
-                previousButton.onClick.AddListener(() => { GoToPage(0); });
-            if (page < pages - 1)
-                nextButton.onClick.AddListener(() => { GoToPage(page + 1); });
-            else
-                nextButton.onClick.AddListener(() => { GoToPage(pages - 1); });
-            pageCount.text = $"Page {page + 1} / {pages}";
+
         }
     }
 }

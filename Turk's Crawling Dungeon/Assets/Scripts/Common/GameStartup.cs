@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using TCD.IO;
 
@@ -9,10 +11,18 @@ namespace TCD
     {
         public static bool isFinished;
 
+        private static Type[] assemblyTypes;
+
         public static IEnumerator StartGame()
         {
+            Assembly assembly = Assembly.GetAssembly(typeof(GameStartup));
+            assemblyTypes = assembly.GetTypes();
+
             PrefabLoader prefabLoader = new PrefabLoader();
             yield return prefabLoader.LoadAllAtPath();
+
+            MaterialsLoader materialsLoader = new MaterialsLoader();
+            yield return materialsLoader.LoadAll();
 
             TileLoader tileLoader = new TileLoader();
             yield return tileLoader.LoadAllAtPath();
@@ -74,8 +84,29 @@ namespace TCD
             KeybindingsLoader keybindingsLoader = new KeybindingsLoader();
             keybindingsLoader.TryToLoad();
 
+            yield return DeserializeAssets();
+
             EventManager.Send(new GameStartupFinishedEvent());
             isFinished = true;
+        }
+
+        private static IEnumerator LoadXmlAssets()
+        {
+            yield return null;
+        }
+
+        private static IEnumerator DeserializeAssets()
+        {
+            DebugLogger.Log("Deserializing assets...");
+            foreach (Type type in assemblyTypes)
+            {
+                AssetDeserializerAttribute attribute = type.GetCustomAttribute<AssetDeserializerAttribute>();
+                if (attribute != null)
+                {
+                    IDeserializer deserializer = (IDeserializer) Activator.CreateInstance(type);
+                    yield return deserializer.DeserializeAll();
+                }
+            }
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace TCD
     {
         public Vector2Int currentPosition;
         public Vector2Int previousPosition;
+        
+        public event Action onMouseMoved;
 
         private void LateUpdate()
         {
@@ -33,6 +36,7 @@ namespace TCD
                     Cell cell = grid[currentPosition];
                     EventManager.Send(new MouseEnterCellEvent(cell));
                 }
+                onMouseMoved?.Invoke();
             }
         }
 

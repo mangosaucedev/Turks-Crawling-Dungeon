@@ -1,0 +1,10 @@
+{
+    "speakers": [
+        {
+            "name": "PsycheMonologue",
+            "displayName": "Inner Monologue",
+            "portrait": "SpeakerPsycheMonologue",
+            "color": "PsycheMonologue"
+        }
+    ]
+}

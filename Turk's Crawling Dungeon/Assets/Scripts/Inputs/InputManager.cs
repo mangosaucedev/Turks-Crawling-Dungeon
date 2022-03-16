@@ -34,6 +34,8 @@ namespace TCD.Inputs
             KeyEventManager.Subscribe(KeyCommand.Enter, KeyState.PressedThisFrame, e => { ConfirmAction(); });
             KeyEventManager.Subscribe(KeyCommand.Rest, KeyState.PressedThisFrame, e => { Rest(); });
             KeyEventManager.Subscribe(KeyCommand.Throw, KeyState.PressedThisFrame, e => { OpenView("Throw Object List"); });
+            KeyEventManager.Subscribe(KeyCommand.ZoomIn, KeyState.PressedThisFrame, e => { ZoomIn(); });
+            KeyEventManager.Subscribe(KeyCommand.ZoomOut, KeyState.PressedThisFrame, e => { ZoomOut(); });
         }
 
         private void Update()
@@ -156,6 +158,18 @@ namespace TCD.Inputs
         private void OnRestComplete()
         {
             MessageLog.Add("You finished resting.");
+        }
+
+        private void ZoomIn()
+        {
+            MainCamera mainCamera = ServiceLocator.Get<MainCamera>();
+            mainCamera.ZoomIn();
+        }
+
+        private void ZoomOut()
+        {
+            MainCamera mainCamera = ServiceLocator.Get<MainCamera>();
+            mainCamera.ZoomOut();
         }
     }
 }

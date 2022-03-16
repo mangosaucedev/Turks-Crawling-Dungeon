@@ -64,6 +64,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 751431535465374539, guid: 332d721240bd70a47919fbf236cd0141, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 751431535465374539, guid: 332d721240bd70a47919fbf236cd0141, type: 3}
       propertyPath: m_Colors.m_DisabledColor.a
       value: 0.11764706
       objectReference: {fileID: 0}

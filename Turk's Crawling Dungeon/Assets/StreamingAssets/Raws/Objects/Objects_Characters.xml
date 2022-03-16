@@ -38,6 +38,8 @@
 
 		<Part Name="Movement"/>
 
+		<Part Name="Outlined"/>
+
 		<Part Name="Wallet"/>
 
 		<Part Name="Brain">
@@ -89,7 +91,12 @@
 		<Part Name="PlayerBrain">
 			<Var Name="Faction">Player</Var>
 		</Part>
-		
+
+		<Part Name="PlayerLight">
+			<Var Name="LightName">Sprite Light</Var>
+			<Var Name="Intensity">1</Var>
+		</Part>
+
 		<Part Name="GameResetOnDestroy"/>
 		
 		<Part Name="Invulnerable"/>

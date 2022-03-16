@@ -6,6 +6,6 @@ namespace TCD.Inputs
 {
     public static class KeybindingInfo
     {
-        public static string Path => Application.persistentDataPath + "/keybindings.json";
+        public static string Path => Application.persistentDataPath + "/Keybindings.json";
     }
 }

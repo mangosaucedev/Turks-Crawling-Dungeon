@@ -13,6 +13,7 @@ namespace TCD.Objects
         public Deactivator deactivator;
         public PartCollection parts;
         public Transform partsParent;
+        public LocalVarCollection localVars = new LocalVarCollection();
         [SerializeField] private SpriteRenderer spriteRenderer;
 
         public SpriteRenderer SpriteRenderer
@@ -36,15 +37,9 @@ namespace TCD.Objects
 
         private void FindPartsParentTransform()
         {
-            foreach (Transform child in transform)
-            {
-                if (child.name == "Parts")
-                {
-                    partsParent = child;
-                    return;
-                }
-            }
-            ExceptionHandler.Handle(new ObjectException($"Could not find parent transform for object '{name}'!"));
+            partsParent = transform.Find("Parts");
+            if (!partsParent)
+                ExceptionHandler.Handle(new ObjectException($"Could not find parent transform for object '{name}'!"));
         }
 
         public bool FireEvent<T>(ILocalEventHandler target, T e) where T : LocalEvent =>

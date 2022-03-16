@@ -75,11 +75,17 @@ namespace TCD.UI
             return button;
         }
 
-        public virtual void OnSetActive() => interactable = true;
-        
+        public virtual void OnSetActive()
+        {
+            //DebugLogger.Log(name + " has been set active by view.");
+            interactable = true;
+        }
 
-        public virtual void OnSetInactive() => interactable = false;
-        
+        public virtual void OnSetInactive()
+        {
+            //DebugLogger.Log(name + " has been set inactive by view.");
+            interactable = false;
+        }
 
         protected virtual bool IsInteractive()
         {

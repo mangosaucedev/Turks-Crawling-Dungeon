@@ -6,5 +6,9 @@
 		<Zone>Level0</Zone>
 		<Zone>Level0</Zone>
 	</Dungeon>
+
+	<Dungeon Name="Tutorial">
+		<Zone>Level0</Zone>
+	</Dungeon>
 	
 </Dungeons>

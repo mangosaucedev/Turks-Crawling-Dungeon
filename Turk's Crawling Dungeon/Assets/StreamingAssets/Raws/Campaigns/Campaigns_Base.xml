@@ -8,6 +8,11 @@
 		<Dungeon>TestDungeon</Dungeon>
 	</Campaign>
 
+	<Campaign Name="Tutorial">
+		<Class>Hellion</Class>
+		<Dungeon>Tutorial</Dungeon>
+	</Campaign>
+
 	<Campaign Name="Limbicum">
 		<Class>Hellion</Class>
 		<Dungeon>Hypothalamus</Dungeon>

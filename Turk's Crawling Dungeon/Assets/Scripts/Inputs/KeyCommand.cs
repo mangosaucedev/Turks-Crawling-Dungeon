@@ -20,6 +20,8 @@ namespace TCD.Inputs
         //
         Enter,
         Cancel,
+        ZoomIn,
+        ZoomOut,
         // Actions
         Interact,
         InteractAdvanced,

@@ -12,7 +12,7 @@ namespace TCD.IO.Serialization
     {
         public string blueprintName;
         public List<SavedPart> parts = new List<SavedPart>();
-        public Vector2IntSurrogate position;
+        public SerializableVector2Int position;
     
         [NonSerialized] private BaseObject baseObject;
 
@@ -25,7 +25,7 @@ namespace TCD.IO.Serialization
         private void SerializeObject()
         {
             blueprintName = baseObject.name;
-            position = new Vector2IntSurrogate(baseObject.cell.Position);
+            position = new SerializableVector2Int(baseObject.cell.Position);
             foreach (Part part in baseObject.parts.Parts)
                 parts.Add(new SavedPart(part));
         }

@@ -3,52 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 using TCD.UI;
 
-namespace TCD.Cinematics.Dialogue
+namespace TCD.Cinematics.Dialogues
 {
-    [ContainsGameStatics]
     public static class DialogueHandler 
     {
-        public static bool inDialogue;
-        public static DialogueNode currentNode;
-        [GameStatic(null)] public static List<DialogueNode> oneShotDialoguesPlayed;
+        public static bool isInDialogue;
 
-        public static bool GoToDialogueNode(string nodeName)
+        private static Dialogue currentDialogue;
+        private static HashSet<Dialogue> oneShotDialogues = new HashSet<Dialogue>();
+
+        public static Dialogue CurrentDialogue => currentDialogue;
+
+        public static bool GoToDialogueNode(string name)
         {
-            if (oneShotDialoguesPlayed == null)
-                oneShotDialoguesPlayed = new List<DialogueNode>();
+            Dialogue dialogue = Assets.Get<Dialogue>(name);
+            return GoToDialogueNode(dialogue);
+        }
 
-            if (string.IsNullOrEmpty(nodeName))
+        public static bool GoToDialogueNode(Dialogue dialogue)
+        {
+            if (dialogue == null)
             {
                 EndDialogue();
-                return false;
+                return true;
             }
 
-            DialogueNode node = DialogueNodeFactory.Retrieve(nodeName);
-
-            if (oneShotDialoguesPlayed.Contains(node))
+            if (oneShotDialogues.Contains(dialogue))
                 return false;
-            else if (node.isOneShot)
-                oneShotDialoguesPlayed.Add(node);
 
-            if (!inDialogue)
-                BeginDialogue();
+            if (dialogue.oneShot)
+                oneShotDialogues.Add(dialogue);
 
-            currentNode = node;      
-            DialogueView view = ServiceLocator.Get<DialogueView>();
-            view.DisplayDialogue(currentNode);
+            currentDialogue = dialogue;
+            if (!isInDialogue)
+                StartDialogue();
             return true;
-        }
-        
-        private static void BeginDialogue()
-        {
-            inDialogue = true;
-            ViewManager.Open("Dialogue View");
         }
 
         public static void EndDialogue()
         {
-            inDialogue = false;
+            isInDialogue = false;
+            currentDialogue = null;
             ViewManager.Close("Dialogue View");
+        }
+
+        private static void StartDialogue()
+        {
+            isInDialogue = true;
+            ViewManager.Open("Dialogue View");
         }
     }
 }

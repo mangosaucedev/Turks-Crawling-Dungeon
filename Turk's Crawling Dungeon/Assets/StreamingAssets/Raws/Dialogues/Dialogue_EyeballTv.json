@@ -1,0 +1,85 @@
+{
+    "dialogue": [
+        {
+            "name": "EyeballTv0_0",
+            "text": "An enormous, wet eyeball stares out into empty space from atop a tripod. Its pupil dilates and contracts sporadically. Suddenly, it whirls to fixate its gaze on... you. The pupil's contractions cease, and the void within beckons to you.",
+            "speakerName": "PsycheMonologue",
+            "oneShot": "true",
+            "transitions": {},
+            "choices": {
+                "choices": [
+                    {
+                        "text": "What..?",
+                        "transitions": {
+                            "transitions": [
+                                {
+                                    "node": "EyeballTv0_0R1A"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "text": "(Stare into it.)",
+                        "transitions": {
+                            "transitions": [
+                                {
+                                    "node": "EyeballTv0_1"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+
+        {
+            "name": "EyeballTv0_0R1A",
+            "text": "Throbbing red veins fringe the milky orb. The iris shimmers with moisture, the ridges of its musculature clearly visible.",
+            "speakerName": "PsycheMonologue",
+            "transitions": {
+                "transitions": [
+                    {
+                        "node": "EyeballTv0_0R1B"
+                    }
+                ]
+            },
+            "choices": {}
+        },
+
+        {
+            "name": "EyeballTv0_0R1B",
+            "text": "Your vision swirls around the eyeball as if being flushed inwards, towards the gaping pupil. You feel an overpowering urge to stare into its darkness...",
+            "speakerName": "PsycheMonologue",
+            "transitions": {
+                "transitions": [
+                    {
+                        "node": "EyeballTv0_1"
+                    }
+                ]
+            },
+            "choices": {}
+        },
+
+        {
+            "name": "EyeballTv0_1",
+            "text": "You cannot resist the compulsion to meet the thing's gaze. You peer into the void and fixate on the blackness. After a few moments, you see...",
+            "speakerName": "PsycheMonologue",
+            "transitions": {
+                "transitions": [
+                    {
+                        "node": "EyeballTv0_2"
+                    }
+                ]
+            },
+            "choices": {}
+        },
+
+        {
+            "name": "EyeballTv0_2",
+            "text": "...Nothing. Nothing but emptiness dwells within the thing's dark pupil. You frown with disappointment, and the urge to stare melts from your mind.",
+            "speakerName": "PsycheMonologue",
+            "transitions": {},
+            "choices": {}
+        }
+    ]
+}

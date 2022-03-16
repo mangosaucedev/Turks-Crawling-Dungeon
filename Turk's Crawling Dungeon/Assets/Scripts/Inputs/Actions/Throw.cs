@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using TCD.Indicators;
+using TCD.Graphics.Indicators;
 using TCD.Objects;
 using TCD.Objects.Parts;
 using TCD.TimeManagement;

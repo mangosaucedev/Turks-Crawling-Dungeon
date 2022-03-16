@@ -35,6 +35,8 @@ namespace TCD.Inputs
             Add(KeyCommand.OpenHealth, KeyCode.H);
             Add(KeyCommand.OpenHelp, KeyCode.Slash, KeyCode.LeftShift);
             Add(KeyCommand.OpenStatus, KeyCode.Z);
+            Add(KeyCommand.ZoomIn, KeyCode.KeypadPlus);
+            Add(KeyCommand.ZoomOut, KeyCode.KeypadMinus);
             // TODO - Delete these later after 8/13/21
             Add(KeyCommand.MoveNorthAlt, KeyCode.UpArrow);
             Add(KeyCommand.MoveSouthAlt, KeyCode.DownArrow);

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
-using TCD.Cinematics.Dialogue;
+using TCD.Cinematics.Dialogues;
 using TCD.Inputs;
+using TCD.Texts;
 
 namespace TCD.UI
 {
@@ -13,7 +14,7 @@ namespace TCD.UI
         [SerializeField] private Text text;
         [SerializeField] private VerticalLayoutGroup layoutGroup;
 
-        private DialogueNode currentNode;
+        private Dialogue currentNode;
         private int index;
         private WaitForSecondsRealtime printWait;
         private bool isPrinting;
@@ -46,42 +47,47 @@ namespace TCD.UI
 
         private void OnBeforeDialogueUpdated(BeforeDialogueUpdatedEvent e) 
         {
-            DebugLogger.Log($"Dialogue display skipping print: {e.Name} event!");
-            FinishPrinting();
+            if (FinishPrinting())
+                DebugLogger.Log($"Dialogue display skipping print: {e.Name} event!");
         }
-        private void FinishPrinting()
+        private bool FinishPrinting()
         {
             if (isPrinting && canSkipPrinting)
             {
                 isPrinting = false;
                 StopAllCoroutines();
+                StartCoroutine(EnableResponseButtonsRoutine());
                 text.text = $"{GetSpeakerName()} - {fullText}";
                 LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform) layoutGroup.transform);
                 LayoutRebuilder.ForceRebuildLayoutImmediate(ParentRectTransform);
+                return true;
             }
+            return false;
         }
 
         private void OnKey(KeyEvent e)
         {
-            if (e.context.command == KeyCommand.Interact && e.context.state == KeyState.PressedThisFrame && isPrinting)
-            {
+            if (e.context.command == KeyCommand.Interact && 
+                e.context.state == KeyState.PressedThisFrame &&
+                FinishPrinting())
                 DebugLogger.Log("Dialogue display skipping print: Interact button pressed!");
-                FinishPrinting();
-            }  
         }
 
-        public void DisplayDialogue(DialogueNode node) =>
+        public void DisplayDialogue(Dialogue node) =>
             StartCoroutine(DisplayDialogueRoutine(node));
 
 
-        public IEnumerator DisplayDialogueRoutine(DialogueNode node)
+        public IEnumerator DisplayDialogueRoutine(Dialogue node)
         {
             currentNode = node;
             isPrinting = true;
             printWait = new WaitForSecondsRealtime(0.05f);
-            fullText = currentNode.text.ToString();
+            fullText = new GameText(node.text);
             while (index < fullText.Length)
             {
+                //DialogueView.currentResponseButtons.ForEach(b => DebugLogger.Log(
+                //    b.name + " interactable: " + b.interactable + " isInteractable: " + b.IsInteractable()));
+
                 index++;
                 
                 stringBuilder.Clear();
@@ -99,6 +105,15 @@ namespace TCD.UI
         }
 
         private string GetSpeakerName() => 
-            $"<color=#{ColorUtility.ToHtmlStringRGBA(currentNode.speaker.Color)}>{currentNode.speaker.displayName}</color>";
+            $"<color=#{ColorUtility.ToHtmlStringRGBA(currentNode.Speaker.Color)}>{currentNode.Speaker.displayName}</color>";
+
+        private IEnumerator EnableResponseButtonsRoutine()
+        {
+            yield return null;
+            DebugLogger.Log("Enabling dialogue response buttons!");
+            DialogueView.currentResponseButtons.ForEach(b => b.interactable = true);
+            ViewManager manager = ServiceLocator.Get<ViewManager>();
+            manager.SelectTopLeftSelectable();
+        }
     }
 }

@@ -1,66 +1,112 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace TCD.Texts
 {
     public class GameText
     {
-        private const string INVALID_PAGE = "INVALID PAGE INDEX";
-        private const int FULL_TEXT = -1;
+        private const string PATTERN =
+            @"(?<command>((?!\<(i|b)\>|\<(size|color|material|quad))(\<(?<type>[a-zA-Z0-9]+)((\s*)\=(\s*)(((?<argument>[a-zA-Z0-9_]+)|)(,|))+|)(\>(?<text>([^\<\>]+|))(\<\/\>)|\/\>))))";
 
-        private static StringBuilder stringBuilder = new StringBuilder();
+        private static Regex regex = new Regex(PATTERN, RegexOptions.IgnoreCase);
 
         public string name;
-        public List<string> pages = new List<string>();
+        public List<Command> commands = new List<Command>();
 
-        public GameText(params string[] pages)
+        private string text;
+        private string parsedText;
+        private Match currentMatch;
+
+        public GameText(string text)
         {
-            foreach (string page in pages)
-                this.pages.Add(page);
+            this.text = text;
+            ParseString();
         }
 
-        public GameText(List<string> pages)
-        {
-            this.pages = pages;
-        }
+        public static implicit operator string(GameText text) => text.ToString();
 
-        public string ToRichText(int page)
-        {
-            if (pages.Count > page)
-                return pages[page];
-            return INVALID_PAGE;
-        }
+        public override string ToString() => parsedText;
 
-        public string ToRichText(int page, int length = FULL_TEXT)
+        private void ParseString()
         {
-            if (pages.Count > page)
+            parsedText = text;
+            currentMatch = regex.Match(parsedText);
+            while (currentMatch.Success)
             {
-                if (length == FULL_TEXT)
-                    return pages[page];
-                return pages[page].Substring(0, length);
+                ParseCommand();
+                currentMatch = regex.Match(parsedText);
             }
-            return INVALID_PAGE;
         }
 
-        public override string ToString() => AllPagesToRichText(FULL_TEXT);
-
-        public string ToString(int length = FULL_TEXT) => AllPagesToRichText(length);
-
-        private string AllPagesToRichText(int length = FULL_TEXT)
+        private void ParseCommand()
         {
-            stringBuilder.Clear();
-            for (int i = 0; i < pages.Count; i++)
+            CommandType commandType = GetCommandType();
+
+            if (commandType > CommandType.Unknown)
             {
-                string page = pages[i];
-                stringBuilder.Append(page);
-                if (i < pages.Count - 1)
-                    stringBuilder.Append("\n\n");
+                Command command = CommandFactory.GetFromType(commandType);
+                command.arguments = GetCommandArguments();
+
+                string text = GetText();
+                command.HandleText(ref text);
+                ExtractTextFromCommand(text);
+
+                command.startIndex = currentMatch.Index;
+                command.endIndex = currentMatch.Index + command.Length;
+                commands.Add(command);
             }
-            if (length == FULL_TEXT)
-                return stringBuilder.ToString();
-            return stringBuilder.ToString().Substring(0, length);
+            else
+                ExtractTextFromCommand(GetText());
+        }
+
+        private CommandType GetCommandType()
+        {
+            Group group = currentMatch.Groups["type"];
+            
+            if (!group.Success)
+                throw new CommandParseException(CommandParseException.TYPE_NOT_FOUND);
+            
+            string type = group.Value;
+            return CommandFactory.GetCommandType(type);
+        }
+
+        private string[] GetCommandArguments()
+        {
+            Group group = currentMatch.Groups["argument"];
+
+            if (!group.Success)
+                return new string[] { };
+
+            CaptureCollection captures = group.Captures;
+            int count = captures.Count;
+            string[] arguments = new string[count];
+
+            for (int i = 0; i < count; i++)
+            {
+                Capture capture = captures[i];
+                arguments[i] = capture.Value;
+            }
+
+            return arguments;
+        }
+
+        private string GetText()
+        {
+            Group group = currentMatch.Groups["text"];
+            
+            if (!group.Success)
+                return "";
+
+            return group.Value;
+        }
+
+        private void ExtractTextFromCommand(string text)
+        {
+            parsedText = parsedText.Remove(currentMatch.Index, currentMatch.Value.Length);
+            parsedText = parsedText.Insert(currentMatch.Index, text);
         }
     }
 }

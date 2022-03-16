@@ -4,7 +4,7 @@ using UnityEngine;
 using TCD.Objects;
 using TCD.Objects.Parts;
 using TCD.Objects.Parts.Talents;
-using TCD.Indicators;
+using TCD.Graphics.Indicators;
 using TCD.Texts;
 
 namespace TCD.Inputs.Actions

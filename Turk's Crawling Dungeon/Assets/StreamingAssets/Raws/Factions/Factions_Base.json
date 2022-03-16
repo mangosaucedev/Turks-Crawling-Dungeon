@@ -1,0 +1,28 @@
+{
+    "factions": [
+        {
+            "name": "Player",
+            "displayName": "Turk",
+            "relations": [
+                {
+                    "faction": "Beast",
+                    "relation": "-250"
+                },
+                {
+                    "faction": "Oxyte",
+                    "relation": "-400"
+                }
+            ]
+        },
+
+        {
+            "name": "Beast",
+            "displayName": "Beasts"
+        },
+
+        {
+            "name": "Oxyte",
+            "displayName": "Oxytes"
+        }
+    ]
+}

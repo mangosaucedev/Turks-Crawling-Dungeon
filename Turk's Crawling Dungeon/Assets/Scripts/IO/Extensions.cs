@@ -9,5 +9,7 @@ namespace TCD.IO
         public static string Dialogue => "json";
 
         public static string Speaker => "json";
+
+        public static string Faction => "json";
     }
 }

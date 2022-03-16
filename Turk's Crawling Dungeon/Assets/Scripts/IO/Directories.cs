@@ -16,6 +16,8 @@ namespace TCD.IO
 
         public static string Speakers => GetDirectory(Raws + "Speakers");
 
+        public static string Factions => GetDirectory(Raws + "Factions");
+
         #endregion
 
         private static string GetDirectory(string path)

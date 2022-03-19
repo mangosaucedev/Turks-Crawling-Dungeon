@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 namespace TCD
 {
@@ -23,11 +22,11 @@ namespace TCD
         }
 #endif
 
-        private static Dictionary<Type, AssetCollection> collections = 
+        private static Dictionary<Type, AssetCollection> collections =
             new Dictionary<Type, AssetCollection>();
 
 #if UNITY_EDITOR
-        private static Dictionary<Type, AssetList> assetListsByType = 
+        private static Dictionary<Type, AssetList> assetListsByType =
             new Dictionary<Type, AssetList>();
         private static List<AssetList> viewableAssets = new List<AssetList>();
         [SerializeField] private List<AssetList> assets;
@@ -69,6 +68,13 @@ namespace TCD
             collection = new AssetCollection();
             collections[type] = collection;
             return collection;
+        }
+
+        public static List<T> FindAll<T>(string nameContains = "")
+        {
+            Type type = typeof(T);
+            AssetCollection assetCollection = GetAssetCollection(type);
+            return assetCollection.FindAll<T>(nameContains);
         }
 
 #if UNITY_EDITOR

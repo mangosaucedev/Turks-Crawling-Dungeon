@@ -9,6 +9,7 @@ namespace TCD
     {
         public Dictionary<string, object> collection =
             new Dictionary<string, object>();
+        public HashSet<string> assetNames = new HashSet<string>();
 
         public T Get<T>(string name)
         {
@@ -22,7 +23,24 @@ namespace TCD
 
         public bool Exists(string name) => collection.ContainsKey(name);
 
-        public void Add(string name, object obj) =>
+        public void Add(string name, object obj)
+        {
+            assetNames.Add(name);
             collection[name] = obj;
+        }
+
+        public List<T> FindAll<T>(string nameContains)
+        {
+            List<T> assets = new List<T>();
+            foreach (string name in assetNames)
+            {
+                if (name.Contains(nameContains))
+                {
+                    T asset = (T)collection[name];
+                    assets.Add(asset);
+                }
+            }
+            return assets;
+        }
     }
 }

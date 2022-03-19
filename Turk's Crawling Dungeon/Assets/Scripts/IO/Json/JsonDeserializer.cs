@@ -9,7 +9,18 @@ namespace TCD.IO
 {
     public abstract class JsonDeserializer<T> : IDeserializer
     {
+        protected int filesToDeserialize;
         protected int deserializedFiles;
+
+        public float Progress
+        {
+            get
+            {
+                if (filesToDeserialize == 0)
+                    return 1f;
+                return (float) deserializedFiles / filesToDeserialize;
+            }
+        }
 
         protected abstract string FullPath { get; }
         
@@ -17,9 +28,10 @@ namespace TCD.IO
 
         public virtual IEnumerator DeserializeAll()
         {
-            var paths = from path in Directory.GetFiles(FullPath, $"*.{Extension}")
+            List<string> paths = (from path in Directory.GetFiles(FullPath, $"*.{Extension}")
                         where !path.EndsWith(".meta")
-                        select path;
+                        select path).ToList();
+            filesToDeserialize = paths.Count;
             foreach (string path in paths)
             {
                 try

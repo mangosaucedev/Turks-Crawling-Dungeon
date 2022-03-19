@@ -41,7 +41,7 @@ namespace TCD
 
         private void CheckIfMouseOverObject()
         {
-            if (EventSystem.current.IsPointerOverGameObject() || !InputManager.IsActive)
+            if (EventSystem.current.IsPointerOverGameObject() || !KeyEventManager.GetInputGroupEnabled(InputGroup.Gameplay))
             {
                 if (isShowingTooltip)
                     HideTooltip();

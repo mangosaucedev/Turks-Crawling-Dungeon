@@ -3,12 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TCD
+namespace TCD.Objects.Blueprints
 {
     [Serializable]
-    public class ObjectBlueprint_v2
+    public class ObjectBlueprint_v2Collection 
     {
-        public string name;
-        
+        public ObjectBlueprint_v2[] blueprints;
     }
 }

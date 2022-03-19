@@ -18,6 +18,8 @@ namespace TCD.IO
 
         public static string Factions => GetDirectory(Raws + "Factions");
 
+        public static string Objects => GetDirectory(Raws + "Objects_v2");
+
         #endregion
 
         private static string GetDirectory(string path)

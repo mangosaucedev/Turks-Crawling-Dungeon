@@ -30,7 +30,7 @@ namespace TCD
             AudioClipLoader audioClipLoader = new AudioClipLoader();
             yield return audioClipLoader.LoadCoreAudioClips();
 
-            SpriteLoader spriteLoader = new SpriteLoader();
+            TextureLoader spriteLoader = new TextureLoader();
             yield return spriteLoader.LoadCoreSprites();
 
             ColorDeserializer colorDeserializer = new ColorDeserializer();
@@ -98,13 +98,14 @@ namespace TCD
         private static IEnumerator DeserializeAssets()
         {
             DebugLogger.Log("Deserializing assets...");
+            LoadingManager loadingManager = ServiceLocator.Get<LoadingManager>();
             foreach (Type type in assemblyTypes)
             {
                 AssetDeserializerAttribute attribute = type.GetCustomAttribute<AssetDeserializerAttribute>();
                 if (attribute != null)
                 {
                     IDeserializer deserializer = (IDeserializer) Activator.CreateInstance(type);
-                    yield return deserializer.DeserializeAll();
+                    yield return loadingManager.EnqueueLoadingOperationRoutine(new AssetLoadingOperation(deserializer));
                 }
             }
         }

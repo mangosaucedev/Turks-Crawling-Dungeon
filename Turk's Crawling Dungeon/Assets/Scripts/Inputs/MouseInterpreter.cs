@@ -6,7 +6,7 @@ using TCD.Inputs.Actions;
 
 namespace TCD.Inputs
 {
-    public class MouseInterpreter 
+    public class MouseInterpreter : IInterpreter
     {
         private PlayerActionManager PlayerActionManager =>
             ServiceLocator.Get<PlayerActionManager>();
@@ -14,9 +14,11 @@ namespace TCD.Inputs
         private MouseCursor MouseCursor =>
             ServiceLocator.Get<MouseCursor>();
 
+        public InputGroup InputGroup => InputGroup.Gameplay;
+
         private EventSystem EventSystem => EventSystem.current;
 
-        public void UpdateMouse()
+        public void Update()
         {
             if (Input.GetMouseButtonDown(0))
                 OnLeftMouseButtonDown();
@@ -26,7 +28,7 @@ namespace TCD.Inputs
 
         private void OnLeftMouseButtonDown()
         {
-            if (EventSystem.IsPointerOverGameObject())
+            if (EventSystem.IsPointerOverGameObject() || !KeyEventManager.GetInputGroupEnabled(InputGroup.Gameplay)) 
                 return;
             if (PlayerActionManager.currentAction == null)
             {

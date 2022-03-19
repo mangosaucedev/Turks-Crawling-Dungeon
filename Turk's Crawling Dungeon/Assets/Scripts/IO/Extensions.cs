@@ -11,5 +11,7 @@ namespace TCD.IO
         public static string Speaker => "json";
 
         public static string Faction => "json";
+
+        public static string Object => "json";
     }
 }

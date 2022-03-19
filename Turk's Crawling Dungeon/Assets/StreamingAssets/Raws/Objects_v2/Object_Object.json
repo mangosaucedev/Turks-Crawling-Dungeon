@@ -1,0 +1,31 @@
+{
+    "blueprints": [
+        {
+            "name": "Object",
+            "inherits": "Base Object",
+            "components": [
+                {
+                    "type": "(Part)Render",
+                    "fields": [
+                        {
+                            "name": "displayName",
+                            "value": "Nameless Object"
+                        },
+                        {
+                            "name": "displayNamePlural",
+                            "value": "Nameless Objects"
+                        },
+                        {
+                            "name": "description",
+                            "value": "Nothing to see here."
+                        },
+                        {
+                            "name": "sprite",
+                            "value": "PlaceholderGuy"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

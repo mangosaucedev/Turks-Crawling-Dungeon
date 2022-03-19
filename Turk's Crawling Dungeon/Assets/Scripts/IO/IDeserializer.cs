@@ -6,6 +6,8 @@ namespace TCD
 {
     public interface IDeserializer
     {
+        float Progress { get; }
+
         IEnumerator DeserializeAll();
     }
 }

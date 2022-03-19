@@ -7,7 +7,7 @@ using TCD.Inputs.Actions;
 
 namespace TCD.Inputs
 {
-    public class MovementInterpreter
+    public class MovementInterpreter : IInterpreter
     {
         private const float TIME_BETWEEN_MOVES = 0.2f;
         private const float TIME_TO_FAST_MOVE = 1f;
@@ -20,9 +20,11 @@ namespace TCD.Inputs
         private float movementTimer = TIME_BETWEEN_MOVES;
         private float fastMovementTimer = TIME_TO_FAST_MOVE;
 
+        public InputGroup InputGroup => InputGroup.Gameplay;
+
         private BaseObject Player => PlayerInfo.currentPlayer;
 
-        public void UpdateMovement()
+        public void Update()
         {
             UpdateMovementVectorPressed();
 
@@ -158,7 +160,7 @@ namespace TCD.Inputs
 
         private bool MovePlayer(Vector2Int direction, bool isForced = false)
         {
-            if (InputManager.IsActive)
+            if (KeyEventManager.GetInputGroupEnabled(InputGroup.Gameplay))
             {
                 Movement movement = Player.parts.Get<Movement>();
                 return movement.TryToMove(direction, isForced);

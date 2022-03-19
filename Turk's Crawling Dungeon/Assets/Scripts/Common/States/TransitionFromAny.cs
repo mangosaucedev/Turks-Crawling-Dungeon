@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TCD
 {
-    public class BlueprintField_v2 : MonoBehaviour
+    public class TransitionFromAny : MonoBehaviour
     {
         // Start is called before the first frame update
         void Start()

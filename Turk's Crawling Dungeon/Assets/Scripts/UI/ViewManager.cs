@@ -11,6 +11,10 @@ namespace TCD.UI
     {
         public static List<ActiveView> activeViews = new List<ActiveView>();
 
+#if UNITY_EDITOR
+        [SerializeField] private string currentView;
+#endif
+
         private Coroutine selectTopLeftSelectableCoroutine;
 
         private void OnEnable()
@@ -25,10 +29,28 @@ namespace TCD.UI
             EventManager.StopListening<ViewClosedEvent>(this);
         }
 
+        public static string GetActiveView()
+        {
+            string viewName = "Null";
+            if (activeViews.Count > 0)
+            {
+                ActiveView activeView = activeViews[0];
+                foreach (ActiveView view in activeViews)
+                {
+                    if (view.isInteractive && (view.locksInput || !activeView.locksInput))
+                        activeView = view;
+                }
+                viewName = activeView.name;
+            }
+#if UNITY_EDITOR
+            ServiceLocator.Get<ViewManager>().currentView = viewName;
+#endif
+            return viewName;
+        }
+
         private void OnViewOpened(ViewOpenedEvent e) => SelectTopLeftSelectable();
 
         private void OnViewClosed(ViewClosedEvent e) => SelectTopLeftSelectable();
-
 
         public void SelectTopLeftSelectable()
         {
@@ -133,6 +155,18 @@ namespace TCD.UI
             Open(viewName);
             while (TryFind(viewName, out ActiveView activeView))
                 yield return null;
+        }
+
+        public static void CloseAllInactive()
+        {
+            string activeView = GetActiveView();
+            for (int i = activeViews.Count - 1; i >= 0; i--)
+            {
+                ActiveView view = activeViews[i];
+                string viewName = view.name;
+                if (viewName != activeView)
+                    Close(viewName);
+            }
         }
     }
 }

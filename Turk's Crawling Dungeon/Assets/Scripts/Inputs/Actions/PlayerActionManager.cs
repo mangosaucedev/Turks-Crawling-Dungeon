@@ -14,13 +14,16 @@ namespace TCD.Inputs.Actions
         public PlayerAction currentAction;
         public int doNotActivateActionForFrames;
 
+        private Coroutine currentActionRoutine;
+
 #if UNITY_EDITOR
         [SerializeField] private List<string> actionNames = new List<string>();
 #endif
 
         private void Awake()
         {
-            KeyEventManager.Subscribe(KeyCommand.Cancel, KeyState.PressedThisFrame, e => { CancelCurrentAction(); });
+            KeyEventManager.Subscribe(InputGroup.Gameplay, KeyCommand.Cancel, KeyState.PressedThisFrame, e => { CancelCurrentAction(); });
+
             Add(new Interact(), KeyCommand.Interact);
             Add(new InteractAdvanced(), KeyCommand.InteractAdvanced);
             Add(new Look(), KeyCommand.Look);
@@ -38,7 +41,7 @@ namespace TCD.Inputs.Actions
             {
                 actions.Add(action);
                 commands.Add(action, command);
-                KeyEventManager.Subscribe(command, KeyState.PressedThisFrame, e => { TryStartAction(action); });
+                KeyEventManager.Subscribe(InputGroup.Gameplay, command, KeyState.PressedThisFrame, e => { TryStartAction(action); });
 #if UNITY_EDITOR
                 actionNames.Add(action.Name);
 #endif
@@ -62,7 +65,7 @@ namespace TCD.Inputs.Actions
             {
                 actions.Remove(action);
                 KeyCommand command = commands[action];
-                KeyEventManager.Unsubscribe(command, KeyState.PressedThisFrame, e => { TryStartAction(action); });
+                KeyEventManager.Unsubscribe(InputGroup.Gameplay, command, KeyState.PressedThisFrame, e => { TryStartAction(action); });
                 commands.Remove(action);
 #if UNITY_EDITOR
                 actionNames.Remove(action.Name);
@@ -82,7 +85,7 @@ namespace TCD.Inputs.Actions
 
         public void TryStartAction(string actionName, bool forced = false)
         {
-            if (!InputManager.IsActive || doNotActivateActionForFrames > 0)
+            if (!KeyEventManager.GetInputGroupEnabled(InputGroup.Gameplay) || doNotActivateActionForFrames > 0)
                 return;
             PlayerAction action = Get(actionName);
             if (action != null)
@@ -91,7 +94,7 @@ namespace TCD.Inputs.Actions
 
         public void TryStartAction(PlayerAction action, bool forced = false)
         {
-            if ((!InputManager.IsActive || doNotActivateActionForFrames > 0) && !forced)
+            if ((!KeyEventManager.GetInputGroupEnabled(InputGroup.Gameplay) || doNotActivateActionForFrames > 0) && !forced)
                 return;
             if (currentAction != null)
                 CancelCurrentAction();
@@ -100,7 +103,6 @@ namespace TCD.Inputs.Actions
             if (currentAction != null)
             {
                 MovementInterpreter.movementMode = currentAction.MovementMode;
-                InputManager.AddDeactivatingCondition(currentAction);
                 EventManager.Send(new PlayerActionStartedEvent(action));
                 DebugLogger.Log($"Player has started action '{action.Name}'.");
             }
@@ -117,7 +119,6 @@ namespace TCD.Inputs.Actions
 
         private void OnActionEnded()
         {
-            InputManager.RemoveDeactivatingCondition(currentAction);
             EventManager.Send(new PlayerActionEndedEvent());
             MovementInterpreter.movementMode = MovementMode.Free;
             MainCursor mainCursor = ServiceLocator.Get<MainCursor>();
@@ -133,6 +134,7 @@ namespace TCD.Inputs.Actions
                 CancelCurrentAction();
                 return;
             }
+            this.EnsureCoroutineStopped(ref currentActionRoutine);
             int distance = Mathf.FloorToInt(Vector2Int.Distance(cell.Position, PlayerInfo.currentPlayer.cell.Position));
             if (distance > currentAction.GetRange())
             {
@@ -142,14 +144,20 @@ namespace TCD.Inputs.Actions
             }
             if (cell.objects.Count == 1 && cell.objects[0].parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer())
             {
-                StartCoroutine(currentAction.OnObject(cell.objects[0]));
+                StartCoroutine(StartActionCoroutine(currentAction.OnObject(cell.objects[0])));
                 DebugLogger.Log($"Player has used action '{currentAction.Name}' on object @{cell.Position}.");
             }
             else
             {
-                StartCoroutine(currentAction.OnCell(cell));
+                StartCoroutine(StartActionCoroutine(currentAction.OnCell(cell)));
                 DebugLogger.Log($"Player has used action '{currentAction.Name}' on cell @{cell.Position}.");
             }
+            EventManager.Send(new PlayerActionPerformEvent());
+        }
+
+        private IEnumerator StartActionCoroutine(IEnumerator routine)
+        {
+            yield return currentActionRoutine = StartCoroutine(routine);
             OnActionEnded();
         }
     }

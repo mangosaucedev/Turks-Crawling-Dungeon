@@ -8,7 +8,15 @@ namespace TCD.UI
 {
     public class MainMenu : ViewController
     {
+        [SerializeField] private GameObject developerToolsButton;
+
         protected override string ViewName => gameObject.name;
+
+        private void Start()
+        {
+            if ((bool) GlobalVars.Get("bool_DeveloperMode"))
+                developerToolsButton.SetActive(true);
+        }
 
         public void Continue()
         {

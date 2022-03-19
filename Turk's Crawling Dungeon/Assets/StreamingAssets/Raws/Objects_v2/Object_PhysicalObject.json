@@ -1,0 +1,75 @@
+{
+    "blueprints": [
+        {
+            "name": "PhysicalObject",
+            "inherits": "Object",
+            "components": [
+                {
+                    "type": "(Part)Audio",
+                    "fields": [
+                        {
+                            "name": "pickedUp",
+                            "value": "PickupItem0"
+                        },
+                        {
+                            "name": "doorOpened",
+                            "value": "DoorOpen0"
+                        },
+                        {
+                            "name": "doorClosed",
+                            "value": "DoorClose0"
+                        },
+                        {
+                            "name": "hit0",
+                            "value": "HitSplat0"
+                        },
+                        {
+                            "name": "hit1",
+                            "value": "HitSplat1"
+                        },
+                        {
+                            "name": "hit2",
+                            "value": "HitSplat2"
+                        }
+                    ]
+                },
+
+                {
+                    "type": "(Part)Effects.Effects"
+                },
+
+                {
+                    "type": "(Part)Inspectable"
+                },
+
+                {
+                    "type": "(Part)Visible"
+                },
+
+                {
+                    "type": "(Part)PhysicsSim",
+                    "fields": [
+                        {
+                            "name": "BaseWeight",
+                            "value": "0.1"
+                        }
+                    ]
+                },
+
+                {
+                    "type": "(Part)Resources",
+                    "fields": [
+                        {
+                            "name": "hitpoints",
+                            "value": "1"
+                        },
+                        {
+                            "name": "regenerates",
+                            "value": "false"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -811,6 +811,7 @@ GameObject:
   - component: {fileID: 665449645}
   - component: {fileID: 665449646}
   - component: {fileID: 665449647}
+  - component: {fileID: 665449648}
   m_Layer: 0
   m_Name: Game Logic
   m_TagString: Untagged
@@ -857,8 +858,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a79c5a338cc9e4cbb1eb3a1a4fa319, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultCampaignName: Limbicum
+  desiredState: InView
   startupScreen: {fileID: 8413441345987465457, guid: 3522d0bc1ed512344abf52a8ef4d8cfd, type: 3}
+  defaultCampaignName: Limbicum
+  testVars:
+  - bool_DeveloperMode
+  state: 
 --- !u!114 &665449634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -924,7 +929,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 306c15e548541d646bdfeb5d3bd5136d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentDeactivatingConditions: []
 --- !u!114 &665449638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -974,6 +978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9dd9f388c9ae0b40a77c38aa38f9655, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentView: 
 --- !u!114 &665449642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1054,6 +1059,19 @@ MonoBehaviour:
   currentSettings:
     version: 
     entries: []
+--- !u!114 &665449648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665449630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 490635ee8abea2a46a34b71b8a6c8af7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentLoadingOperation: 
 --- !u!1 &797838110
 GameObject:
   m_ObjectHideFlags: 0

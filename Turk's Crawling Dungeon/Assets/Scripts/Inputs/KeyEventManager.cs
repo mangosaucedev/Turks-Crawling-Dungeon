@@ -26,9 +26,8 @@ namespace TCD.Inputs
             }
         }
 #endif
-
-        private static Dictionary<KeyCommand, KeyEventCollection> events = 
-            new Dictionary<KeyCommand, KeyEventCollection>();
+        private static Dictionary<InputGroup, KeyCommandEventCollection> groupedEvents =
+            new Dictionary<InputGroup, KeyCommandEventCollection>();
 
 #if UNITY_EDITOR
         public static List<Keybind> keybinds = new List<Keybind>();
@@ -38,63 +37,50 @@ namespace TCD.Inputs
 
         private void Update()
         {
-            foreach (KeyCommand command in Enum.GetValues(typeof(KeyCommand)))
-                CheckKeyCommandState(command);
+            foreach (InputGroup group in Enum.GetValues(typeof(InputGroup)))
+            {
+                KeyCommandEventCollection eventGroup = GetGroupedEvents(group);
+                if (eventGroup.isEnabled)
+                {
+                    foreach (KeyCommand command in Enum.GetValues(typeof(KeyCommand)))
+                        eventGroup.CheckKeyCommandState(command);
+                }
+            }
 
 #if UNITY_EDITOR
             loadedKeybindings = keybinds;
 #endif
         }
 
-        private static KeyEventCollection GetKeyEventCollection(KeyCommand command)
+        private static KeyCommandEventCollection GetGroupedEvents(InputGroup group)
         {
-            KeyEventCollection keyEventCollection;
-            if (!events.TryGetValue(command, out keyEventCollection))
-                keyEventCollection = RegisterEvents(command);
-            return keyEventCollection;
-        }
-
-        private static void CheckKeyCommandState(KeyCommand command)
-        {
-            foreach (KeyState state in Enum.GetValues(typeof(KeyState)))
+            if (!groupedEvents.TryGetValue(group, out KeyCommandEventCollection eventGroup))
             {
-                if (Keys.GetCommand(command, state))
-                    SendKeyEvent(command, state);
+                eventGroup = new KeyCommandEventCollection();
+                groupedEvents[group] = eventGroup;
             }
+            return eventGroup;
         }
 
-        private static void SendKeyEvent(KeyCommand command, KeyState state)
+        public static bool GetInputGroupEnabled(InputGroup group) =>
+            GetGroupedEvents(group).isEnabled;
+
+        public static void SetInputGroupEnabled(InputGroup group, bool isEnabled = true)
         {
-            KeyEventCollection keyEventCollection = GetKeyEventCollection(command);
-            KeyEventContext context = new KeyEventContext(command, state);
-            keyEventCollection[state]?.Invoke(context);
-            EventManager.Send(KeyEvent.FromPool(context));
-            return;
+            KeyCommandEventCollection eventGroup = GetGroupedEvents(group);
+            eventGroup.isEnabled = isEnabled;
         }
 
-        private static KeyEventCollection RegisterEvents(KeyCommand command)
+        public static void Subscribe(InputGroup group, KeyCommand command, KeyState state, KeyEventDelegate action)
         {
-            KeyEventCollection keyEventCollection = new KeyEventCollection();
-
-            keyEventCollection[KeyState.Released] = delegate { };
-            keyEventCollection[KeyState.ReleasedThisFrame] = delegate { };
-            keyEventCollection[KeyState.Pressed] = delegate { };
-            keyEventCollection[KeyState.PressedThisFrame] = delegate { };
-
-            events[command] = keyEventCollection;
-            return keyEventCollection;
+            KeyCommandEventCollection eventGroup = GetGroupedEvents(group);
+            eventGroup.Subscribe(command, state, action);
         }
 
-        public static void Subscribe(KeyCommand command, KeyState state, KeyEventDelegate action)
+        public static void Unsubscribe(InputGroup group, KeyCommand command, KeyState state, KeyEventDelegate action)
         {
-            KeyEventCollection keyEventCollection = GetKeyEventCollection(command);
-            keyEventCollection[state] += action;
-        }
-
-        public static void Unsubscribe(KeyCommand command, KeyState state, KeyEventDelegate action)
-        {
-            KeyEventCollection keyEventCollection = GetKeyEventCollection(command);
-            keyEventCollection[state] -= action;
+            KeyCommandEventCollection eventGroup = GetGroupedEvents(group);
+            eventGroup.Unsubscribe(command, state, action);
         }
     }
 }

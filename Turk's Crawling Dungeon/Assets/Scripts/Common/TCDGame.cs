@@ -11,6 +11,7 @@ using TCD.Zones.Dungeons;
 
 namespace TCD
 {
+    [ContainsConsoleCommand]
     public class TCDGame : MonoBehaviour
     {
 #if UNITY_WEBPLAYER
@@ -128,7 +129,19 @@ namespace TCD
             EventManager.StopListening<PlayerActionPerformEvent>(this);
             EventManager.StopListening<PlayerActionEndedEvent>(this);
         }
-         
+
+        #region Console Commands
+
+        [ConsoleCommand("set")]
+        public static void CommandGlobalVarSet(string var, string value) => 
+            GlobalVars.Set(var, value);
+
+        [ConsoleCommand("get")]
+        public static void CommandGlobalVarGet(string var) =>
+            DebugLogger.Log(GlobalVars.Get(var).ToString());
+
+        #endregion
+
         public static void StartNewGame()
         {
             GameResetter.ResetGame();
@@ -154,6 +167,8 @@ namespace TCD
             System.Diagnostics.Process.GetCurrentProcess().Kill();
 #endif
         }
+
+        #region Events
 
         private void OnViewOpened(ViewOpenedEvent e)
         {
@@ -186,5 +201,7 @@ namespace TCD
                 return;
             State = desiredState;
         }
+
+        #endregion
     }
 }

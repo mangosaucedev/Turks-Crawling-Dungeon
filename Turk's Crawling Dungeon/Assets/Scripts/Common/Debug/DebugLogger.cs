@@ -11,6 +11,7 @@ namespace TCD
         private const int MAX_LOG_MESSAGES = 2048;
 
         public static List<string> log = new List<string>();
+        public static List<string> consoleLog = new List<string>();
         public static DebugLoggerPrefix prefix =
             DebugLoggerPrefix.TimeAndFrame;
         public static DebugLoggerTrace trace =
@@ -31,6 +32,7 @@ namespace TCD
         public static void Log(string message)
         {
             string finalMessage = InsertFrameTimeInfo(message);
+            ConsoleLogEvent(finalMessage);
             finalMessage = InsertStackTrace(finalMessage);
 #if UNITY_EDITOR
             Debug.Log(finalMessage);
@@ -48,6 +50,14 @@ namespace TCD
             return finalMessage;
         }
 
+        private static void ConsoleLogEvent(string message)
+        {
+            consoleLog.Add(message);
+            while (consoleLog.Count > MAX_LOG_MESSAGES)
+                consoleLog.RemoveAt(0);
+            EventManager.Send(new ConsoleLogEntryAddedEvent(message));
+        }
+
         private static string InsertStackTrace(string message, bool forceInfo = false)
         {
             string finalMessage = message;
@@ -59,6 +69,7 @@ namespace TCD
         public static void LogError(string message)
         {
             string finalMessage = InsertFrameTimeInfo(message);
+            ConsoleLogEvent(finalMessage);
             finalMessage = InsertStackTrace(finalMessage);
 #if UNITY_EDITOR
             Debug.LogError(finalMessage);
@@ -69,6 +80,7 @@ namespace TCD
         public static void LogException(string message)
         {
             string finalMessage = InsertFrameTimeInfo(message);
+            ConsoleLogEvent(finalMessage);
             finalMessage = InsertStackTrace(finalMessage);
 #if UNITY_EDITOR
             Debug.LogError(finalMessage);

@@ -1,19 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Campaigns>
 
-	<Campaign Name="TestCampaign">
+	<Campaign Name="TestCampaign" HideSelection="True">
 		<Class>Hellion</Class>
 		<Dungeon>TestDungeon</Dungeon>
 		<Dungeon>TestDungeon</Dungeon>
 		<Dungeon>TestDungeon</Dungeon>
 	</Campaign>
 
-	<Campaign Name="Tutorial">
+	<Campaign Name="Tutorial" HideSelection="True">
 		<Class>Hellion</Class>
 		<Dungeon>Tutorial</Dungeon>
 	</Campaign>
 
 	<Campaign Name="Limbicum">
+		<Tutorial>Tutorial</Tutorial>
 		<Class>Hellion</Class>
 		<Dungeon>Hypothalamus</Dungeon>
 		<Dungeon>Amygdala</Dungeon>

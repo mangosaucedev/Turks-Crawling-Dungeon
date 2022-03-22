@@ -70,6 +70,8 @@ namespace TCD.Inputs
         MoveWestAlt,
         MoveEastAlt,
         //
+        DevConsole,
+        //
         Reset,
         ResetToDefaults
     }

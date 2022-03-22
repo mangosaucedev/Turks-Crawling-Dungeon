@@ -20,6 +20,8 @@ namespace TCD.Inputs
             interpreters.Add(new MouseInterpreter());
             interpreters.Add(new MovementInterpreter());
 
+            KeyEventManager.Subscribe(InputGroup.None, KeyCommand.DevConsole, KeyState.PressedThisFrame, e => { OpenView("Dev Console"); });
+
             KeyEventManager.Subscribe(InputGroup.UI, KeyCommand.Cancel, KeyState.PressedThisFrame, e => { });
 
             KeyEventManager.Subscribe(InputGroup.Gameplay, KeyCommand.MovePass, KeyState.PressedThisFrame, e => { Pass(); });
@@ -46,10 +48,15 @@ namespace TCD.Inputs
             KeyEventManager.SetInputGroupEnabled(group, isEnabled);
 
         private void Pass() => TimeScheduler.Tick(TimeInfo.TIME_PER_STANDARD_TURN);
-        
 
-        private void OpenView(string viewName) => ViewManager.Open(viewName);
-        
+
+        private void OpenView(string viewName)
+        {
+            if (ViewManager.TryFind(viewName, out var view))
+                ViewManager.Close(viewName);
+            else
+                ViewManager.Open(viewName);
+        }
 
         private void ConfirmAction()
         {

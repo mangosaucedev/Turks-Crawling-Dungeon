@@ -6,6 +6,7 @@ namespace TCD.Inputs
 {
     public enum InputGroup 
     {
+        None,
         UI,
         Gameplay,
         Action

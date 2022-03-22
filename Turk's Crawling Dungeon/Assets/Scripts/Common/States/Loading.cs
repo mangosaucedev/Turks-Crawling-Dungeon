@@ -15,6 +15,7 @@ namespace TCD
         public override void Start()
         {
             base.Start();
+            InputManager.SetInputGroupEnabled(InputGroup.None, false);
             if (Assets.FindAll<GameObject>("Loading View").Count > 0)
                 ViewManager.Open("Loading View");
         }
@@ -22,6 +23,7 @@ namespace TCD
         public override void End()
         {
             base.End();
+            InputManager.SetInputGroupEnabled(InputGroup.None);
             ViewManager.Close("Loading View");
         }
     }

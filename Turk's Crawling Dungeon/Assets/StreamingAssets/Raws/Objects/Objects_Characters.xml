@@ -107,17 +107,6 @@
 
 		<Part Name="PlayerWallet"/>
 
-		<Part Name="Talents.Tackle"/>
-		
-		<Part Name="Talents.Strangle"/>
-	
-		<Part Name="Talents.Sprint"/>
-
-		<Part Name="Talents.Maul"/>
-
-		<Part Name="Talents.BloodCrazed"/>
-
-		<Part Name="Talents.FearfulPin"/>
 	</Object>
 
 	<!-- Enemies -->

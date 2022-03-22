@@ -8,13 +8,13 @@
 		<Terrain>
 			<Walls>
 				<Wall Name="PeelingPaint0"/>
-				<Wall Name="PeelingPaint1"/>
-				<Wall Name="PeelingPaint2"/>
+				<Wall Name="PeelingPaint1" Surface="1"/>
+				<Wall Name="PeelingPaint2" Surface="2"/>
 			</Walls>
 			<Floors>
 				<Floor Name="RottingWoodFloor0"/>
-				<Floor Name="RottingWoodFloor1"/>
-				<Floor Name="RottingWoodFloor2"/>
+				<Floor Name="RottingWoodFloor1" Surface="1"/>
+				<Floor Name="RottingWoodFloor2" Surface="2"/>
 			</Floors>
 		</Terrain>
 	</Zone>

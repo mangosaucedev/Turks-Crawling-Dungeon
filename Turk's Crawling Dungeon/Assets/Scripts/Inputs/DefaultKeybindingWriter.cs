@@ -74,6 +74,8 @@ namespace TCD.Inputs
             Add(KeyCommand.HotbarS8, KeyCode.Alpha8, KeyCode.LeftShift);
             Add(KeyCommand.HotbarS9, KeyCode.Alpha9, KeyCode.LeftShift);
             //
+            Add(KeyCommand.DevConsole, KeyCode.Backslash);
+            //
             Add(KeyCommand.Reset, KeyCode.R);
             Add(KeyCommand.ResetToDefaults, KeyCode.R, KeyCode.LeftShift);
         }

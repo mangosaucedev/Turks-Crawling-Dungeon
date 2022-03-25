@@ -12,5 +12,16 @@ namespace TCD.Objects.Blueprints
 
         public string type;
         public BlueprintField_v2[] fields;
+
+        public Type GetComponentType()
+        {
+            string typeName = ParseType(); 
+            return TypeResolver.ResolveType(typeName);
+        }
+
+        private string ParseType()
+        {
+            return "";
+        }
     }
 }

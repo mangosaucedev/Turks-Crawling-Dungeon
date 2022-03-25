@@ -6,6 +6,8 @@ namespace TCD.Zones
 {
     public abstract class ZoneGeneratorMachine
     {
+        public virtual string LoadMessage => "Building zone...";
+
         protected IZone Zone => CurrentZoneInfo.zone;
 
         protected IZoneParams ZoneParams => Zone.ZoneParams;

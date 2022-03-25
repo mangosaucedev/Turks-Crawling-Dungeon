@@ -89,6 +89,7 @@ namespace TCD
             Destroy(startupScreen);
 
             ViewManager.Open("Main Menu");
+            //ViewManager.Open("Object Editor v1");
 
             if (lastSessionCrashed)
             {

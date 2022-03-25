@@ -8,6 +8,8 @@ namespace TCD.Zones
     {
         private const int NEIGHBORING_WALLS_FOR_DOOR = 4;
 
+        public override string LoadMessage => "Planning doors...";
+
         private TGrid<ChamberCellType> Cells => Zone.CellTypes;
 
         public override IEnumerator Generate()

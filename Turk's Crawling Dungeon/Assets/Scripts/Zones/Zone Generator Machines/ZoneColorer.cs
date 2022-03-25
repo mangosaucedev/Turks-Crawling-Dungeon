@@ -15,6 +15,8 @@ namespace TCD.Zones
         private PerlinNoiseGrid blueInfluence;
         private PerlinNoiseGrid whiteInfluence;
 
+        public override string LoadMessage => "Coloring zone...";
+
         public override IEnumerator Generate()
         {
             redInfluence = GetRandomPerlinNoiseGrid();

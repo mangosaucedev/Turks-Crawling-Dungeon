@@ -18,6 +18,8 @@ namespace TCD.Zones
         private IFeature currentFeature;
         private Encounter currentEncounter;
 
+        public override string LoadMessage => "Populating zone...";
+
         private ZoneEncounters ZoneEncounters => Zone.ZoneEncounters;
 
         public override IEnumerator Generate()

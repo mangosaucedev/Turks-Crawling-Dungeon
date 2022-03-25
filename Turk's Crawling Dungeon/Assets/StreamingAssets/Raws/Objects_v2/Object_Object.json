@@ -5,6 +5,10 @@
             "inherits": "Base Object",
             "components": [
                 {
+                    "type": "(Part)CinematicTarget"
+                },
+                
+                {
                     "type": "(Part)Render",
                     "fields": [
                         {

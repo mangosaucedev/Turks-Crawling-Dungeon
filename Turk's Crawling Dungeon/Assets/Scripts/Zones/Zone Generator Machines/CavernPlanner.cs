@@ -8,6 +8,8 @@ namespace TCD.Zones
     {
         private const int BORDER_SIZE = 16;
 
+        public override string LoadMessage => "Planning caverns...";
+
         public override IEnumerator Generate()
         {
             int size = Width * Height / 5;

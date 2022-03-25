@@ -13,6 +13,8 @@ namespace TCD.Zones
     {
         private Tilemap ground;
 
+        public override string LoadMessage => "Placing player...";
+
         private Tilemap Ground
         {
             get

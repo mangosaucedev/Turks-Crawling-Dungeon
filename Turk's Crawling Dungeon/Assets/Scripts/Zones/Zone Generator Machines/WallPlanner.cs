@@ -6,6 +6,8 @@ namespace TCD.Zones
 {
     public class WallPlanner : ZoneGeneratorMachine
     {
+        public override string LoadMessage => "Planning walls...";
+
         private TGrid<ChamberCellType> Cells => Zone.CellTypes;
 
         public override IEnumerator Generate()

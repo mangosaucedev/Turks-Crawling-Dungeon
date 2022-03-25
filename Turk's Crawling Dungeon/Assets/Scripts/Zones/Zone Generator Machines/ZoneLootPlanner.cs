@@ -9,6 +9,8 @@ namespace TCD.Zones
     {
         private IFeature currentFeature;
 
+        public override string LoadMessage => "Planning loot...";
+
         public override IEnumerator Generate()
         {
             foreach (IFeature feature in Zone.Features)

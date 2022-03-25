@@ -12,6 +12,8 @@ namespace TCD.Zones
         private GroundTilemapManager groundTilemap;
         private PerlinNoiseGrid surfaceMap;
 
+        public override string LoadMessage => "Building zone...";
+
         private GroundTilemapManager GroundTilemap
         {
             get

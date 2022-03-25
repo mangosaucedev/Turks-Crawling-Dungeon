@@ -57,7 +57,6 @@ namespace TCD.Zones
 
             ZoneResetter zoneResetter = ServiceLocator.Get<ZoneResetter>();
             yield return zoneResetter.UnloadZoneRoutine(zoneResetter.resetPlayer);
-            ViewManager.Open("Loading View");
 
             string zoneName = "";
             switch (currentType)
@@ -86,12 +85,14 @@ namespace TCD.Zones
                     zoneGenerator = new GenericZoneGenerator();
                     break;
             }
-            yield return zoneGenerator.GenerateZoneRoutine();
+            LoadingManager loadingManager = ServiceLocator.Get<LoadingManager>();
+            ZoneGenerationOperation operation = new ZoneGenerationOperation(zoneGenerator);
+            yield return loadingManager.EnqueueLoadingOperationRoutine(operation);
 
             stopwatch.Stop();
             DebugLogger.Log($"Zone generated in {stopwatch.ElapsedMilliseconds} ms.");
             hasBegunGeneratingZone = false;
-            ViewManager.Close("Loading View");
+
             EventManager.Send(new ZoneGenerationFinishedEvent());
         }
 

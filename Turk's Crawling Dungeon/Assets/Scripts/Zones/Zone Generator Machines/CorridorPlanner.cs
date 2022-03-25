@@ -13,6 +13,8 @@ namespace TCD.Zones
         private ChamberAnchor parentAnchor;
         private List<ChamberAnchor> facingAnchors = new List<ChamberAnchor>();
 
+        public override string LoadMessage => "Planning corridors...";
+
         public override IEnumerator Generate()
         {
             for (int i = 0; i < Chambers.Count; i++)

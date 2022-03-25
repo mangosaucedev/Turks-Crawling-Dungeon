@@ -7,6 +7,13 @@ namespace TCD.IO
 {
     public static class Directories 
     {
+        #region Persistent (Read/Write)
+
+        public static string ModUtility => GetDirectory(Application.persistentDataPath + "/ModUtility/");
+        
+        public static string WritableObjects => GetDirectory(ModUtility + "Objects");
+
+        #endregion
 
         #region Streaming (Read-Only)
 

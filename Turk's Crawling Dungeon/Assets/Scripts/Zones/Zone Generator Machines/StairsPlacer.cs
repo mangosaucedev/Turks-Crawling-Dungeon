@@ -10,6 +10,8 @@ namespace TCD.Zones
     {
         private IFeature currentFeature;
 
+        public override string LoadMessage => "Placing stairs...";
+
         public override IEnumerator Generate()
         {
             if (Zone.Chambers.Count > 0)

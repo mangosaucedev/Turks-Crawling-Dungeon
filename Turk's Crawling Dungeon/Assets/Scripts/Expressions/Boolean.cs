@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using TCD.Cinematics;
 using TCD.Objects;
+using TCD.Objects.Parts;
 
 namespace TCD.Expressions
 {

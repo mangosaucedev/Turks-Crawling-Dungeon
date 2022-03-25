@@ -6,6 +6,8 @@ namespace TCD.Zones
 {
     public class FeatureFloorPlanner : ZoneGeneratorMachine
     {
+        public override string LoadMessage => "Planning feature floors...";
+
         private TGrid<ChamberCellType> Cells => Zone.CellTypes;
 
         public override IEnumerator Generate()

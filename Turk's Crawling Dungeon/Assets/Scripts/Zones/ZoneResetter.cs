@@ -9,6 +9,8 @@ namespace TCD.Zones
 {
     public class ZoneResetter : MonoBehaviour
     {
+        private const int OBJECTS_BEFORE_PAUSE = 256;
+
         public bool resetPlayer;
 
         public static void ResetZone(bool resetPlayer = false)
@@ -22,24 +24,25 @@ namespace TCD.Zones
 
         private IEnumerator ResetZoneRoutine()
         {
-            yield return UnloadZoneRoutine();
+            LoadingManager loadingManager = ServiceLocator.Get<LoadingManager>();
+            ZoneUnloadOperation operation = new ZoneUnloadOperation(UnloadZoneRoutine());
+            yield return loadingManager.EnqueueLoadingOperationRoutine(operation);
             yield return GenerateNewZone();
-            
         }
 
         public void UnloadZone(bool resetPlayer = false)
         {
             StopAllCoroutines();
-            StartCoroutine(UnloadZoneRoutine(resetPlayer));
+            LoadingManager loadingManager = ServiceLocator.Get<LoadingManager>();
+            ZoneUnloadOperation operation = new ZoneUnloadOperation(UnloadZoneRoutine(resetPlayer));
+            StartCoroutine(loadingManager.EnqueueLoadingOperationRoutine(operation));
         }
 
         public IEnumerator UnloadZoneRoutine(bool resetPlayer = false)
         {
-            ViewManager.Open("Loading View");
             this.resetPlayer = resetPlayer;
             yield return DestroyAllObjectsRoutine();
             ResetTilemaps();
-            ViewManager.Close("Loading View");
         }
 
         private IEnumerator DestroyAllObjectsRoutine()
@@ -48,7 +51,7 @@ namespace TCD.Zones
             int count = parent.childCount;
             for (int i = count - 1; i >= 0; i--)
             {
-                if (i % 16 == 0)
+                if (i % OBJECTS_BEFORE_PAUSE == 0)
                     yield return null;
                 if (i > parent.childCount - 1)
                     continue;

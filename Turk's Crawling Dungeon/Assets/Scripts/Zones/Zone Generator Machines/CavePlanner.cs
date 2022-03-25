@@ -7,6 +7,8 @@ namespace TCD.Zones
 {
     public class CavePlanner : ZoneGeneratorMachine
     {
+        public override string LoadMessage => "Planning caves...";
+
         public override IEnumerator Generate()
         {
             CellularAutomataGrid grid = new CellularAutomataGrid(Width, Height, 50, 10);

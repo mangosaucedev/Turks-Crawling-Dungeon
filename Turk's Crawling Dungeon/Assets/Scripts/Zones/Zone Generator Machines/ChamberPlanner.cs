@@ -19,6 +19,8 @@ namespace TCD.Zones
         private bool currentChamberPlacedSuccessfully;
         private TGrid<ChamberCellType> chamberCells;
 
+        public override string LoadMessage => "Planning chambers...";
+
         private int MaxChambers => ZoneParams.MaxChambers;
 
         private int MinChamberWidth => ZoneParams.MinChamberWidth;

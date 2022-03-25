@@ -2,22 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TCD.Cinematics
+namespace TCD.Objects.Parts
 {
-    public class CinematicTarget : MonoBehaviour
+    public class CinematicTarget : Part
     {
         public static Dictionary<string, CinematicTarget> targets = new Dictionary<string, CinematicTarget>();
 
         public string id;
 
-        private void OnEnable()
+        public override string Name => "Cinematic Target";
+
+        protected override void OnEnable()
         {
+            base.OnEnable();
             if (!string.IsNullOrEmpty(id))
                 targets[id] = this;
         }
 
-        private void OnDisable()
+        protected override void OnDisable()
         {
+            base.OnDisable();
             if (targets.ContainsKey(id))
                 targets.Remove(id);
         }

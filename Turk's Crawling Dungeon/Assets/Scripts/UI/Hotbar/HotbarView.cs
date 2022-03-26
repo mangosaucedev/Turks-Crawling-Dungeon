@@ -57,7 +57,7 @@ namespace TCD.UI
 
         private void BuildHotbarButtons()
         {
-            if (!PlayerInfo.currentPlayer.parts.TryGetList(out List<Talent> talents))
+            if (!PlayerInfo.currentPlayer.Parts.TryGetList(out List<Talent> talents))
                 return;
             hotbarIndex = 0;
             foreach (Talent talent in talents)

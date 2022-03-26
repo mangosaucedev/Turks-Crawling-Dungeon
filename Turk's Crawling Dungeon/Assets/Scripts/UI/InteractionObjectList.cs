@@ -27,7 +27,7 @@ namespace TCD.UI
             buttonIndex = 0;
             foreach (BaseObject obj in objects)
             {
-                if (obj.parts.Get<Inspectable>())
+                if (obj.Parts.Get<Inspectable>())
                 {
                     CreateButton(obj);
                     buttonIndex++;

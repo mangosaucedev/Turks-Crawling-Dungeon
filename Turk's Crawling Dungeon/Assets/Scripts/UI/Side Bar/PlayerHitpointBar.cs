@@ -20,7 +20,7 @@ namespace TCD.UI
             get
             {
                 if (!playerResources)
-                    playerResources = PlayerInfo.currentPlayer?.parts.Get<Resources>();
+                    playerResources = PlayerInfo.currentPlayer?.Parts.Get<Resources>();
                 return playerResources;
             }
         }

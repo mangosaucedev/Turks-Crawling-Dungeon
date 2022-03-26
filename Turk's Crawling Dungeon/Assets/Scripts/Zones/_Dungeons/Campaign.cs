@@ -8,6 +8,8 @@ namespace TCD.Zones.Dungeons
     public class Campaign
     {
         public string name;
+        public string description;
+        public bool hideSelection;
         public List<string> dungeonNames = new List<string>();
         public List<string> classNames = new List<string>();
 

@@ -15,7 +15,7 @@ namespace TCD.Objects.Parts
             get
             {
                 if (!inventory)
-                    inventory = parent.parts.Get<Inventory>();
+                    inventory = parent.Parts.Get<Inventory>();
                 return inventory;
             }
         }

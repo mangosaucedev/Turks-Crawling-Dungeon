@@ -23,7 +23,7 @@ namespace TCD.Zones
             Cell cell = GameGrid[x, y];
             foreach (BaseObject obj in cell.objects)
             {
-                if (obj.parts.Get<Inspectable>())
+                if (obj.Parts.Get<Inspectable>())
                     return false;
             }
             return true;
@@ -57,7 +57,7 @@ namespace TCD.Zones
             Cell cell = CurrentZoneInfo.grid[x, y];
             foreach (BaseObject obj in cell.objects)
             {
-                if (obj.parts.TryGet(out T part) && (predicate == null || predicate(part)))
+                if (obj.Parts.TryGet(out T part) && (predicate == null || predicate(part)))
                     return true;
             }
             return false;

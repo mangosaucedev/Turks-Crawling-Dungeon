@@ -7,7 +7,7 @@ using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts.Talents
 {
-    [Serializable]
+    [PlayerTalent("Sprint"), Serializable]
     public class Sprint : Talent
     {
         public override string Name => "Sprint";
@@ -38,14 +38,14 @@ namespace TCD.Objects.Parts.Talents
 
         public override bool Activate()
         {
-            if (parent.parts.TryGet(out Effects.Effects effects))
+            if (parent.Parts.TryGet(out Effects.Effects effects))
                 effects.AddEffect(new Sprinting(), TimeInfo.TIME_PER_STANDARD_TURN * 9999);
             return base.Activate();
         }
 
         public override bool Deactivate()
         {
-            if (parent.parts.TryGet(out Effects.Effects effects))
+            if (parent.Parts.TryGet(out Effects.Effects effects))
                 effects.RemoveEffect("Sprinting");
             return base.Deactivate();
         }

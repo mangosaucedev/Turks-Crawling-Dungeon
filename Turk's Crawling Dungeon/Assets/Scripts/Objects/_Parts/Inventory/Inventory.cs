@@ -52,7 +52,7 @@ namespace TCD.Objects.Parts
 
         private float GetItemWeight(BaseObject item)
         {
-            if (item.parts.TryGet(out PhysicsSim physics))
+            if (item.Parts.TryGet(out PhysicsSim physics))
                 return physics.GetWeight();
             return 0f;
         }
@@ -86,7 +86,7 @@ namespace TCD.Objects.Parts
             items.Add(item);
             item.cell.SetPosition(0, 0);
             item.deactivator.AddDeactivatingCondition(this);
-            Item i = item.parts.Get<Item>();
+            Item i = item.Parts.Get<Item>();
             i.inventory = this;
         }
 
@@ -100,7 +100,7 @@ namespace TCD.Objects.Parts
 
         public bool CannotUnequipEquippedItem(BaseObject item)
         {
-            if (parent.parts.TryGet(out Equipment equipment) &&
+            if (parent.Parts.TryGet(out Equipment equipment) &&
                 equipment.equippedItems.Contains(item) &&
                 !equipment.TryUnequip(item))
                 return true;
@@ -112,7 +112,7 @@ namespace TCD.Objects.Parts
             items.Remove(item);
             item.cell.SetPosition(Position);
             item.deactivator.RemoveDeactivatingCondition(this);
-            Item i = item.parts.Get<Item>();
+            Item i = item.Parts.Get<Item>();
             i.inventory = null;
         }
     }

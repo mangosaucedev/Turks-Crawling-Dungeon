@@ -21,7 +21,7 @@ namespace TCD.Objects.Parts
         {
             EnteredCellEvent enteredCellEvent = (EnteredCellEvent) e;
             if (enteredCellEvent.obj == PlayerInfo.currentPlayer &&
-                parent.parts.TryGet(out Item item))
+                parent.Parts.TryGet(out Item item))
                 item.PutInPlayerInventory();
         }
     }

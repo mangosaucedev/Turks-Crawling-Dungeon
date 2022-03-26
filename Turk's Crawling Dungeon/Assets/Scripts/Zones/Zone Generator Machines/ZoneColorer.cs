@@ -63,7 +63,7 @@ namespace TCD.Zones
             Cell cell = grid[x, y];
             foreach (BaseObject obj in cell.objects)
             {
-                if (obj.parts.TryGet(out Render render))
+                if (obj.Parts.TryGet(out Render render))
                     render.AddColorLayer("Zone", color);
             }
         }

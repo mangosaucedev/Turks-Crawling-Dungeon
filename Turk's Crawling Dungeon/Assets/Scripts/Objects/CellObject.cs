@@ -54,6 +54,8 @@ namespace TCD.Objects
             if (CurrentCell != null)
                 CurrentCell.Remove(parent);
             GameGrid grid = CurrentZoneInfo.grid;
+            if (grid == null)
+                return;
             X = x;
             Y = y;
             Cell cell = grid[x, y];

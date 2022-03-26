@@ -30,7 +30,7 @@ namespace TCD.UI
                 BaseObject player = PlayerInfo.currentPlayer;
                 if (player)
                 {
-                    Inventory playerInventory = player.parts.Get<Inventory>();
+                    Inventory playerInventory = player.Parts.Get<Inventory>();
                     carryWeightCounter.text = "#" + playerInventory.GetWeight() + "/" + playerInventory.GetMaxWeight();
                 }
                 yield return wait;

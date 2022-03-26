@@ -9,7 +9,7 @@ namespace TCD.Objects
     {
         public static bool MakeSavingThrow(BaseObject attacker, BaseObject defender, Stat attackingStat, Stat defendingStat)
         {
-            if (!attacker.parts.TryGet(out Stats attackerStats) || !defender.parts.TryGet(out Stats defenderStats))
+            if (!attacker.Parts.TryGet(out Stats attackerStats) || !defender.Parts.TryGet(out Stats defenderStats))
                 return true;
             float attackingRoll = attackerStats.RollStat(attackingStat); 
             float defendingRoll = defenderStats.RollStat(defendingStat);

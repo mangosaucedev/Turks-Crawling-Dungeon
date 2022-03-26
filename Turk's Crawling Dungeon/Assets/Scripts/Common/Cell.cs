@@ -36,7 +36,7 @@ namespace TCD
             part = null;
             foreach (BaseObject obj in objects)
             {
-                if (obj.parts.TryGet(out part))
+                if (obj.Parts.TryGet(out part))
                     return part;
             }
             return false;
@@ -89,7 +89,7 @@ namespace TCD
             List<BaseObject> visibleObjects = new List<BaseObject>();
             foreach (BaseObject obj in objects)
             {
-                if (obj.parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer())
+                if (obj.Parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer())
                     visibleObjects.Add(obj);
             }
             return visibleObjects;

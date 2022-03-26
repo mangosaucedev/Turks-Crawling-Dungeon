@@ -162,7 +162,7 @@ namespace TCD.Inputs
         {
             if (KeyEventManager.GetInputGroupEnabled(InputGroup.Gameplay))
             {
-                Movement movement = Player.parts.Get<Movement>();
+                Movement movement = Player.Parts.Get<Movement>();
                 return movement.TryToMove(direction, isForced);
             }
             return false;

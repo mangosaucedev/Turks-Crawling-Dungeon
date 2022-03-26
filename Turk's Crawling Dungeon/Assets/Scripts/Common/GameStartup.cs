@@ -36,6 +36,9 @@ namespace TCD
             ColorDeserializer colorDeserializer = new ColorDeserializer();
             yield return colorDeserializer.DeserializeRawsAtPath();
 
+            ClassDeserializer classDeserializer = new ClassDeserializer();
+            yield return classDeserializer.DeserializeRawsAtPath();
+
             ObjectsDeserializer objectsDeserializer = new ObjectsDeserializer();
             yield return objectsDeserializer.DeserializeRawsAtPath();
             

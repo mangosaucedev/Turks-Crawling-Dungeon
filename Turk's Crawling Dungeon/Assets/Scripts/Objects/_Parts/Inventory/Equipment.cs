@@ -20,14 +20,14 @@ namespace TCD.Objects.Parts
             get
             {
                 if (!inventory)
-                    inventory = parent.parts.Get<Inventory>();
+                    inventory = parent.Parts.Get<Inventory>();
                 return inventory;
             }
         }
 
         public bool TryEquip(BaseObject equipment)
         {
-            if (!equipment.parts.TryGet(out Item item) || !equipment.parts.TryGet(out Equippable equippable) ||
+            if (!equipment.Parts.TryGet(out Item item) || !equipment.Parts.TryGet(out Equippable equippable) ||
                 (item.inventory != Inventory && !Inventory.TryAddItem(equipment)))
                 return false;
             return EquipToSlots(equipment);
@@ -35,7 +35,7 @@ namespace TCD.Objects.Parts
 
         public bool EquipToSlots(BaseObject equipment)
         {
-            Equippable equippable = equipment.parts.Get<Equippable>();
+            Equippable equippable = equipment.Parts.Get<Equippable>();
             if (!TryGetAvailableSlots(equippable, out List<EquipSlot> availableSlots))
                 return false;
             if (!equippable.RequiresSecondSlot)
@@ -108,7 +108,7 @@ namespace TCD.Objects.Parts
                 return false;
             equippedItems.Add(equipment);
             equippedItemsBySlot[slot] = equipment;
-            Equippable equippable = equipment.parts.Get<Equippable>();
+            Equippable equippable = equipment.Parts.Get<Equippable>();
             equippable.equipment = this;
             return true;
         }
@@ -118,7 +118,7 @@ namespace TCD.Objects.Parts
             if (!CanUnequip(item))
                 return false;
             equippedItems.Remove(item);
-            Equippable equippable = item.parts.Get<Equippable>();
+            Equippable equippable = item.Parts.Get<Equippable>();
             foreach (EquipSlot slot in equippable.equipSlots)
             {
                 if (GetEquippedItem(slot) == item)

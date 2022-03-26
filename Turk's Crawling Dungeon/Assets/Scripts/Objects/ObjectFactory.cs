@@ -93,9 +93,9 @@ namespace TCD.Objects
             {
                 PartBlueprint partBlueprint = blueprint.partsByName[partName];
                 Type type = partBlueprint.GetPartType();
-                if (!obj.parts.Has(type))
+                if (!obj.Parts.Has(type))
                 {
-                    Part part = obj.parts.Add(type);
+                    Part part = obj.Parts.Add(type);
                     SetPartFields(part, partBlueprint);
                 }
             }
@@ -143,9 +143,9 @@ namespace TCD.Objects
             {
                 PartBlueprint partBlueprint = blueprint.overridenPartsByName[partName];
                 Type type = partBlueprint.GetPartType();
-                if (obj.parts.Has(type))
+                if (obj.Parts.Has(type))
                 {
-                    Part part = obj.parts.Get(type);
+                    Part part = obj.Parts.Get(type);
                     SetPartFields(part, partBlueprint);
                 }
             }
@@ -156,7 +156,7 @@ namespace TCD.Objects
             foreach (string partName in blueprint.removedParts)
             {
                 Type type = TypeResolver.ResolveType($"TCD.Objects.Parts.{partName}");
-                obj.parts.Remove(type);
+                obj.Parts.Remove(type);
             }
         }
     }

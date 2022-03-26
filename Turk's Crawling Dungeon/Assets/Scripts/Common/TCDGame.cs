@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.Diagnostics;
 #if UNITY_EDITOR
@@ -51,6 +52,8 @@ namespace TCD
 
         private void Awake()
         {
+            AssemblyInfo.executingAssemblies.Add(Assembly.GetExecutingAssembly());
+
             lastSessionCrashed = DebugCrashHandler.CrashFilePersists();
 
 #if UNITY_EDITOR

@@ -25,7 +25,7 @@ namespace TCD.UI
 
         private BaseObject Player => PlayerInfo.currentPlayer;
 
-        private Resources Resources => Player.parts.Get<Resources>();
+        private Resources Resources => Player.Parts.Get<Resources>();
 
         static ResourceBar()
         {

@@ -11,10 +11,11 @@ namespace TCD.Objects
     {
         public CellObject cell;
         public Deactivator deactivator;
-        public PartCollection parts;
         public Transform partsParent;
         public LocalVarCollection localVars = new LocalVarCollection();
         [SerializeField] private SpriteRenderer spriteRenderer;
+
+        private PartCollection parts;
 
         public SpriteRenderer SpriteRenderer
         {
@@ -26,11 +27,20 @@ namespace TCD.Objects
             }
         }
 
+        public PartCollection Parts
+        {
+            get
+            {
+                if (parts == null)
+                    parts = new PartCollection(this);
+                return parts;
+            }
+        }
+
         protected virtual void Awake()
         {
             cell = new CellObject(this); 
             deactivator = new Deactivator(this);
-            parts = new PartCollection(this);
             if (!partsParent)
                 FindPartsParentTransform();
         }
@@ -48,7 +58,7 @@ namespace TCD.Objects
         public bool HandleEvent<T>(T e) where T : LocalEvent
         {
             bool isSuccessful = true;
-            foreach (Part part in parts.Parts)
+            foreach (Part part in Parts.Parts)
             {
                 if (!part.HandleEvent(e))
                     isSuccessful = false;
@@ -80,7 +90,7 @@ namespace TCD.Objects
         {
             GetDescriptionEvent e = LocalEvent.Get<GetDescriptionEvent>();
             e.obj = this;
-            Render render = parts.Get<Render>();
+            Render render = Parts.Get<Render>();
             e.description = render.Description;
             HandleEvent(e);
             return e;
@@ -102,7 +112,7 @@ namespace TCD.Objects
         {
             GetDisplayNameEvent e = LocalEvent.Get<GetDisplayNameEvent>();
             e.obj = this;
-            Render render = parts.Get<Render>();
+            Render render = Parts.Get<Render>();
             e.displayName = render.DisplayName;
             e.displayNamePlural = render.DisplayNamePlural;
             HandleEvent(e);

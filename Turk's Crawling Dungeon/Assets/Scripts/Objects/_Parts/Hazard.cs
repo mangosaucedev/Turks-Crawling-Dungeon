@@ -48,7 +48,7 @@ namespace TCD.Objects.Parts
 
         protected virtual void OnEnteredCell(EnteredCellEvent e)
         {
-            if (!e.Object.parts.TryGet(out Movement movement))
+            if (!e.Object.Parts.TryGet(out Movement movement))
                 return;
             AttackHandler.AttackTarget(parent, e.Object, attack);
         }

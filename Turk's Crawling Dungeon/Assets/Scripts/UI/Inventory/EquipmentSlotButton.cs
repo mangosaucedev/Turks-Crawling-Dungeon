@@ -37,7 +37,7 @@ namespace TCD.UI
                 equipmentOwner = PlayerInfo.currentPlayer;
             else
                 equipmentOwner = SelectionHandler.SelectedObject;
-            if (equipmentOwner.parts.TryGet(out equipment))
+            if (equipmentOwner.Parts.TryGet(out equipment))
             {
                 equippedItem = equipment.GetEquippedItem(equipSlot);
                 if (equippedItem)

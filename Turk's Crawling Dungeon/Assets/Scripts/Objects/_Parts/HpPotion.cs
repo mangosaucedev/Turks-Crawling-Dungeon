@@ -28,9 +28,9 @@ namespace TCD.Objects.Parts
 
         private void OnPickedUp()
         {
-            Item item = parent.parts.Get<Item>();
+            Item item = parent.Parts.Get<Item>();
             BaseObject obj = item.Owner;
-            if (obj.parts.TryGet(out Resources resources))
+            if (obj.Parts.TryGet(out Resources resources))
             {
                 resources.ModifyResource(Resource.Hitpoints, Heal);
                 if (obj == PlayerInfo.currentPlayer)

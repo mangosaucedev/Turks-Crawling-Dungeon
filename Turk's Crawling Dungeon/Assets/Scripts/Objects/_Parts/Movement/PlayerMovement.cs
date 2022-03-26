@@ -25,7 +25,7 @@ namespace TCD.Objects.Parts
             {
                 GameGrid grid = CurrentZoneInfo.grid;
                 Cell cell = grid[Position + direction];
-                if (TryGetObjectToAttack(cell, out BaseObject target) && parent.parts.TryGet(out Combat combat))
+                if (TryGetObjectToAttack(cell, out BaseObject target) && parent.Parts.TryGet(out Combat combat))
                 {
                     TimeScheduler.Tick(combat.GetAttackCost(target));
                     AttackHandler.AutoAttack(parent, target);
@@ -39,8 +39,8 @@ namespace TCD.Objects.Parts
             target = null;
             foreach (BaseObject obj in cell.objects)
             {
-                Brain brain = obj.parts.Get<Brain>();
-                if (obj.parts.Get<Combat>() && brain?.Faction != "Neutral" && brain?.Faction != "Player")
+                Brain brain = obj.Parts.Get<Brain>();
+                if (obj.Parts.Get<Combat>() && brain?.Faction != "Neutral" && brain?.Faction != "Player")
                 {
                     target = obj;
                     return true;

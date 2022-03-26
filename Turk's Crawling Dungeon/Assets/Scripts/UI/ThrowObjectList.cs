@@ -22,10 +22,10 @@ namespace TCD.UI
         {
             buttonIndex = 0;
             BaseObject player = PlayerInfo.currentPlayer;
-            Inventory inventory = player.parts.Get<Inventory>();
+            Inventory inventory = player.Parts.Get<Inventory>();
             foreach (BaseObject obj in inventory.items)
             {
-                if (obj.parts.Get<Throwable>())
+                if (obj.Parts.Get<Throwable>())
                 {
                     CreateButton(obj);
                     buttonIndex++;

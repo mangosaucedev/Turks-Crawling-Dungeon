@@ -45,7 +45,7 @@ namespace TCD.UI
         private void BuildEffectIcons()
         {
             BaseObject player = PlayerInfo.currentPlayer;
-            Effects effects = player.parts.Get<Effects>();
+            Effects effects = player.Parts.Get<Effects>();
             foreach (Effect effect in effects.activeEffects)
             {
                 if (!builtEffects.Contains(effect.Name))
@@ -62,7 +62,7 @@ namespace TCD.UI
             GameObject gameObject = Instantiate(prefab, transform);
             EffectIcon effectIcon = gameObject.GetComponent<EffectIcon>();
             effectIcon.effectName = effectName;
-            effectIcon.effects = PlayerInfo.currentPlayer.parts.Get<Effects>();
+            effectIcon.effects = PlayerInfo.currentPlayer.Parts.Get<Effects>();
             effectIcons.Add(effectIcon);
         }
     }

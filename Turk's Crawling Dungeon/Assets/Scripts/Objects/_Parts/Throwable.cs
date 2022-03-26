@@ -46,7 +46,7 @@ namespace TCD.Objects.Parts
 
         public void Throw(Vector2Int startPosition, Vector2Int targetPosition)
         {
-            Item item = parent.parts.Get<Item>();
+            Item item = parent.Parts.Get<Item>();
             if (!item || !item.inventory || (item.inventory && item.inventory.TryRemoveItem(parent)))
             {
                 GridRaycastResult result = GridRaycaster.Raycast(startPosition, targetPosition, new BlockedByObstaclesEvaluator());

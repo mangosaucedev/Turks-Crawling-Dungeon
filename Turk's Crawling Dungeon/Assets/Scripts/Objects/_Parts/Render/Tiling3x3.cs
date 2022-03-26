@@ -215,7 +215,7 @@ namespace TCD.Objects.Parts
             bool below = HasTilingObject(X, Y - 1);
             bool toLeft = HasTilingObject(X - 1, Y);
             bool toRight = HasTilingObject(X + 1, Y);
-            Render render = parent.parts.Get<Render>();
+            Render render = parent.Parts.Get<Render>();
 
             if (above && below && toLeft && toRight)
                 render.SetSprite(center);

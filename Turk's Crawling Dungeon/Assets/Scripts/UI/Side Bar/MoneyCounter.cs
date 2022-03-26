@@ -30,7 +30,7 @@ namespace TCD.UI
                 BaseObject player = PlayerInfo.currentPlayer;
                 if (player)
                 {
-                    Wallet playerWallet = player.parts.Get<PlayerWallet>();
+                    Wallet playerWallet = player.Parts.Get<PlayerWallet>();
                     moneyCounter.text = "$" + playerWallet.money.ToString();
                 }
                 yield return wait;

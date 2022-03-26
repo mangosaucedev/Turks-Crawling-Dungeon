@@ -49,7 +49,7 @@ namespace TCD.Objects.Parts.Talents
         {
             if (!isActive && activeCooldown >= 0)
                 activeCooldown -= e.timeElapsed;
-            if (isActive && parent.parts.TryGet(out Resources resources))
+            if (isActive && parent.Parts.TryGet(out Resources resources))
             {
                 float timeMultiplier = (float) e.timeElapsed / TimeInfo.TIME_PER_STANDARD_TURN;
                 float sustainCost = -GetSustainResourceCost() * timeMultiplier;
@@ -65,7 +65,7 @@ namespace TCD.Objects.Parts.Talents
 
         public virtual bool Activate()
         {
-            if (parent.parts.TryGet(out Resources resources))
+            if (parent.Parts.TryGet(out Resources resources))
                 resources.ModifyResource(Resource, -GetActivationResourceCost());
             isActive = true;
             return true;
@@ -98,7 +98,7 @@ namespace TCD.Objects.Parts.Talents
 
         public virtual bool CanUseTalent()
         {
-            if ((parent.parts.TryGet(out Resources resources) && resources.GetResource(Resource) < GetActivationResourceCost()) || 
+            if ((parent.Parts.TryGet(out Resources resources) && resources.GetResource(Resource) < GetActivationResourceCost()) || 
                 activeCooldown >= 0)
                 return false;
             foreach (TalentRequirement requirement in GetRequirements())

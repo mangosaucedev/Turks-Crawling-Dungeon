@@ -34,7 +34,7 @@ namespace TCD.Objects.Attacks
             attack = e.GetAttack();
             if (attack == null)
                 return false;
-            if (currentAttacker.parts.TryGet(out Stats stats))
+            if (currentAttacker.Parts.TryGet(out Stats stats))
                 attack.hitAccuracy = stats.RollStat(Stat.HitAccuracy);
             return true;
         }
@@ -86,7 +86,7 @@ namespace TCD.Objects.Attacks
                 return false;
             }
 
-            if (!currentDefender.parts.TryGet(out Resources defenderResources))
+            if (!currentDefender.Parts.TryGet(out Resources defenderResources))
             {
                 if (currentAttacker == PlayerInfo.currentPlayer)
                     MessageLog.Add($"{currentDefender.GetDisplayName()} cannot be attacked.");
@@ -109,7 +109,7 @@ namespace TCD.Objects.Attacks
             attackedEvent.attack = currentAttack;
             attackedEvent.damage = lastDamage;
             currentDefender.HandleEvent(attackedEvent);
-            if (currentDefender.parts.TryGet(out Render render))
+            if (currentDefender.Parts.TryGet(out Render render))
                 render.RenderEffect("Standard Render Effect", Choose.Random("EnemyHitGraphic", "EnemyHitGraphic1", "EnemyHitGraphic2"), 0.2f);
             if (currentDefender == PlayerInfo.currentPlayer)
                 FloatingTextHandler.DrawFlying(currentDefender.transform.position, $"{lastDamage.RoundToDecimal(1)}", Color.red);

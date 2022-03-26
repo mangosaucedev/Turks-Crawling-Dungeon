@@ -26,7 +26,7 @@ namespace TCD.Inputs.Actions
             }
         }
 
-        private Throwable Throwable => thrownObject.parts.Get<Throwable>();
+        private Throwable Throwable => thrownObject.Parts.Get<Throwable>();
 
         public Throw(BaseObject thrownObject)
         {

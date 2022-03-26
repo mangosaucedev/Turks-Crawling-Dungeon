@@ -28,13 +28,13 @@ public class InventoryTests
     {
         if (playerInventory)
             return;
-        playerInventory = (Inventory) PlayerInfo.currentPlayer.parts.Add(typeof(Inventory));
+        playerInventory = (Inventory) PlayerInfo.currentPlayer.Parts.Add(typeof(Inventory));
     }
 
     private void MakeItem(ref BaseObject obj, ref Item item, string itemName)
     {
         obj = ObjectFactory.BuildFromBlueprint(itemName, Vector2Int.zero);
-        item = obj.parts.Get<Item>();
+        item = obj.Parts.Get<Item>();
     }
 
     [UnityTest]

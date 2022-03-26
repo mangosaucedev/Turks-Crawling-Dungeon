@@ -17,7 +17,7 @@ namespace TCD.UI
         {
             base.Awake();
             BaseObject player = PlayerInfo.currentPlayer;
-            currentInventory = player.parts.Get<Inventory>();
+            currentInventory = player.Parts.Get<Inventory>();
         }
 
         protected override void UpdateInventories()

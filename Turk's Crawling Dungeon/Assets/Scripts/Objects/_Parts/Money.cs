@@ -49,9 +49,9 @@ namespace TCD.Objects.Parts
 
         private void PutInWallet()
         {
-            Item item = parent.parts.Get<Item>();
+            Item item = parent.Parts.Get<Item>();
             BaseObject obj = item.Owner;
-            if (obj.parts.TryGet(out Wallet wallet))
+            if (obj.Parts.TryGet(out Wallet wallet))
             {
                 wallet.AddMoney((decimal) BaseValue.RoundToDecimal(2));
                 Destroy(parent.gameObject);

@@ -9,7 +9,7 @@ namespace TCD.Objects.Parts
     {
         private BaseObject target;
 
-        private Combat Combat => brain.parent.parts.Get<Combat>();
+        private Combat Combat => brain.parent.Parts.Get<Combat>();
 
         public Kill(Brain brain, BaseObject target) : base(brain)
         {

@@ -8,6 +8,7 @@ namespace TCD.Objects.Parts
     public class Class
     {
         public string name;
+        public string description;
         public string statPresetName;
         public List<string> talentTreeNames = new List<string>();
 

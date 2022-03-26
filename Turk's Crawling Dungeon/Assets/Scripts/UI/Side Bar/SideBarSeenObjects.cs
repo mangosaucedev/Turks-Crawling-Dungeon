@@ -56,7 +56,7 @@ namespace TCD.UI
         {
             foreach (BaseObject obj in cell.objects)
             {
-                if (obj != PlayerInfo.currentPlayer && obj.parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer())
+                if (obj != PlayerInfo.currentPlayer && obj.Parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer())
                     allSeenObjects.Add(obj);
             }
         }
@@ -74,7 +74,7 @@ namespace TCD.UI
             for (int i = allSeenObjects.Count - 1; i >= 0; i--)
             {
                 BaseObject obj = allSeenObjects[i];
-                if (obj.parts.TryGet(out T part))
+                if (obj.Parts.TryGet(out T part))
                 {
                     allSeenObjects.RemoveAt(i);
                     allSeenWithPart.Add(obj);

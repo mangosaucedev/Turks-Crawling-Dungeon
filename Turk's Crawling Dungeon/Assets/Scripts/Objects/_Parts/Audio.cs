@@ -146,7 +146,7 @@ namespace TCD.Objects.Parts
 
         public void PlayAudioClip(AudioClip audioClip)
         {
-            if (!parent.parts.TryGet(out Visible visible) || visible.IsVisibleToPlayer())
+            if (!parent.Parts.TryGet(out Visible visible) || visible.IsVisibleToPlayer())
                 AudioPlayer.PlayOneShot(audioClip);
         } 
     }

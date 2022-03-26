@@ -274,7 +274,7 @@ namespace TCD
             Cell gridCell = grid[gridPosition];
             foreach (BaseObject obj in gridCell.objects)
             {
-                if (obj.parts.TryGet(out Obstacle obstacle) &&
+                if (obj.Parts.TryGet(out Obstacle obstacle) &&
                     obstacle.OccludesLineOfSight)
                     return true;
             }

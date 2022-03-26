@@ -14,7 +14,7 @@ namespace TCD.Objects.Parts
 
         protected virtual Vector2Int TargetPosition => targetPosition;
 
-        protected Movement Movement => brain.parent.parts.Get<Movement>();
+        protected Movement Movement => brain.parent.Parts.Get<Movement>();
 
         public MoveTo(Brain brain, Vector2Int targetPosition) : 
             base(brain)

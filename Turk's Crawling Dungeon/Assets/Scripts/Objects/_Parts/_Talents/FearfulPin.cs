@@ -10,7 +10,7 @@ using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts.Talents
 {
-    [Serializable]
+    [PlayerTalent("FearfulPin"), Serializable]
     public class FearfulPin : Talent
     {
         public override string Name => "Fearful Pin";
@@ -45,7 +45,7 @@ namespace TCD.Objects.Parts.Talents
         public override IEnumerator OnObjectRoutine(BaseObject obj)
         {
             bool madeSuccessfulAttackAgainstTarget = AttackHandler.AutoAttack(parent, obj);
-            bool targetHasEffects = obj.parts.TryGet(out Effects.Effects targetEffects);
+            bool targetHasEffects = obj.Parts.TryGet(out Effects.Effects targetEffects);
             if (madeSuccessfulAttackAgainstTarget && targetHasEffects &&
                 targetEffects.AddEffect(new Pinned(), TimeInfo.TIME_PER_STANDARD_TURN * GetEffectDuration()))
             {
@@ -62,7 +62,7 @@ namespace TCD.Objects.Parts.Talents
                     MessageLog.Add($"{parent.GetDisplayName()} failed to pin you!");
             }
             activeCooldown += GetCooldown();
-            if (parent.parts.TryGet(out Resources resources))
+            if (parent.Parts.TryGet(out Resources resources))
                 resources.ModifyResource(Resource, -GetActivationResourceCost());
             if (parent == PlayerInfo.currentPlayer)
                 TimeScheduler.Tick(GetEnergyCost());
@@ -102,7 +102,7 @@ namespace TCD.Objects.Parts.Talents
         {
             if (CanUseTalent() && !e.hasActed)
             {
-                if (parent.parts.TryGet(out Brain brain))
+                if (parent.Parts.TryGet(out Brain brain))
                     brain.Think("Decided to use fearul pin on " + e.target.GetDisplayName() + " instead.");
                 StopAllCoroutines();
                 StartCoroutine(OnObjectRoutine(e.target));

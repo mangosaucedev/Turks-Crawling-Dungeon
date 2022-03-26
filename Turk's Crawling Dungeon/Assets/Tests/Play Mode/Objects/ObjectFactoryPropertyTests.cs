@@ -20,7 +20,7 @@ public class ObjectFactoryPropertyTests
         BaseObject liquid = ObjectFactory.BuildFromBlueprint("Liquid", Vector2Int.zero);
         Tiling3x3 prefabTiling = prefab.GetComponentInChildren<Tiling3x3>();
         Tiling3x3 instantiatedTiling = instantiatedObject.GetComponentInChildren<Tiling3x3>();
-        Tiling3x3 gameObjectTiling = liquid.parts.Get<Tiling3x3>();
+        Tiling3x3 gameObjectTiling = liquid.Parts.Get<Tiling3x3>();
         Assert.AreEqual("LiquidUpperLeft", prefabTiling.UpperLeft);
         Assert.AreEqual("LiquidUpperLeft", instantiatedTiling.UpperLeft);
         Assert.AreEqual("LiquidUpperLeft", gameObjectTiling.UpperLeft);

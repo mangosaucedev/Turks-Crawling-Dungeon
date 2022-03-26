@@ -142,7 +142,7 @@ namespace TCD.Inputs.Actions
                 CancelCurrentAction();
                 return;
             }
-            if (cell.objects.Count == 1 && cell.objects[0].parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer())
+            if (cell.objects.Count == 1 && cell.objects[0].Parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer())
             {
                 StartCoroutine(StartActionCoroutine(currentAction.OnObject(cell.objects[0])));
                 DebugLogger.Log($"Player has used action '{currentAction.Name}' on object @{cell.Position}.");

@@ -89,7 +89,7 @@ namespace TCD.Inputs
 
         private bool IsRestComplete()
         {
-            Resources resources = PlayerInfo.currentPlayer.parts.Get<Resources>();
+            Resources resources = PlayerInfo.currentPlayer.Parts.Get<Resources>();
             foreach (Resource resource in Enum.GetValues(typeof(Resource)))
             {
                 float value = resources.GetResource(resource);

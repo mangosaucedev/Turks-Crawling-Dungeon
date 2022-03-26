@@ -71,8 +71,8 @@ namespace TCD.Inputs.Actions
             BaseObject target = null;
             foreach (BaseObject obj in cell.objects)
             {
-                if (obj.parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer() &&
-                    (!target || obj.parts.Get<Combat>()))
+                if (obj.Parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer() &&
+                    (!target || obj.Parts.Get<Combat>()))
                     target = obj;
             }
             if (talent.TargetMode != TargetMode.Cell)

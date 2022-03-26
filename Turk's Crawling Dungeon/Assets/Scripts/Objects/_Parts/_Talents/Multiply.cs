@@ -10,7 +10,7 @@ using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts.Talents
 {
-    [Serializable]
+    [PlayerTalent("Multiply"), Serializable]
     public class Multiply : Talent
     {
         public bool isClone;
@@ -59,7 +59,7 @@ namespace TCD.Objects.Parts.Talents
             {
                 BaseObject clone = ObjectFactory.BuildFromBlueprint(parent.name, cell.Position);
                 clones.Add(clone);
-                if (clone.parts.TryGet(out Multiply multiply))
+                if (clone.Parts.TryGet(out Multiply multiply))
                     multiply.isClone = true;
                 if (parent == PlayerInfo.currentPlayer)
                     MessageLog.Add("You multiplied!");

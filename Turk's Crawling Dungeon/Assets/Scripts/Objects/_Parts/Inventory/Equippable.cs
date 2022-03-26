@@ -100,7 +100,7 @@ namespace TCD.Objects.Parts
         private void OnPlayerEquip()
         {
             BaseObject player = PlayerInfo.currentPlayer;
-            Equipment playerEquipment = player.parts.Get<Equipment>();
+            Equipment playerEquipment = player.Parts.Get<Equipment>();
             if (playerEquipment.TryEquip(parent))
             {
                 EquippedEvent e = LocalEvent.Get<EquippedEvent>();
@@ -112,7 +112,7 @@ namespace TCD.Objects.Parts
         private void OnPlayerUnequip()
         {
             BaseObject player = PlayerInfo.currentPlayer;
-            Equipment playerEquipment = player.parts.Get<Equipment>();
+            Equipment playerEquipment = player.Parts.Get<Equipment>();
             if (playerEquipment.TryUnequip(parent))
             {
                 UnequippedEvent e = LocalEvent.Get<UnequippedEvent>();

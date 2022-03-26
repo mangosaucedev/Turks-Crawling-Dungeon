@@ -10,7 +10,7 @@ using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts.Talents
 {
-    [Serializable]
+    [PlayerTalent("Takedown"), Serializable]
     public class Takedown : Talent
     {
         public override string Name => "Takedown";

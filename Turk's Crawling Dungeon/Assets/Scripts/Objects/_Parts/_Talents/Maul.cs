@@ -10,7 +10,7 @@ using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts.Talents
 {
-    [Serializable]
+    [PlayerTalent("Maul"), Serializable]
     public class Maul : Talent
     {
         public override string Name => "Maul";
@@ -62,8 +62,8 @@ namespace TCD.Objects.Parts.Talents
         public override IEnumerator OnObjectRoutine(BaseObject obj)
         {
             bool madeSuccessfulAttackAgainstTarget = AttackHandler.AutoAttack(parent, obj);
-            bool targetHasEffects = obj.parts.TryGet(out Effects.Effects targetEffects);
-            bool parentHasStats = obj.parts.TryGet(out Stats parentStats);
+            bool targetHasEffects = obj.Parts.TryGet(out Effects.Effects targetEffects);
+            bool parentHasStats = obj.Parts.TryGet(out Stats parentStats);
             if (madeSuccessfulAttackAgainstTarget && AttackHandler.AutoAttack(parent, obj) && targetHasEffects &&
                 parentHasStats && targetEffects.AddEffect(new Bleeding(AttackHandler.lastDamage / 2f, parentStats.RollStat(Stat.PhysicalPower)), GetBleedDuration()))
             {
@@ -73,7 +73,7 @@ namespace TCD.Objects.Parts.Talents
                     MessageLog.Add($"{parent.GetDisplayName()} has mauled you for {AttackHandler.lastDamage} damage!");
             }
             activeCooldown += GetCooldown();
-            if (parent.parts.TryGet(out Resources resources))
+            if (parent.Parts.TryGet(out Resources resources))
                 resources.ModifyResource(Resource, -GetActivationResourceCost());
             if (parent == PlayerInfo.currentPlayer)
                 TimeScheduler.Tick(GetEnergyCost());
@@ -116,7 +116,7 @@ namespace TCD.Objects.Parts.Talents
         {
             if (CanUseTalent() && !e.hasActed)
             {
-                if (parent.parts.TryGet(out Brain brain))
+                if (parent.Parts.TryGet(out Brain brain))
                     brain.Think("Decided to maul " + e.target.GetDisplayName() + " instead.");
                 StopAllCoroutines();
                 StartCoroutine(OnObjectRoutine(e.target));

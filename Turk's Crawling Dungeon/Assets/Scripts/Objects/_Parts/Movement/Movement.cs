@@ -124,7 +124,7 @@ namespace TCD.Objects.Parts
 
         public int GetCostToMove()
         {
-            if (parent.parts.TryGet(out Stats stats))
+            if (parent.Parts.TryGet(out Stats stats))
                 return stats.GetStatLevel(Stat.MoveCost);
             return TimeInfo.TIME_PER_STANDARD_TURN;
         }

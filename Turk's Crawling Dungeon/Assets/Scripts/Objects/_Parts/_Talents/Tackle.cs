@@ -9,7 +9,7 @@ using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts.Talents
 {
-    [Serializable]
+    [PlayerTalent("Tackle"), Serializable]
     public class Tackle : Talent
     {
         public override string Name => "Tackle";
@@ -62,7 +62,7 @@ namespace TCD.Objects.Parts.Talents
 
         public override IEnumerator OnObjectRoutine(BaseObject obj)
         {
-            if (!parent.parts.TryGet(out Movement movement))
+            if (!parent.Parts.TryGet(out Movement movement))
             {
                 if (parent == PlayerInfo.currentPlayer)
                     FloatingTextHandler.Draw(parent.transform.position, "Can't move!", Color.red);
@@ -78,7 +78,7 @@ namespace TCD.Objects.Parts.Talents
                 Vector2Int position = ray.positions[result.collisionIndex - 1];
                 if (movement.TryMoveToPosition(position) && (Mathf.FloorToInt(Vector2Int.Distance(Position, position)) <= 1))
                 {
-                    if (AttackHandler.AutoAttack(parent, obj) && obj.parts.TryGet(out Effects.Effects targetEffects))
+                    if (AttackHandler.AutoAttack(parent, obj) && obj.Parts.TryGet(out Effects.Effects targetEffects))
                     {
                         if (SavingThrows.MakeSavingThrow(parent, obj, Stat.PhysicalPower, Stat.PhysicalSave))
                         {
@@ -88,7 +88,7 @@ namespace TCD.Objects.Parts.Talents
                             if (obj == PlayerInfo.currentPlayer)
                                 MessageLog.Add($"You were tackled to the ground by {parent.GetDisplayName()}!");
                         }
-                        else if (parent.parts.TryGet(out Effects.Effects attackerEffects))
+                        else if (parent.Parts.TryGet(out Effects.Effects attackerEffects))
                         {
                             attackerEffects.AddEffect(new OffBalance(), TimeInfo.TIME_PER_STANDARD_TURN * 2);
                             if (parent == PlayerInfo.currentPlayer)
@@ -99,7 +99,7 @@ namespace TCD.Objects.Parts.Talents
                     }
                 }
                 activeCooldown += GetCooldown();
-                if (parent.parts.TryGet(out Resources resources))
+                if (parent.Parts.TryGet(out Resources resources))
                     resources.ModifyResource(Resource, -GetActivationResourceCost());
                 if (parent == PlayerInfo.currentPlayer)
                     TimeScheduler.Tick(GetEnergyCost());

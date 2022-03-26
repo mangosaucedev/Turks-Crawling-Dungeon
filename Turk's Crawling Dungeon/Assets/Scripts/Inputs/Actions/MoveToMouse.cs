@@ -31,7 +31,7 @@ namespace TCD.Inputs.Actions
         public override IEnumerator OnObject(BaseObject target)
         {
             BaseObject player = PlayerInfo.currentPlayer;
-            if (!player.parts.TryGet(out Movement movement))
+            if (!player.Parts.TryGet(out Movement movement))
                 yield break;
             Vector2Int startPosition = player.cell.Position;
             Vector2Int targetPosition = target.cell.Position;
@@ -45,7 +45,7 @@ namespace TCD.Inputs.Actions
         public override IEnumerator OnCell(Cell cell)
         {
             BaseObject player = PlayerInfo.currentPlayer;
-            if (!player.parts.TryGet(out Movement movement))
+            if (!player.Parts.TryGet(out Movement movement))
                 yield break;
             Vector2Int startPosition = player.cell.Position;
             Vector2Int targetPosition = cell.Position;

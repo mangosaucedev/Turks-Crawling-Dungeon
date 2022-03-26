@@ -10,7 +10,7 @@ using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts.Talents
 {
-    [Serializable]
+    [PlayerTalent("BloodCrazed"), Serializable]
     public class BloodCrazed : Talent
     {
         public override string Name => "Blood-Crazed";
@@ -76,8 +76,8 @@ namespace TCD.Objects.Parts.Talents
 
         protected override bool OnAttack(AttackEvent e)
         {
-            if (e.defender.parts.TryGet(out Effects.Effects targetEffects) && targetEffects.HasEffect("Bleeding") &&
-                parent.parts.TryGet(out Effects.Effects attackerEffects))
+            if (e.defender.Parts.TryGet(out Effects.Effects targetEffects) && targetEffects.HasEffect("Bleeding") &&
+                parent.Parts.TryGet(out Effects.Effects attackerEffects))
                 attackerEffects.AddEffect(new BloodCraze(GetPhysicalPowerBonus(), GetAttackCostMultiplier()), TimeInfo.TIME_PER_STANDARD_TURN * 2);
             return base.OnAttack(e);
         }

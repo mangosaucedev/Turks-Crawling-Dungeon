@@ -26,7 +26,7 @@ namespace TCD.Objects.Parts
             if (!beforeAttackEvent.target == parent)
                 return true;
             Attack attack = beforeAttackEvent.attack;
-            if (attack.damageType.undodgeable || !parent.parts.TryGet(out Stats stats))
+            if (attack.damageType.undodgeable || !parent.Parts.TryGet(out Stats stats))
                 return true;
             int hitAccuracy = attack.hitAccuracy;
             int dodge = stats.RollStat(Stat);

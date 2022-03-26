@@ -26,8 +26,7 @@ namespace TCD.UI
         
         public void NewGame()
         {
-            CloseView();
-            TCDGame.StartNewGame();
+            ViewManager.Open("Embark View");
         }
 
         public void Help()

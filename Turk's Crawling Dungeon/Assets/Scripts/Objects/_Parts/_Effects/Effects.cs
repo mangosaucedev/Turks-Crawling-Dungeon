@@ -135,7 +135,7 @@ namespace TCD.Objects.Parts.Effects
             e.obj = parent;
             e.effect = effect;
             FireEvent(parent, e);
-            if (parent.parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer() && effect.ShowFloatingText)
+            if (parent.Parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer() && effect.ShowFloatingText)
                 FloatingTextHandler.Draw(parent.transform.position, "+" + effect.Name, effect.Color);
             effect.OnApply();
             return true;
@@ -174,7 +174,7 @@ namespace TCD.Objects.Parts.Effects
             EffectRemovedEvent e = LocalEvent.Get<EffectRemovedEvent>();
             e.obj = parent;
             e.effect = effect;
-            if (parent.parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer() && effect.ShowFloatingText)
+            if (parent.Parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer() && effect.ShowFloatingText)
                 FloatingTextHandler.Draw(parent.transform.position, "-" + effect.Name, Color.red);
             effect.OnRemove();
             FireEvent(parent, e);

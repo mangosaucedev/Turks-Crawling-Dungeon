@@ -32,7 +32,7 @@ namespace TCD.Objects.Parts
         protected void OnPlayerGet()
         {
             BaseObject player = PlayerInfo.currentPlayer;
-            Inventory playerInventory = player.parts.Get<Inventory>();
+            Inventory playerInventory = player.Parts.Get<Inventory>();
             if (playerInventory.TryAddItem(parent))
             {
                 PickedUpEvent pickedUpEvent = LocalEvent.Get<PickedUpEvent>();
@@ -43,7 +43,7 @@ namespace TCD.Objects.Parts
         protected void OnPlayerDrop()
         {
             BaseObject player = PlayerInfo.currentPlayer;
-            Inventory playerInventory = player.parts.Get<Inventory>();
+            Inventory playerInventory = player.Parts.Get<Inventory>();
             if (playerInventory.TryRemoveItem(parent))
             {
                 DroppedEvent droppedEvent = LocalEvent.Get<DroppedEvent>();

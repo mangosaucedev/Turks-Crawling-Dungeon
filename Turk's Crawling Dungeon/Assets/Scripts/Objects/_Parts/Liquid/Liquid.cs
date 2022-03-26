@@ -118,7 +118,7 @@ namespace TCD.Objects.Parts
             }
             Vector2Int position = cell.Position;
             BaseObject liquidObject = ObjectFactory.BuildFromBlueprint(parent.name, position);
-            liquid = liquidObject.parts.Get<Liquid>();
+            liquid = liquidObject.Parts.Get<Liquid>();
             liquid.SetDepth(flowAmount);
         }
 
@@ -189,7 +189,7 @@ namespace TCD.Objects.Parts
         protected virtual void OnEnteredCell(EnteredCellEvent e)
         {
             BaseObject obj = e.obj;
-            if (!obj.parts.Get<Movement>() || !obj.parts.TryGet(out Effects.Effects effects))
+            if (!obj.Parts.Get<Movement>() || !obj.Parts.TryGet(out Effects.Effects effects))
                 return;
             if (Depth >= SWIM_DEPTH)
             {
@@ -206,7 +206,7 @@ namespace TCD.Objects.Parts
         protected virtual void OnExitedCell(ExitedCellEvent e)
         {
             BaseObject obj = e.obj;
-            if (!obj.parts.TryGet(out Movement movement) || !obj.parts.TryGet(out Effects.Effects effects))
+            if (!obj.Parts.TryGet(out Movement movement) || !obj.Parts.TryGet(out Effects.Effects effects))
                 return;
             effects.RemoveEffect("Swimming");
             effects.RemoveEffect("Wading");

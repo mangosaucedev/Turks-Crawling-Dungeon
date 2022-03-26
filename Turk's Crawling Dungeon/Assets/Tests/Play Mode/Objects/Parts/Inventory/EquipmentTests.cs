@@ -30,14 +30,14 @@ public class EquipmentTests
     {
         if (playerEquipment)
             return;
-        playerEquipment = (Equipment) PlayerInfo.currentPlayer.parts.Add(typeof(Equipment));
-        PlayerInfo.currentPlayer.parts.Add(typeof(Inventory));
+        playerEquipment = (Equipment) PlayerInfo.currentPlayer.Parts.Add(typeof(Equipment));
+        PlayerInfo.currentPlayer.Parts.Add(typeof(Inventory));
     }
 
     private IEnumerator SetupOneHandedEquippable()
     {
         BaseObject obj = ObjectFactory.BuildFromBlueprint("RustyHatchet", Vector2Int.one);
-        oneHandedEquippable = obj.parts.Get<Equippable>();
+        oneHandedEquippable = obj.Parts.Get<Equippable>();
         yield return null;
     }
 
@@ -54,7 +54,7 @@ public class EquipmentTests
     private IEnumerator SetupTwoHandedEquippable()
     {
         BaseObject obj = ObjectFactory.BuildFromBlueprint("RottingWoodScepter", Vector2Int.one);
-        twoHandedEquippable = obj.parts.Get<Equippable>();
+        twoHandedEquippable = obj.Parts.Get<Equippable>();
         yield return null;
     }
 
@@ -76,9 +76,9 @@ public class EquipmentTests
     private IEnumerator SetupOneHandedEquippableBC()
     {
         BaseObject obj = ObjectFactory.BuildFromBlueprint("RustyHatchet", Vector2Int.one);
-        oneHandedEquippableB = obj.parts.Get<Equippable>();
+        oneHandedEquippableB = obj.Parts.Get<Equippable>();
         obj = ObjectFactory.BuildFromBlueprint("RustyHatchet", Vector2Int.one);
-        oneHandedEquippableC = obj.parts.Get<Equippable>();
+        oneHandedEquippableC = obj.Parts.Get<Equippable>();
         yield return null;
     }
 
@@ -98,7 +98,7 @@ public class EquipmentTests
     private IEnumerator SetupTwoHandedEquippableB()
     {
         BaseObject obj = ObjectFactory.BuildFromBlueprint("RottingWoodScepter", Vector2Int.one);
-        twoHandedEquippableB = obj.parts.Get<Equippable>();
+        twoHandedEquippableB = obj.Parts.Get<Equippable>();
         yield return null;
     }
 

@@ -10,7 +10,7 @@ using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts.Talents
 {
-    [Serializable]
+    [PlayerTalent("Strangle"), Serializable]
     public class Strangle : Talent
     {
         public override string Name => "Strangle";
@@ -63,7 +63,7 @@ namespace TCD.Objects.Parts.Talents
         {
             bool madeSuccessfulAttackAgainstTarget = AttackHandler.AutoAttack(parent, obj);
             bool targetFailedSavingThrow = !SavingThrows.MakeSavingThrow(parent, obj, Stat.PhysicalPower, Stat.PhysicalSave);
-            bool targetHasEffects = obj.parts.TryGet(out Effects.Effects targetEffects);
+            bool targetHasEffects = obj.Parts.TryGet(out Effects.Effects targetEffects);
             if (madeSuccessfulAttackAgainstTarget && targetFailedSavingThrow && targetHasEffects &&
                 targetEffects.AddEffect(new Strangled(), TimeInfo.TIME_PER_STANDARD_TURN * 2))
             {
@@ -80,7 +80,7 @@ namespace TCD.Objects.Parts.Talents
                     MessageLog.Add($"{parent.GetDisplayName()} failed to strangle you!");
             }
             activeCooldown += GetCooldown();
-            if (parent.parts.TryGet(out Resources resources))
+            if (parent.Parts.TryGet(out Resources resources))
                 resources.ModifyResource(Resource, -GetActivationResourceCost());
             if (parent == PlayerInfo.currentPlayer)
                 TimeScheduler.Tick(GetEnergyCost());
@@ -123,7 +123,7 @@ namespace TCD.Objects.Parts.Talents
         {
             if (CanUseTalent() && !e.hasActed)
             {
-                if (parent.parts.TryGet(out Brain brain))
+                if (parent.Parts.TryGet(out Brain brain))
                     brain.Think("Decided to strangle " + e.target.GetDisplayName() + " instead.");
                 StopAllCoroutines();
                 StartCoroutine(OnObjectRoutine(e.target));

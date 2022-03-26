@@ -862,7 +862,7 @@ MonoBehaviour:
   startupScreen: {fileID: 8413441345987465457, guid: 3522d0bc1ed512344abf52a8ef4d8cfd, type: 3}
   defaultCampaignName: Limbicum
   testVars:
-  - bool_DeveloperMode
+  - bool_DeveloperMode_
   state: 
 --- !u!114 &665449634
 MonoBehaviour:

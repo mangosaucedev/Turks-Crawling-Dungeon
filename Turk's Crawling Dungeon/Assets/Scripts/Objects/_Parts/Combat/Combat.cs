@@ -71,7 +71,7 @@ namespace TCD.Objects.Parts
 
         public int GetAttackCost(BaseObject target)
         {
-            if (parent.parts.TryGet(out Stats stats))
+            if (parent.Parts.TryGet(out Stats stats))
                 return stats.GetStatLevel(Stat.AttackCost);
             return TimeInfo.TIME_PER_STANDARD_TURN;
         }

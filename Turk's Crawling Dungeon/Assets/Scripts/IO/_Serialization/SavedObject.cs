@@ -26,7 +26,7 @@ namespace TCD.IO.Serialization
         {
             blueprintName = baseObject.name;
             position = new SerializableVector2Int(baseObject.cell.Position);
-            foreach (Part part in baseObject.parts.Parts)
+            foreach (Part part in baseObject.Parts.Parts)
                 parts.Add(new SavedPart(part));
         }
 

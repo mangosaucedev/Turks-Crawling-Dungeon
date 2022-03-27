@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace TCD.Objects.Parts.Talents
 {
@@ -21,8 +22,7 @@ namespace TCD.Objects.Parts.Talents
                 {
                     foreach (string talentName in talentNames)
                     {
-                        Type type = TypeResolver.ResolveType("TCD.Objects.Parts.Talents." + talentName);
-                        Talent talent = (Talent) Activator.CreateInstance(type);
+                        Talent talent = PlayerTalentUtility.GetTalentInstance(talentName);
                         talents.Add(talent);
                     }   
                 }

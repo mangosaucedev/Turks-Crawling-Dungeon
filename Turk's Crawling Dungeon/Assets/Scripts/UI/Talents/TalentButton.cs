@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TCD
+namespace TCD.UI
 {
     public class TalentButton : MonoBehaviour
     {

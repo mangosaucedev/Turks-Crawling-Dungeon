@@ -19,4 +19,13 @@
 		<Charm>8</Charm>
 	</StatPreset>
 
+	<StatPreset Name="Prodigy">
+		<Strength>8</Strength>
+		<Agility>10</Agility>
+		<Constitution>8</Constitution>
+		<Cunning>14</Cunning>
+		<Willpower>14</Willpower>
+		<Charm>10</Charm>
+	</StatPreset>
+
 </StatPresets>

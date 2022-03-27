@@ -146,8 +146,10 @@ namespace TCD
 
         #endregion
 
+        [ConsoleCommand("newgame")]
         public static void StartNewGame()
         {
+            ViewManager.Close("Dev Console");
             GameResetter.ResetGame();
             TCDGame game = ServiceLocator.Get<TCDGame>();
             game.desiredState = "Gameplay";
@@ -160,6 +162,8 @@ namespace TCD
 
         }
 
+        [ConsoleCommand("exit")]
+        [ConsoleCommand("quit")]
         public static void ExitToDesktop()
         {
 #if UNITY_EDITOR

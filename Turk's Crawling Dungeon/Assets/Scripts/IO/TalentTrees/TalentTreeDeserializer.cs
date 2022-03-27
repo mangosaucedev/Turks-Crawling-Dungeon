@@ -27,7 +27,7 @@ namespace TCD.IO
 
             XmlNodeList talentNodes = node.SelectNodes("Talent");
             foreach (XmlNode talentNode in talentNodes)
-                talentTree.talentNames.Add(talentNode.InnerText);
+                talentTree.talentNames.Add(EvaluateAttribute(talentNode, "Name", true));
 
             Assets.Add(talentTree.name, talentTree);
         }

@@ -18,7 +18,8 @@ namespace TCD.Objects
 
         public PartCollection(BaseObject parent) : base(parent)
         {
-            parts = parent.GetComponentsInChildren<Part>().ToList();
+            if (parent)
+                parts = parent.GetComponentsInChildren<Part>().ToList();
         }
 
         public Part Add(Type type)

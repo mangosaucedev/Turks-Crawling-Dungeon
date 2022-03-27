@@ -10,11 +10,13 @@ namespace TCD
         private const string CANVAS = "Main Canvas";
         private const string TEMP = "--- Temp ---";
         private const string PREFABS = "--- Prefabs ---";
+        private const string TALENT_INSTANCES = "Talent Instances";
 
         private static Transform objects;
         private static Transform canvas;
         private static Transform temp;
         private static Transform prefabs;
+        private static Transform talentInstances;
 
         public static Transform Objects => Find(ref objects, OBJECTS);
 
@@ -23,6 +25,8 @@ namespace TCD
         public static Transform Temp => Find(ref temp, TEMP);
 
         public static Transform Prefabs => Find(ref prefabs, PREFABS);
+
+        public static Transform TalentInstances => Find(ref talentInstances, TALENT_INSTANCES);
 
         private void OnEnable()
         {

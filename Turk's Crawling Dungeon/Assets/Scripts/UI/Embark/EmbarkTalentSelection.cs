@@ -9,13 +9,16 @@ namespace TCD.UI
     public class EmbarkTalentSelection : MonoBehaviour
     {
         [SerializeField] private GameObject nextButton;
+        [SerializeField] private TalentView talentView;
 
         private void OnEnable()
         {
             if (PlayerInfo.currentPlayer)
-                PlayerInfo.currentPlayer.Destroy();
+                Destroy(PlayerInfo.currentPlayer.gameObject);
             PlayerInfo.currentPlayer = ObjectFactory.BuildFromBlueprint("Player", Vector2Int.zero);
             PlayerInfo.currentPlayer.gameObject.SetActive(false);
+            PlayerInfo.currentClass = Embark.ChosenClass;
+            talentView.BuildTalents();
         }
     }
 }

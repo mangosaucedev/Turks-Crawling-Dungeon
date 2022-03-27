@@ -84,6 +84,9 @@ namespace TCD
             DialogueSpeakerDeserializer dialogueSpeakerDeserializer = new DialogueSpeakerDeserializer();
             yield return dialogueSpeakerDeserializer.DeserializeRawsAtPath();
 
+            TalentTreeDeserializer talentTreeDeserializer = new TalentTreeDeserializer();
+            yield return talentTreeDeserializer.DeserializeRawsAtPath();
+
             KeybindingsLoader keybindingsLoader = new KeybindingsLoader();
             keybindingsLoader.TryToLoad();
 

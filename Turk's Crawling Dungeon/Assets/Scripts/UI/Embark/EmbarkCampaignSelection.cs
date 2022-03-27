@@ -17,6 +17,7 @@ namespace TCD
         private void Start()
         {
             List<Campaign> campaigns = Assets.FindAll<Campaign>();
+            dropdown.options.Add(new Dropdown.OptionData(" "));
             foreach (Campaign campaign in campaigns)
             {
                 if (campaign.hideSelection)
@@ -26,8 +27,20 @@ namespace TCD
             }
         }
 
+        private void OnEnable()
+        {
+            dropdown.Select();
+        }
+
         public void OnCampaignSelected(int campaignIndex)
         {
+            campaignIndex -= 1;
+            if (campaignIndex == -1)
+            {
+                if (nextButton.activeInHierarchy)
+                    nextButton.SetActive(false);
+                return;
+            }
             Campaign campaign = campaigns[campaignIndex];
             Embark.SetChosenCampaign(campaign);
             description.text = campaign.description;

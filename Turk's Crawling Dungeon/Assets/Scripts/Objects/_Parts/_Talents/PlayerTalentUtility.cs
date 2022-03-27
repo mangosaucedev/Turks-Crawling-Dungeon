@@ -11,6 +11,7 @@ namespace TCD.Objects.Parts.Talents
     {
         private static List<PlayerTalentEntry> playerTalents = new List<PlayerTalentEntry>();
         private static Dictionary<string, PlayerTalentEntry> playerTalentsByName = new Dictionary<string, PlayerTalentEntry>();
+        private static Dictionary<string, Talent> talentInstancesByName = new Dictionary<string, Talent>();
 
         public static List<PlayerTalentEntry> GetPlayerTalents()
         {
@@ -52,6 +53,21 @@ namespace TCD.Objects.Parts.Talents
                 ExceptionHandler.HandleMessage("Player Talent " + name + " not defined! Are you sure the associated class has PlayerTalentAttribute?");
                 return default;
             }
+        }
+
+        public static Talent GetTalentInstance(string name)
+        {
+            if (playerTalents.Count == 0)
+                FindPlayerTalents();
+            if (!talentInstancesByName.TryGetValue(name, out Talent talent))
+            {
+                GameObject parent = ParentManager.TalentInstances.gameObject;
+                PlayerTalentEntry entry = Get(name); 
+                talent = (Talent) parent.AddComponent(entry.type);
+                talent.enabled = false;
+                talentInstancesByName[name] = talent;
+            }
+            return talent;
         }
     }
 }

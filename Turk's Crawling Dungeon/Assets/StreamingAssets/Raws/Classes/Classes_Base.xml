@@ -1,14 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Classes>
 	
-	<Class Name="Hellion" StatPreset="Hellion">
+	<Class Name="Hellion">
 
+		<Description>A rambunctious youth has become a troublemaking adult. Fists will fly.</Description>
+		
 		<StatPreset>Hellion</StatPreset>
 
 		<TalentTree>BasicAthletics</TalentTree>
 		<TalentTree>BasicGrappling</TalentTree>
 		<TalentTree>Fitness</TalentTree>
+		<TalentTree>RecklessCombat</TalentTree>
 		
 	</Class>
-	
+
+	<Class Name="Prodigy">
+
+		<Description>Gifted from a young age, your mind has become your primary means of overcoming obstacles.</Description>
+		
+		<StatPreset>Prodigy</StatPreset>
+
+		<TalentTree>BasicAthletics</TalentTree>
+		<TalentTree>Telekinesis</TalentTree>
+		<TalentTree>RandomPsionics</TalentTree>
+
+	</Class>
+
 </Classes>

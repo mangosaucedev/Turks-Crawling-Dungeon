@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace TCD
 {
-    [AttributeUsage(AttributeTargets.Method)]
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
     public class ConsoleCommandAttribute : Attribute
     {
         public string command;

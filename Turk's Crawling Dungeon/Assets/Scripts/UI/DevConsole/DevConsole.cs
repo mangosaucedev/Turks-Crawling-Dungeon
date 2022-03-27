@@ -52,9 +52,12 @@ namespace TCD.UI
                     MethodInfo[] methods = type.GetMethods(BindingFlags.Static | BindingFlags.Public);
                     foreach (MethodInfo method in methods)
                     {
-                        ConsoleCommandAttribute commandAttribute = method.GetCustomAttribute<ConsoleCommandAttribute>();
-                        if (commandAttribute != null)
-                            commandMethods[commandAttribute.command] = method;
+                        IEnumerable<ConsoleCommandAttribute> commandAttributes = method.GetCustomAttributes<ConsoleCommandAttribute>();
+                        foreach (ConsoleCommandAttribute commandAttribute in commandAttributes)
+                        {
+                            if (commandAttribute != null)
+                                commandMethods[commandAttribute.command] = method;
+                        }
                     }
                 }
             }

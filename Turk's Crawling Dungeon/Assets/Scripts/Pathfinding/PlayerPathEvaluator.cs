@@ -27,6 +27,8 @@ namespace TCD.Pathfinding
             Cell cell = gameGrid[node.position];
             foreach (BaseObject obj in cell.objects)
             {
+                if (!obj)
+                    return false;
                 if (obj.Parts.TryGet(out Obstacle obstacle) && obstacle.IsImpassable && !obj.Parts.Get<Door>())
                     return false;
             }

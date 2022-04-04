@@ -14,7 +14,7 @@ namespace TCD.Objects.Parts.Talents
 
         public override string TalentTree => "BasicAtheltics";
 
-        public override Sprite Icon => Assets.Get<Sprite>("WeaveIcon");
+        public override string IconName => "WeaveIcon";
 
         public override int MaxLevel => 5;
 

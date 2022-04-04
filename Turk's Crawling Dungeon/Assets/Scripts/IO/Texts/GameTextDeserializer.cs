@@ -6,6 +6,7 @@ using TCD.Texts;
 
 namespace TCD.IO
 {
+    [AssetLoader]
     public class GameTextDeserializer : RawDeserializer
     {
         GameText currentText;

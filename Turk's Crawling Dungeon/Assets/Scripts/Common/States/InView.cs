@@ -11,14 +11,14 @@ namespace TCD
 
         public override void Start()
         {
-            base.Start();
             InputManager.SetInputGroupEnabled(InputGroup.UI);
+            base.Start();
         }
 
         public override void End()
         {
-            base.End();
             InputManager.SetInputGroupEnabled(InputGroup.UI, false);
+            base.End();
         }
     }
 }

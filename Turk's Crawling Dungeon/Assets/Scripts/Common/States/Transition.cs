@@ -1,21 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace TCD
 {
-    public class Transition : MonoBehaviour
+    public class Transition : TransitionFromAny
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
+        public readonly IState state;
 
-        // Update is called once per frame
-        void Update()
+        public Transition(IState state, Func<bool> transition, IState goTo) : base(transition, goTo)
         {
-        
+            this.state = state;
         }
     }
 }

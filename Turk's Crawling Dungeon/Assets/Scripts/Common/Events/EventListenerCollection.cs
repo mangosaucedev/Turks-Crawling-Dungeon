@@ -12,7 +12,7 @@ namespace TCD
 
         public void AddListener<T>(object listener, EventDelegate<T> action)
             where T : Event
-        {
+        {   
             if (!listeners.Contains(listener))
             {
                 listeners.Add(listener);

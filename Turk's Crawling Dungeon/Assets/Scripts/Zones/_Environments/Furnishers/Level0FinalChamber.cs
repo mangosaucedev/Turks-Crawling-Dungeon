@@ -11,9 +11,9 @@ namespace TCD.Zones.Environments
         {
             base.Furnish(feature, x, y);
             Cell cell = CurrentZoneInfo.grid[x, y];
-            for (int i = cell.objects.Count - 1; i >= 0; i--)
+            for (int i = cell.Objects.Count - 1; i >= 0; i--)
             {
-                BaseObject obj = cell.objects[i];
+                BaseObject obj = cell.Objects[i];
                 if (obj)
                 {
                     obj.cell.SetPosition(0, 0);

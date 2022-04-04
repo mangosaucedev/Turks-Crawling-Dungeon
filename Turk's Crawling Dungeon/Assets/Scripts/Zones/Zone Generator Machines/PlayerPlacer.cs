@@ -39,6 +39,7 @@ namespace TCD.Zones
             }         
             else
                 PlayerInfo.currentPlayer.cell.SetPosition(position);
+            PlayerInfo.currentPlayer.enabled = true;
             yield return null;
         }
 

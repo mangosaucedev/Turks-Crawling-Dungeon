@@ -103,6 +103,13 @@ namespace TCD.UI
             return false;
         }
 
+        public static bool ActiveViewLocksInput()
+        {
+            if (!TryGetActiveView(out ActiveView view))
+                return false;
+            return view.locksInput;
+        }
+
         public static void Open(string viewName, bool locksInput = true, bool isInteractive = true)
         {
             if (TryFind(viewName, out ActiveView view))
@@ -115,6 +122,8 @@ namespace TCD.UI
             activeViews.Add(view);
             EventManager.Send(new ViewOpenedEvent(view));
         }
+
+        public static bool IsOpen(string viewName) => TryFind(viewName, out var view);
 
         public static bool TryFind(string viewName, out ActiveView foundView)
         {

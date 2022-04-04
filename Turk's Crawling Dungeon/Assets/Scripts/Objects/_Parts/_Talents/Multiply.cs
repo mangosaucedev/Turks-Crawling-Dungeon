@@ -20,7 +20,7 @@ namespace TCD.Objects.Parts.Talents
 
         public override string TalentTree => "StrangeTechniques";
 
-        public override Sprite Icon => Assets.Get<Sprite>("MultiplyIcon");
+        public override string IconName => "MultiplyIcon";
 
         public override int MaxLevel => 5;
 

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ZoneParams>
+
+	<ZoneParam Name="Hypothalamus0">
+		<Width>120</Width>
+		<Height>120</Height>
+		<MinChamberWidth>5</MinChamberWidth>
+		<MinChamberHeight>5</MinChamberHeight>
+		<MaxChamberWidth>12</MaxChamberWidth>
+		<MaxChamberHeight>12</MaxChamberHeight>
+		<MaxChambers>8</MaxChambers>
+		<MinChamberChildDistance>8</MinChamberChildDistance>
+		<MinChamberBufferDistance>2</MinChamberBufferDistance>
+		<MinCorridorWidth>1</MinCorridorWidth>
+		<MaxCorridorWidth>3</MaxCorridorWidth>
+	</ZoneParam>
+	
+</ZoneParams>

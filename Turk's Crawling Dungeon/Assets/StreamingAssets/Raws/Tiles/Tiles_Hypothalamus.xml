@@ -8,5 +8,7 @@
 	<Tile Name="RottingWoodFloor1">RottingWoodFloor1</Tile>
 	
 	<Tile Name="RottingWoodFloor2">RottingWoodFloor2</Tile>
+	
+	<Tile Name="BareConcrete0">BareConcrete0</Tile>
 
 </Tiles>

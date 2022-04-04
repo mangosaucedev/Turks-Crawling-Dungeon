@@ -1,0 +1,36 @@
+﻿{
+	"damageTypes": [
+		{
+			"name": "Pure"
+		},
+
+		{
+			"name": "Cut",
+			"armorSoak": "0.8",
+			"armorReduction": "0.02"
+		},
+
+		{
+			"name": "Pierce",
+			"armorSoak": "0.65",
+			"armorReduction": "0.01"
+		},
+
+		{
+			"name": "Blunt",
+			"armorSoak": "0.4",
+			"armorReduction": "0.01"
+		},
+
+		{
+			"name": "Burn",
+			"armorSoak": "0.2",
+			"armorReduction": "0.03"
+		},
+
+		{
+			"name": "Acid",
+			"armorReduction": "0.05"
+		}
+	]
+}

@@ -8,6 +8,7 @@ using TCD.Zones;
 
 namespace TCD.IO
 {
+    [AssetLoader]
     public class ZoneEncountersDeserializer : RawDeserializer
     {
         ZoneEncounters currentZoneEncounters;

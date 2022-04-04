@@ -4,17 +4,11 @@ using UnityEngine;
 
 namespace TCD
 {
-    public interface IState 
+    public interface IState : IStateMachine
     {
         string Name { get; }
 
         void Start();
-        
-        void Update();
-
-        void FixedUpdate();
-
-        void SlowUpdate();
 
         void End();
     }

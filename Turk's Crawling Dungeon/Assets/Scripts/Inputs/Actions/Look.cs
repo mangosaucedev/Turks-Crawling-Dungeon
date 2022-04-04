@@ -31,9 +31,9 @@ namespace TCD.Inputs.Actions
         public override IEnumerator OnCell(Cell cell)
         {
             SelectionHandler.SetSelectedCell(cell);
-            if (cell.objects.Count == 1)
-                yield return OnObject(cell.objects[0]);
-            else if (cell.objects.Count > 1)
+            if (cell.Objects.Count == 1)
+                yield return OnObject(cell.Objects[0]);
+            else if (cell.Objects.Count > 1)
                 ViewManager.Open("Inspect Object List");
         }
 

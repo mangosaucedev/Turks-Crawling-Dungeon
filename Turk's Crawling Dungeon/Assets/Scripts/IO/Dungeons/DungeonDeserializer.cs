@@ -6,6 +6,7 @@ using TCD.Zones.Dungeons;
 
 namespace TCD.IO
 {
+    [AssetLoader]
     public class DungeonDeserializer : RawDeserializer
     {
         public override string RawPath => "Dungeons";

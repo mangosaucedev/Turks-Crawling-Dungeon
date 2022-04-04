@@ -6,6 +6,7 @@ using TCD.Cinematics.Dialogues;
 
 namespace TCD.IO
 {
+    [AssetLoader]
     public class DialogueSpeakerDeserializer : RawDeserializer
     {
         public override string RawPath => "DialogueSpeakers";

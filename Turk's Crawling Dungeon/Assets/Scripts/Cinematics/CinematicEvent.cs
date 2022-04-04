@@ -31,6 +31,15 @@ namespace TCD.Cinematics
                 case "waitviews":
                 case "waitforviews":
                     return EventType.WaitForViews;
+                case "fade":
+                case "fadecolor":
+                case "fadetocolor":
+                    return EventType.FadeColor;
+                case "monologue":
+                case "startmonologue":
+                    return EventType.StartMonologue;
+                case "clearmonologue":
+                    return EventType.ClearMonologue;
                 default:
                     return EventType.Unknown;            
             }

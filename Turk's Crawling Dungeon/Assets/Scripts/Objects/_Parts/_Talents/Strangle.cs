@@ -17,7 +17,7 @@ namespace TCD.Objects.Parts.Talents
 
         public override string TalentTree => "FearfulTechniques";
 
-        public override Sprite Icon => Assets.Get<Sprite>("StrangleIcon");
+        public override string IconName => "StrangleIcon";
 
         public override int MaxLevel => 5;
 

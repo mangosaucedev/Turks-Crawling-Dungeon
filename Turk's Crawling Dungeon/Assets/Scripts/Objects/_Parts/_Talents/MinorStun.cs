@@ -16,7 +16,7 @@ namespace TCD.Objects.Parts.Talents
 
         public override string TalentTree => "RandomPsionics";
 
-        public override Sprite Icon => Assets.Get<Sprite>("PsiStunIcon");
+        public override string IconName => "PsiStunIcon";
 
         public override Resource Resource => Resource.Psi;
 

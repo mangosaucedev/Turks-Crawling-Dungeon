@@ -69,7 +69,7 @@ namespace TCD.Inputs.Actions
         public override IEnumerator OnCell(Cell cell)
         {
             BaseObject target = null;
-            foreach (BaseObject obj in cell.objects)
+            foreach (BaseObject obj in cell.Objects)
             {
                 if (obj.Parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer() &&
                     (!target || obj.Parts.Get<Combat>()))

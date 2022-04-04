@@ -24,6 +24,8 @@ namespace TCD.Zones.Dungeons
             zoneGenerator.GenerateZone(dungeon.Zones[0]);
         }
 
+        [ConsoleCommand("nextzone")]
+        [ConsoleCommand("next")]
         public static void GoToNextZone()
         {
             currentZoneIndex++;

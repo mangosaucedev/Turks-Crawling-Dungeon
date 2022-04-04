@@ -5,7 +5,7 @@ using TCD.Objects.Blueprints;
 
 namespace TCD.IO
 {
-    [AssetDeserializer]
+    [AssetLoader]
     public class ObjectBlueprint_v2CollectionDeserializer : JsonDeserializer<ObjectBlueprint_v2Collection>
     {
         protected override string FullPath => Directories.Objects;

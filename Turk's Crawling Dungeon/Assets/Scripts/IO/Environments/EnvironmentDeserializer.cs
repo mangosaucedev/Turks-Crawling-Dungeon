@@ -9,6 +9,7 @@ using Environment = TCD.Zones.Environments.Environment;
 
 namespace TCD.IO
 {
+    [AssetLoader]
     public class EnvironmentDeserializer : RawDeserializer
     {
         private Environment currentEnvironment;

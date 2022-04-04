@@ -5,7 +5,7 @@ using TCD.Cinematics.Dialogues;
 
 namespace TCD.IO
 {
-    [AssetDeserializer]
+    [AssetLoader]
     public class DialogueCollectionDeserializer : JsonDeserializer<DialogueCollection>
     {
         protected override string FullPath => Directories.Dialogues;

@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using TCD.Cinematics;
 using TCD.Pathfinding;
+using TCD.Pathfinding.AutoExplore;
 using TCD.Zones.Dungeons;
 using TCD.Zones.Environments;
 using TCD.UI;
@@ -65,7 +67,7 @@ namespace TCD.Zones
                     zoneName = "Cavern";
                     break;
                 default:
-                    zoneName = Choose.Random("Level0", "Overgrown", "Decomposition", "Fungus");
+                    zoneName = Choose.Random("Level0", "Overgrown", "Decomposition", "Fungus", "House");
                     break;
             }
 
@@ -74,6 +76,8 @@ namespace TCD.Zones
                 new GameGrid(CurrentZoneInfo.zone.Width, CurrentZoneInfo.zone.Height);
             CurrentZoneInfo.navGrid =
                 new NavGrid(CurrentZoneInfo.zone.Width, CurrentZoneInfo.zone.Height);
+            CurrentZoneInfo.floorGrid =
+                new TGrid<bool>(CurrentZoneInfo.zone.Width, CurrentZoneInfo.zone.Height);
 
             ZoneGenerator zoneGenerator = null;
             switch (currentType)
@@ -89,11 +93,22 @@ namespace TCD.Zones
             ZoneGenerationOperation operation = new ZoneGenerationOperation(zoneGenerator);
             yield return loadingManager.EnqueueLoadingOperationRoutine(operation);
 
+            CurrentZoneInfo.autoExploreGrid =
+                new AutoExploreGrid(CurrentZoneInfo.zone.Width, CurrentZoneInfo.zone.Height);
+
             stopwatch.Stop();
             DebugLogger.Log($"Zone generated in {stopwatch.ElapsedMilliseconds} ms.");
             hasBegunGeneratingZone = false;
 
             EventManager.Send(new ZoneGenerationFinishedEvent());
+
+            Cinematic cinematic = CurrentZoneInfo.zone.Cinematic;
+            if (cinematic != null)
+            {
+                DebugLogger.Log("Zone cinematic = " + cinematic.name);
+                CinematicManager cinematicManager = ServiceLocator.Get<CinematicManager>();
+                cinematicManager.PlayCinematic(cinematic);
+            }
         }
 
 #if UNITY_EDITOR

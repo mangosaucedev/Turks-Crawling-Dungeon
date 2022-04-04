@@ -1,0 +1,98 @@
+{
+    "cinematics": [
+
+        {
+            "name": "LimbicumOpening",
+            "events": [
+                {
+                    "type": "FadeColor",
+                    "arguments": [
+                        "Black",
+                        "1",
+                        "0"
+                    ]
+                },
+
+                {
+                    "type": "WaitForSeconds",
+                    "arguments": [
+                        "1"
+                    ]
+                },
+
+                {
+                    "type": "StartMonologue",
+                    "arguments": [
+                        "You both are in bed. Ren snores softly while you watch their sleeping face. Their features are immaculate in the moonlight beaming from the open window.",
+                        "true"
+                    ]
+                },
+
+                {
+                    "type": "ClearMonologue",
+                    "arguments": [
+                        "2"
+                    ]
+                },
+
+                {
+                    "type": "FadeColor",
+                    "arguments": [
+                        "Black",
+                        "0.8",
+                        "2"
+                    ]
+                },
+
+                {
+                    "type": "StartMonologue",
+                    "arguments": [
+                        "You wake with a start, the cold ground pressed against your side.\nWhatever you felt that night was a mirage.\nMelting into the ether. Becoming nothing.\nYou\u0027ll never see Ren\u0027s moonlit face again.",
+                        "true"
+                    ]
+                },
+
+                {
+                    "type": "ClearMonologue",
+                    "arguments": [
+                        "2"
+                    ]
+                },
+
+                {
+                    "type": "FadeColor",
+                    "arguments": [
+                        "Black",
+                        "0.65",
+                        "2"
+                    ]
+                },
+
+                {
+                    "type": "StartMonologue",
+                    "arguments": [
+                        "So far from reach... The worst is yet to come.",
+                        "true"
+                    ]
+                },
+
+                {
+                    "type": "ClearMonologue",
+                    "arguments": [
+                        "2"
+                    ]
+                },
+
+                {
+                    "type": "FadeColor",
+                    "arguments": [
+                        "Black",
+                        "0",
+                        "2"
+                    ]
+                }
+            ]
+        }
+
+    ]
+}

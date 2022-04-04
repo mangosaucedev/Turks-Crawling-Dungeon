@@ -9,18 +9,24 @@ namespace TCD.Cinematics
     public class Cinematic 
     {
         public string name;
-        public CinematicEventCollection events;
+        public CinematicEvent[] events;
 
         private List<CinematicAction> actions = new List<CinematicAction>();
 
-        public List<CinematicAction> GetActions()
+        private List<CinematicAction> GetActions()
         {
-            if (actions.Count == 0 && events.Count > 0)
+            if (actions.Count == 0 && events != null && events.Length > 0)
             {
-                foreach (CinematicEvent e in events.events)
+                foreach (CinematicEvent e in events)
                     actions.Add(CinematicActionFactory.GetFromEvent(e));
             }
             return actions;
+        }
+
+        public IEnumerator PlayRoutine()
+        {
+            foreach (CinematicAction action in GetActions())
+                yield return action.PerformRoutine();
         }
     }
 }

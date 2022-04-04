@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Objects>
+
+	<!-- Walls -->
+
+	<Object Name="PeelingPaint0" InheritsFrom="Wall">
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Peeling Wall</Var>
+			<Var Name="DisplayNamePlural">Peeling Walls</Var>
+			<Var Name="Description">A wall blistering with old paint.</Var>
+			<Var Name="Sprite">PeelingPaint0</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="PeelingPaint1" InheritsFrom="PeelingPaint0">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">PeelingPaint1</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="PeelingPaint2" InheritsFrom="PeelingPaint0">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">PeelingPaint2</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="BareStuds0" InheritsFrom="Wall">
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Bare Wall</Var>
+			<Var Name="DisplayNamePlural">Bare Walls</Var>
+			<Var Name="Description">Bare studs and plywood.</Var>
+			<Var Name="Sprite">BareStuds0</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="BareStuds1" InheritsFrom="BareStuds0">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">BareStuds1</Var>
+		</OverridePart>
+
+	</Object>
+	
+</Objects>

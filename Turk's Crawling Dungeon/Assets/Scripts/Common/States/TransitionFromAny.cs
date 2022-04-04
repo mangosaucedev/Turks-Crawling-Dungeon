@@ -1,21 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace TCD
 {
-    public class TransitionFromAny : MonoBehaviour
+    public class TransitionFromAny
     {
-        // Start is called before the first frame update
-        void Start()
+        public IState goTo;
+
+        protected Func<bool> transition;
+
+        public TransitionFromAny(Func<bool> transition, IState goTo)
         {
-        
+            this.transition = transition;
+            this.goTo = goTo;
         }
 
-        // Update is called once per frame
-        void Update()
+        public bool CanTransition()
         {
-        
+            if (transition != null)
+                return transition.Invoke();
+            return false;
         }
     }
 }

@@ -18,6 +18,8 @@ namespace TCD.Cinematics
         FadeColor,
         FadeColorHex,
         StartDialogue,
+        StartMonologue,
+        ClearMonologue,
         FireTrigger
     }
 }

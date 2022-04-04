@@ -476,3 +476,5 @@ MonoBehaviour:
   label: {fileID: 1873453408076427622}
   icon: {fileID: 559338134635948902}
   content: {fileID: 6652125323366441911}
+  closedIcon: {fileID: 0}
+  openIcon: {fileID: 0}

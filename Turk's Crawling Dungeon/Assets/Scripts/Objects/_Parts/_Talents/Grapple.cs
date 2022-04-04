@@ -17,7 +17,7 @@ namespace TCD.Objects.Parts.Talents
 
         public override string TalentTree => "BasicGrappling";
 
-        public override Sprite Icon => Assets.Get<Sprite>("GrappleIcon");
+        public override string IconName => "GrappleIcon";
 
         public override int MaxLevel => 5;
 

@@ -17,7 +17,7 @@ namespace TCD.Objects.Parts.Talents
 
         public override string TalentTree => "Envenomation";
 
-        public override Sprite Icon => Assets.Get<Sprite>("VenomStrikeIcon");
+        public override string IconName => "VenomStrikeIcon";
 
         public override int MaxLevel => 5;
 

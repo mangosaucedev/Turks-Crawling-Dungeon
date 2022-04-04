@@ -10,9 +10,9 @@ namespace TCD.Zones.Utilities
 
         private static HashSet<Vector2Int> searched = new HashSet<Vector2Int>();
         private static HashSet<Vector2Int> largestContiguousShape = new HashSet<Vector2Int>();
-        private static CellularAutomataGrid currentGrid;
+        private static TGrid<bool> currentGrid;
 
-        public static HashSet<Vector2Int> GetLargestContiguousShape(CellularAutomataGrid grid)
+        public static HashSet<Vector2Int> GetLargestContiguousShape(TGrid<bool> grid)
         {
             currentGrid = grid;
             searched.Clear();

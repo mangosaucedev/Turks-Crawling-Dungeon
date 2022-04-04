@@ -7,6 +7,7 @@ using TCD.Objects.Encounters;
 
 namespace TCD.IO
 {
+    [AssetLoader]
     public class EncountersDeserializer : RawDeserializer
     {
         private Encounter currentEncounter;

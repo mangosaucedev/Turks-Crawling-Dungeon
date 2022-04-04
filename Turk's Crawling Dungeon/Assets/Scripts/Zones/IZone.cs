@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TCD.Cinematics;
 using TCD.Zones.Environments;
 
 namespace TCD.Zones
 {
     public interface IZone
     {
+        Cinematic Cinematic { get; }
+
         IZoneParams ZoneParams { get; set; }
 
         ZoneEnvironments ZoneEnvironments { get; set; }

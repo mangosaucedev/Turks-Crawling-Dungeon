@@ -44,13 +44,13 @@ namespace TCD.Inputs.Actions
 
         public override IEnumerator OnCell(Cell cell)
         {
-            if (cell.objects.Count > 1)
+            if (cell.Objects.Count > 1)
             {
                 SelectionHandler.SetSelectedCell(cell);
                 ViewManager.Open("Interaction Object List");
             }
-            else if (cell.objects.Count == 1)
-                yield return OnObject(cell.objects[0]);
+            else if (cell.Objects.Count == 1)
+                yield return OnObject(cell.Objects[0]);
         }
     }
 }

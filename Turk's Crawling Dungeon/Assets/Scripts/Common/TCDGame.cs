@@ -6,8 +6,10 @@ using UnityEngine.Diagnostics;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+using TCD.Cinematics;
 using TCD.UI;
 using TCD.UI.Notifications;
+using TCD.Zones;
 using TCD.Zones.Dungeons;
 
 namespace TCD
@@ -18,37 +20,13 @@ namespace TCD
 #if UNITY_WEBPLAYER
         private const string QUIT_URL = "http://google.com";
 #endif
-
-        public string desiredState;
-
         [SerializeField] private GameObject startupScreen;
 
         [Header("Startup Options")]
         [SerializeField] private string defaultCampaignName;
         [SerializeField] private string[] testVars;
 
-#if UNITY_EDITOR
-        [SerializeField] private string state;
-#endif
-
-        private StateMachine stateMachine;
         private bool lastSessionCrashed;
-
-        public StateMachine StateMachine
-        {
-            get
-            {
-                if (stateMachine == null)
-                    stateMachine = new StateMachine();
-                return stateMachine;
-            }
-        }
-
-        public string State
-        {
-            get => StateMachine.State;
-            set => StateMachine.GoToState(value);
-        }
 
         private void Awake()
         {
@@ -79,16 +57,7 @@ namespace TCD
             DebugCrashHandler.CreateCrashFile();
 
             startupScreen = Instantiate(startupScreen, ParentManager.Canvas);
-
-            StateMachine.EnableLogging("Game State Machine");
-            StateMachine.AddState(new Gameplay());
-            StateMachine.AddState(new InCinematic());
-            StateMachine.AddState(new InView());
-            StateMachine.AddState(new InAction());
-            StateMachine.AddState(new Loading(), true);
-
             yield return GameStartup.StartGame();
-
             Destroy(startupScreen);
 
             ViewManager.Open("Main Menu");
@@ -104,34 +73,9 @@ namespace TCD
             }
         }
 
-        private void Update()
-        {
-#if UNITY_EDITOR
-            state = State;
-#endif
-            StateMachine?.Update();
-        }
-
-        private void FixedUpdate()
-        {
-            StateMachine?.FixedUpdate();
-        }
-
-        private void OnEnable()
-        {
-            EventManager.Listen<ViewOpenedEvent>(this, OnViewOpened);
-            EventManager.Listen<ViewClosedEvent>(this, OnViewClosed);
-            EventManager.Listen<PlayerActionPerformEvent>(this, OnPlayerActionPerform);
-            EventManager.Listen<PlayerActionEndedEvent>(this, OnPlayerActionEnded);
-        }
-
         private void OnDisable()
         {
             StopAllCoroutines();
-            EventManager.StopListening<ViewOpenedEvent>(this);
-            EventManager.StopListening<ViewClosedEvent>(this);
-            EventManager.StopListening<PlayerActionPerformEvent>(this);
-            EventManager.StopListening<PlayerActionEndedEvent>(this);
         }
 
         #region Console Commands
@@ -149,11 +93,12 @@ namespace TCD
         [ConsoleCommand("newgame")]
         public static void StartNewGame()
         {
+            DebugLogger.Log("New game started!");
             ViewManager.Close("Dev Console");
             GameResetter.ResetGame();
             TCDGame game = ServiceLocator.Get<TCDGame>();
-            game.desiredState = "Gameplay";
-            CampaignHandler.StartCampaign(game.defaultCampaignName);
+            ZoneResetter.ResetZone();
+            //CampaignHandler.StartCampaign(game.defaultCampaignName);
         }
 
         // TODO: REPLACE THIS WITH ENDING?
@@ -175,41 +120,5 @@ namespace TCD
             System.Diagnostics.Process.GetCurrentProcess().Kill();
 #endif
         }
-
-        #region Events
-
-        private void OnViewOpened(ViewOpenedEvent e)
-        {
-            if (e.view.locksInput && State != "InView" && State != "Loading")
-            {
-                desiredState = State == "InAction" ? "Gameplay" : State;
-                State = "InView";
-            }
-        }
-
-        private void OnViewClosed(ViewClosedEvent e)
-        {
-            bool noViewActive = ViewManager.activeViews.Count == 0;
-            bool activeViewDoesNotLockInput = noViewActive ? true : !ViewManager.TryFind(ViewManager.GetActiveView(), out ActiveView activeView) || !activeView.locksInput;
-            if (State == "InView" && (noViewActive || activeViewDoesNotLockInput))
-                State = desiredState;
-        }
-
-        private void OnPlayerActionPerform(PlayerActionPerformEvent e)
-        {
-            if (State == "InView" || State == "Loading")
-                return;
-            desiredState = State;
-            State = "InAction";
-        }
-
-        private void OnPlayerActionEnded(PlayerActionEndedEvent e)
-        {
-            if (State == "InView" || State == "Loading")
-                return;
-            State = desiredState;
-        }
-
-        #endregion
     }
 }

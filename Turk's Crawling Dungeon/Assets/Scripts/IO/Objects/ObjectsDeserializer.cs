@@ -6,6 +6,7 @@ using TCD.Objects;
 
 namespace TCD.IO
 {
+    [AssetLoader]
     public class ObjectsDeserializer : RawDeserializer
     {
         private static PartParser partParser = new PartParser();

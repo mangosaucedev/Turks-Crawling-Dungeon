@@ -8,23 +8,37 @@ using UnityEngine;
 
 namespace TCD.IO
 {
-    public abstract class RawDeserializer
+    public abstract class RawDeserializer : IAssetLoader
     {
         protected string streamingAssetsRaws = Application.streamingAssetsPath + "/Raws/";
 
+        private int filesToDeserialize;
+        private int filesDeserialized;
+
+        public float Progress
+        {
+            get
+            {
+                if (filesToDeserialize == 0)
+                    return 1f;
+                return (float) filesDeserialized / filesToDeserialize;
+            }
+        }
+
         public abstract string RawPath { get; }
 
-        public IEnumerator DeserializeRawsAtPath()
+        public IEnumerator LoadAll()
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
             List<XmlDocument> xmlDocuments = GetXmlDocumentsAtPath();
+            filesToDeserialize = xmlDocuments.Count;
             yield return DeserializeAllXmlDocumentsInList(xmlDocuments);
 
             stopwatch.Stop();
             DebugLogger.Log(
-                $"Deserialized {xmlDocuments.Count} raw xml documents in folder " +
+                $"\tDeserialized {filesDeserialized}/{filesToDeserialize} raw xml documents in folder " +
                 $"/{RawPath}/ in {stopwatch.ElapsedMilliseconds} ms.");
         }
 
@@ -36,7 +50,7 @@ namespace TCD.IO
             if (!Directory.Exists(path))
                 return xmlDocuments;
 
-            string[] filePaths = Directory.GetFiles(path, "*.xml");
+            string[] filePaths = Directory.GetFiles(path, "*.xml", SearchOption.AllDirectories);
             foreach (string filePath in filePaths)
             {
                 XmlDocument xml = new XmlDocument();
@@ -52,8 +66,21 @@ namespace TCD.IO
         {
             foreach (XmlDocument xml in xmlDocuments)
             {
-                DeserializeXmlDocument(xml);
-                yield return null;
+                bool isSuccessful = true;
+                try
+                {
+                    DeserializeXmlDocument(xml);
+                }
+                catch (Exception e)
+                {
+                    isSuccessful = false;
+                    ExceptionHandler.HandleMessage("Raw \"" + xml.Name + "\" could not be deserialized: " + e.Message);
+                }
+                if (isSuccessful)
+                {
+                    filesDeserialized++;
+                    yield return null;
+                }
             }
         }
 

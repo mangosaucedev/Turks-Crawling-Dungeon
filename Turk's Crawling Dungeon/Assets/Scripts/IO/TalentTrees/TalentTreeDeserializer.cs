@@ -6,6 +6,7 @@ using TCD.Objects.Parts.Talents;
 
 namespace TCD.IO
 {
+    [AssetLoader]
     public class TalentTreeDeserializer : RawDeserializer
     {
         public override string RawPath => "TalentTrees";

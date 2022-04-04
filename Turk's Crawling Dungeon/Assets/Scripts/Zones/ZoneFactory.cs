@@ -7,7 +7,7 @@ namespace TCD.Zones
 {
     public static class ZoneFactory 
     {
-        private static IZone currentZone;
+        private static Zone currentZone;
 
         public static IZone BuildFromBlueprint(string blueprintName)
         {
@@ -21,6 +21,7 @@ namespace TCD.Zones
             zoneEncounters.density = blueprint.encounterDensity;
             zoneEncounters.BuildEncounters();
             currentZone = new Zone(zoneParams);
+            currentZone.cinematicName = blueprint.cinematicName;
             currentZone.ZoneEnvironments = zoneEnvironments;
             currentZone.ZoneTerrain = zoneTerrain;
             currentZone.ZoneEncounters = zoneEncounters;

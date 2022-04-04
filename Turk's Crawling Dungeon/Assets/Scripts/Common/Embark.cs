@@ -9,6 +9,8 @@ namespace TCD
 {
     public static class Embark
     {
+        private static int STARTING_TALENT_POINTS = 4;
+
         public static bool tutorialEnabled;
 
         private static Campaign chosenCampaign;
@@ -31,6 +33,7 @@ namespace TCD
             chosenClass = null;
             chosenTalents.Clear();
             chosenTalentLevels.Clear();
+            PlayerInfo.talentPoints = STARTING_TALENT_POINTS;
         }
 
         public static void SetChosenCampaign(Campaign campaign)
@@ -47,11 +50,15 @@ namespace TCD
 
         public static void AddChosenTalentLevel(string talent)
         {
+            if (PlayerInfo.talentPoints == 0)
+                return;
             if (!chosenTalents.Contains(talent))
                 chosenTalents.Add(talent);
             if (!chosenTalentLevels.ContainsKey(talent))
                 chosenTalentLevels[talent] = 0;
             chosenTalentLevels[talent] += 1;
+            PlayerInfo.talentPoints--;
+            EventManager.Send(new EmbarkTalentPointModifiedEvent());
         }
 
         public static void RemoveChosenTalentLevel(string talent)
@@ -59,11 +66,20 @@ namespace TCD
             if (!chosenTalentLevels.ContainsKey(talent))
                 return;
             chosenTalentLevels[talent] -= 1;
+            PlayerInfo.talentPoints++;
             if (chosenTalentLevels[talent] == 0)
             {
                 chosenTalentLevels.Remove(talent);
                 chosenTalents.Remove(talent);
             }
+            EventManager.Send(new EmbarkTalentPointModifiedEvent());
+        }
+
+        public static int GetChosenTalentLevel(string talent)
+        {
+            if (!chosenTalentLevels.ContainsKey(talent))
+                return 0;
+            return chosenTalentLevels[talent];
         }
     }
 }

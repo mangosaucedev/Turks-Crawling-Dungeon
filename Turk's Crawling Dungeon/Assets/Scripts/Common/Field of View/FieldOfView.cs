@@ -272,7 +272,7 @@ namespace TCD
         {
             GameGrid grid = CurrentZoneInfo.grid;
             Cell gridCell = grid[gridPosition];
-            foreach (BaseObject obj in gridCell.objects)
+            foreach (BaseObject obj in gridCell.Objects)
             {
                 if (obj.Parts.TryGet(out Obstacle obstacle) &&
                     obstacle.OccludesLineOfSight)

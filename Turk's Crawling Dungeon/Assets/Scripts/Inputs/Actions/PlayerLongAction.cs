@@ -66,7 +66,7 @@ namespace TCD.Inputs.Actions
             foreach (Vector2Int position in FieldOfView.visiblePositions)
             {
                 Cell cell = CurrentZoneInfo.grid[position];
-                if (cell.objects.Find(o => o.Parts.Get<Brain>()?.Faction == "Enemy"))
+                if (cell.Objects.Find(o => o.Parts.Get<Brain>()?.Faction == "Enemy"))
                     return true;
             }
             return false;

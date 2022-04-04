@@ -357,11 +357,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad93a9d4672a5534cb41babb5bff5264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
   isCancellable: 1
   canvasGroup: {fileID: 6115468305407462756}
   refreshOnStart: 1
   refreshOnUpdate: 0
-  isActive: 0
 --- !u!1 &6406104047788859439
 GameObject:
   m_ObjectHideFlags: 0

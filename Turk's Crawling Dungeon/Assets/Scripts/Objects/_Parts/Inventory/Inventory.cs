@@ -112,8 +112,10 @@ namespace TCD.Objects.Parts
             items.Remove(item);
             item.cell.SetPosition(Position);
             item.deactivator.RemoveDeactivatingCondition(this);
-            Item i = item.Parts.Get<Item>();
-            i.inventory = null;
+            if (item.Parts.TryGet(out Item i))
+                i.inventory = null;
+            else if (item)
+                DebugLogger.LogError($"{item.name} cannot be removed from inventory; no Item Part attached!");
         }
     }
 }

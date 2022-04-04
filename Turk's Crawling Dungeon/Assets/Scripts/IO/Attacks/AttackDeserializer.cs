@@ -6,6 +6,7 @@ using TCD.Objects.Attacks;
 
 namespace TCD.IO
 {
+    [AssetLoader]
     public class AttackDeserializer : RawDeserializer
     {
         public override string RawPath => "Attacks";

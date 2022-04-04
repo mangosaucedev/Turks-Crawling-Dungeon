@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TCD.Cinematics;
 using TCD.Zones.Environments;
 
 namespace TCD.Zones
@@ -8,6 +9,7 @@ namespace TCD.Zones
     public class Zone : IZone
     {
         public string name;
+        public string cinematicName;
         public string zoneParamsName;
         public string zoneEncountersName;
         public float encounterDensity;
@@ -22,6 +24,16 @@ namespace TCD.Zones
         private List<ICorridor> corridors = new List<ICorridor>();
         private TGrid<ChamberCellType> cellTypes;
         private TGrid<Environment> environments;
+
+        public Cinematic Cinematic
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(cinematicName))
+                    return null;
+                return Assets.Get<Cinematic>(cinematicName);
+            }
+        }
 
         public IZoneParams ZoneParams
         {

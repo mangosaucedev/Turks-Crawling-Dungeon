@@ -13,7 +13,7 @@ namespace TCD.Pathfinding
             GameGrid gameGrid = CurrentZoneInfo.grid;
             Cell cell = gameGrid[node.position];
             int difficulty = 0;
-            foreach (BaseObject obj in cell.objects)
+            foreach (BaseObject obj in cell.Objects)
             {
                 if (obj.Parts.TryGet(out Obstacle obstacle))
                     difficulty += obstacle.Difficulty;
@@ -25,7 +25,7 @@ namespace TCD.Pathfinding
         {
             GameGrid gameGrid = CurrentZoneInfo.grid;
             Cell cell = gameGrid[node.position];
-            foreach (BaseObject obj in cell.objects)
+            foreach (BaseObject obj in cell.Objects)
             {
                 if (obj.Parts.TryGet(out Obstacle obstacle) && obstacle.IsImpassable)
                     return false;

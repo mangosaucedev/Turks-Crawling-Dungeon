@@ -49,7 +49,6 @@ namespace TCD.Inputs
 
         private void Pass() => TimeScheduler.Tick(TimeInfo.TIME_PER_STANDARD_TURN);
 
-
         private void OpenView(string viewName)
         {
             if (ViewManager.TryFind(viewName, out var view))

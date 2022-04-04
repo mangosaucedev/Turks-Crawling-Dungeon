@@ -19,6 +19,10 @@ namespace TCD.IO
 
         public static string Raws => GetDirectory(Application.streamingAssetsPath + "/Raws/");
 
+        public static string Cinematics => GetDirectory(Raws + "Cinematics");
+
+        public static string DamageTypes => GetDirectory(Raws + "DamageTypes");
+
         public static string Dialogues => GetDirectory(Raws + "Dialogues");
 
         public static string Speakers => GetDirectory(Raws + "Speakers");

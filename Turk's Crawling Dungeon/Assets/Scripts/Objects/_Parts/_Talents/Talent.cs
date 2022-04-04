@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TCD.Graphics;
 using Resources = TCD.Objects.Parts.Resources;
 
 namespace TCD.Objects.Parts.Talents
@@ -19,9 +20,11 @@ namespace TCD.Objects.Parts.Talents
             set => level = value;
         }
 
+        public Sprite Icon => SpriteUtility.GetSprite(IconName);
+
         public abstract string TalentTree { get; }
 
-        public abstract Sprite Icon { get; }
+        public abstract string IconName { get; }
 
         public abstract int MaxLevel { get; }
 

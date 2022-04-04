@@ -21,6 +21,7 @@ namespace TCD
         public TGridEnumerator(TGrid<T> grid)
         {
             this.grid = grid;
+            Reset();
         }
 
         public void Dispose()

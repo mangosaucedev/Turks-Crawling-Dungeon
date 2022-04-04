@@ -49,8 +49,6 @@ namespace TCD
             {
                 if (!CurrentLoadingOperation.HasStarted)
                 {
-                    if (Game.State != "Loading")
-                        Game.State = "Loading";
                     StartCoroutine(CurrentLoadingOperation.Load());
                     isComplete = false;
                     CurrentLoadingOperation.HasStarted = true;
@@ -90,10 +88,7 @@ namespace TCD
             if (pausedForSeconds > 0f)
                 pausedForSeconds -= Time.deltaTime;
             else
-            {
-                isComplete = false;
-                Game.State = Game.desiredState;
-            }
+                isComplete = false;   
         }
     }
 }

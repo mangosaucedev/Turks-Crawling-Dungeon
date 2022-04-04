@@ -7,6 +7,7 @@ using TCD.Texts;
 
 namespace TCD.IO
 {
+    [AssetLoader]
     public class DialogueNodeDeserializer : RawDeserializer
     {
         private Dialogue currentDialogueNode;

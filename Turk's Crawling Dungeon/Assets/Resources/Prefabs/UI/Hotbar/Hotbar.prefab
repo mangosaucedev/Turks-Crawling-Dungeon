@@ -129,9 +129,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad93a9d4672a5534cb41babb5bff5264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
   isCancellable: 0
   canvasGroup: {fileID: 8854112827200993051}
-  isActive: 0
+  refreshOnStart: 0
+  refreshOnUpdate: 0
 --- !u!114 &6768772494882953837
 MonoBehaviour:
   m_ObjectHideFlags: 0

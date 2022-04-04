@@ -22,6 +22,8 @@
 	<Color Name="PsycheCraving" Symbol="Pc">#730bda</Color>
 	
 	<!-- Interface Colors -->
+
+	<Color Name="Black" Symbol="K">#000000</Color>
 	
 	<Color Name="Gold" Symbol="Au">#FFC527</Color>
 	

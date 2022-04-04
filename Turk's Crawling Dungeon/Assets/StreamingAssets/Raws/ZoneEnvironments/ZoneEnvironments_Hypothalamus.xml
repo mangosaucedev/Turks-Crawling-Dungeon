@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ZoneEnvironments>
+	
+	<ZoneEnvironment Name="Hypothalamus0">
+		<Environment Name="Mundane" Weight="8"/>
+		<Environment Name="Rest"/>
+		<Environment Name="Zoo"/>
+		<Environment Name="SafetyChamber" Placement="Start" Exclusive="True" Forced="True"/>
+		<Environment Name="FinalChamber" Placement="Final" Exclusive="True" Forced="True"/>
+	</ZoneEnvironment>
+	
+</ZoneEnvironments>

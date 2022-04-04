@@ -68,9 +68,9 @@ namespace TCD.Objects.Parts
         private void AttackAtPosition(Vector2Int position)
         {
             Cell cell = CurrentZoneInfo.grid[position];
-            for (int i = cell.objects.Count - 1; i >= 0; i--)
+            for (int i = cell.Objects.Count - 1; i >= 0; i--)
             {
-                BaseObject obj = cell.objects[i];
+                BaseObject obj = cell.Objects[i];
                 if (obj && parent != obj)
                     AttackHandler.AttackTarget(parent, obj, ThrowAttack);
             }

@@ -37,6 +37,9 @@ namespace TCD.Cinematics.Dialogues
             currentDialogue = dialogue;
             if (!isInDialogue)
                 StartDialogue();
+
+            DialogueView dialogueView = ServiceLocator.Get<DialogueView>();
+            dialogueView.DisplayDialogue(currentDialogue);
             return true;
         }
 

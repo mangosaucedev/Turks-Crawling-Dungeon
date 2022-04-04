@@ -7,7 +7,7 @@ namespace TCD
 {
     public class AssetLoadingOperation : ILoadingOperation
     {
-        private IDeserializer assetDeserializer;
+        private IAssetLoader assetDeserializer;
 
         public string Name => "Asset Loading Operation";
 
@@ -29,14 +29,14 @@ namespace TCD
             }
         }
 
-        public AssetLoadingOperation(IDeserializer assetDeserializer)
+        public AssetLoadingOperation(IAssetLoader assetDeserializer)
         {
             this.assetDeserializer = assetDeserializer;
         }
 
         public IEnumerator Load()
         {
-            yield return assetDeserializer.DeserializeAll();
+            yield return assetDeserializer.LoadAll();
             IsDone = true;
         }
     }

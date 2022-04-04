@@ -87,4 +87,24 @@
 		</Terrain>
 	</Zone>
 
+	<Zone Name="House">
+		<Params>Generic</Params>
+		<Environments>Generic</Environments>
+		<Encounters Density="1.5">Generic</Encounters>
+		<Terrain>
+			<Walls>
+				<Wall Name="PeelingPaint0"/>
+				<Wall Name="PeelingPaint1"/>
+				<Wall Name="PeelingPaint2"/>
+				<Wall Name="BareStuds0" Surface="1"/>
+				<Wall Name="BareStuds1" Surface="1"/>
+			</Walls>
+			<Floors>
+				<Floor Name="RottingWoodFloor0"/>
+				<Floor Name="RottingWoodFloor1"/>
+				<Floor Name="RottingWoodFloor2"/>
+				<Floor Name="BareConcrete0" Surface="1"/>
+			</Floors>
+		</Terrain>
+	</Zone>
 </Zones>

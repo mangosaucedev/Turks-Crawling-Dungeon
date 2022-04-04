@@ -4,10 +4,12 @@ using UnityEngine;
 
 namespace TCD.IO
 {
-    public class ResourceLoader<T> where T : Object
+    public abstract class ResourceLoader<T> : IAssetLoader where T : Object
     {
         private int resourcesToLoad;
         private int resourcesLoaded;
+
+        public abstract string ResourcePath { get; }
 
         public float Progress
         {

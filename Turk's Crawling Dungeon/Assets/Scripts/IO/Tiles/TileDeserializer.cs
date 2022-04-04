@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 
 namespace TCD.IO
 {
+    [AssetLoader]
     public class TileDeserializer : RawDeserializer
     {
         public override string RawPath => "Tiles";

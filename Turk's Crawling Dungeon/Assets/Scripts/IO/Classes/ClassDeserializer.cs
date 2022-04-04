@@ -6,6 +6,7 @@ using TCD.Objects.Parts;
 
 namespace TCD.IO
 {
+    [AssetLoader]
     public class ClassDeserializer : RawDeserializer
     {
         public override string RawPath => "Classes";

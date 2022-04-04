@@ -2,7 +2,7 @@
     "dialogue": [
         {
             "name": "EyeballTv0_0",
-            "text": "An enormous, wet eyeball stares out into empty space from atop a tripod. Its pupil dilates and contracts sporadically. Suddenly, it whirls to fixate its gaze on... you. The pupil's contractions cease, and the void within beckons to you.",
+            "text": "An enormous, wet eyeball stares out into empty space from atop a tripod. Its pupil dilates and contracts sporadically. Suddenly, it whirls to fixate its gaze on... you. The pupil\u0027s contractions cease, and the void within beckons to you.",
             "speakerName": "PsycheMonologue",
             "oneShot": "true",
             "transitions": {},
@@ -62,7 +62,7 @@
 
         {
             "name": "EyeballTv0_1",
-            "text": "You cannot resist the compulsion to meet the thing's gaze. You peer into the void and fixate on the blackness. After a few moments, you see...",
+            "text": "You cannot resist the compulsion to meet the thing\u0027s gaze. You peer into the void and fixate on the blackness. After a few moments, you see...",
             "speakerName": "PsycheMonologue",
             "transitions": {
                 "transitions": [
@@ -76,7 +76,23 @@
 
         {
             "name": "EyeballTv0_2",
-            "text": "...Nothing. Nothing but emptiness dwells within the thing's dark pupil. You frown with disappointment, and the urge to stare melts from your mind.",
+            "text": "...Nothing. Nothing but emptiness dwells within the thing\u0027s dark pupil. You frown with disappointment, and the urge to stare melts from your mind.",
+            "speakerName": "PsycheMonologue",
+            "transitions": {},
+            "choices": {}
+        },
+
+        {
+            "name": "EyeballTv1_0",
+            "text": "You deliver a swift kick to the eyeball as its gaze turns to you. Its glossy surface begins to swell with blood at the site of its injury. That\u0027ll show it for messing with you.",
+            "speakerName": "PsycheMonologue",
+            "transitions": {},
+            "choices": {}
+        },
+
+        {
+            "name": "EyeballTv2_0",
+            "text": "The eyeball averts its gaze from you. The pupil dilates wide, and droplets of moisture bead on its surface. Is it... afraid?",
             "speakerName": "PsycheMonologue",
             "transitions": {},
             "choices": {}

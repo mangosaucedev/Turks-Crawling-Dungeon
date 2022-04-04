@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace TCD
+namespace TCD.Objects.Attacks
 {
     [Serializable]
     public class DamageType

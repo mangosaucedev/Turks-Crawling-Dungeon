@@ -29,6 +29,7 @@ namespace TCD.Settings
             defaultSettings.AddEntry("AmbienceMuted", "False", SettingsEntryType.Bool);
             defaultSettings.AddEntry("MusicMuted", "False", SettingsEntryType.Bool);
             defaultSettings.AddEntry("MasterMuted", "False", SettingsEntryType.Bool);
+            defaultSettings.AddEntry("DeveloperMode", "False", SettingsEntryType.Bool);
         }
 
         public bool IsValid() =>

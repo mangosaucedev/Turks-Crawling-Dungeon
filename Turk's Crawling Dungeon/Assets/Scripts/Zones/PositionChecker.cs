@@ -21,7 +21,7 @@ namespace TCD.Zones
             if (!GameGrid.IsWithinBounds(x, y) || Zone.Environments[x, y] == null)
                 return false;
             Cell cell = GameGrid[x, y];
-            foreach (BaseObject obj in cell.objects)
+            foreach (BaseObject obj in cell.Objects)
             {
                 if (obj.Parts.Get<Inspectable>())
                     return false;
@@ -55,7 +55,7 @@ namespace TCD.Zones
             if (!GameGrid.IsWithinBounds(x, y))
                 return false;
             Cell cell = CurrentZoneInfo.grid[x, y];
-            foreach (BaseObject obj in cell.objects)
+            foreach (BaseObject obj in cell.Objects)
             {
                 if (obj.Parts.TryGet(out T part) && (predicate == null || predicate(part)))
                     return true;

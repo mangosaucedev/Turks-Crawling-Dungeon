@@ -12,6 +12,8 @@ namespace TCD.Pathfinding
         {
             get
             {
+                if (current == null)
+                    current = CurrentZoneInfo.navGrid;
                 return current;
             }
         }

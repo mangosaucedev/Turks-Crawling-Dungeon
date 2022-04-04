@@ -8,23 +8,30 @@ namespace TCD
 {
     public class Loading : GameplayState
     {
+        private IState inView;
+
         public override string Name => "Loading";
 
-        private InputManager InputManager => ServiceLocator.Get<InputManager>();
+        public Loading()
+        {
+            inView = AddState(GameplayStateFactory.InView());
+            Transitions.Add(new Transition(inView, () => { return !GoToInView(); }, null));
+            TransitionsFromAny.Add(new TransitionFromAny(GoToInView, inView));
+        }
 
         public override void Start()
         {
-            base.Start();
             InputManager.SetInputGroupEnabled(InputGroup.None, false);
             if (Assets.FindAll<GameObject>("Loading View").Count > 0)
                 ViewManager.Open("Loading View");
+            base.Start();
         }
 
         public override void End()
         {
-            base.End();
             InputManager.SetInputGroupEnabled(InputGroup.None);
             ViewManager.Close("Loading View");
+            base.End();
         }
     }
 }

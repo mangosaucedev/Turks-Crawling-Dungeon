@@ -67,7 +67,7 @@ namespace TCD.Texts
             Group group = currentMatch.Groups["type"];
             
             if (!group.Success)
-                throw new CommandParseException(CommandParseException.TYPE_NOT_FOUND);
+                ExceptionHandler.Handle(new CommandParseException(CommandParseException.TYPE_NOT_FOUND));
             
             string type = group.Value;
             return CommandFactory.GetCommandType(type);

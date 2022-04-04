@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace TCD.IO
 {
+    [AssetLoader]
     public class ColorDeserializer : RawDeserializer
     {
         public override string RawPath => "Colors";

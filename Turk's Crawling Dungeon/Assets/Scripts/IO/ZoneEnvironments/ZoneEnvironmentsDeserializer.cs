@@ -7,6 +7,7 @@ using TCD.Zones.Environments;
 
 namespace TCD.IO
 {
+    [AssetLoader]
     public class ZoneEnvironmentsDeserializer : RawDeserializer
     {
         private ZoneEnvironments currentZoneEnvironments;

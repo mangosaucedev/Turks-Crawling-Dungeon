@@ -10,6 +10,7 @@ namespace TCD
     {
         public static BaseObject currentPlayer;
         public static Class currentClass;
+        public static int talentPoints;
 
         public static int GetDistanceToPlayer(BaseObject obj)
         {

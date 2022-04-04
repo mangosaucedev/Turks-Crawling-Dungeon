@@ -9,6 +9,7 @@ using TCD.Zones.Environments;
 
 namespace TCD.IO
 {
+    [AssetLoader]
     public class ZoneDeserializer : RawDeserializer
     {
         private Zone currentZone;
@@ -32,6 +33,7 @@ namespace TCD.IO
             currentZone = new Zone();
             currentZoneName = EvaluateAttribute(node, "Name", true);
             currentZone.name = currentZoneName;
+            currentZone.cinematicName = EvaluateNode(node, "Cinematic");
             currentZone.zoneParamsName = EvaluateNode(node, "Params", true);
             XmlNode encountersNode = node.SelectSingleNode("Encounters");
             currentZone.zoneEncountersName = encountersNode.InnerText;

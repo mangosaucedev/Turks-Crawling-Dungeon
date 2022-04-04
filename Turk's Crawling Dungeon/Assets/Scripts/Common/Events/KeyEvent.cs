@@ -48,14 +48,9 @@ namespace TCD
                     }
                 }
             }
-            catch (IndexOutOfRangeException exception)
+            catch
             {
-                ExceptionHandler.HandleMessage($"Input exception: Command {e?.context.command} (State {e?.context.state}) " +
-                    $"could not be gotten from pool. " + exception.Message);
-            }
-            catch (Exception exception)
-            {
-                ExceptionHandler.HandleMessage($"Input exception: " + exception.Message);
+                return new KeyEvent(context);
             }
             return new KeyEvent(context);
         }

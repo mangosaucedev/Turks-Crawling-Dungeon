@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 593810876879475523}
   - component: {fileID: 7460908534268333434}
   - component: {fileID: 2592038287584819745}
+  - component: {fileID: 5012662863408120337}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -75,6 +76,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5012662863408120337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6125965436781630639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db1259963ef09e8478180e7d7492d27b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 5061387283754879597}
+  image: {fileID: 2592038287584819745}
 --- !u!1 &6732583700371375800
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,7 +159,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0c63696503d58c34ea22e2b68a7702c8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 30ab69e1aa2fb9f4a9fe14320aceeed3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -16,7 +16,7 @@ namespace TCD.Objects.Parts.Talents
 
         public override string TalentTree => "RecklessCombat";
 
-        public override Sprite Icon => Assets.Get<Sprite>("TackleIcon");
+        public override string IconName => "TackleIcon";
 
         public override string Indicator => "Player To Cursor Indicator";
 

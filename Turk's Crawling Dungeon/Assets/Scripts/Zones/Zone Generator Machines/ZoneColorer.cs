@@ -61,7 +61,7 @@ namespace TCD.Zones
 
             GameGrid grid = CurrentZoneInfo.grid;
             Cell cell = grid[x, y];
-            foreach (BaseObject obj in cell.objects)
+            foreach (BaseObject obj in cell.Objects)
             {
                 if (obj.Parts.TryGet(out Render render))
                     render.AddColorLayer("Zone", color);

@@ -13,8 +13,7 @@ namespace TCD.Inputs.Actions
             new Dictionary<PlayerAction, KeyCommand>();
         public PlayerAction currentAction;
         public int doNotActivateActionForFrames;
-
-        private Coroutine currentActionRoutine;
+        public Coroutine currentActionRoutine;
 
 #if UNITY_EDITOR
         [SerializeField] private List<string> actionNames = new List<string>();
@@ -125,6 +124,7 @@ namespace TCD.Inputs.Actions
             mainCursor.CenterOnPlayer();
             currentAction.End();
             currentAction = null;
+            currentActionRoutine = null;
         }
 
         public void OnCell(Cell cell)
@@ -142,9 +142,9 @@ namespace TCD.Inputs.Actions
                 CancelCurrentAction();
                 return;
             }
-            if (cell.objects.Count == 1 && cell.objects[0].Parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer())
+            if (cell.Objects.Count == 1 && cell.Objects[0].Parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer())
             {
-                StartCoroutine(StartActionCoroutine(currentAction.OnObject(cell.objects[0])));
+                StartCoroutine(StartActionCoroutine(currentAction.OnObject(cell.Objects[0])));
                 DebugLogger.Log($"Player has used action '{currentAction.Name}' on object @{cell.Position}.");
             }
             else

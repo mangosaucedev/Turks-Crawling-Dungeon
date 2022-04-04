@@ -16,6 +16,14 @@ namespace TCD.Cinematics
             {
                 case EventType.SetTarget:
                     return new SetTarget(e);
+                case EventType.WaitForSeconds:
+                    return new WaitForXSeconds(e);
+                case EventType.FadeColor:
+                    return new FadeColor(e);
+                case EventType.StartMonologue:
+                    return new StartMonologue(e);
+                case EventType.ClearMonologue:
+                    return new ClearMonologue(e);
                 default:
                     throw new Exception(string.Format(INVALID_TYPE, type));
             }

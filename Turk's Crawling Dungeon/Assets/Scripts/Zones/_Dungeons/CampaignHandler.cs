@@ -4,12 +4,14 @@ using UnityEngine;
 
 namespace TCD.Zones.Dungeons
 {
-    [ContainsGameStatics]
+    [ContainsConsoleCommand, ContainsGameStatics]
     public static class CampaignHandler 
     {
         [GameStatic(null)] public static Campaign currentCampaign;
         [GameStatic(0)] public static int currentDungeonIndex;
 
+        [ConsoleCommand("startcampaign")]
+        [ConsoleCommand("sc")]
         public static void StartCampaign(string campaignName)
         {
             Campaign campaign = Assets.Get<Campaign>(campaignName);
@@ -23,6 +25,7 @@ namespace TCD.Zones.Dungeons
             DungeonHandler.GoToDungeon(campaign.Dungeons[0]);
         }
 
+        [ConsoleCommand("nextdungeon")]
         public static void GoToNextDungeon()
         {
             currentDungeonIndex++;
@@ -30,6 +33,15 @@ namespace TCD.Zones.Dungeons
                 DungeonHandler.GoToDungeon(currentCampaign.Dungeons[currentDungeonIndex]);
             else
                 TCDGame.WinGame();
+        }
+
+        [ConsoleCommand("resetcampaign")]
+        [ConsoleCommand("rc")]
+        public static void ResetCampaign()
+        {
+            currentCampaign = null;
+            currentDungeonIndex = 0;
+            ZoneResetter.ResetZone();
         }
     }
 }

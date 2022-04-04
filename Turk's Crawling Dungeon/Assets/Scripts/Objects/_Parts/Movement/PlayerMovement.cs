@@ -37,7 +37,7 @@ namespace TCD.Objects.Parts
         private bool TryGetObjectToAttack(Cell cell, out BaseObject target)
         {
             target = null;
-            foreach (BaseObject obj in cell.objects)
+            foreach (BaseObject obj in cell.Objects)
             {
                 Brain brain = obj.Parts.Get<Brain>();
                 if (obj.Parts.Get<Combat>() && brain?.Faction != "Neutral" && brain?.Faction != "Player")

@@ -7,9 +7,9 @@ namespace TCD
 {
     public class AssetCollection
     {
-        public Dictionary<string, object> collection =
+        private Dictionary<string, object> collection =
             new Dictionary<string, object>();
-        public HashSet<string> assetNames = new HashSet<string>();
+        private HashSet<string> assetNames = new HashSet<string>();
 
         public T Get<T>(string name)
         {

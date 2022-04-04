@@ -14,12 +14,19 @@ namespace TCD.Objects
 
         public Transform PartsParent => parent.partsParent;
 
-        public List<Part> Parts => parts;
+        public List<Part> Parts
+        {
+            get
+            {
+                if (parts == null)
+                    parts = parent.GetComponentsInChildren<Part>().ToList();
+                return parts;
+            }
+        }
 
         public PartCollection(BaseObject parent) : base(parent)
         {
-            if (parent)
-                parts = parent.GetComponentsInChildren<Part>().ToList();
+            
         }
 
         public Part Add(Type type)
@@ -33,7 +40,7 @@ namespace TCD.Objects
 
         public Part Get(Type type) 
         {
-            foreach (Part part in parts)
+            foreach (Part part in Parts)
             {
                 if (part.GetType() == type)
                     return part;
@@ -43,7 +50,7 @@ namespace TCD.Objects
 
         public T Get<T>() where T : Part
         {
-            foreach (Part part in parts)
+            foreach (Part part in Parts)
             {
                 if (part is T)
                     return (T) part;
@@ -92,7 +99,7 @@ namespace TCD.Objects
         public bool TryGetList<T>(out List<T> partList) where T : Part
         {
             partList = new List<T>();
-            foreach (Part part in parts)
+            foreach (Part part in Parts)
             {
                 if (part is T)
                     partList.Add((T) part);

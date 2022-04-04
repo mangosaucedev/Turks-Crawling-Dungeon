@@ -17,7 +17,7 @@ namespace TCD.Objects.Parts.Talents
 
         public override string TalentTree => "Fitness";
 
-        public override Sprite Icon => Assets.Get<Sprite>("LifebloodIcon");
+        public override string IconName => "LifebloodIcon";
 
         public override int MaxLevel => 5;
 

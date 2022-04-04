@@ -31,8 +31,11 @@ namespace TCD.Zones
                 PlanFloor(position.x, position.y);
         }
 
-        private void PlanFloor(int x, int y) =>
+        private void PlanFloor(int x, int y)
+        {
             Cells[x, y] = ChamberCellType.Floor;
+            CurrentZoneInfo.floorGrid[x, y] = true;
+        }
 
         private IEnumerator BuildChambers()
         {

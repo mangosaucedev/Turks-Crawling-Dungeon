@@ -4,11 +4,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using Newtonsoft.Json;
 
 namespace TCD.IO
 {
-    public abstract class JsonDeserializer<T> : IDeserializer
+    public abstract class JsonDeserializer<T> : IAssetLoader
     {
+        private static JsonSerializerSettings settings = new JsonSerializerSettings 
+        { 
+            NullValueHandling = NullValueHandling.Ignore,
+            StringEscapeHandling = StringEscapeHandling.EscapeHtml 
+        };
+
         protected int filesToDeserialize;
         protected int deserializedFiles;
 
@@ -26,7 +33,7 @@ namespace TCD.IO
         
         protected abstract string Extension { get; }
 
-        public virtual IEnumerator DeserializeAll()
+        public virtual IEnumerator LoadAll()
         {
             List<string> paths = (from path in Directory.GetFiles(FullPath, $"*.{Extension}")
                         where !path.EndsWith(".meta")
@@ -38,7 +45,7 @@ namespace TCD.IO
                 {
                     string name = Path.GetFileNameWithoutExtension(path);
                     string json = File.ReadAllText(path);
-                    T obj = JsonUtility.FromJson<T>(json);
+                    T obj = JsonConvert.DeserializeObject<T>(json, settings);
                     AddAsset(name, obj);
                     deserializedFiles++;
                 }

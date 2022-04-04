@@ -5,7 +5,7 @@ using TCD.Objects.Parts;
 
 namespace TCD.IO
 {
-    [AssetDeserializer]
+    [AssetLoader]
     public class FactionCollectionDeserializer : JsonDeserializer<FactionCollection>
     {
         protected override string FullPath => Directories.Factions;

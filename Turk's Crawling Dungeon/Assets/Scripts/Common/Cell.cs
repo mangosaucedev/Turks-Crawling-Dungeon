@@ -15,6 +15,19 @@ namespace TCD
         private int x;
         private int y;   
         
+        public List<BaseObject> Objects
+        {
+            get
+            {
+                for (int i = objects.Count - 1; i >= 0; i--)
+                {
+                    if (!objects[i])
+                        objects.RemoveAt(i);
+                }
+                return objects;
+            }
+        }
+
         public int X => x;
 
         public int Y => y;
@@ -27,14 +40,14 @@ namespace TCD
             this.y = y;
         }
 
-        public bool Contains(BaseObject obj) => objects.Contains(obj);
+        public bool Contains(BaseObject obj) => Objects.Contains(obj);
 
         public bool Contains<T>() where T : Part => Contains(out T part);
 
         public bool Contains<T>(out T part) where T : Part
         {
             part = null;
-            foreach (BaseObject obj in objects)
+            foreach (BaseObject obj in Objects)
             {
                 if (obj.Parts.TryGet(out part))
                     return part;
@@ -44,17 +57,17 @@ namespace TCD
 
         public bool Add(BaseObject obj)
         {
-            if (objects.Contains(obj))
+            if (Objects.Contains(obj))
                 return false;
-            objects.Add(obj);
+            Objects.Add(obj);
             return true;
         }
 
         public bool Remove(BaseObject obj)
         {
-            if (!objects.Contains(obj))
+            if (!Objects.Contains(obj))
                 return false;
-            objects.Remove(obj);
+            Objects.Remove(obj);
             return true;
         }
 
@@ -65,9 +78,9 @@ namespace TCD
         {
             bool isSuccessful = true;
             CleanupObjectList();
-            for (int i = objects.Count - 1; i >= 0; i--)
+            for (int i = Objects.Count - 1; i >= 0; i--)
             {
-                BaseObject obj = objects[i];
+                BaseObject obj = Objects[i];
                 if (!FireEvent(obj, e))
                     isSuccessful = false;
             }
@@ -76,18 +89,18 @@ namespace TCD
 
         private void CleanupObjectList()
         {
-            for (int i = objects.Count - 1; i >= 0; i--)
+            for (int i = Objects.Count - 1; i >= 0; i--)
             {
-                BaseObject obj = objects[i];
+                BaseObject obj = Objects[i];
                 if (obj == null)
-                    objects.RemoveAt(i);
+                    Objects.RemoveAt(i);
             }
         }
 
         public List<BaseObject> GetVisibleObjects()
         {
             List<BaseObject> visibleObjects = new List<BaseObject>();
-            foreach (BaseObject obj in objects)
+            foreach (BaseObject obj in Objects)
             {
                 if (obj.Parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer())
                     visibleObjects.Add(obj);

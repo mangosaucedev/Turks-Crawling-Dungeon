@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using TCD.Objects;
 using TCD.UI;
+using TCD.Zones.Dungeons;
 
 namespace TCD.Zones
 {
@@ -74,9 +75,14 @@ namespace TCD.Zones
 
         private IEnumerator GenerateNewZone()
         {
-            Dungeons.Dungeon dungeon = Assets.Get<Dungeons.Dungeon>("TestDungeon");
             ZoneGeneratorManager zoneGenerator = ServiceLocator.Get<ZoneGeneratorManager>();
-            yield return zoneGenerator.GenerateZoneRoutine(dungeon, 0);
+            if (CampaignHandler.currentCampaign != null)
+            {
+                Dungeon dungeon = DungeonHandler.currentDungeon;
+                yield return zoneGenerator.GenerateZoneRoutine(dungeon, DungeonHandler.currentZoneIndex);
+            }
+            else
+                yield return zoneGenerator.GenerateZoneRoutine();
         }
     }
 }

@@ -88,6 +88,17 @@
 			<Var Name="InitStats">Strength:12,Agility:12,Constitution:12,Cunning:12,Willpower:12,Charm:12,HitAccuracy:95,Dodge:5, Armor:5,PhysicalSave:10,MentalSave:10,MoveCost:12,AttackCost:12</Var>
 		</OverridePart>
 
+		<!-- !!! -->
+		<!-- Delete to impl. embark system -->
+
+		<Part Name="Talents.Tackle"/>
+		<Part Name="Talents.FearfulPin"/>
+		<Part Name="Talents.Sprint"/>
+		<Part Name="Talents.Maul"/>
+		<Part Name="Talents.BloodCrazed"/>
+
+		<!-- !!! -->
+		
 		<Part Name="PlayerBrain">
 			<Var Name="Faction">Player</Var>
 		</Part>

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using TCD.Objects.Attacks;
 
@@ -47,7 +48,7 @@ namespace TCD.Objects.Parts
         {
             string[] splitString = attackString.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
             string attackName = splitString[0];
-            float weight = float.Parse(splitString[1]);
+            float weight = float.Parse(splitString[1], CultureInfo.InvariantCulture);
             Attack attack = AttackFactory.BuildFromBlueprint(attackName);
             attack.weapon = parent;
             attack.weight = weight;

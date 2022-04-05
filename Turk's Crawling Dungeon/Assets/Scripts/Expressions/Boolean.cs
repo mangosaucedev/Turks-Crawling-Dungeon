@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using TCD.Cinematics;
@@ -114,7 +115,10 @@ namespace TCD.Expressions
             if (type == typeof(bool))
                 return bool.Parse(value);
             if (type == typeof(float))
-                return float.Parse(value);
+            {
+                CultureInfo info = CultureInfo.InvariantCulture;
+                return float.Parse(value, info);
+            }
             if (type == typeof(int))
                 return int.Parse(value);
             return value;

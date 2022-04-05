@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 namespace TCD.Settings
@@ -27,7 +28,7 @@ namespace TCD.Settings
                 case SettingsEntryType.Int:
                     return int.Parse(value);
                 case SettingsEntryType.Float:
-                    return float.Parse(value);
+                    return float.Parse(value, CultureInfo.InvariantCulture);
                 default:
                     return value;
             }

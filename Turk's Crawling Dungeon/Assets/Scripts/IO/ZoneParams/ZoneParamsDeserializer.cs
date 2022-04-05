@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Reflection;
 using System.Xml;
 using UnityEngine;
@@ -43,7 +44,7 @@ namespace TCD.IO
                 if (property.PropertyType == typeof(int))
                     value = int.Parse(stringValue);
                 if (property.PropertyType == typeof(float))
-                    value = float.Parse(stringValue);
+                    value = float.Parse(stringValue, CultureInfo.InvariantCulture);
                 if (property.PropertyType == typeof(string))
                     value = stringValue;
                 PropertyInfo instanceProperty = type.GetProperty(propertyName);

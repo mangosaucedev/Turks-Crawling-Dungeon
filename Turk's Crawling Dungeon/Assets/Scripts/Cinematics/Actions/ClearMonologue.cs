@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using TCD.UI;
 
@@ -19,7 +20,8 @@ namespace TCD.Cinematics
         {
             if (arguments == null || arguments.Length == 0)
                 return;
-            fadeTime = float.Parse(arguments[0]);
+            CultureInfo info = CultureInfo.InvariantCulture;
+            fadeTime = float.Parse(arguments[0], info);
             if (arguments.Length > 1)
                 wait = bool.Parse(arguments[1]);
         }

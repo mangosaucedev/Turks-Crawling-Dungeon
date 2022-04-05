@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Xml;
 using UnityEngine;
 using TCD.Zones;
@@ -28,7 +29,8 @@ namespace TCD.IO
         {
             currentEnvironment = new Environment();
             currentEnvironment.name = EvaluateAttribute(node, "Name", true);
-            currentEnvironment.furnishingDensity = float.Parse(EvaluateNode(node, "FurnishingDensity", true));
+            CultureInfo info = CultureInfo.InvariantCulture;
+            currentEnvironment.furnishingDensity = float.Parse(EvaluateNode(node, "FurnishingDensity", true), info);
             currentEnvironment.furnishers = EvaluateFurnishers(node.SelectSingleNode("Furnishers"));
             EvaluateFurnishings(node.SelectSingleNode("Furnishings"));
             Assets.Add(currentEnvironment.name, currentEnvironment);
@@ -52,7 +54,8 @@ namespace TCD.IO
         {
             string name = EvaluateAttribute(node, "Name", true);
             Furnisher furnisher = InstantiateFurnisher(name);
-            furnisher.weight = float.Parse(EvaluateAttribute(node, "Weight") ?? "1");
+            CultureInfo info = CultureInfo.InvariantCulture;
+            furnisher.weight = float.Parse(EvaluateAttribute(node, "Weight") ?? "1", info);
             furnisher.forced = bool.Parse(EvaluateAttribute(node, "Forced") ?? "False");
             furnisher.exclusive = bool.Parse(EvaluateAttribute(node, "Exclusive") ?? "False");
             return furnisher;

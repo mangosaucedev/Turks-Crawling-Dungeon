@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 namespace TCD.Cinematics
@@ -18,7 +19,8 @@ namespace TCD.Cinematics
         {
             if (arguments == null || arguments.Length == 0)
                 return;
-            seconds = float.Parse(arguments[0]);
+            CultureInfo info = CultureInfo.InvariantCulture;
+            seconds = float.Parse(arguments[0], info);
         }
 
         public override IEnumerator PerformRoutine()

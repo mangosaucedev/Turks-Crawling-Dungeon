@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Xml;
 using UnityEngine;
 using TCD.Objects.Encounters;
@@ -37,7 +38,7 @@ namespace TCD.IO
             currentZone.zoneParamsName = EvaluateNode(node, "Params", true);
             XmlNode encountersNode = node.SelectSingleNode("Encounters");
             currentZone.zoneEncountersName = encountersNode.InnerText;
-            currentZone.encounterDensity = float.Parse(EvaluateAttribute(encountersNode, "Density") ?? "1");
+            currentZone.encounterDensity = float.Parse(EvaluateAttribute(encountersNode, "Density") ?? "1", CultureInfo.InvariantCulture);
             currentZone.zoneEnvironmentsName = EvaluateNode(node, "Environments", true);
             Assets.Add(currentZoneName, currentZone);
             XmlNode terrainNode = node.SelectSingleNode("Terrain");
@@ -63,7 +64,7 @@ namespace TCD.IO
             Wall wall = new Wall();
             wall.name = EvaluateAttribute(node, "Name", true);
             wall.surface = int.Parse(EvaluateAttribute(node, "Surface") ?? "0");
-            wall.weight = float.Parse(EvaluateAttribute(node, "Weight") ?? "1");
+            wall.weight = float.Parse(EvaluateAttribute(node, "Weight") ?? "1", CultureInfo.InvariantCulture);
             currentZoneTerrain.walls.Add(wall);
         }
 
@@ -72,7 +73,7 @@ namespace TCD.IO
             Floor floor = new Floor();
             floor.name = EvaluateAttribute(node, "Name", true);
             floor.surface = int.Parse(EvaluateAttribute(node, "Surface") ?? "0");
-            floor.weight = float.Parse(EvaluateAttribute(node, "Weight") ?? "1");
+            floor.weight = float.Parse(EvaluateAttribute(node, "Weight") ?? "1", CultureInfo.InvariantCulture);
             currentZoneTerrain.floors.Add(floor);
         }
     }

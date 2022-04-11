@@ -107,4 +107,45 @@
 			</Floors>
 		</Terrain>
 	</Zone>
+
+	<Zone Name="Rubble">
+		<Params>Generic</Params>
+		<Environments>Generic</Environments>
+		<Encounters Density="1.5">Generic</Encounters>
+		<Terrain>
+			<Walls>
+				<Wall Name="WallRubble0"/>
+				<Wall Name="WallRubble1"/>
+				<Wall Name="WallRubble2"/>
+				<Wall Name="WallRubble3"/>
+			</Walls>
+			<Floors>
+				<Floor Name="BurnedConcrete0"/>
+				<Floor Name="BurnedConcrete1"/>
+				<Floor Name="FloorRubble0" Surface="1"/>
+				<Floor Name="FloorRubble1" Surface="1"/>
+				<Floor Name="FloorRubble2" Surface="1"/>
+			</Floors>
+		</Terrain>
+	</Zone>
+
+	<Zone Name="Construction">
+		<Params>Generic</Params>
+		<Environments>Generic</Environments>
+		<Encounters Density="1.5">Generic</Encounters>
+		<Terrain>
+			<Walls>
+				<Wall Name="WallConcrete0"/>
+				<Wall Name="WallConcrete1"/>
+				<Wall Name="WallConcrete2"/>
+			</Walls>
+			<Floors>
+				<Floor Name="RakedConcrete0" Weight="2"/>
+				<Floor Name="FloorRebar0"/>
+				<Floor Name="FloorRebar1"/>
+				<Floor Name="FloorRebar1" Surface="1"/>
+				<Floor Name="PouredConcrete0" Weight="2" Surface="1"/>
+			</Floors>
+		</Terrain>
+	</Zone>
 </Zones>

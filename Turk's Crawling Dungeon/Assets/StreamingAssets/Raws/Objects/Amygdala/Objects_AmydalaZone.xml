@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Objects>
+
+	<!-- Walls -->
+
+	<Object Name="WallRubble0" InheritsFrom="Wall">
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Rubble Wall</Var>
+			<Var Name="DisplayNamePlural">Rubble Walls</Var>
+			<Var Name="Description">A ruined wall.</Var>
+			<Var Name="Sprite">WallRubble0</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="WallRubble1" InheritsFrom="WallRubble0">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">WallRubble1</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="WallRubble2" InheritsFrom="WallRubble0">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">WallRubble2</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="WallRubble3" InheritsFrom="WallRubble0">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">WallRubble3</Var>
+		</OverridePart>
+
+	</Object>
+	
+	<Object Name="WallConcrete0" InheritsFrom="Wall">
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Concrete Wall</Var>
+			<Var Name="DisplayNamePlural">Concrete Walls</Var>
+			<Var Name="Description">Bare concrete.</Var>
+			<Var Name="Sprite">WallConcrete0</Var>
+		</OverridePart>
+
+	</Object>
+	
+	<Object Name="WallConcrete1" InheritsFrom="WallConcrete0">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">WallConcrete1</Var>
+		</OverridePart>
+
+	</Object>
+	
+	<Object Name="WallConcrete2" InheritsFrom="WallConcrete0">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">WallConcrete2</Var>
+		</OverridePart>
+
+	</Object>
+	
+</Objects>

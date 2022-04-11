@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Tiles>
+
+	<Tile Name="BurnedConcrete0">BurnedConcrete0</Tile>
+
+	<Tile Name="BurnedConcrete1">BurnedConcrete1</Tile>
+	
+	<Tile Name="FloorRubble0">FloorRubble0</Tile>
+
+	<Tile Name="FloorRubble1">FloorRubble1</Tile>
+	
+	<Tile Name="FloorRubble2">FloorRubble2</Tile>
+	
+	<Tile Name="RakedConcrete0">RakedConcrete0</Tile>
+	
+	<Tile Name="FloorRebar0">FloorRebar0</Tile>
+	
+	<Tile Name="FloorRebar1">FloorRebar1</Tile>
+	
+	<Tile Name="PouredConcrete0">PouredConcrete0</Tile>
+
+</Tiles>

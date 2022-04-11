@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Objects>
+
+	<Object Name="RoastGoat" InheritsFrom="Enemy">
+
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">35</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Roast Goat</Var>
+			<Var Name="DisplayNamePlural">Roast Goats</Var>
+			<Var Name="Description">It smells like spice and smoke, filmy yellow eyes staring out into nothing.</Var>
+			<Var Name="Sprite">RoastGoat</Var>
+		</OverridePart>
+		
+	</Object>
+
+	<Object Name="CharGoat" InheritsFrom="RoastGoat">
+
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">30</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Charred Goat</Var>
+			<Var Name="DisplayNamePlural">Charred Goats</Var>
+			<Var Name="Sprite">CharGoat</Var>
+		</OverridePart>
+
+	</Object>
+	
+	<Object Name="CrispGoat" InheritsFrom="RoastGoat">
+
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">40</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Crispy Goat</Var>
+			<Var Name="DisplayNamePlural">Crispy Goats</Var>
+			<Var Name="Sprite">CrispGoat</Var>
+		</OverridePart>
+
+	</Object>
+	
+</Objects>

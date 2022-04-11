@@ -61,7 +61,8 @@ namespace TCD.Inputs.Actions
 
         private void ThrowObject(Vector2Int position)
         {
-            Throwable.Throw(PlayerInfo.currentPlayer.cell.Position, position);
+            BaseObject player = PlayerInfo.currentPlayer;
+            Throwable.Throw(player, player.cell.Position, position);
             TimeScheduler.Tick(TimeInfo.TIME_PER_STANDARD_TURN);
         }  
     }

@@ -106,5 +106,20 @@ namespace TCD.Objects
             }
             return partList.Count > 0;
         }
+
+        public bool TryGet<T>(Type type, out T part) where T : Part
+        {
+            part = null;
+            bool success = TryGet(type, out Part genericPart);
+            if (success)
+                part = (T) genericPart;
+            return success;
+        }
+
+        public bool TryGet(Type type, out Part part)
+        {
+            part = Get(type);
+            return part;
+        }
     }
 }

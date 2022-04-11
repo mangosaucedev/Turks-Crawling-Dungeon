@@ -6,11 +6,10 @@ using TCD.Objects;
 using TCD.Objects.Attacks;
 using TCD.Objects.Parts;
 using TCD.Objects.Parts.Effects;
-using TCD.TimeManagement;
+using TCD.Texts;
 
 namespace TCD.Objects.Parts.Talents
 {
-    [PlayerTalent("Grapple"), Serializable]
     public class Grapple : Talent
     {
         public override string Name => "Grapple";
@@ -25,7 +24,7 @@ namespace TCD.Objects.Parts.Talents
 
         public override TargetMode TargetMode => TargetMode.Attack;
 
-        public override int GetActivationResourceCost()
+        public override int GetActivationResourceCost(int level)
         {
             switch (level)
             {
@@ -42,7 +41,7 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override int GetCooldown()
+        public override int GetCooldown(int level)
         {
             switch (level)
             {
@@ -59,21 +58,40 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override IEnumerator OnObjectRoutine(BaseObject obj)
+        protected override bool CanUseOnObject(BaseObject obj)
         {
-            yield break;
+            if (!obj.Parts.Has(typeof(Combat)))
+            {
+                if (parent == PlayerInfo.currentPlayer)
+                    FloatingTextHandler.Draw(parent.transform.position, "Can't maul this!", Color.red);
+                return false;
+            }
+            if (!obj.Parts.Has(typeof(Effects.Effects)))
+            {
+                if (parent == PlayerInfo.currentPlayer)
+                    FloatingTextHandler.Draw(parent.transform.position, "Target immune!", Color.red);
+                return false;
+            }
+            return true;
         }
 
-        public override IEnumerator OnCellRoutine(Cell cell)
+        protected override void OnObject()
         {
-            yield break;
+
+        }
+
+        protected override bool CanUseOnCell(Cell cell) => false;
+
+        protected override void OnCell()
+        {
+
         }
 
         public override int GetEnergyCost() => TimeInfo.TIME_PER_STANDARD_TURN;
 
-        public override int GetRange() => 1;
+        public override int GetRange(int level) => 1;
 
-        public override string GetDescription() => $"Make an unarmed attack against an opponent. " +
+        public override string GetDescription(int level) => $"Make an unarmed attack against an opponent. " +
             $"If it hits, you will begin grappling with your foe, increasing both of your " +
             $"move cost by 300%. If either of you exits melee range, the grapple will end. " +
             $"You may only grapple with one enemy at a time.\nAutomatically trains the talent " +

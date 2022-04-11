@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Zones>
+
+	<Zone Name="DungeonGeneric">
+		<Params>Generic</Params>
+		<Environments>Dungeon</Environments>
+		<Encounters Density="1.5">Generic</Encounters>
+		<Terrain>
+			<Walls>
+				<Wall Name="WallDungeon0" Weight="4"/>
+				<Wall Name="WallDungeon1"/>
+				<Wall Name="DungeonPlaster0" Weight="3" Surface="1"/>
+				<Wall Name="DungeonPlaster1" Surface="1"/>
+			</Walls>
+			<Floors>
+				<Floor Name="DungeonStones0" Weight="7"/>
+				<Floor Name="DungeonStones1"/>
+				<Floor Name="DungeonTerracotta" Surface="1"/>
+			</Floors>
+		</Terrain>
+	</Zone>
+
+</Zones>

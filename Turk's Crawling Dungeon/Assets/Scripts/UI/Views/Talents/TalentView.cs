@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,9 +10,12 @@ namespace TCD.UI
 {
     public class TalentView : MonoBehaviour
     {
+        public TalentDescriptionStyle style = TalentDescriptionStyle.TalentView;
+
         [SerializeField] private bool buildOnStart;
         [SerializeField] private Transform content;
         [SerializeField] private Text talentPoints;
+        [SerializeField] private Text title;
         [SerializeField] private Text description;
         [SerializeField] private GameObject talentTreePrefab;
 
@@ -23,6 +27,26 @@ namespace TCD.UI
             if (buildOnStart)
                 BuildTalents();
             UpdateTalentPointCount();
+        }
+
+        private void OnEnable()
+        {
+            EventManager.Listen<EmbarkTalentPointModifiedEvent>(this, OnEmbarkTalentPointModified);
+        }
+
+        private void OnDisable()
+        {
+            EventManager.StopListening<EmbarkTalentPointModifiedEvent>(this);
+        }
+
+        private void OnEmbarkTalentPointModified(EmbarkTalentPointModifiedEvent e)
+        {
+            if (e.level == 0)
+            {
+                UpdateDescription(null, 0);
+                return;
+            }
+            UpdateDescription(TalentUtility.GetTalentInstance(e.type), e.level);
         }
 
         public void BuildTalents()
@@ -50,6 +74,18 @@ namespace TCD.UI
         public void UpdateTalentPointCount()
         {
             talentPoints.text = $"{PlayerInfo.talentPoints} points to spend on talents";
+        }
+
+        public void UpdateDescription(Talent talent, int level)
+        {
+            if (!talent)
+            {
+                title.text = "";
+                description.text = "";
+                return;
+            }
+            title.text = TalentUtility.BuildTalentTitle(talent);
+            description.text = TalentUtility.BuildTalentDescription(talent, level, style);
         }
     }
 }

@@ -2,33 +2,33 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TCD.Objects.Parts.Talents;
 
 namespace TCD.Objects.Parts.Effects
 {
-    [Serializable]
     public class Sprinting : Effect
     {
+        private int level;
+
         public override string Name => "Sprinting";
 
         public override Sprite Icon => Assets.Get<Sprite>("SprintIcon");
 
         public override EffectStacking Stacking => EffectStacking.None;
 
-        public override string GetDescription() => $"Sprinting characters move 100% faster!";
-
-        public override bool HandleEvent<T>(T e)
+        public Sprinting(int level) : base()
         {
-            if (e.Id == GetStatEvent.id)
-                OnGetStat(e);
-            return base.HandleEvent(e);
+            this.level = level;
         }
 
-        private void OnGetStat(LocalEvent e)
+        public override string GetDescription() => $"Moving {(Sprint.GetSprintSpeedMultiplier(level) - 1f) * 100f}% faster!";
+
+        protected override void OnGetStat(GetStatEvent e)
         {
-            GetStatEvent getStatEvent = (GetStatEvent) e;
+            GetStatEvent getStatEvent = e;
+            float multiplier = 1f / Sprint.GetSprintSpeedMultiplier(level);
             if (getStatEvent.stat == Stat.MoveCost)
-                getStatEvent.level = Mathf.CeilToInt(getStatEvent.level * 0.5f);
+                getStatEvent.level = Mathf.CeilToInt(getStatEvent.level * multiplier);
         }
     }
 }

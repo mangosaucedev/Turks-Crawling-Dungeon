@@ -28,6 +28,7 @@ namespace TCD.Inputs
             KeyEventManager.Subscribe(InputGroup.Gameplay, KeyCommand.OpenInventory, KeyState.PressedThisFrame, e => { OpenView("Player Inventory View"); });
             KeyEventManager.Subscribe(InputGroup.Gameplay, KeyCommand.Cancel, KeyState.PressedThisFrame, e => { OpenView("Escape View"); });
             KeyEventManager.Subscribe(InputGroup.Gameplay, KeyCommand.OpenHelp, KeyState.PressedThisFrame, e => { OpenView("Help View"); });
+            KeyEventManager.Subscribe(InputGroup.Gameplay, KeyCommand.OpenTalents, KeyState.PressedThisFrame, e => { OpenView("Talent View"); });
             KeyEventManager.Subscribe(InputGroup.Gameplay, KeyCommand.Enter, KeyState.PressedThisFrame, e => { ConfirmAction(); });
             KeyEventManager.Subscribe(InputGroup.Gameplay, KeyCommand.Rest, KeyState.PressedThisFrame, e => { Rest(); });
             KeyEventManager.Subscribe(InputGroup.Gameplay, KeyCommand.Throw, KeyState.PressedThisFrame, e => { OpenView("Throw Object List"); });

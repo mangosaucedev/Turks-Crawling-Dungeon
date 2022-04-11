@@ -23,6 +23,7 @@ namespace TCD.IO
         {
             Class currentClass = new Class();
             currentClass.name = EvaluateAttribute(node, "Name", true);
+            currentClass.unlisted = bool.Parse(EvaluateNode(node, "Unlisted") ?? "False");
             currentClass.statPresetName = EvaluateNode(node, "StatPreset", true);
             
             XmlNodeList talentTreeNodes = node.SelectNodes("TalentTree");

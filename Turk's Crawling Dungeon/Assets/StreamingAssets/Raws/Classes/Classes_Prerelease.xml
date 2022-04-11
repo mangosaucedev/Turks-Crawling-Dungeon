@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Classes>
+	
+	<Class Name="Turkinopoulos">
+
+		<Description>A rambunctious youth has become a troublemaking adult. Fists will fly.</Description>
+		
+		<StatPreset>Hellion</StatPreset>
+
+		<TalentTree>PrereleaseBasicAthletics</TalentTree>
+		<!--
+		<TalentTree>PrereleaseBasicGrappling</TalentTree>
+		<TalentTree>PrereleaseFitness</TalentTree>
+		-->
+		<TalentTree>PrereleaseRecklessCombat</TalentTree>
+		<TalentTree>PrereleaseMangle</TalentTree>
+		<TalentTree>PrereleaseFearfulTechniques</TalentTree>
+		<!--
+		<TalentTree>PrereleaseRandomPsionics</TalentTree>
+		-->
+	</Class>
+
+</Classes>

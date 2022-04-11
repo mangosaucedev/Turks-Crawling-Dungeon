@@ -61,8 +61,8 @@ namespace TCD.Objects.Parts
         {
             if (!isOpen)
             {
+                ActionScheduler.EnqueueAction(PlayerInfo.currentPlayer, OnOpen);
                 TimeScheduler.Tick(TimeInfo.TIME_PER_STANDARD_TURN);
-                OnOpen();
             }
         }
 
@@ -81,8 +81,8 @@ namespace TCD.Objects.Parts
         {
             if (isOpen)
             {
+                ActionScheduler.EnqueueAction(PlayerInfo.currentPlayer, OnClose);
                 TimeScheduler.Tick(TimeInfo.TIME_PER_STANDARD_TURN);
-                OnClose();
             }
         }
 

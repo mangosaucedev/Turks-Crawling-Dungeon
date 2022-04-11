@@ -6,6 +6,7 @@ using TCD.Objects.Parts;
 using TCD.Objects.Parts.Talents;
 using TCD.Graphics.Indicators;
 using TCD.Texts;
+using TCD.TimeManagement;
 
 namespace TCD.Inputs.Actions
 {
@@ -26,8 +27,14 @@ namespace TCD.Inputs.Actions
         {
             base.Start();
             if (!string.IsNullOrEmpty(talent.Indicator))
-                IndicatorHandler.ShowIndicator(talent.Indicator, talent.GetRange(), true);
+                IndicatorHandler.ShowIndicator(talent.Indicator, talent.GetRange(talent.level), true);
             PlayerActionManager playerActionManager = ServiceLocator.Get<PlayerActionManager>();
+            if (talent.TargetMode == TargetMode.None)
+            {
+                talent.Activate();
+                playerActionManager.CancelCurrentAction();
+                EventManager.Send(new TalentUsedEvent(talent));
+            }
             if (talent.UseMode == UseMode.Toggle)
             {
                 if (talent.isActive)
@@ -35,10 +42,10 @@ namespace TCD.Inputs.Actions
                 else
                     talent.Activate();
                 playerActionManager.CancelCurrentAction();
+                EventManager.Send(new TalentUsedEvent(talent));
             }
             if (talent.UseMode == UseMode.Passive)
                 playerActionManager.CancelCurrentAction();
-
         }
 
         public override void End()
@@ -58,11 +65,13 @@ namespace TCD.Inputs.Actions
             }
         }
 
-        public override int GetRange() => talent.GetRange();
+        public override int GetRange() => talent.GetRange(talent.level);
 
         public override IEnumerator OnObject(BaseObject target)
         {
-            yield return talent.OnObjectRoutine(target);
+            if (talent.OnObject(target))
+                TimeScheduler.Tick(talent.GetEnergyCost());
+            yield break;
         }
 
 
@@ -84,7 +93,8 @@ namespace TCD.Inputs.Actions
                 }
                 yield return OnObject(target);
             }
-            yield return talent.OnCellRoutine(cell);
+            if (talent.OnCell(cell))
+                TimeScheduler.Tick(talent.GetEnergyCost());
         }
     }
 }

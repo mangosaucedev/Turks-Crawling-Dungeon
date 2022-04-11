@@ -12,6 +12,10 @@ namespace TCD.UI
 {
     public class EmbarkSummary : MonoBehaviour
     {
+        private const string ENDLESS_DESCRIPTION = 
+            "Endless dungeon mode allows players to navigate a never-ending series of hostile " +
+            "zones in a freeform quest to get the highest score possible.";
+
         [SerializeField] private Text campaign;
         [SerializeField] private Text campaignDescription;
         [SerializeField] private Text className;
@@ -21,8 +25,8 @@ namespace TCD.UI
 
         private void OnEnable()
         {
-            campaign.text = "Campaign: " + Embark.ChosenCampaign.name;
-            campaignDescription.text = "\t" + Embark.ChosenCampaign.description;
+            campaign.text = "Campaign: " + Embark.ChosenCampaign?.name ?? "Endless Dungeon";
+            campaignDescription.text = "\t" + Embark.ChosenCampaign?.description ?? ENDLESS_DESCRIPTION;
             className.text = "Class: " + Embark.ChosenClass.name;
             classDescription.text = "\t" + Embark.ChosenClass.description;
             talents.text = "Talents: ";

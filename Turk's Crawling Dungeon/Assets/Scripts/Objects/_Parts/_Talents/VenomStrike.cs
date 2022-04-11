@@ -10,7 +10,6 @@ using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts.Talents
 {
-    [PlayerTalent("VenomStrike"), Serializable]
     public class VenomStrike : Talent
     {
         public override string Name => "Venom Strike";
@@ -25,7 +24,7 @@ namespace TCD.Objects.Parts.Talents
 
         public override TargetMode TargetMode => TargetMode.Attack;
 
-        public override int GetCooldown()
+        public override int GetCooldown(int level)
         {
             switch (level)
             {
@@ -42,21 +41,25 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override IEnumerator OnObjectRoutine(BaseObject obj)
+        protected override bool CanUseOnObject(BaseObject obj) => true;
+
+        protected override void OnObject()
         {
-            yield break;
+
         }
 
-        public override IEnumerator OnCellRoutine(Cell cell)
+        protected override bool CanUseOnCell(Cell cell) => true;
+
+        protected override void OnCell()
         {
-            yield break;
+
         }
 
         public override int GetEnergyCost() => TimeInfo.TIME_PER_STANDARD_TURN;
 
-        public override int GetRange() => 1;
+        public override int GetRange(int level) => 1;
 
-        public float GetVenomDamage()
+        public float GetVenomDamage(int level)
         {
             switch (level)
             {
@@ -73,7 +76,7 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public int GetDuration()
+        public int GetDuration(int level)
         {
             switch (level)
             {
@@ -90,9 +93,9 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override string GetDescription() => $"Make an unarmed attack against an opponent. " +
-            $"If it hits, your opponent will be injected with venom dealing {GetVenomDamage()} poison " +
-            $"damage per turn for {((float) GetDuration() / TimeInfo.TIME_PER_STANDARD_TURN).RoundToDecimal(1)} " +
+        public override string GetDescription(int level) => $"Make an unarmed attack against an opponent. " +
+            $"If it hits, your opponent will be injected with venom dealing {GetVenomDamage(level)} poison " +
+            $"damage per turn for {((float) GetDuration(level) / TimeInfo.TIME_PER_STANDARD_TURN).RoundToDecimal(1)} " +
             $"turns.";
 
         protected override bool OnAIBeforeAttack(AIBeforeAttackEvent e)

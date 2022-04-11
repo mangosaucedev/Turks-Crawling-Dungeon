@@ -28,7 +28,11 @@ namespace TCD.UI
 
             portraitImage.sprite = node.Speaker.Sprite;
 
-            currentResponseButtons.ForEach(b => b.interactable = false);
+            foreach (var button in currentResponseButtons)
+            {
+                if (button)
+                    button.interactable = false;
+            }
             currentResponseButtons.Clear();
 
             currentNode = node;

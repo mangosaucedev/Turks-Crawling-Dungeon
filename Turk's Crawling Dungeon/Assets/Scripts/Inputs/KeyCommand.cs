@@ -33,6 +33,7 @@ namespace TCD.Inputs
         OpenStatus,
         OpenHealth,
         OpenHelp,
+        OpenTalents,
         // Hotbar
         Hotbar1,
         Hotbar2,

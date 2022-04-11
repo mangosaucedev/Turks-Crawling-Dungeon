@@ -25,10 +25,7 @@ namespace TCD.Zones
 
         private IEnumerator ResetZoneRoutine()
         {
-            LoadingManager loadingManager = ServiceLocator.Get<LoadingManager>();
-            ZoneUnloadOperation operation = new ZoneUnloadOperation(UnloadZoneRoutine());
-            yield return loadingManager.EnqueueLoadingOperationRoutine(operation);
-            yield return GenerateNewZone();
+            yield return GenerateNewZoneRoutine();
         }
 
         public void UnloadZone(bool resetPlayer = false)
@@ -36,7 +33,7 @@ namespace TCD.Zones
             StopAllCoroutines();
             LoadingManager loadingManager = ServiceLocator.Get<LoadingManager>();
             ZoneUnloadOperation operation = new ZoneUnloadOperation(UnloadZoneRoutine(resetPlayer));
-            StartCoroutine(loadingManager.EnqueueLoadingOperationRoutine(operation));
+            loadingManager.EnqueueLoadingOperation(operation);
         }
 
         public IEnumerator UnloadZoneRoutine(bool resetPlayer = false)
@@ -73,7 +70,7 @@ namespace TCD.Zones
             tilemap.ClearAllTiles();
         }
 
-        private IEnumerator GenerateNewZone()
+        private IEnumerator GenerateNewZoneRoutine()
         {
             ZoneGeneratorManager zoneGenerator = ServiceLocator.Get<ZoneGeneratorManager>();
             if (CampaignHandler.currentCampaign != null)

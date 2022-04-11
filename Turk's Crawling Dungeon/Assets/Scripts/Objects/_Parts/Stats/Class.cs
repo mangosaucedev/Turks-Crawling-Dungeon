@@ -9,6 +9,7 @@ namespace TCD.Objects.Parts
     {
         public string name;
         public string description;
+        public bool unlisted;
         public string statPresetName;
         public List<string> talentTreeNames = new List<string>();
 

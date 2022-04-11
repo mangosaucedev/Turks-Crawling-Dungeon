@@ -10,7 +10,6 @@ using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts.Talents
 {
-    [PlayerTalent("Multiply"), Serializable]
     public class Multiply : Talent
     {
         public bool isClone;
@@ -28,7 +27,7 @@ namespace TCD.Objects.Parts.Talents
 
         public override TargetMode TargetMode => TargetMode.Cell;
 
-        public override int GetCooldown()
+        public override int GetCooldown(int level)
         {
             switch (level)
             {
@@ -45,25 +44,29 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override IEnumerator OnObjectRoutine(BaseObject obj)
+        protected override bool CanUseOnObject(BaseObject obj) => false;
+
+        protected override void OnObject()
         {
-            yield break;
+
         }
 
-        public override IEnumerator OnCellRoutine(Cell cell)
+        protected override bool CanUseOnCell(Cell cell) => true;
+
+        protected override void OnCell()
         {
             TrimClonesList();
-            if (clones.Count >= GetMaxClones())
-                yield break;
-            if (!cell.Contains(out Obstacle obstacle) || !obstacle.IsImpassable)
+            if (clones.Count >= GetMaxClones(level))
+                return;
+            if (!targetCell.Contains(out Obstacle obstacle) || !obstacle.IsImpassable)
             {
-                BaseObject clone = ObjectFactory.BuildFromBlueprint(parent.name, cell.Position);
+                BaseObject clone = ObjectFactory.BuildFromBlueprint(parent.name, targetCell.Position);
                 clones.Add(clone);
                 if (clone.Parts.TryGet(out Multiply multiply))
                     multiply.isClone = true;
                 if (parent == PlayerInfo.currentPlayer)
                     MessageLog.Add("You multiplied!");
-                activeCooldown += GetCooldown();
+                activeCooldown += GetCooldown(level);
             }
         }
 
@@ -78,12 +81,12 @@ namespace TCD.Objects.Parts.Talents
 
         public override int GetEnergyCost() => TimeInfo.TIME_PER_STANDARD_TURN;
 
-        public override int GetRange() => 1;
+        public override int GetRange(int level) => 1;
 
-        public override string GetDescription() => $"Clone yourself into an adjacent cell " +
-            $"(up to {GetMaxClones()} times!)";
+        public override string GetDescription(int level) => $"Clone yourself into an adjacent cell " +
+            $"(up to {GetMaxClones(level)} times!)";
 
-        private int GetMaxClones()
+        private int GetMaxClones(int level)
         {
             switch (level)
             {
@@ -110,13 +113,12 @@ namespace TCD.Objects.Parts.Talents
         private bool TryUseAbility(AICommandEvent e)
         {
             TrimClonesList();
-            if (clones.Count >= GetMaxClones())
+            if (clones.Count >= GetMaxClones(level))
                 return false;
             if (CanUseTalent() && !e.hasActed && !isClone && TryGetEmptyAdjacentPosition(out Vector2Int position))
             {
-                Cell cell = CurrentZoneInfo.grid[position];
-                StopAllCoroutines();
-                StartCoroutine(OnCellRoutine(cell));
+                targetCell = CurrentZoneInfo.grid[position];
+                ActionScheduler.EnqueueAction(parent, OnCell);
                 e.hasActed = true;
                 return true;
             }

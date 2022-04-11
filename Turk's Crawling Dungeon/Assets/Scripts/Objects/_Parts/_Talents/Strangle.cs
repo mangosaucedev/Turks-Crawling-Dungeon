@@ -6,11 +6,11 @@ using TCD.Objects;
 using TCD.Objects.Attacks;
 using TCD.Objects.Parts;
 using TCD.Objects.Parts.Effects;
+using TCD.Texts;
 using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts.Talents
 {
-    [PlayerTalent("Strangle"), Serializable]
     public class Strangle : Talent
     {
         public override string Name => "Strangle";
@@ -25,7 +25,7 @@ namespace TCD.Objects.Parts.Talents
 
         public override TargetMode TargetMode => TargetMode.Attack;
 
-        public override int GetActivationResourceCost()
+        public override int GetActivationResourceCost(int level)
         {
             switch (level)
             {
@@ -42,7 +42,7 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override int GetCooldown()
+        public override int GetCooldown(int level)
         {
             switch (level)
             {
@@ -59,50 +59,60 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override IEnumerator OnObjectRoutine(BaseObject obj)
+        protected override bool CanUseOnObject(BaseObject obj)
         {
-            bool madeSuccessfulAttackAgainstTarget = AttackHandler.AutoAttack(parent, obj);
-            bool targetFailedSavingThrow = !SavingThrows.MakeSavingThrow(parent, obj, Stat.PhysicalPower, Stat.PhysicalSave);
-            bool targetHasEffects = obj.Parts.TryGet(out Effects.Effects targetEffects);
+            if (!obj.Parts.Has(typeof(Combat)))
+            {
+                if (parent == PlayerInfo.currentPlayer)
+                    FloatingTextHandler.Draw(parent.transform.position, "Can't strangle this!", Color.red);
+                return false;
+            }
+            return true;
+        }
+
+        protected override void OnObject()
+        {
+            bool madeSuccessfulAttackAgainstTarget = AttackHandler.AutoAttack(parent, target);
+            bool targetFailedSavingThrow = !SavingThrows.MakeSavingThrow(parent, target, Stat.PhysicalPower, Stat.PhysicalSave);
+            bool targetHasEffects = target.Parts.TryGet(out Effects.Effects targetEffects);
             if (madeSuccessfulAttackAgainstTarget && targetFailedSavingThrow && targetHasEffects &&
                 targetEffects.AddEffect(new Strangled(), TimeInfo.TIME_PER_STANDARD_TURN * 2))
             {
                 if (parent == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"You are strangling {obj.GetDisplayName()}!");
-                if (obj == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"{obj.GetDisplayName()} is strangling you!");
+                    MessageLog.Add($"You are strangling {target.GetDisplayName()}!");
+                if (target == PlayerInfo.currentPlayer)
+                    MessageLog.Add($"{target.GetDisplayName()} is strangling you!");
             }
             else if (madeSuccessfulAttackAgainstTarget && !targetFailedSavingThrow)
             {
                 if (parent == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"You failed to strangle {obj.GetDisplayName()}!");
-                if (obj == PlayerInfo.currentPlayer)
+                    MessageLog.Add($"You failed to strangle {target.GetDisplayName()}!");
+                if (target == PlayerInfo.currentPlayer)
                     MessageLog.Add($"{parent.GetDisplayName()} failed to strangle you!");
             }
-            activeCooldown += GetCooldown();
+            activeCooldown += GetCooldown(level);
             if (parent.Parts.TryGet(out Resources resources))
-                resources.ModifyResource(Resource, -GetActivationResourceCost());
-            if (parent == PlayerInfo.currentPlayer)
-                TimeScheduler.Tick(GetEnergyCost());
-            yield break;
+                resources.ModifyResource(Resource, -GetActivationResourceCost(level));
         }
 
-        public override IEnumerator OnCellRoutine(Cell cell)
+        protected override bool CanUseOnCell(Cell cell) => false;
+
+        protected override void OnCell()
         {
-            yield break;
+            
         }
 
         public override int GetEnergyCost() => TimeInfo.TIME_PER_STANDARD_TURN;
 
-        public override int GetRange() => 1;
+        public override int GetRange(int level) => 1;
         
-        public override string GetDescription() => $"Make an attack against an opponent. " +
+        public override string GetDescription(int level) => $"Make an attack against an opponent. " +
             $"If it hits, the enemy will have to make a saving throw against your physical " +
             $"power, or be pinned to the spot and lose air for 2 turns. Consecutive attacks " +
-            $"against the strangled opponent will refresh the effect for up to {GetMaxRefreshTurns()} " +
+            $"against the strangled opponent will refresh the effect for up to {GetMaxRefreshTurns(level)} " +
             $"turns.";
 
-        private int GetMaxRefreshTurns()
+        private int GetMaxRefreshTurns(int level)
         {
             switch (level)
             {
@@ -125,8 +135,8 @@ namespace TCD.Objects.Parts.Talents
             {
                 if (parent.Parts.TryGet(out Brain brain))
                     brain.Think("Decided to strangle " + e.target.GetDisplayName() + " instead.");
-                StopAllCoroutines();
-                StartCoroutine(OnObjectRoutine(e.target));
+                target = e.target;
+                ActionScheduler.EnqueueAction(parent, OnObject);
                 e.hasActed = true;
                 return false;
             }

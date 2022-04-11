@@ -9,7 +9,6 @@ using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts.Talents
 {
-    [PlayerTalent("Tackle"), Serializable]
     public class Tackle : Talent
     {
         public override string Name => "Tackle";
@@ -26,7 +25,7 @@ namespace TCD.Objects.Parts.Talents
 
         public override TargetMode TargetMode => TargetMode.Object;
 
-        public override int GetActivationResourceCost()
+        public override int GetActivationResourceCost(int level)
         {
             switch (level)
             {
@@ -43,7 +42,7 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override int GetCooldown()
+        public override int GetCooldown(int level)
         {
             switch (level)
             {
@@ -60,62 +59,68 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override IEnumerator OnObjectRoutine(BaseObject obj)
+        protected override bool CanUseOnObject(BaseObject obj)
         {
-            if (!parent.Parts.TryGet(out Movement movement))
+            if (!parent.Parts.TryGet(out Movement movement) || !movement.CanMoveAndExitCurrentCell())
             {
                 if (parent == PlayerInfo.currentPlayer)
                     FloatingTextHandler.Draw(parent.transform.position, "Can't move!", Color.red);
-                yield break;
+                return false;
             }
+            return true;
+        }
+
+        protected override void OnObject()
+        {
             Vector2Int startPosition = parent.cell.Position;
-            Vector2Int targetPosition = obj.cell.Position;
+            Vector2Int targetPosition = target.cell.Position;
             GridRaycastResult result = GridRaycaster.Raycast(startPosition, targetPosition, new BlockedByObstaclesEvaluator());
             GridRay ray = result.ray;
             int count = ray.positions.Count;
-            if (count > 2 && result.collision && result.collisionIndex - 1 <= GetRange())
+            if (count > 2 && result.collision && result.collisionIndex - 1 <= GetRange(level))
             { 
                 Vector2Int position = ray.positions[result.collisionIndex - 1];
+                Movement movement = parent.Parts.Get<Movement>();
                 if (movement.TryMoveToPosition(position) && (Mathf.FloorToInt(Vector2Int.Distance(Position, position)) <= 1))
                 {
-                    if (AttackHandler.AutoAttack(parent, obj) && obj.Parts.TryGet(out Effects.Effects targetEffects))
+                    if (AttackHandler.AutoAttack(parent, target) && target.Parts.TryGet(out Effects.Effects targetEffects))
                     {
-                        if (SavingThrows.MakeSavingThrow(parent, obj, Stat.PhysicalPower, Stat.PhysicalSave))
+                        if (SavingThrows.MakeSavingThrow(parent, target, Stat.PhysicalPower, Stat.PhysicalSave))
                         {
                             targetEffects.AddEffect(new Prone(), TimeInfo.TIME_PER_STANDARD_TURN * 2);
                             if (parent == PlayerInfo.currentPlayer)
-                                MessageLog.Add($"You tackled {obj.GetDisplayName()} to the ground!");
-                            if (obj == PlayerInfo.currentPlayer)
+                                MessageLog.Add($"You tackled {target.GetDisplayName()} to the ground!");
+                            if (target == PlayerInfo.currentPlayer)
                                 MessageLog.Add($"You were tackled to the ground by {parent.GetDisplayName()}!");
                         }
                         else if (parent.Parts.TryGet(out Effects.Effects attackerEffects))
                         {
                             attackerEffects.AddEffect(new OffBalance(), TimeInfo.TIME_PER_STANDARD_TURN * 2);
                             if (parent == PlayerInfo.currentPlayer)
-                                MessageLog.Add($"You failed to tackle {obj.GetDisplayName()}, and are knocked off-balance!");
-                            if (obj == PlayerInfo.currentPlayer)
+                                MessageLog.Add($"You failed to tackle {target.GetDisplayName()}, and are knocked off-balance!");
+                            if (target == PlayerInfo.currentPlayer)
                                 MessageLog.Add($"{parent.GetDisplayName()} failed to tackle you, and is knocked off-balance!");
                         }
                     }
                 }
-                activeCooldown += GetCooldown();
+                activeCooldown = GetCooldown(level);
                 if (parent.Parts.TryGet(out Resources resources))
-                    resources.ModifyResource(Resource, -GetActivationResourceCost());
-                if (parent == PlayerInfo.currentPlayer)
-                    TimeScheduler.Tick(GetEnergyCost());
+                    resources.ModifyResource(Resource, -GetActivationResourceCost(level));
             }
             else if (count <= 2 && parent == PlayerInfo.currentPlayer)
                 FloatingTextHandler.Draw(parent.transform.position, "Can't build momentum from this distance!", Color.red);
         }
 
-        public override IEnumerator OnCellRoutine(Cell cell)
+        protected override bool CanUseOnCell(Cell cell) => false;
+
+        protected override void OnCell()
         {
-            yield break;
+            
         }
 
         public override int GetEnergyCost() => TimeInfo.TIME_PER_STANDARD_TURN;
 
-        public override int GetRange()
+        public override int GetRange(int level)
         {
             switch (level)
             {
@@ -132,20 +137,20 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override string GetDescription() => $"Rush an opponent up to {GetRange()} cells away and try to " +
+        public override string GetDescription(int level) => $"Rush an opponent up to {GetRange(level)} cells away and try to " +
             $"tackle them to the ground. The enemy must make a saving throw against your physical power or be knocked prone " +
             $"for 2 turns. If they resist your tackle, you are thrown off-balance for 2 turns, reducing your physical save by 10.";
 
         protected override bool OnAIBeforeMove(AIBeforeMoveEvent e)
         {
             int distanceToTarget = Mathf.FloorToInt(Vector2Int.Distance(Position, e.targetPosition));
-            if (CanUseTalent() && distanceToTarget <= GetRange() && distanceToTarget > 1 && !e.hasActed)
+            if (CanUseTalent() && distanceToTarget <= GetRange(level) && distanceToTarget > 1 && !e.hasActed)
             {
                 Cell cell = CurrentZoneInfo.grid[e.targetPosition];
                 if (cell.Contains(out Combat combat))
                 {
-                    StopAllCoroutines();
-                    StartCoroutine(OnObjectRoutine(combat.parent));
+                    targetCell = cell;
+                    ActionScheduler.EnqueueAction(parent, OnCell);
                     e.hasActed = true;
                     return false;
                 }

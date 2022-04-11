@@ -11,18 +11,26 @@ namespace TCD.UI
         private List<EffectIcon> effectIcons = new List<EffectIcon>();
         private HashSet<string> builtEffects = new HashSet<string>();
 
+        private void Start()
+        {
+            UpdateEffectIcons();
+        }
+
         private void OnEnable()
         {
             EventManager.Listen<AfterTurnTickEvent>(this, OnAfterTurnTick);
+            EventManager.Listen<TalentUsedEvent>(this, OnTalentUsed);
         }
 
         private void OnDisable()
         {
             EventManager.StopListening<AfterTurnTickEvent>(this);
+            EventManager.StopListening<TalentUsedEvent>(this);
         }
 
         private void OnAfterTurnTick(AfterTurnTickEvent e) => UpdateEffectIcons();
-        
+
+        private void OnTalentUsed(TalentUsedEvent e) => UpdateEffectIcons();
 
         private void UpdateEffectIcons()
         {

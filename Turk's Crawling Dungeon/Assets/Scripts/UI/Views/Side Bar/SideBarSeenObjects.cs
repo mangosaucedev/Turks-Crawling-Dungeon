@@ -19,6 +19,7 @@ namespace TCD.UI
             seenCharacters.text = "";
             seenItems.text = "";
             seenOther.text = "";
+            UpdateSeenObjects();
         }
 
         private void OnEnable()

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2320709428573075462}
   - component: {fileID: 8142689324076847155}
   - component: {fileID: 7920233110125543132}
+  - component: {fileID: 5698295475913029635}
   m_Layer: 5
   m_Name: Talent Button Row
   m_TagString: Untagged
@@ -102,3 +103,16 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &5698295475913029635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4726271995273836337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eeb2a08052a47843b1e1b1bf71d2264, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  talentButtonPrefab: {fileID: 5328786838305266604, guid: fc906e449bd09544fa6d15cf15a45374, type: 3}

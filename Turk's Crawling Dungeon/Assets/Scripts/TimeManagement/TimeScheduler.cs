@@ -41,6 +41,7 @@ namespace TCD.TimeManagement
             PassTime(timeElapsedThisTurn);
             if (actors.Count > 0)
                 UpdateActors();
+            ActionScheduler.PerformQueue();
             ObjectCuller.PerformCulling();
             EventManager.Send(new AfterTurnTickEvent(timeElapsedThisTurn));
         }

@@ -7,7 +7,6 @@ using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts.Talents
 {
-    [PlayerTalent("BreakGrapple"), Serializable]
     public class BreakGrapple : Talent
     {
         public override string Name => "Break Grapple";
@@ -22,18 +21,14 @@ namespace TCD.Objects.Parts.Talents
 
         public override TargetMode TargetMode => TargetMode.None;
 
-        public override IEnumerator OnObjectRoutine(BaseObject obj)
-        {
-            BreakAllGrapples();
-            yield break;
-        }
+        protected override bool CanUseOnObject(BaseObject obj) => true;
 
-        public override IEnumerator OnCellRoutine(Cell cell)
-        {
-            BreakAllGrapples();
-            yield break;
-        }
+        protected override void OnObject() => BreakAllGrapples();
 
+        protected override bool CanUseOnCell(Cell cell) => true;
+
+        protected override void OnCell() => BreakAllGrapples();
+        
         private void BreakAllGrapples()
         {
 
@@ -41,8 +36,8 @@ namespace TCD.Objects.Parts.Talents
 
         public override int GetEnergyCost() => 0;
 
-        public override int GetRange() => 1;
+        public override int GetRange(int level) => 1;
 
-        public override string GetDescription() => $"Break your active grapples.";
+        public override string GetDescription(int level) => $"Break your active grapples.";
     }
 }

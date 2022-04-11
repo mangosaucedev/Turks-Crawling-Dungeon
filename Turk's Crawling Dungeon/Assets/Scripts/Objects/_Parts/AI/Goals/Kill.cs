@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TCD.Objects.Attacks;
+using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts
 {
@@ -90,8 +91,12 @@ namespace TCD.Objects.Parts
             e.target = target;
             if (!obj.HandleEvent(e))
                 return false;
-            return AttackHandler.AutoAttack(obj, target);
+            ActionScheduler.EnqueueAction(brain.parent, AttackTarget);
+            return true; 
         }
+
+        private void AttackTarget() => AttackHandler.AutoAttack(obj, target);
+        
 
         public override bool IsFinished()
         {

@@ -4,10 +4,31 @@ using UnityEngine;
 
 namespace TCD
 {
+    [ContainsGameStatics]
     public static class GlobalVars 
     {
-        private static List<GlobalVar> globalVars = new List<GlobalVar>();
-        private static Dictionary<string, GlobalVar> globalVarsByName = new Dictionary<string, GlobalVar>();
+        [GameStatic(null)] private static List<GlobalVar> allGlobalVars = new List<GlobalVar>();
+        [GameStatic(null)] private static Dictionary<string, GlobalVar> globalVarsByName = new Dictionary<string, GlobalVar>();
+
+        private static List<GlobalVar> AllGlobalVars
+        {
+            get
+            {
+                if (allGlobalVars == null)
+                    allGlobalVars = new List<GlobalVar>();
+                return allGlobalVars;
+            }
+        }
+
+        private static Dictionary<string, GlobalVar> GlobalVarsByName
+        {
+            get
+            {
+                if (globalVarsByName == null)
+                    globalVarsByName = new Dictionary<string, GlobalVar>();
+                return globalVarsByName;
+            }
+        }
 
         public static void Set(string name, object value)
         {
@@ -17,11 +38,11 @@ namespace TCD
 
         private static GlobalVar Find(string name)
         {
-            if (!globalVarsByName.TryGetValue(name, out GlobalVar var))
+            if (!GlobalVarsByName.TryGetValue(name, out GlobalVar var))
             {
                 var = new GlobalVar(name, false);
-                globalVars.Add(var);
-                globalVarsByName[name] = var;
+                AllGlobalVars.Add(var);
+                GlobalVarsByName[name] = var;
             }
             return var;
         }
@@ -38,6 +59,6 @@ namespace TCD
             return value != null;
         }
 
-        public static GlobalVar[] GetArray() => globalVars.ToArray();
+        public static GlobalVar[] GetArray() => AllGlobalVars.ToArray();
     }
 }

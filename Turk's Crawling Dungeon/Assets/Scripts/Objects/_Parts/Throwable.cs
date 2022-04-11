@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TCD.Objects.Attacks;
 using TCD.Inputs.Actions;
+using TCD.TimeManagement;
 using TCD.UI;
 
 namespace TCD.Objects.Parts
@@ -13,6 +14,9 @@ namespace TCD.Objects.Parts
     {
         [SerializeField] private int range;
         [SerializeField] private string attack;
+
+        private Vector2Int lastThrowStartPosition;
+        private Vector2Int lastThrowTargetPosition;
 
         public override string Name => "Throwable";
 
@@ -44,8 +48,17 @@ namespace TCD.Objects.Parts
             playerActionManager.TryStartAction(new Throw(parent), true);
         }
 
-        public void Throw(Vector2Int startPosition, Vector2Int targetPosition)
+        public void Throw(BaseObject thrower, Vector2Int startPosition, Vector2Int targetPosition)
         {
+            lastThrowStartPosition = startPosition;
+            lastThrowTargetPosition = targetPosition;
+            ActionScheduler.EnqueueAction(thrower, Throw);
+        }
+
+        private void Throw()
+        {
+            Vector2Int startPosition = lastThrowStartPosition;
+            Vector2Int targetPosition = lastThrowTargetPosition;
             Item item = parent.Parts.Get<Item>();
             if (!item || !item.inventory || (item.inventory && item.inventory.TryRemoveItem(parent)))
             {
@@ -55,7 +68,7 @@ namespace TCD.Objects.Parts
                 {
                     collisionPoint = result.ray.positions[result.collisionIndex];
                     if (result.collisionIndex != 0)
-                        targetPosition = result.ray.positions[result.collisionIndex - 1];
+                        targetPosition = result.ray.positions[result.collisionIndex];
                     else
                         targetPosition = startPosition;
                 }

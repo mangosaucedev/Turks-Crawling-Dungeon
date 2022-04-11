@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TCD.Objects;
 using TCD.Objects.Parts;
 
 namespace TCD.UI
@@ -16,10 +17,15 @@ namespace TCD.UI
 
         private void Start()
         {
-            classes = Assets.FindAll<Class>();
+            List<Class> allClasses = Assets.FindAll<Class>();
             dropdown.options.Add(new Dropdown.OptionData(" "));
-            foreach (Class c in classes)
+            foreach (Class c in allClasses)
+            {
+                if (c.unlisted)
+                    continue;
+                classes.Add(c);
                 dropdown.options.Add(new Dropdown.OptionData(c.name));
+            }
             dropdown.SetValueWithoutNotify(-1);
         }
 
@@ -39,9 +45,18 @@ namespace TCD.UI
             }
             Class c = classes[classIndex];
             Embark.SetChosenClass(c);
+            RebuildPlayer();
             description.text = c.description;
             if (!nextButton.activeInHierarchy)
                 nextButton.SetActive(true);
+        }
+        private void RebuildPlayer()
+        {
+            if (PlayerInfo.currentPlayer)
+                Destroy(PlayerInfo.currentPlayer.gameObject);
+            PlayerInfo.currentPlayer = ObjectFactory.BuildFromBlueprint("Player", Vector2Int.zero);
+            PlayerInfo.currentPlayer.gameObject.SetActive(false);
+            PlayerInfo.currentClass = Embark.ChosenClass;
         }
     }
 }

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Objects>
+
+	<!-- Walls -->
+
+	<Object Name="WallDungeon0" InheritsFrom="Wall">
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Stone Wall</Var>
+			<Var Name="DisplayNamePlural">Stone Walls</Var>
+			<Var Name="Description">Stacked stones form a solid barrier.</Var>
+			<Var Name="Sprite">WallDungeon0</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="WallDungeon1" InheritsFrom="WallDungeon0">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">WallDungeon1</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="DungeonPlaster0" InheritsFrom="Wall">
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Plaster Wall</Var>
+			<Var Name="DisplayNamePlural">Plaster Walls</Var>
+			<Var Name="Description">Rough plaster covers rougher stone.</Var>
+			<Var Name="Sprite">DungeonPlaster0</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="DungeonPlaster1" InheritsFrom="DungeonPlaster0">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">DungeonPlaster1</Var>
+		</OverridePart>
+
+	</Object>
+	
+</Objects>

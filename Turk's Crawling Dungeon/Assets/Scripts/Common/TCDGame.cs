@@ -95,9 +95,10 @@ namespace TCD
         {
             DebugLogger.Log("New game started!");
             ViewManager.Close("Dev Console");
+            Instantiate(Assets.Get<GameObject>("Over Screen Fade"), ParentManager.OverScreen);
             GameResetter.ResetGame();
             TCDGame game = ServiceLocator.Get<TCDGame>();
-            ZoneResetter.ResetZone();
+            ZoneResetter.ResetZone(true);
             //CampaignHandler.StartCampaign(game.defaultCampaignName);
         }
 

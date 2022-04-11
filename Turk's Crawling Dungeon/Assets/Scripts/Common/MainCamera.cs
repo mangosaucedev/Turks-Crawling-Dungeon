@@ -40,11 +40,13 @@ namespace TCD
         private void OnEnable()
         {
             EventManager.Listen<CursorMovedEvent>(this, OnCursorMoved);
+            EventManager.Listen<AfterTurnTickEvent>(this, OnAfterTurnTick);
         }
 
         private void OnDisable()
         {
             EventManager.StopListening<CursorMovedEvent>(this);
+            EventManager.StopListening<AfterTurnTickEvent>(this);
         }
 
 
@@ -55,6 +57,10 @@ namespace TCD
         }
 
         private void OnCursorMoved(CursorMovedEvent e)
+        {
+            CenterOnCursor();
+        }
+        private void OnAfterTurnTick(AfterTurnTickEvent e)
         {
             CenterOnCursor();
         }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TCD.Pathfinding;
 using TCD.Objects.Juice;
+using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts
 {
@@ -14,32 +15,26 @@ namespace TCD.Objects.Parts
 
         public bool navigatedPath;
         public Vector2Int movementVector;
+
         private WaitForSecondsRealtime wait = new WaitForSecondsRealtime(0.15f);
+        private bool lastMoveIsForced;
 
         public override string Name => "Movement";
 
         public virtual bool TryToMove(Vector2Int direction, bool isForced = false)
         {
             movementVector = direction;
-            MoveSpriteToOrigin();
-
+            lastMoveIsForced = isForced;
             if (!CanMoveAndExitCurrentCell())
                 return false;
-
-            Vector2Int newPosition = Position + direction;
+            Vector2Int newPosition = Position + movementVector;
             if (CurrentZoneInfo.grid.IsWithinBounds(newPosition))
             {
-                if (!CanEnterCell(newPosition))
-                    return FailMove();
-
-                ExitCell(Position);
-                SetPosition(newPosition);
-                AnimateMovement();
-
-                //visualizer.StartVizualization(visualizer.MoveVisualizationRoutine());
-                return true;
+                if (!CanEnterCell(newPosition) && !lastMoveIsForced)
+                    return false;
             }
-            return FailMove();
+            ActionScheduler.EnqueueAction(parent, MoveInDirection);
+            return true;
         }
 
 
@@ -72,10 +67,29 @@ namespace TCD.Objects.Parts
             return isSuccessful && canEnterCell;
         }
 
-        private bool FailMove()
+        protected bool FailMove()
         {
             CombatJuiceHandler.Punch(parent, movementVector);
             return false;
+        }
+
+        private void MoveInDirection()
+        {
+            Vector2Int newPosition = Position + movementVector;
+            if (CurrentZoneInfo.grid.IsWithinBounds(newPosition))
+            {
+                if (!CanEnterCell(newPosition) && !lastMoveIsForced)
+                {
+                    FailMove();
+                    return;
+                }
+
+                ExitCell(Position);
+                SetPosition(newPosition);
+                AnimateMovement();
+                return;
+            }
+            FailMove();
         }
 
         public void SetPosition(Vector2Int position)

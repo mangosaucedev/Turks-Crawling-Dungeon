@@ -33,8 +33,7 @@ namespace TCD.Zones
             Vector2Int position = FindSuitableSpawnForPlayer();
             if (!PlayerInfo.currentPlayer)
             {
-                BaseObject player = ObjectFactory.BuildFromBlueprint("Player", position);
-                PlayerInfo.currentPlayer = player;
+                PlayerUtility.BuildPlayer("Player", position);
                 EventManager.Send(new PlayerCreatedEvent());
             }         
             else

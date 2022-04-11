@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TCD.Graphics;
+using TCD.TimeManagement;
 using Resources = TCD.Objects.Parts.Resources;
 
 namespace TCD.Objects.Parts.Talents
@@ -13,6 +14,9 @@ namespace TCD.Objects.Parts.Talents
         public int level = 1;
         public bool isActive;
         public int activeCooldown;
+
+        protected BaseObject target;
+        protected Cell targetCell;
 
         public int Level
         {
@@ -55,21 +59,47 @@ namespace TCD.Objects.Parts.Talents
             if (isActive && parent.Parts.TryGet(out Resources resources))
             {
                 float timeMultiplier = (float) e.timeElapsed / TimeInfo.TIME_PER_STANDARD_TURN;
-                float sustainCost = -GetSustainResourceCost() * timeMultiplier;
+                float sustainCost = -GetSustainResourceCost(level) * timeMultiplier;
                 if (resources.GetResource(Resource) <= Mathf.Abs(sustainCost))
                     Deactivate();
                 resources.ModifyResource(Resource, sustainCost);
             }
         }
 
-        public abstract IEnumerator OnObjectRoutine(BaseObject obj);
+        public bool OnObject(BaseObject obj)
+        {
+            if (CanUseOnObject(obj))
+            {
+                target = obj;
+                ActionScheduler.EnqueueAction(parent, OnObject);
+                return true;
+            }
+            return false;
+        }
 
-        public abstract IEnumerator OnCellRoutine(Cell cell);
+        public bool OnCell(Cell cell)
+        {
+            if (CanUseOnCell(cell))
+            {
+                targetCell = cell;
+                ActionScheduler.EnqueueAction(parent, OnCell);
+                return true;
+            }
+            return false;
+        }
+
+        protected abstract bool CanUseOnObject(BaseObject obj);
+
+        protected abstract void OnObject();
+
+        protected abstract bool CanUseOnCell(Cell cell);
+
+        protected abstract void OnCell();
 
         public virtual bool Activate()
         {
             if (parent.Parts.TryGet(out Resources resources))
-                resources.ModifyResource(Resource, -GetActivationResourceCost());
+                resources.ModifyResource(Resource, -GetActivationResourceCost(level));
             isActive = true;
             return true;
         }
@@ -77,38 +107,52 @@ namespace TCD.Objects.Parts.Talents
         public virtual bool Deactivate()
         {
             isActive = false;
-            activeCooldown = GetCooldown();
+            activeCooldown = GetCooldown(level);
             return false;
         }
 
-        public abstract string GetDescription();
+        public abstract string GetDescription(int level);
 
         public virtual int GetEnergyCost() => TimeInfo.TIME_PER_STANDARD_TURN;
 
-        public virtual int GetActivationResourceCost() => 0;
+        public virtual int GetActivationResourceCost(int level) => 0;
 
-        public virtual int GetSustainResourceCost() => 0;
+        public virtual int GetSustainResourceCost(int level) => 0;
 
-        public virtual int GetCooldown() => 0;
+        public virtual int GetCooldown(int level) => 0;
 
-        public virtual int GetRange() => 1;
+        public virtual int GetRange(int level) => 1;
 
-        public virtual List<TalentRequirement> GetRequirements()
+        public virtual List<ITalentRequirement> GetRequirements(int level)
         {
-            List<TalentRequirement> requirements = new List<TalentRequirement>();
+            List<ITalentRequirement> requirements = new List<ITalentRequirement>();
             return requirements;
+        }
+
+        public virtual bool MeetsRequirements(int level)
+        {
+            foreach (ITalentRequirement requirement in GetRequirements(level))
+            {
+                if (!requirement.MeetsRequirement())
+                    return false;
+            }
+            return true;
+        }
+        public virtual bool MeetsEmbarkRequirements(int level)
+        {
+            foreach (ITalentRequirement requirement in GetRequirements(level))
+            {
+                if (!requirement.MeetsEmbarkRequirement())
+                    return false;
+            }
+            return true;
         }
 
         public virtual bool CanUseTalent()
         {
-            if ((parent.Parts.TryGet(out Resources resources) && resources.GetResource(Resource) < GetActivationResourceCost()) || 
+            if ((parent.Parts.TryGet(out Resources resources) && resources.GetResource(Resource) < GetActivationResourceCost(level)) || 
                 activeCooldown >= 0)
                 return false;
-            foreach (TalentRequirement requirement in GetRequirements())
-            {
-                if (!requirement.MeetsRequirement(parent))
-                    return false;
-            }
             return true;
         }
 

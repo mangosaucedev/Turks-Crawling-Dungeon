@@ -12,7 +12,7 @@ namespace TCD.UI
 
         public IEnumerator FadeToColorRoutine(Color color, float alpha, float fadeTime)
         {
-            if (fadeTime <= 0)
+            if (fadeTime <= 0f)
             {
                 canvasGroup.alpha = alpha;
                 image.color = color;

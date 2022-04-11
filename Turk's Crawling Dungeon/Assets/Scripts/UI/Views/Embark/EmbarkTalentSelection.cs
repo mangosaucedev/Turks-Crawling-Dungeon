@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TCD.Objects;
+using TCD.Objects.Parts.Talents;
 
 namespace TCD.UI
 {
@@ -11,10 +11,14 @@ namespace TCD.UI
         [SerializeField] private GameObject nextButton;
         [SerializeField] private TalentView talentView;
 
+        private void Awake()
+        {
+            talentView.style = TalentDescriptionStyle.EmbarkView;
+        }
+
         private void OnEnable()
         {
             EventManager.Listen<EmbarkTalentPointModifiedEvent>(this, OnEmbarkTalentPointModified);
-            RebuildPlayer();
             talentView.BuildTalents();
         }
 
@@ -30,15 +34,6 @@ namespace TCD.UI
                 nextButton.SetActive(true);
             else if (!nextButton.activeInHierarchy)
                 nextButton.SetActive(false);
-        }
-
-        private void RebuildPlayer()
-        {
-            if (PlayerInfo.currentPlayer)
-                Destroy(PlayerInfo.currentPlayer.gameObject);
-            PlayerInfo.currentPlayer = ObjectFactory.BuildFromBlueprint("Player", Vector2Int.zero);
-            PlayerInfo.currentPlayer.gameObject.SetActive(false);
-            PlayerInfo.currentClass = Embark.ChosenClass;
         }
     }
 }

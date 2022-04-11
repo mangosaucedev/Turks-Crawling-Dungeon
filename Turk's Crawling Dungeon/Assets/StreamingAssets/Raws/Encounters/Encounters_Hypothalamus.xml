@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Encounters>
+
+	<Encounter Name="GoatGroupSmall" Density="Tight">
+		<Object Name="RoastGoat" Count="1-2" ChanceIn100="45"/>
+		<Object Name="CharGoat" Count="1-2" ChanceIn100="45"/>
+		<Object Name="CrispGoat" Count="1-2" ChanceIn100="45"/>
+	</Encounter>
+
+	<Encounter Name="GoatGroupMedium" Density="Tight" Tier="1">
+		<Object Name="RoastGoat" Count="1-3" ChanceIn100="45"/>
+		<Object Name="CharGoat" Count="1-3" ChanceIn100="45"/>
+		<Object Name="CrispGoat" Count="1-3" ChanceIn100="45"/>
+	</Encounter>
+
+	<Encounter Name="GoatGroupLarge" Density="Tight" Tier="2">
+		<Object Name="RoastGoat" Count="2-3" ChanceIn100="45"/>
+		<Object Name="CharGoat" Count="2-3" ChanceIn100="45"/>
+		<Object Name="CrispGoat" Count="2-3" ChanceIn100="45"/>
+	</Encounter>
+
+</Encounters>

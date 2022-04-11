@@ -6,11 +6,11 @@ using TCD.Objects;
 using TCD.Objects.Attacks;
 using TCD.Objects.Parts;
 using TCD.Objects.Parts.Effects;
+using TCD.Texts;
 using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts.Talents
 {
-    [PlayerTalent("Maul"), Serializable]
     public class Maul : Talent
     {
         public override string Name => "Maul";
@@ -25,7 +25,7 @@ namespace TCD.Objects.Parts.Talents
 
         public override TargetMode TargetMode => TargetMode.Attack;
 
-        public override int GetActivationResourceCost()
+        public override int GetActivationResourceCost(int level)
         {
             switch (level)
             {
@@ -42,7 +42,7 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override int GetCooldown()
+        public override int GetCooldown(int level)
         {
             switch (level)
             {
@@ -59,37 +59,50 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override IEnumerator OnObjectRoutine(BaseObject obj)
+        protected override bool CanUseOnObject(BaseObject obj)
         {
-            bool madeSuccessfulAttackAgainstTarget = AttackHandler.AutoAttack(parent, obj);
-            bool targetHasEffects = obj.Parts.TryGet(out Effects.Effects targetEffects);
-            bool parentHasStats = obj.Parts.TryGet(out Stats parentStats);
-            if (madeSuccessfulAttackAgainstTarget && AttackHandler.AutoAttack(parent, obj) && targetHasEffects &&
-                parentHasStats && targetEffects.AddEffect(new Bleeding(AttackHandler.lastDamage / 2f, parentStats.RollStat(Stat.PhysicalPower)), GetBleedDuration()))
+            if (!obj.Parts.Has(typeof(Combat)))
             {
                 if (parent == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"You have mauled {obj.GetDisplayName()} for {AttackHandler.lastDamage} damage!");
-                if (obj == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"{parent.GetDisplayName()} has mauled you for {AttackHandler.lastDamage} damage!");
+                    FloatingTextHandler.Draw(parent.transform.position, "Can't maul this!", Color.red);
+                return false;
             }
-            activeCooldown += GetCooldown();
-            if (parent.Parts.TryGet(out Resources resources))
-                resources.ModifyResource(Resource, -GetActivationResourceCost());
-            if (parent == PlayerInfo.currentPlayer)
-                TimeScheduler.Tick(GetEnergyCost());
-            yield break;
+            return true;
         }
 
-        public override IEnumerator OnCellRoutine(Cell cell)
+        protected override void OnObject()
         {
-            yield break;
+            bool madeSuccessfulAttackAgainstTarget = AttackHandler.AutoAttack(parent, target);
+            bool targetHasEffects = target.Parts.TryGet(out Effects.Effects targetEffects);
+            bool parentHasStats = target.Parts.TryGet(out Stats parentStats);
+
+            if (madeSuccessfulAttackAgainstTarget && AttackHandler.AutoAttack(parent, target) && targetHasEffects &&
+                parentHasStats && targetEffects.AddEffect(new Bleeding(AttackHandler.lastDamage / 2f, parentStats.RollStat(Stat.PhysicalPower)), GetBleedDuration(level)))
+            {
+                if (parent == PlayerInfo.currentPlayer)
+                    MessageLog.Add($"You have mauled {target.GetDisplayName()} for {AttackHandler.lastDamage} damage!");
+                if (target == PlayerInfo.currentPlayer)
+                    MessageLog.Add($"{parent.GetDisplayName()} has mauled you for {AttackHandler.lastDamage} damage!");
+            }
+
+            activeCooldown += GetCooldown(level);
+
+            if (parent.Parts.TryGet(out Resources resources))
+                resources.ModifyResource(Resource, -GetActivationResourceCost(level));
+        }
+
+        protected override bool CanUseOnCell(Cell cell) => false;
+
+        protected override void OnCell()
+        {
+
         }
 
         public override int GetEnergyCost() => TimeInfo.TIME_PER_STANDARD_TURN;
 
-        public override int GetRange() => 1;
+        public override int GetRange(int level) => 1;
 
-        public int GetBleedDuration()
+        public int GetBleedDuration(int level)
         {
             switch (level)
             {
@@ -106,10 +119,10 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override string GetDescription() => $"Make an attack against an opponent. " +
+        public override string GetDescription(int level) => $"Make an attack against an opponent. " +
             $"If it hits, make another free attack that will cause bleed for 50% attack damage " +
-            $"per turn for {((float)GetBleedDuration() / TimeInfo.TIME_PER_STANDARD_TURN).RoundToDecimal(1)} " +
-            $"turns (totalling {50 * ((float) GetBleedDuration() / TimeInfo.TIME_PER_STANDARD_TURN).RoundToDecimal(1)}% " +
+            $"per turn for {((float)GetBleedDuration(level) / TimeInfo.TIME_PER_STANDARD_TURN).RoundToDecimal(1)} " +
+            $"turns (totalling {50 * ((float) GetBleedDuration(level) / TimeInfo.TIME_PER_STANDARD_TURN).RoundToDecimal(1)}% " +
             $"bleed damage).";
 
         protected override bool OnAIBeforeAttack(AIBeforeAttackEvent e)
@@ -118,8 +131,8 @@ namespace TCD.Objects.Parts.Talents
             {
                 if (parent.Parts.TryGet(out Brain brain))
                     brain.Think("Decided to maul " + e.target.GetDisplayName() + " instead.");
-                StopAllCoroutines();
-                StartCoroutine(OnObjectRoutine(e.target));
+                target = e.target;
+                ActionScheduler.EnqueueAction(parent, OnObject);
                 e.hasActed = true;
                 return false;
             }

@@ -10,7 +10,6 @@ using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts.Talents
 {
-    [PlayerTalent("BloodCrazed"), Serializable]
     public class BloodCrazed : Talent
     {
         public override string Name => "Blood-Crazed";
@@ -25,22 +24,26 @@ namespace TCD.Objects.Parts.Talents
 
         public override TargetMode TargetMode => TargetMode.None;
 
-        public override IEnumerator OnObjectRoutine(BaseObject obj)
+        protected override bool CanUseOnObject(BaseObject obj) => false;
+
+        protected override void OnObject()
         {
-            yield break;
+
         }
 
-        public override IEnumerator OnCellRoutine(Cell cell)
+        protected override bool CanUseOnCell(Cell cell) => false;
+
+        protected override void OnCell()
         {
-            yield break;
+            
         }
 
-        public override string GetDescription() => $"Each time you make an attack " +
+        public override string GetDescription(int level) => $"Each time you make an attack " +
             $"against a bleeding enemy, you go into a Blood Craze, increasing your " +
-            $"physical power by {GetPhysicalPowerBonus()} and your attack speed by " +
-            $"{(1 - GetAttackCostMultiplier()) * 100}% for 2 turns.";
+            $"physical power by {GetPhysicalPowerBonus(level)} and your attack speed by " +
+            $"{(1 - GetAttackCostMultiplier(level)) * 100}% for 2 turns.";
 
-        private int GetPhysicalPowerBonus()
+        private int GetPhysicalPowerBonus(int level)
         {
             switch (level)
             {
@@ -57,7 +60,7 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        private float GetAttackCostMultiplier()
+        private float GetAttackCostMultiplier(int level)
         {
             switch (level)
             {
@@ -78,7 +81,7 @@ namespace TCD.Objects.Parts.Talents
         {
             if (e.defender.Parts.TryGet(out Effects.Effects targetEffects) && targetEffects.HasEffect("Bleeding") &&
                 parent.Parts.TryGet(out Effects.Effects attackerEffects))
-                attackerEffects.AddEffect(new BloodCraze(GetPhysicalPowerBonus(), GetAttackCostMultiplier()), TimeInfo.TIME_PER_STANDARD_TURN * 2);
+                attackerEffects.AddEffect(new BloodCraze(GetPhysicalPowerBonus(level), GetAttackCostMultiplier(level)), TimeInfo.TIME_PER_STANDARD_TURN * 2);
             return base.OnAttack(e);
         }
     }

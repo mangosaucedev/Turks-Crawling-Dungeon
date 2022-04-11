@@ -14,7 +14,7 @@ namespace TCD.Zones
 {
     public class ZoneGeneratorManager : MonoBehaviour, IZoneGenerator
     {
-        private bool hasBegunGeneratingZone;
+        private bool isGeneratingZone;
         private ZoneGeneratorType currentType;
         private IZone currentZone;
         private Coroutine generationRoutine;
@@ -30,9 +30,9 @@ namespace TCD.Zones
 
         public void GenerateZone(IZone zone)
         {
-            if (!hasBegunGeneratingZone)
+            if (!isGeneratingZone)
             {
-                hasBegunGeneratingZone = true;
+                isGeneratingZone = true;
                 this.EnsureCoroutineStopped(ref generationRoutine);
                 currentType = zone.ZoneParams.Type;
                 currentZone = zone;
@@ -42,9 +42,9 @@ namespace TCD.Zones
 
         public IEnumerator GenerateZoneRoutine(Dungeon dungeon, int zoneIndex)
         {
-            if (!hasBegunGeneratingZone)
+            if (!isGeneratingZone)
             {
-                hasBegunGeneratingZone = true;
+                isGeneratingZone = true;
                 this.EnsureCoroutineStopped(ref generationRoutine);
                 currentType = ZoneGeneratorType.Generic;
                 currentZone = dungeon.Zones[zoneIndex];
@@ -57,8 +57,7 @@ namespace TCD.Zones
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            ZoneResetter zoneResetter = ServiceLocator.Get<ZoneResetter>();
-            yield return zoneResetter.UnloadZoneRoutine(zoneResetter.resetPlayer);
+            yield return UnloadZoneRoutine();
 
             string zoneName = "";
             switch (currentType)
@@ -67,17 +66,12 @@ namespace TCD.Zones
                     zoneName = "Cavern";
                     break;
                 default:
-                    zoneName = Choose.Random("Level0", "Overgrown", "Decomposition", "Fungus", "House");
+                    zoneName = Choose.Random("Level0", "Overgrown", "Decomposition", "Fungus", "House", "Rubble", "Construction", "DungeonGeneric");
                     break;
             }
 
             CurrentZoneInfo.zone = currentZone == null ? ZoneFactory.BuildFromBlueprint(zoneName) : currentZone;
-            CurrentZoneInfo.grid =
-                new GameGrid(CurrentZoneInfo.zone.Width, CurrentZoneInfo.zone.Height);
-            CurrentZoneInfo.navGrid =
-                new NavGrid(CurrentZoneInfo.zone.Width, CurrentZoneInfo.zone.Height);
-            CurrentZoneInfo.floorGrid =
-                new TGrid<bool>(CurrentZoneInfo.zone.Width, CurrentZoneInfo.zone.Height);
+            InitializePreZoneStructures();
 
             ZoneGenerator zoneGenerator = null;
             switch (currentType)
@@ -89,19 +83,52 @@ namespace TCD.Zones
                     zoneGenerator = new GenericZoneGenerator();
                     break;
             }
-            LoadingManager loadingManager = ServiceLocator.Get<LoadingManager>();
-            ZoneGenerationOperation operation = new ZoneGenerationOperation(zoneGenerator);
-            yield return loadingManager.EnqueueLoadingOperationRoutine(operation);
-
-            CurrentZoneInfo.autoExploreGrid =
-                new AutoExploreGrid(CurrentZoneInfo.zone.Width, CurrentZoneInfo.zone.Height);
+            
+            yield return GenerateOperationRoutine(zoneGenerator);
+            InitializePostZoneStructures();
 
             stopwatch.Stop();
             DebugLogger.Log($"Zone generated in {stopwatch.ElapsedMilliseconds} ms.");
-            hasBegunGeneratingZone = false;
+            isGeneratingZone = false;
 
             EventManager.Send(new ZoneGenerationFinishedEvent());
 
+            PlayZoneCinematic();
+        }
+
+        private IEnumerator UnloadZoneRoutine()
+        {
+            ZoneResetter zoneResetter = ServiceLocator.Get<ZoneResetter>();
+            LoadingManager loadingManager = ServiceLocator.Get<LoadingManager>();
+            ZoneUnloadOperation operation = new ZoneUnloadOperation(zoneResetter.UnloadZoneRoutine(zoneResetter.resetPlayer));
+            yield return loadingManager.EnqueueLoadingOperationRoutine(operation);
+        }
+
+        private void InitializePreZoneStructures()
+        {
+            CurrentZoneInfo.grid =
+                new GameGrid(CurrentZoneInfo.zone.Width, CurrentZoneInfo.zone.Height);
+            CurrentZoneInfo.navGrid =
+                new NavGrid(CurrentZoneInfo.zone.Width, CurrentZoneInfo.zone.Height);
+            CurrentZoneInfo.floorGrid =
+                new TGrid<bool>(CurrentZoneInfo.zone.Width, CurrentZoneInfo.zone.Height);
+        }
+
+        private IEnumerator GenerateOperationRoutine(ZoneGenerator zoneGenerator)
+        {
+            LoadingManager loadingManager = ServiceLocator.Get<LoadingManager>();
+            ZoneGenerationOperation operation = new ZoneGenerationOperation(zoneGenerator);
+            yield return loadingManager.EnqueueLoadingOperationRoutine(operation);
+        }
+
+        private void InitializePostZoneStructures()
+        {
+            CurrentZoneInfo.autoExploreGrid =
+                new AutoExploreGrid(CurrentZoneInfo.zone.Width, CurrentZoneInfo.zone.Height);
+        }
+
+        private void PlayZoneCinematic()
+        {
             Cinematic cinematic = CurrentZoneInfo.zone.Cinematic;
             if (cinematic != null)
             {

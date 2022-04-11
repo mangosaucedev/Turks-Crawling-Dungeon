@@ -10,13 +10,13 @@ namespace TCD
         private void OnEnable()
         {
             EventManager.Listen<ZoneGenerationFinishedEvent>(this, OnZoneGenerationFinished);
-            EventManager.Listen<PlayerMovedEvent>(this, OnPlayerMoved);
+            EventManager.Listen<AfterTurnTickEvent>(this, OnAfterTurnTick);
         }
 
         private void OnDisable()
         {
             EventManager.StopListening<ZoneGenerationFinishedEvent>(this);
-            EventManager.StopListening<PlayerMovedEvent>(this);
+            EventManager.StopListening<AfterTurnTickEvent>(this);
         }
 
         private void OnZoneGenerationFinished(ZoneGenerationFinishedEvent e)
@@ -47,7 +47,7 @@ namespace TCD
             EventManager.Send(new CursorMovedEvent(new Vector2Int(x, y)));
         }
 
-        private void OnPlayerMoved(PlayerMovedEvent e)
+        private void OnAfterTurnTick(AfterTurnTickEvent e)
         {
             CenterOnPlayer();
         }

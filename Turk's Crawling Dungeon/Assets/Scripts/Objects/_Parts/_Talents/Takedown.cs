@@ -10,7 +10,6 @@ using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts.Talents
 {
-    [PlayerTalent("Takedown"), Serializable]
     public class Takedown : Talent
     {
         public override string Name => "Takedown";
@@ -25,7 +24,7 @@ namespace TCD.Objects.Parts.Talents
 
         public override TargetMode TargetMode => TargetMode.Attack;
 
-        public override int GetActivationResourceCost()
+        public override int GetActivationResourceCost(int level)
         {
             switch (level)
             {
@@ -42,7 +41,7 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override int GetCooldown()
+        public override int GetCooldown(int level)
         {
             switch (level)
             {
@@ -59,21 +58,32 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override IEnumerator OnObjectRoutine(BaseObject obj)
+        protected override bool CanUseOnObject(BaseObject obj) => true;
+
+        protected override void OnObject()
         {
-            yield break;
+
         }
 
-        public override IEnumerator OnCellRoutine(Cell cell)
+        protected override bool CanUseOnCell(Cell cell) => false;
+
+        protected override void OnCell()
         {
-            yield break;
+
+        }
+
+        public override List<ITalentRequirement> GetRequirements(int level)
+        {
+            List<ITalentRequirement> requirements = base.GetRequirements(level);
+            requirements.Add(new RequiresTalentLevel(typeof(Grapple)));
+            return requirements;
         }
 
         public override int GetEnergyCost() => TimeInfo.TIME_PER_STANDARD_TURN;
 
-        public override int GetRange() => 1;
+        public override int GetRange(int level) => 1;
 
-        public float GetUnarmedDamageMultiplier()
+        public float GetUnarmedDamageMultiplier(int level)
         {
             switch (level)
             {
@@ -90,7 +100,7 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override string GetDescription() => $"Make an unarmed attack against an opponent for {GetUnarmedDamageMultiplier() * 100}% " +
+        public override string GetDescription(int level) => $"Make an unarmed attack against an opponent for {GetUnarmedDamageMultiplier(level) * 100}% " +
             $"damage. If you are grappling with the enemy, this attack will knock them prone.";
 
         protected override bool OnAIBeforeAttack(AIBeforeAttackEvent e)

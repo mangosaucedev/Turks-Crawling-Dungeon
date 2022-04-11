@@ -15,11 +15,17 @@ namespace TCD.UI
 
         protected override string ViewName => gameObject.name;
 
+        private void Start()
+        {
+            UpdateHotbarButtons();
+        }
+
         protected override void OnEnable()
         {
             base.OnEnable();
             EventManager.Listen<PlayerCreatedEvent>(this, OnPlayerCreated);
             EventManager.Listen<AfterTurnTickEvent>(this, OnAfterTurnTick);
+            EventManager.Listen<TalentUsedEvent>(this, OnTalentUsed);
         }
 
         protected override void OnDisable()
@@ -27,6 +33,7 @@ namespace TCD.UI
             base.OnDisable();
             EventManager.StopListening<PlayerCreatedEvent>(this);
             EventManager.StopListening<AfterTurnTickEvent>(this);
+            EventManager.StopListening<TalentUsedEvent>(this);
         }
 
         private void OnPlayerCreated(PlayerCreatedEvent e)
@@ -35,6 +42,11 @@ namespace TCD.UI
         }
 
         private void OnAfterTurnTick(AfterTurnTickEvent e)
+        {
+            UpdateHotbarButtons();
+        }
+
+        private void OnTalentUsed(TalentUsedEvent e)
         {
             UpdateHotbarButtons();
         }

@@ -6,11 +6,11 @@ using TCD.Objects;
 using TCD.Objects.Attacks;
 using TCD.Objects.Parts;
 using TCD.Objects.Parts.Effects;
+using TCD.Texts;
 using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts.Talents
 {
-    [PlayerTalent("FearfulPin"), Serializable]
     public class FearfulPin : Talent
     {
         public override string Name => "Fearful Pin";
@@ -25,7 +25,7 @@ namespace TCD.Objects.Parts.Talents
 
         public override TargetMode TargetMode => TargetMode.Attack;
 
-        public override int GetCooldown()
+        public override int GetCooldown(int level)
         {
             switch (level)
             {
@@ -42,46 +42,56 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override IEnumerator OnObjectRoutine(BaseObject obj)
+        protected override bool CanUseOnObject(BaseObject obj)
         {
-            bool madeSuccessfulAttackAgainstTarget = AttackHandler.AutoAttack(parent, obj);
-            bool targetHasEffects = obj.Parts.TryGet(out Effects.Effects targetEffects);
-            if (madeSuccessfulAttackAgainstTarget && targetHasEffects &&
-                targetEffects.AddEffect(new Pinned(), TimeInfo.TIME_PER_STANDARD_TURN * GetEffectDuration()))
+            if (!obj.Parts.Has(typeof(Combat)))
             {
                 if (parent == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"You have pinned {obj.GetDisplayName()}!");
-                if (obj == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"{obj.GetDisplayName()} has pinned you!");
+                    FloatingTextHandler.Draw(parent.transform.position, "Can't pin this!", Color.red);
+                return false;
+            }
+            return true;
+        }
+
+        protected override void OnObject()
+        {
+            bool madeSuccessfulAttackAgainstTarget = AttackHandler.AutoAttack(parent, target);
+            bool targetHasEffects = target.Parts.TryGet(out Effects.Effects targetEffects);
+            if (madeSuccessfulAttackAgainstTarget && targetHasEffects &&
+                targetEffects.AddEffect(new Pinned(), TimeInfo.TIME_PER_STANDARD_TURN * GetEffectDuration(level)))
+            {
+                if (parent == PlayerInfo.currentPlayer)
+                    MessageLog.Add($"You have pinned {target.GetDisplayName()}!");
+                if (target == PlayerInfo.currentPlayer)
+                    MessageLog.Add($"{target.GetDisplayName()} has pinned you!");
             }
             else if (!madeSuccessfulAttackAgainstTarget)
             {
                 if (parent == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"You failed to pin {obj.GetDisplayName()}!");
-                if (obj == PlayerInfo.currentPlayer)
+                    MessageLog.Add($"You failed to pin {target.GetDisplayName()}!");
+                if (target == PlayerInfo.currentPlayer)
                     MessageLog.Add($"{parent.GetDisplayName()} failed to pin you!");
             }
-            activeCooldown += GetCooldown();
+            activeCooldown += GetCooldown(level);
             if (parent.Parts.TryGet(out Resources resources))
-                resources.ModifyResource(Resource, -GetActivationResourceCost());
-            if (parent == PlayerInfo.currentPlayer)
-                TimeScheduler.Tick(GetEnergyCost());
-            yield break;
+                resources.ModifyResource(Resource, -GetActivationResourceCost(level));
         }
 
-        public override IEnumerator OnCellRoutine(Cell cell)
+        protected override bool CanUseOnCell(Cell cell) => false;
+
+        protected override void OnCell()
         {
-            yield break;
+
         }
 
         public override int GetEnergyCost() => TimeInfo.TIME_PER_STANDARD_TURN;
 
-        public override int GetRange() => 1;
+        public override int GetRange(int level) => 1;
 
-        public override string GetDescription() => $"Make an attack against an opponent. " +
-            $"If it hits, the enemy will be pinned to the spot for {GetEffectDuration()} turns.";
+        public override string GetDescription(int level) => $"Make an attack against an opponent. " +
+            $"If it hits, the enemy will be pinned to the spot for {GetEffectDuration(level)} turns.";
 
-        private int GetEffectDuration()
+        private int GetEffectDuration(int level)
         {
             switch (level)
             {
@@ -103,9 +113,9 @@ namespace TCD.Objects.Parts.Talents
             if (CanUseTalent() && !e.hasActed)
             {
                 if (parent.Parts.TryGet(out Brain brain))
-                    brain.Think("Decided to use fearul pin on " + e.target.GetDisplayName() + " instead.");
-                StopAllCoroutines();
-                StartCoroutine(OnObjectRoutine(e.target));
+                    brain.Think("Decided to use fearful pin on " + e.target.GetDisplayName() + " instead.");
+                target = e.target;
+                ActionScheduler.EnqueueAction(parent, OnObject);
                 e.hasActed = true;
                 return false;
             }

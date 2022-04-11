@@ -22,7 +22,7 @@ namespace TCD.Objects.Parts.Talents
                 {
                     foreach (string talentName in talentNames)
                     {
-                        Talent talent = PlayerTalentUtility.GetTalentInstance(talentName);
+                        Talent talent = TalentUtility.GetTalentInstance(TalentUtility.Get(talentName));
                         talents.Add(talent);
                     }   
                 }

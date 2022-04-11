@@ -7,7 +7,6 @@ using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts.Talents
 {
-    [PlayerTalent("Scream"), Serializable]
     public class Scream : Talent
     {
         public override string Name => "Scream";
@@ -22,24 +21,20 @@ namespace TCD.Objects.Parts.Talents
 
         public override TargetMode TargetMode => TargetMode.None;
 
-        public override IEnumerator OnObjectRoutine(BaseObject obj)
-        {
-            ScreamInRadius();
-            yield break;
-        }
+        protected override bool CanUseOnObject(BaseObject obj) => true;
 
-        public override IEnumerator OnCellRoutine(Cell cell)
-        {
-            ScreamInRadius();
-            yield break;
-        }
+        protected override void OnObject() => ScreamInRadius();
+
+        protected override bool CanUseOnCell(Cell cell) => true;
+
+        protected override void OnCell() => ScreamInRadius();
 
         private void ScreamInRadius()
         {
 
         }
 
-        public int GetRadius()
+        public int GetRadius(int level)
         {
             switch (level)
             {
@@ -56,7 +51,7 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public float GetDamage()
+        public float GetDamage(int level)
         {
             switch (level)
             {
@@ -75,9 +70,9 @@ namespace TCD.Objects.Parts.Talents
 
         public override int GetEnergyCost() => TimeInfo.TIME_PER_STANDARD_TURN;
 
-        public override int GetRange() => 1;
+        public override int GetRange(int level) => 1;
 
-        public override int GetCooldown()
+        public override int GetCooldown(int level)
         {
             switch (level)
             {
@@ -94,7 +89,7 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override string GetDescription() => $"Unleash an ear-bursting cry that " +
-            $"deals {GetDamage()} pure damage to enemies in a radius of {GetRadius()}.";
+        public override string GetDescription(int level) => $"Unleash an ear-bursting cry that " +
+            $"deals {GetDamage(level)} pure damage to enemies in a radius of {GetRadius(level)}.";
     }
 }

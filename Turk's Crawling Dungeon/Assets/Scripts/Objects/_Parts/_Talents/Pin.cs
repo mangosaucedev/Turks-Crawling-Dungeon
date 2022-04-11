@@ -6,11 +6,10 @@ using TCD.Objects;
 using TCD.Objects.Attacks;
 using TCD.Objects.Parts;
 using TCD.Objects.Parts.Effects;
-using TCD.TimeManagement;
+using TCD.Texts;
 
 namespace TCD.Objects.Parts.Talents
 {
-    [PlayerTalent("Pin"), Serializable]
     public class Pin : Talent
     {
         public override string Name => "Pin";
@@ -25,7 +24,7 @@ namespace TCD.Objects.Parts.Talents
 
         public override TargetMode TargetMode => TargetMode.Attack;
 
-        public override int GetActivationResourceCost()
+        public override int GetActivationResourceCost(int level)
         {
             switch (level)
             {
@@ -42,7 +41,7 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override int GetCooldown()
+        public override int GetCooldown(int level)
         {
             switch (level)
             {
@@ -59,21 +58,46 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override IEnumerator OnObjectRoutine(BaseObject obj)
+        protected override bool CanUseOnObject(BaseObject obj)
         {
-            yield break;
+            if (!obj.Parts.Has(typeof(Combat)))
+            {
+                if (parent == PlayerInfo.currentPlayer)
+                    FloatingTextHandler.Draw(parent.transform.position, "Can't choke this!", Color.red);
+                return false;
+            }
+            if (!obj.Parts.TryGet(out Effects.Effects effects))
+            {
+                if (parent == PlayerInfo.currentPlayer)
+                    FloatingTextHandler.Draw(parent.transform.position, "Target immune!", Color.red);
+                return false;
+            }
+            return true;
         }
 
-        public override IEnumerator OnCellRoutine(Cell cell)
+        protected override void OnObject()
         {
-            yield break;
+
         }
 
+        protected override bool CanUseOnCell(Cell cell) => false;
+
+        protected override void OnCell()
+        {
+
+        }
+
+        public override List<ITalentRequirement> GetRequirements(int level)
+        {
+            List<ITalentRequirement> requirements = base.GetRequirements(level);
+            requirements.Add(new RequiresTalentLevel(typeof(Takedown)));
+            return requirements;
+        }
         public override int GetEnergyCost() => TimeInfo.TIME_PER_STANDARD_TURN;
 
-        public override int GetRange() => 1;
+        public override int GetRange(int level) => 1;
 
-        public float GetUnarmedDamageMultiplier()
+        public float GetUnarmedDamageMultiplier(int level)
         {
             switch (level)
             {
@@ -90,7 +114,7 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public int GetPinDuration()
+        public int GetPinDuration(int level)
         {
             switch (level)
             {
@@ -107,7 +131,7 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public int GetDisarmDuration()
+        public int GetDisarmDuration(int level)
         {
             switch (level)
             {
@@ -124,9 +148,9 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override string GetDescription() => $"Make an unarmed attack against an opponent for {GetUnarmedDamageMultiplier() * 100}% " +
-            $"damage. If you are grappling with the enemy, this attack will pin them for {((float) GetPinDuration() / TimeInfo.TIME_PER_STANDARD_TURN).RoundToDecimal(1)} " +
-            $"turns. If the grappled enemy is also prone, they will be disarmed for {((float) GetDisarmDuration() / TimeInfo.TIME_PER_STANDARD_TURN).RoundToDecimal(1)} " +
+        public override string GetDescription(int level) => $"Make an unarmed attack against an opponent for {GetUnarmedDamageMultiplier(level) * 100}% " +
+            $"damage. If you are grappling with the enemy, this attack will pin them for {((float) GetPinDuration(level) / TimeInfo.TIME_PER_STANDARD_TURN).RoundToDecimal(1)} " +
+            $"turns. If the grappled enemy is also prone, they will be disarmed for {((float) GetDisarmDuration(level) / TimeInfo.TIME_PER_STANDARD_TURN).RoundToDecimal(1)} " +
             $"turns.";
 
         protected override bool OnAIBeforeAttack(AIBeforeAttackEvent e)

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Tiles>
+
+	<Tile Name="DungeonStones0">DungeonStones0</Tile>
+
+	<Tile Name="DungeonStones1">DungeonStones1</Tile>
+	
+	<Tile Name="DungeonTerracotta">DungeonTerracotta</Tile>
+	
+
+</Tiles>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TalentTrees>
+	
+	<TalentTree Name="PrereleaseBasicAthletics" DisplayName="Agility/Basic Athletics">
+		<Talent Name="Sprint" />
+		<Talent Name="Weave" />
+	</TalentTree>
+
+	<TalentTree Name="PrereleaseBasicGrappling" DisplayName="Strength/Basic Grappling">
+		<Talent Name="Grapple" />
+		<Talent Name="Takedown" />
+		<Talent Name="Pin" />
+		<Talent Name="Choke" />
+	</TalentTree>
+
+	<TalentTree Name="PrereleaseRecklessCombat" DisplayName="Strength/Reckless Combat">
+		<Talent Name="Tackle" />
+	</TalentTree>
+
+	<TalentTree Name="PrereleaseFitness" DisplayName="Constitution/Fitness">
+		<Talent Name="ThickSkin" />
+		<Talent Name="Lifeblood" />
+	</TalentTree>
+	
+	<TalentTree Name="PrereleaseMangle" DisplayName="Savagery/Mangle Prey">
+		<Talent Name="Maul" />
+	</TalentTree>
+
+	<TalentTree Name="PrereleaseFearfulTechniques" DisplayName="Terror/Fearful Techniques">
+		<Talent Name="Strangle" />
+	</TalentTree>
+
+	<TalentTree Name="PrereleaseRandomPsionics" DisplayName="Psionic/Random Psionics">
+		<Talent Name="MinorFireblast" />
+		<Talent Name="MinorStun" />
+	</TalentTree>
+
+</TalentTrees>

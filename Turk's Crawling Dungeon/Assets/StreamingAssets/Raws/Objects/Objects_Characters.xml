@@ -90,13 +90,13 @@
 
 		<!-- !!! -->
 		<!-- Delete to impl. embark system -->
-
+		<!--
 		<Part Name="Talents.Tackle"/>
 		<Part Name="Talents.FearfulPin"/>
 		<Part Name="Talents.Sprint"/>
 		<Part Name="Talents.Maul"/>
 		<Part Name="Talents.BloodCrazed"/>
-
+		-->
 		<!-- !!! -->
 		
 		<Part Name="PlayerBrain">
@@ -216,7 +216,10 @@
 			<Var Name="Sprite">WhiteHand</Var>
 		</OverridePart>
 
+		<!--
 		<Part Name="Talents.Strangle"/>
+		-->
+
 	</Object>
 
 	<Object Name="Mandrake" InheritsFrom="Enemy">
@@ -340,7 +343,9 @@
 			<Var Name="Sprite">BuriedAlive</Var>
 		</OverridePart>
 
+		<!--
 		<Part Name="Talents.FearfulPin"/>
+		-->
 	</Object>
 
 	<Object Name="Tumbleweed" InheritsFrom="Enemy">

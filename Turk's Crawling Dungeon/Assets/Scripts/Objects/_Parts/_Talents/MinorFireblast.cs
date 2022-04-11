@@ -9,7 +9,6 @@ using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts.Talents
 {
-    [PlayerTalent("MinorFireblast"), Serializable]
     public class MinorFireblast : Talent
     {
         public override string Name => "Minor Fireblast";
@@ -28,7 +27,7 @@ namespace TCD.Objects.Parts.Talents
 
         public override TargetMode TargetMode => TargetMode.Object;
 
-        public override int GetActivationResourceCost()
+        public override int GetActivationResourceCost(int level)
         {
             switch (level)
             {
@@ -45,7 +44,7 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override int GetCooldown()
+        public override int GetCooldown(int level)
         {
             switch (level)
             {
@@ -62,19 +61,23 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override IEnumerator OnObjectRoutine(BaseObject obj)
+        protected override bool CanUseOnObject(BaseObject obj) => true;
+
+        protected override void OnObject()
         {
-            yield break;
+
         }
 
-        public override IEnumerator OnCellRoutine(Cell cell)
+        protected override bool CanUseOnCell(Cell cell) => true;
+
+        protected override void OnCell()
         {
-            yield break;
+
         }
 
         public override int GetEnergyCost() => TimeInfo.TIME_PER_STANDARD_TURN;
 
-        public override int GetRange()
+        public override int GetRange(int level)
         {
             switch (level)
             {
@@ -91,7 +94,7 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public float GetMinDamage()
+        public float GetMinDamage(int level)
         {
             switch (level)
             {
@@ -108,7 +111,7 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public float GetMaxDamage()
+        public float GetMaxDamage(int level)
         {
             switch (level)
             {
@@ -125,15 +128,15 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override string GetDescription() => $"Conjure a fireball and launch it at an opponent, " +
-            $"dealing {GetMinDamage()} - {GetMaxDamage()} fire damage on impact.";
+        public override string GetDescription(int level) => $"Conjure a fireball and launch it at an opponent, " +
+            $"dealing {GetMinDamage(level)} - {GetMaxDamage(level)} fire damage on impact.";
 
         protected override bool OnAIBeforeMove(AIBeforeMoveEvent e)
         {
             int distanceToTarget = Mathf.FloorToInt(Vector2Int.Distance(Position, e.targetPosition));
-            if (CanUseTalent() && distanceToTarget <= GetRange() && !e.hasActed)
+            if (CanUseTalent() && distanceToTarget <= GetRange(level) && !e.hasActed)
             {
-
+                return false;
             }
             return base.OnAIBeforeMove(e);
         }

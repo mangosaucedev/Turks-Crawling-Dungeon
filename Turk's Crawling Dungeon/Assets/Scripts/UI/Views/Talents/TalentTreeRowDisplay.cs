@@ -13,6 +13,7 @@ namespace TCD.UI
         {
             GameObject talentButtonObject = Instantiate(talentButtonPrefab, transform);
             ITalentButton talentButton = talentButtonObject.GetComponent<ITalentButton>();
+            talentButton.View = GetComponentInParent<TalentView>();
             talentButton.BuildTalent(talent);
         }
     }

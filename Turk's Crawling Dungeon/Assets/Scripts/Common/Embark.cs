@@ -58,7 +58,7 @@ namespace TCD
                 chosenTalentLevels[talent] = 0;
             chosenTalentLevels[talent] += 1;
             PlayerInfo.talentPoints--;
-            EventManager.Send(new EmbarkTalentPointModifiedEvent());
+            EventManager.Send(new EmbarkTalentPointModifiedEvent(TalentUtility.Get(talent), chosenTalentLevels[talent]));
         }
 
         public static void RemoveChosenTalentLevel(string talent)
@@ -72,7 +72,7 @@ namespace TCD
                 chosenTalentLevels.Remove(talent);
                 chosenTalents.Remove(talent);
             }
-            EventManager.Send(new EmbarkTalentPointModifiedEvent());
+            EventManager.Send(new EmbarkTalentPointModifiedEvent(TalentUtility.Get(talent), GetChosenTalentLevel(talent)));
         }
 
         public static int GetChosenTalentLevel(string talent)

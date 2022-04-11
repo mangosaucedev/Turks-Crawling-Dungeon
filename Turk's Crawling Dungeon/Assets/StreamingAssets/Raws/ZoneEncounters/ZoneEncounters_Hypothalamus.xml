@@ -2,7 +2,8 @@
 <ZoneEncounters>
 
 	<ZoneEncounter Name="Hypothalamus0">
-
+		<Encounter Name="GoatGroupSmall" Type="EnemyPatrol" Weight="1" />
+		<Encounter Name="MeleeWeaponsTier0" Type="OpenLoot" Weight="1" />
 	</ZoneEncounter>
 	
 </ZoneEncounters>

@@ -2,11 +2,14 @@
 <ZoneEncounters>
 
 	<ZoneEncounter Name="Generic">
-		<Encounter Name="DungeonEnemyPatrolsTier0" Type="EnemyPatrol" Weight="1" />
-		<Encounter Name="DungeonEnemyPatrolsTier1" Type="EnemyPatrol" Weight="3"/>
-		<Encounter Name="DungeonEnemyPatrolsTier1B" Type="EnemyPatrol" Weight="1"/>
-		<Encounter Name="DungeonEnemyPatrolsTier2" Type="EnemyPatrol" Weight="3"/>
-		<Encounter Name="DungeonEnemyPatrolsTier2B" Type="EnemyPatrol" Weight="1"/>
+		<Encounter Name="DungeonEnemyPatrolsTier0" Type="EnemyPatrol" Weight="5" />
+		<Encounter Name="DungeonEnemyPatrolsTier1" Type="EnemyPatrol" Weight="5"/>
+		<Encounter Name="DungeonEnemyPatrolsTier1B" Type="EnemyPatrol" Weight="2"/>
+		<Encounter Name="DungeonEnemyPatrolsTier2" Type="EnemyPatrol" Weight="5"/>
+		<Encounter Name="DungeonEnemyPatrolsTier2B" Type="EnemyPatrol" Weight="2"/>
+		<Encounter Name="GoatGroupSmall" Type="EnemyPatrol" Weight="1" />
+		<Encounter Name="GoatGroupMedium" Type="EnemyPatrol" Weight="1" />
+		<Encounter Name="GoatGroupLarge" Type="EnemyPatrol" Weight="1" />
 		<Encounter Name="MeleeWeaponsTier0" Type="OpenLoot" Weight="1"/>
 		<Encounter Name="MeleeWeaponsTier1" Type="OpenLoot" Weight="1"/>
 	</ZoneEncounter>

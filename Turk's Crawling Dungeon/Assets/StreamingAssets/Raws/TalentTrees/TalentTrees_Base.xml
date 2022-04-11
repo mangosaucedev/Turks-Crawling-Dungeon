@@ -8,7 +8,6 @@
 
 	<TalentTree Name="BasicGrappling" DisplayName="Strength/Basic Grappling">
 		<Talent Name="Grapple" />
-		<Talent Name="BreakGrapple" />
 		<Talent Name="Takedown" />
 		<Talent Name="Pin" />
 		<Talent Name="Choke" />

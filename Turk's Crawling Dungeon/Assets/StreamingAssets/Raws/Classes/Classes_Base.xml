@@ -3,6 +3,8 @@
 	
 	<Class Name="Hellion">
 
+		<Unlisted>True</Unlisted>
+		
 		<Description>A rambunctious youth has become a troublemaking adult. Fists will fly.</Description>
 		
 		<StatPreset>Hellion</StatPreset>
@@ -16,6 +18,8 @@
 
 	<Class Name="Prodigy">
 
+		<Unlisted>True</Unlisted>
+		
 		<Description>Gifted from a young age, your mind has become your primary means of overcoming obstacles.</Description>
 		
 		<StatPreset>Prodigy</StatPreset>

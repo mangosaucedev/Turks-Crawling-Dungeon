@@ -23,6 +23,7 @@ namespace TCD.UI
         private void OnContinue()
         {
             CloseView();
+            Instantiate(Assets.Get<GameObject>("Over Screen Fade"), ParentManager.OverScreen);
             ScoreHandler.level++;
             ScoreHandler.ModifyScore(1000);
             if (CampaignHandler.currentCampaign != null)

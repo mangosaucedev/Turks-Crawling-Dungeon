@@ -26,9 +26,10 @@ namespace TCD.UI
         
         public void NewGame()
         {
-            CloseView();
-            TCDGame.StartNewGame();
-            //ViewManager.Open("Embark View");
+            //CloseView();
+            //Embark.SetChosenClass(Assets.Get<TCD.Objects.Parts.Class>("Turkinopoulos"));
+            //TCDGame.StartNewGame();
+            ViewManager.Open("Prerelease Embark View");
         }
 
         public void Help()

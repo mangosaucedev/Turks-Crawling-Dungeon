@@ -13,6 +13,7 @@ namespace TCD.Objects
         public Deactivator deactivator;
         public Transform partsParent;
         public LocalVarCollection localVars = new LocalVarCollection();
+
         [SerializeField] private SpriteRenderer spriteRenderer;
 
         private PartCollection parts;

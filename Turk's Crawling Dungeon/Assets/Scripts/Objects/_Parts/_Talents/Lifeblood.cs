@@ -10,7 +10,6 @@ using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts.Talents
 {
-    [PlayerTalent("Lifeblood"), Serializable]
     public class Lifeblood : Talent
     {
         public override string Name => "Lifeblood";
@@ -25,21 +24,9 @@ namespace TCD.Objects.Parts.Talents
 
         public override TargetMode TargetMode => TargetMode.None;
 
-        public override IEnumerator OnObjectRoutine(BaseObject obj)
-        {
-            yield break;
-        }
+        protected override bool CanUseOnObject(BaseObject obj) => true;
 
-        public override IEnumerator OnCellRoutine(Cell cell)
-        {
-            yield break;
-        }
-
-        public override int GetEnergyCost() => 0;
-
-        public override int GetRange() => 1;
-
-        public float GetHealingMultiplier()
+        public static float GetHealingMultiplier(int level)
         {
             switch (level)
             {
@@ -56,7 +43,40 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public int GetDuration()
+        public override List<ITalentRequirement> GetRequirements(int level)
+        {
+            var requirements = base.GetRequirements(level);
+            requirements.Add(new RequiresTalentLevel(typeof(ThickSkin)));
+            return requirements;
+        }
+
+        protected override void OnObject()
+        {
+
+        }
+
+        protected override bool CanUseOnCell(Cell cell) => true;
+
+        protected override void OnCell()
+        {
+
+        }
+
+        public override bool Activate()
+        {
+            var effects = parent.Parts.Get<Effects.Effects>();
+            effects.AddEffect(new SurgingLifeblood(level), Mathf.FloorToInt(GetDuration(level)));
+            activeCooldown = GetCooldown(level);
+            if (parent == PlayerInfo.currentPlayer)
+                MessageLog.Add($"Your lifeblood surges forth, mending your grievous wounds!");
+            return base.Activate();
+        }
+
+        public override int GetEnergyCost() => 0;
+
+        public override int GetRange(int level) => 1;
+
+        public int GetDuration(int level)
         {
             switch (level)
             {
@@ -73,8 +93,58 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override string GetDescription() => $"On reaching below 30% health, your health regeneration will " +
-            $"increase {GetHealingMultiplier() * 100}% for {((float) GetDuration() / TimeInfo.TIME_PER_STANDARD_TURN).RoundToDecimal(1)} " +
+        public override int GetCooldown(int level)
+        {
+            switch (level)
+            {
+                default:
+                    return 32 * TimeInfo.TIME_PER_STANDARD_TURN;
+                case 2:
+                    return 29 * TimeInfo.TIME_PER_STANDARD_TURN;
+                case 3:
+                    return 26 * TimeInfo.TIME_PER_STANDARD_TURN;
+                case 4:
+                    return 23 * TimeInfo.TIME_PER_STANDARD_TURN;
+                case 5:
+                    return 20 * TimeInfo.TIME_PER_STANDARD_TURN;
+            }
+        }
+
+        public override string GetDescription(int level) => $"On reaching below 30% health, your health regeneration will " +
+            $"increase {GetHealingMultiplier(level) * 100}% for {((float) GetDuration(level) / TimeInfo.TIME_PER_STANDARD_TURN).RoundToDecimal(1)} " +
             $"turns.";
+
+        public override bool HandleEvent<T>(T e)
+        {
+            if (e.Id == HpModifiedEvent.id)
+                OnHpModified();
+            return base.HandleEvent(e);
+        }
+
+        private void OnHpModified()
+        {
+            DebugLogger.Log("LIFEBLOOD: hp modified!");
+
+            if (!parent.Parts.TryGet(out Resources resources) || parent.Parts.TryGet(out Effects.Effects effects))
+                return;
+
+            float hpMax = resources.GetMaxResource(Resource.Hitpoints);
+            float hp = resources.GetResource(Resource.Hitpoints);
+            float percent = (float) hp / (float) hpMax;
+
+            bool belowThreshold = percent < 0.3f;
+            bool cooldownActive = activeCooldown > 0f;
+            bool hasEffect = effects.HasEffect("Surging Lifeblood");
+
+            if (belowThreshold)
+                DebugLogger.Log("LIFEBLOOD: hp below threshold!");
+            if (!cooldownActive)
+                DebugLogger.Log("LIFEBLOOD: cooldown inactive!");
+            if (!hasEffect)
+                DebugLogger.Log("LIFEBLOOD: does not have 'Surging Lifeblood' effect active!");
+
+            if (belowThreshold && !cooldownActive && !hasEffect)
+                Activate();
+        }
     }
 }

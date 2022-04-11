@@ -2,10 +2,10 @@
 <Environments>
 
 	<Environment Name="Mundane">
-		<FurnishingDensity>0.35</FurnishingDensity>
+		<FurnishingDensity>0.25</FurnishingDensity>
 		<Furnishers>
-			<Furnisher Name="TableAndChairs" Weight="2"/>
-			<Furnisher Name="RandomFurniture" Weight="4"/>
+			<Furnisher Name="TableAndChairs" Weight="4"/>
+			<Furnisher Name="RandomFurniture" Weight="6"/>
 			<Furnisher Name="Bush"/>
 			<Furnisher Name="Lake"/>
 		</Furnishers>
@@ -21,16 +21,16 @@
 			<Furnishing Name="DeadTree2" Category="Bush"/>
 			<Furnishing Name="WaterFull" Category="Lake" Weight="8"/>
 			<Furnishing Name="AcidFull" Category="Lake"/>
-			<Furnishing Name="EyeTv" Category="Random" Weight="2"/>
+			<Furnishing Name="EyeTv" Category="Random"/>
 			<Furnishing Name="TurkVessel" Category="Random" Weight="2"/>
 			<Furnishing Name="TurkArm" Category="Random" Weight="2"/>
 		</Furnishings>
 	</Environment>
 
 	<Environment Name="Rest">
-		<FurnishingDensity>0.35</FurnishingDensity>
+		<FurnishingDensity>0.25</FurnishingDensity>
 		<Furnishers>
-			<Furnisher Name="RandomFurniture" Weight="2"/>
+			<Furnisher Name="RandomFurniture" Weight="3"/>
 			<Furnisher Name="Bush" Weight="2"/>
 			<Furnisher Name="Lake"/>
 		</Furnishers>
@@ -47,27 +47,31 @@
 	</Environment>
 
 	<Environment Name="Zoo">
-		<FurnishingDensity>0.3</FurnishingDensity>
+		<FurnishingDensity>0.25</FurnishingDensity>
 		<Furnishers>
 			<Furnisher Name="Bush"/>
 		</Furnishers>
 		<Furnishings>
 			<Furnishing Name="EyeTv" Category="Bush"/>
+			<Furnishing Name="DeadGrassLarge" Category="Bush" Weight="2"/>
+			<Furnishing Name="DeadGrassMedium" Category="Bush" Weight="2"/>
 		</Furnishings>
 	</Environment>
 
 	<Environment Name="SafetyChamber">
-		<FurnishingDensity>0.4</FurnishingDensity>
+		<FurnishingDensity>0.3</FurnishingDensity>
 		<Furnishers>
 			<Furnisher Name="Bush"/>
 		</Furnishers>
 		<Furnishings>
 			<Furnishing Name="RoseThorns" Category="Bush"/>
+			<Furnishing Name="DeadGrassLarge" Category="Bush" Weight="2"/>
+			<Furnishing Name="DeadGrassMedium" Category="Bush" Weight="2"/>
 		</Furnishings>
 	</Environment>
 
 	<Environment Name="FinalChamber">
-		<FurnishingDensity>0.3</FurnishingDensity>
+		<FurnishingDensity>0.25</FurnishingDensity>
 		<Furnishers>
 			<Furnisher Name="Bush" Weight="2"/>
 		</Furnishers>
@@ -75,6 +79,9 @@
 			<Furnishing Name="DeadTree0" Category="Bush"/>
 			<Furnishing Name="DeadTree1" Category="Bush"/>
 			<Furnishing Name="DeadTree2" Category="Bush"/>
+			<Furnishing Name="DeadGrassLarge" Category="Bush" Weight="3"/>
+			<Furnishing Name="DeadGrassMedium" Category="Bush" Weight="3"/>
+			<Furnishing Name="RoseThorns" Category="Bush" Weight="2"/>
 		</Furnishings>
 	</Environment>
 	

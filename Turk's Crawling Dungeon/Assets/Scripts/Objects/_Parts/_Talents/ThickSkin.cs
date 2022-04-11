@@ -10,7 +10,6 @@ using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts.Talents
 {
-    [PlayerTalent("ThickSkin"), Serializable]
     public class ThickSkin : Talent
     {
         public override string Name => "Thick Skin";
@@ -25,21 +24,25 @@ namespace TCD.Objects.Parts.Talents
 
         public override TargetMode TargetMode => TargetMode.None;
 
-        public override IEnumerator OnObjectRoutine(BaseObject obj)
+        protected override bool CanUseOnObject(BaseObject obj) => true;
+        
+        protected override void OnObject()
         {
-            yield break;
+
         }
 
-        public override IEnumerator OnCellRoutine(Cell cell)
+        protected override bool CanUseOnCell(Cell cell) => true;
+
+        protected override void OnCell()
         {
-            yield break;
+
         }
 
         public override int GetEnergyCost() => 0;
 
-        public override int GetRange() => 1;
+        public override int GetRange(int level) => 1;
 
-        public float GetDamageSoak()
+        public float GetDamageSoak(int level)
         {
             switch (level)
             {
@@ -56,6 +59,23 @@ namespace TCD.Objects.Parts.Talents
             }
         }
 
-        public override string GetDescription() => $"Resist {GetDamageSoak() * 100}% of all damage taken.";
+        public override string GetDescription(int level) => $"Resist {GetDamageSoak(level) * 100}% of all damage taken.";
+
+        public override bool HandleEvent<T>(T e)
+        {
+            if (e.Id == BeforeHpModifiedEvent.id)
+                OnBeforeHpModified((BeforeHpModifiedEvent) (LocalEvent) e);
+            return base.HandleEvent(e);
+        }
+
+        private void OnBeforeHpModified(BeforeHpModifiedEvent e)
+        {
+            if (e.IsDamage)
+            {
+                float soak = Mathf.Abs(e.amount * GetDamageSoak(level));
+                e.amount = Mathf.Min(0, e.amount + soak);
+                DebugLogger.Log($"THICK SKIN: {soak} damage soaked!");
+            }
+        }
     }
 }

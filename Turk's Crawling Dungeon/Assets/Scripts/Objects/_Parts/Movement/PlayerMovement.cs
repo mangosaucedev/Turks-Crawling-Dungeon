@@ -19,7 +19,6 @@ namespace TCD.Objects.Parts
                 GameGrid grid = CurrentZoneInfo.grid;
                 Cell cell = grid[Position];
                 TimeScheduler.Tick(GetCostToMove() + GetMoveCostToCell(cell));
-                AnimateMovement();
             }
             else
             {
@@ -27,9 +26,11 @@ namespace TCD.Objects.Parts
                 Cell cell = grid[Position + direction];
                 if (TryGetObjectToAttack(cell, out BaseObject target) && parent.Parts.TryGet(out Combat combat))
                 {
-                    TimeScheduler.Tick(combat.GetAttackCost(target));
                     AttackHandler.AutoAttack(parent, target);
+                    TimeScheduler.Tick(combat.GetAttackCost(target));
                 }
+                else
+                    FailMove();
             }
             return success;
         }

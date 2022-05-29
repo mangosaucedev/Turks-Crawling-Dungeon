@@ -58,6 +58,13 @@ namespace TCD.UI
             selectTopLeftSelectableCoroutine = StartCoroutine(SelectTopLeftSelectableRoutine());
         }
 
+        public IEnumerator WaitToSelectTopLeftSelectableRoutine()
+        {
+            this.EnsureCoroutineStopped(ref selectTopLeftSelectableCoroutine);
+            selectTopLeftSelectableCoroutine = StartCoroutine(SelectTopLeftSelectableRoutine());
+            yield return selectTopLeftSelectableCoroutine;
+        }
+
         private IEnumerator SelectTopLeftSelectableRoutine()
         {
             yield return null;
@@ -69,7 +76,7 @@ namespace TCD.UI
             GameObject selectedObject = null;
             foreach (Selectable selectable in selectables)
             {
-                Vector3 selectablePostion = selectable.transform.position;
+                Vector3 selectablePostion = selectable.transform.localPosition;
                 float distance = Vector3.Distance(selectablePostion, topLeft);
                 if (selectable.interactable && distance < shortestDistanceFromTopLeft)
                 {

@@ -13,18 +13,32 @@ namespace TCD.Zones
         {
             Zone blueprint = Assets.Get<Zone>(blueprintName);
             IZoneParams zoneParams = Assets.Get<IZoneParams>(blueprint.zoneParamsName);
-            ZoneEnvironments zoneEnvironments = Assets.Get<ZoneEnvironments>(blueprint.zoneEnvironmentsName);
-            if (zoneEnvironments.environments.Count == 0)
-                SetupZoneEnvironments(zoneEnvironments);
-            ZoneTerrain zoneTerrain = Assets.Get<ZoneTerrain>(blueprintName);
-            ZoneEncounters zoneEncounters = (ZoneEncounters) Assets.Get<ZoneEncounters>(blueprint.zoneEncountersName).Clone();
-            zoneEncounters.density = blueprint.encounterDensity;
-            zoneEncounters.BuildEncounters();
+
             currentZone = new Zone(zoneParams);
-            currentZone.cinematicName = blueprint.cinematicName;
-            currentZone.ZoneEnvironments = zoneEnvironments;
+
+            if (!string.IsNullOrEmpty(blueprint.zoneEnvironmentsName))
+            {
+                ZoneEnvironments zoneEnvironments = Assets.Get<ZoneEnvironments>(blueprint.zoneEnvironmentsName);
+                if (zoneEnvironments.environments.Count == 0)
+                    SetupZoneEnvironments(zoneEnvironments);
+                currentZone.ZoneEnvironments = zoneEnvironments;
+            }
+
+            ZoneTerrain zoneTerrain = Assets.Get<ZoneTerrain>(blueprintName);
             currentZone.ZoneTerrain = zoneTerrain;
-            currentZone.ZoneEncounters = zoneEncounters;
+
+
+            if (!string.IsNullOrEmpty(blueprint.zoneEncountersName))
+            {
+                ZoneEncounters zoneEncounters = (ZoneEncounters)Assets.Get<ZoneEncounters>(blueprint.zoneEncountersName).Clone();
+                zoneEncounters.density = blueprint.encounterDensity;
+                zoneEncounters.BuildEncounters();
+                currentZone.ZoneEncounters = zoneEncounters;
+            }
+
+            currentZone.cinematicName = blueprint.cinematicName;
+            currentZone.CustomGeneratorMachineNames = blueprint.CustomGeneratorMachineNames;
+
             return currentZone;
         }
 

@@ -30,7 +30,7 @@ namespace TCD.Objects.Parts
         {
             Item item = parent.Parts.Get<Item>();
             BaseObject obj = item.Owner;
-            if (obj.Parts.TryGet(out Resources resources))
+            if (item.inventory.TryRemoveItem(parent) && obj.Parts.TryGet(out Resources resources))
             {
                 resources.ModifyResource(Resource.Hitpoints, Heal);
                 if (obj == PlayerInfo.currentPlayer)

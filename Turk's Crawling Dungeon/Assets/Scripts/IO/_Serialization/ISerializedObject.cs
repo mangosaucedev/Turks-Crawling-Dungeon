@@ -9,6 +9,8 @@ namespace TCD.IO.Serialization
     {
         Guid Guid { get; set; }
 
-        bool Load();
+        object Save();
+
+        bool Load(object savedObject);
     }
 }

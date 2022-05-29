@@ -12,7 +12,7 @@ using TCD.UI;
 
 namespace TCD.Zones
 {
-    public class ZoneGeneratorManager : MonoBehaviour, IZoneGenerator
+    public class ZoneGeneratorManager : MonoBehaviour
     {
         private bool isGeneratingZone;
         private ZoneGeneratorType currentType;
@@ -36,7 +36,7 @@ namespace TCD.Zones
                 this.EnsureCoroutineStopped(ref generationRoutine);
                 currentType = zone.ZoneParams.Type;
                 currentZone = zone;
-                generationRoutine = StartCoroutine(GenerateZoneRoutine());
+                generationRoutine = StartCoroutine(GenerateZoneRoutine(currentType, currentZone));
             }
         }
 
@@ -48,11 +48,11 @@ namespace TCD.Zones
                 this.EnsureCoroutineStopped(ref generationRoutine);
                 currentType = ZoneGeneratorType.Generic;
                 currentZone = dungeon.Zones[zoneIndex];
-                yield return generationRoutine = StartCoroutine(GenerateZoneRoutine());
+                yield return generationRoutine = StartCoroutine(GenerateZoneRoutine(currentType, currentZone));
             }
         }
 
-        public IEnumerator GenerateZoneRoutine()
+        public IEnumerator GenerateZoneRoutine(ZoneGeneratorType currentType = ZoneGeneratorType.Generic, IZone currentZone = null)
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -70,7 +70,7 @@ namespace TCD.Zones
                     break;
             }
 
-            CurrentZoneInfo.zone = currentZone == null ? ZoneFactory.BuildFromBlueprint(zoneName) : currentZone;
+            CurrentZoneInfo.zone = currentZone == null ? currentZone = ZoneFactory.BuildFromBlueprint(zoneName) : currentZone;
             InitializePreZoneStructures();
 
             ZoneGenerator zoneGenerator = null;
@@ -82,6 +82,13 @@ namespace TCD.Zones
                 default:
                     zoneGenerator = new GenericZoneGenerator();
                     break;
+            }
+
+            if (currentZone.GetCustomGeneratorMachines().Count > 0)
+            {
+                zoneGenerator = new CustomZoneGenerator();
+                foreach (var generatorMachine in currentZone.GetCustomGeneratorMachines())
+                    zoneGenerator.machines.Enqueue(generatorMachine);
             }
             
             yield return GenerateOperationRoutine(zoneGenerator);

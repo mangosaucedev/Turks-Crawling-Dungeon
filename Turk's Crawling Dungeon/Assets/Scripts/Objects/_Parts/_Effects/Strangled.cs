@@ -20,7 +20,7 @@ namespace TCD.Objects.Parts.Effects
         {
             if (e.Id == BeforeMoveEvent.id)
                 return false;
-            if (e is GetResourceRegenEvent)
+            if (e.Id == GetResourceRegenEvent.id)
                 OnGetResourceRegen((GetResourceRegenEvent)(LocalEvent)e);
             return base.HandleEvent(e);
         }

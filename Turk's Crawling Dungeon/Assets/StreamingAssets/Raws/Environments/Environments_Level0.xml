@@ -22,7 +22,7 @@
 			<Furnishing Name="WaterFull" Category="Lake" Weight="8"/>
 			<Furnishing Name="AcidFull" Category="Lake"/>
 			<Furnishing Name="EyeTv" Category="Random"/>
-			<Furnishing Name="TurkVessel" Category="Random" Weight="2"/>
+			<Furnishing Name="TurkVessel" Category="Random" Weight="8"/>
 			<Furnishing Name="TurkArm" Category="Random" Weight="2"/>
 		</Furnishings>
 	</Environment>

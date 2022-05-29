@@ -26,5 +26,9 @@
 	<Color Name="Black" Symbol="K">#000000</Color>
 	
 	<Color Name="Gold" Symbol="Au">#FFC527</Color>
+
+  <Color Name="Red" Symbol="R">#FF0000</Color>
+  
+  <Color Name="Lulu" Symbol="Lu">#ca2c92</Color>
 	
 </Colors>

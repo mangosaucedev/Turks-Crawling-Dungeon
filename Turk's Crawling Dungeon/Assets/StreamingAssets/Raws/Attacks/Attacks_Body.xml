@@ -9,11 +9,27 @@
 		<DamageType>Blunt</DamageType>
 	</Attack>
 
+  <Attack Name="WeakBite">
+    <Verb>bite</Verb>
+    <VerbPastTense>bit</VerbPastTense>
+    <MinDamage>7</MinDamage>
+    <MaxDamage>18</MaxDamage>
+    <DamageType>Pierce</DamageType>
+  </Attack>
+
+  <Attack Name="WeakSlash">
+    <Verb>slash</Verb>
+    <VerbPastTense>slashed</VerbPastTense>
+    <MinDamage>5</MinDamage>
+    <MaxDamage>21</MaxDamage>
+    <DamageType>Cut</DamageType>
+  </Attack>
+  
 	<Attack Name="UnarmedClaw">
 		<Verb>claw</Verb>
 		<VerbPastTense>clawed</VerbPastTense>
 		<MinDamage>10</MinDamage>
-		<MaxDamage>20</MaxDamage>
+		<MaxDamage>21</MaxDamage>
 		<DamageType>Cut</DamageType>
 	</Attack>
 		

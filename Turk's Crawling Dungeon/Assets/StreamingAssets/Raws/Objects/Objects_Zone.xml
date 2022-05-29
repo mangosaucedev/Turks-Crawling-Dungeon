@@ -17,7 +17,11 @@
 			<Var Name="OccludesLineOfSight">True</Var>
 		</Part>
 
-		<Part Name="Invulnerable"/>
+    <Part Name="Invulnerable"/>
+    
+    <Part Name="Wall"/>
+
+    <RemovePart Name="Visible"/>
 		
 	</Object>
 

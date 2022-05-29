@@ -48,5 +48,32 @@
 		</OverridePart>
 
 	</Object>
+
+  <Object Name="EvergladesTreeWall0" InheritsFrom="Wall">
+
+    <OverridePart Name="Render">
+      <Var Name="DisplayName">Tree</Var>
+      <Var Name="DisplayNamePlural">Trees</Var>
+      <Var Name="Description">A thick-trunked tree.</Var>
+      <Var Name="Sprite">EvergladesTreeWall0</Var>
+    </OverridePart>
+
+  </Object>
+
+  <Object Name="EvergladesTreeWall1" InheritsFrom="EvergladesTreeWall0">
+
+    <OverridePart Name="Render">
+      <Var Name="Sprite">EvergladesTreeWall1</Var>
+    </OverridePart>
+
+  </Object>
+
+  <Object Name="EvergladesTreeWall2" InheritsFrom="EvergladesTreeWall0">
+
+    <OverridePart Name="Render">
+      <Var Name="Sprite">EvergladesTreeWall2</Var>
+    </OverridePart>
+
+  </Object>
 	
 </Objects>

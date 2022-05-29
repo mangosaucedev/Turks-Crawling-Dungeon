@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Attacks>
+  
+  <!-- Slash -->
 
 	<Attack Name="Tier0Slash">
 		<Verb>slash</Verb>
@@ -9,14 +11,16 @@
 		<DamageType>Cut</DamageType>
 	</Attack>
 
-	<Attack Name="Tier0Shank">
-		<Verb>shank</Verb>
-		<VerbPastTense>shanked</VerbPastTense>
-		<MinDamage>15</MinDamage>
-		<MaxDamage>22</MaxDamage>
-		<DamageType>Pierce</DamageType>
-	</Attack>
-
+  <Attack Name="Tier1Slash">
+    <Verb>slash</Verb>
+    <VerbPastTense>slashed</VerbPastTense>
+    <MinDamage>25</MinDamage>
+    <MaxDamage>35</MaxDamage>
+    <DamageType>Cut</DamageType>
+  </Attack>
+  
+  <!-- Bludgeon -->
+  
 	<Attack Name="Tier0Bludgeon">
 		<Verb>bludgeon</Verb>
 		<VerbPastTense>bludgeoned</VerbPastTense>
@@ -25,13 +29,31 @@
 		<DamageType>Blunt</DamageType>
 	</Attack>
 
-	<Attack Name="Tier1Slash">
-		<Verb>slash</Verb>
-		<VerbPastTense>slashed</VerbPastTense>
-		<MinDamage>25</MinDamage>
-		<MaxDamage>35</MaxDamage>
-		<DamageType>Cut</DamageType>
-	</Attack>
+  <Attack Name="Tier0.5Bludgeon">
+    <Verb>bludgeon</Verb>
+    <VerbPastTense>bludgeoned</VerbPastTense>
+    <MinDamage>18</MinDamage>
+    <MaxDamage>26</MaxDamage>
+    <DamageType>Blunt</DamageType>
+  </Attack>
+
+  <Attack Name="Tier1Bludgeon">
+    <Verb>bludgeon</Verb>
+    <VerbPastTense>bludgeoned</VerbPastTense>
+    <MinDamage>20</MinDamage>
+    <MaxDamage>30</MaxDamage>
+    <DamageType>Blunt</DamageType>
+  </Attack>
+  
+  <!-- Shank -->
+
+  <Attack Name="Tier0Shank">
+    <Verb>shank</Verb>
+    <VerbPastTense>shanked</VerbPastTense>
+    <MinDamage>15</MinDamage>
+    <MaxDamage>22</MaxDamage>
+    <DamageType>Pierce</DamageType>
+  </Attack>
 
 	<Attack Name="Tier1Shank">
 		<Verb>shank</Verb>
@@ -41,12 +63,6 @@
 		<DamageType>Pierce</DamageType>
 	</Attack>
 
-	<Attack Name="Tier1Bludgeon">
-		<Verb>bludgeon</Verb>
-		<VerbPastTense>bludgeoned</VerbPastTense>
-		<MinDamage>20</MinDamage>
-		<MaxDamage>30</MaxDamage>
-		<DamageType>Blunt</DamageType>
-	</Attack>
+
 		
 </Attacks>

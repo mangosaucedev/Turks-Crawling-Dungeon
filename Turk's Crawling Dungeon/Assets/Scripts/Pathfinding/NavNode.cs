@@ -10,6 +10,8 @@ namespace TCD.Pathfinding
         public int gCost;
         public int hCost;
         public NavNode parent;
+        
+        private readonly object _lock = new object();
 
         public int HeapIndex { get; set; }
 
@@ -26,34 +28,43 @@ namespace TCD.Pathfinding
 
         public List<NavNode> GetNeighbors()
         {
-            List<NavNode> neighbors = new List<NavNode>();
+            lock (_lock)
+            {
+                List<NavNode> neighbors = new List<NavNode>();
 
-            for (int xoffset = -1; xoffset <= 1; xoffset++)
-                for (int yoffset = -1; yoffset <= 1; yoffset++)
-                {
-                    Vector2Int checkPosition = new Vector2Int(position.x + xoffset, position.y + yoffset);
-                    if (checkPosition == position || !NavGrid.Current.IsWithinBounds(checkPosition))
-                        continue;
-                    NavNode node = NavGrid.Current[checkPosition];
-                    neighbors.Add(node);
-                }
+                for (int xoffset = -1; xoffset <= 1; xoffset++)
+                    for (int yoffset = -1; yoffset <= 1; yoffset++)
+                    {
+                        Vector2Int checkPosition = new Vector2Int(position.x + xoffset, position.y + yoffset);
+                        if (checkPosition == position || !NavGrid.Current.IsWithinBounds(checkPosition))
+                            continue;
+                        NavNode node = NavGrid.Current[checkPosition];
+                        neighbors.Add(node);
+                    }
 
-            return neighbors;
+                return neighbors;
+            }
         }
 
         public void ResetCost()
         {
-            parent = null;
-            hCost = 0;
-            gCost = 0;
+            lock (_lock)
+            {
+                parent = null;
+                hCost = 0;
+                gCost = 0;
+            }
         }
 
         public int CompareTo(NavNode other)
         {
-            int comparison = FCost.CompareTo(other.FCost);
-            if (comparison == 0)
-                comparison = hCost.CompareTo(other.hCost);
-            return -comparison;
+            lock (_lock)
+            {
+                int comparison = FCost.CompareTo(other.FCost);
+                if (comparison == 0)
+                    comparison = hCost.CompareTo(other.hCost);
+                return -comparison;
+            }
         }
     }
 }

@@ -9,12 +9,21 @@ namespace TCD.Objects
     [Serializable]
     public class BaseObject : MonoBehaviour, ILocalEventHandler
     {
+        public static HashSet<BaseObject> allObjects = new HashSet<BaseObject>();
+        public static HashSet<BaseObject> enabledObjects = new HashSet<BaseObject>();
+
+        public Guid id = Guid.NewGuid();
         public CellObject cell;
         public Deactivator deactivator;
         public Transform partsParent;
         public LocalVarCollection localVars = new LocalVarCollection();
 
         [SerializeField] private SpriteRenderer spriteRenderer;
+
+#if UNITY_EDITOR
+        [Header("Debug Info")]
+        [SerializeField] private Vector2Int position;
+#endif
 
         private PartCollection parts;
 
@@ -44,6 +53,35 @@ namespace TCD.Objects
             deactivator = new Deactivator(this);
             if (!partsParent)
                 FindPartsParentTransform();
+            allObjects.Add(this);
+        }
+
+        private void Start()
+        {
+            Parts.Initialize();
+        }
+
+        private void OnEnable()
+        {
+            ObjectUtility.Add(this);
+            enabledObjects.Add(this);
+#if UNITY_EDITOR
+            cell.SetPositionEvent += c => { position = c.Position; };
+#endif
+        }
+
+        private void OnDisable()
+        {
+            ObjectUtility.Remove(id);
+            enabledObjects.Remove(this);
+#if UNITY_EDITOR
+            cell.SetPositionEvent -= c => { position = c.Position; };
+#endif
+        }
+
+        private void OnDestroy()
+        {
+            allObjects.Remove(this);
         }
 
         private void FindPartsParentTransform()

@@ -1,0 +1,16 @@
+{
+    "dialogue": [
+        {
+            "name": "RenShadow0",
+            "text": "",
+            "speakerName": "Ren",
+            "oneShot": "false",
+            "transitions": {
+                "transitions": []
+            },
+            "choices": {
+                "choices": []
+            }
+        }
+    ]
+}

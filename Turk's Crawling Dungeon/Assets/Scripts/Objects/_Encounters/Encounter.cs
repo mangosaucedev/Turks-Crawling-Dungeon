@@ -17,13 +17,52 @@ namespace TCD.Objects.Encounters
         public bool exclusive;
         public List<EncounterObject> objects = new List<EncounterObject>();
 
+        private List<BaseObject> lastBuiltObjects = new List<BaseObject>();
+
+        public List<BaseObject> BuildObjects(Vector2Int position)
+        {
+            lastBuiltObjects.Clear();
+
+            foreach (EncounterObject obj in GetForcedObjects())
+                BuildObject(obj, position);
+
+            var randomObjs = GetRandomItems();
+            foreach (var randomObj in randomObjs)
+            {
+                if (randomObj != null)
+                    BuildObject(randomObj, position);
+            }
+
+            return lastBuiltObjects;
+        }
+
+        public List<BaseObject> BuildForcedObjects(Vector2Int position)
+        {
+            lastBuiltObjects.Clear();
+
+            foreach (EncounterObject obj in GetForcedObjects())
+                BuildObject(obj, position);
+
+            return lastBuiltObjects;
+        }
+
+        private void BuildObject(EncounterObject encounterObject, Vector2Int position)
+        {
+            List<string> objects = encounterObject.GetObjects();
+            foreach (string obj in objects)
+                lastBuiltObjects.Add(ObjectFactory.BuildFromBlueprint(obj, position));
+        }
+
         public void BuildAtPosition(Vector2Int position)
         {
             foreach (EncounterObject obj in GetForcedObjects())
                 PlaceObjectRandomly(obj, position);
-            EncounterObject randomObj = GetRandomObject();
-            if (randomObj != null)
-                PlaceObjectRandomly(randomObj, position);
+            var randomObjs = GetRandomItems();
+            foreach (var randomObj in randomObjs)
+            {
+                if (randomObj != null)
+                    PlaceObjectRandomly(randomObj, position);
+            }
         }
 
         private List<EncounterObject> GetForcedObjects()
@@ -85,8 +124,9 @@ namespace TCD.Objects.Encounters
             }
         }
 
-        private EncounterObject GetRandomObject()
+        private List<EncounterObject> GetRandomItems()
         {
+            List<EncounterObject> items = new List<EncounterObject>();
             using (GrabBag<EncounterObject> bag = new GrabBag<EncounterObject>())
             {
                 foreach (EncounterObject obj in objects)
@@ -94,8 +134,15 @@ namespace TCD.Objects.Encounters
                     if (RandomInfo.Random.Next(100) <= obj.chanceIn100)
                         bag.AddItem(obj, 1);
                 }
-                return bag.Grab();
+                if (bag.Count > 1)
+                {
+                    for (int i = 0; i < RandomInfo.Random.Next(1, bag.Count); i++)
+                        items.Add(bag.Grab());
+                } 
+                else
+                    items.Add(bag.Grab());
             }
+            return items;
         }
 
         public object Clone()

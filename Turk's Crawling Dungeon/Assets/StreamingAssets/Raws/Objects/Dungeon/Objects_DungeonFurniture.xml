@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Objects>
+
+	<Object Name="OldCabinet" InheritsFrom="Container">
+		
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Cabinet</Var>
+			<Var Name="DisplayNamePlural">Cabinets</Var>
+			<Var Name="Description">An old cabinet.</Var>
+			<Var Name="Sprite">OldCabinet</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="OldSmallTable0" InheritsFrom="Furniture">
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Small Table</Var>
+			<Var Name="DisplayNamePlural">Small Tables</Var>
+			<Var Name="Description">An old, small table.</Var>
+			<Var Name="Sprite">OldSmallTable0</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="OldSmallTable1" InheritsFrom="OldSmallTable0">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">OldSmallTable1</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="OldSurface" InheritsFrom="Container">
+
+		<OverridePart Name="Render">
+			<Var Name="Sprite">OldSurface</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="BronzeChair" InheritsFrom="Furniture">
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Bronze Chair</Var>
+			<Var Name="DisplayNamePlural">Bronze Chairs</Var>
+			<Var Name="Description">A chair with bronze detailing.</Var>
+			<Var Name="Sprite">BronzeChair</Var>
+		</OverridePart>
+
+	</Object>
+
+	<Object Name="Barrel0" InheritsFrom="Container">
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Barrel</Var>
+			<Var Name="DisplayNamePlural">Barrels</Var>
+			<Var Name="Description">An old barrel.</Var>
+			<Var Name="Sprite">Barrel</Var>
+		</OverridePart>
+
+	</Object>
+
+</Objects>

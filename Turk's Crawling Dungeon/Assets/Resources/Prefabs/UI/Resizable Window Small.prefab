@@ -226,6 +226,7 @@ GameObject:
   - component: {fileID: 6406104046738149074}
   - component: {fileID: 6115468305407462756}
   - component: {fileID: 522145278513999804}
+  - component: {fileID: 2393938140981049923}
   m_Layer: 5
   m_Name: Resizable Window Small
   m_TagString: Untagged
@@ -276,15 +277,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.002017321, g: 0.003921569, b: 0.039215688, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 833b0e8a7f8f22f4594737e1519810c1, type: 3}
-  m_Type: 2
+  m_Sprite: {fileID: 21300000, guid: 5c1c41c0f90be524690ff58e1bbaf05d, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -362,6 +363,19 @@ MonoBehaviour:
   canvasGroup: {fileID: 6115468305407462756}
   refreshOnStart: 1
   refreshOnUpdate: 0
+--- !u!114 &2393938140981049923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6406104046738149084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!1 &6406104047788859439
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,7 +538,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: d9757fab72d365a4a9cf5b36e708e66d, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -642,7 +656,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: d9757fab72d365a4a9cf5b36e708e66d, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -33,7 +33,8 @@ namespace TCD
             if (Embark.ChosenCampaign != null)
                 CampaignHandler.StartCampaign(Embark.ChosenCampaign);
             else
-                ZoneResetter.ResetZone(false);
+                TCDGame.StartNewGame();
+                //ZoneResetter.ResetZone(false);
             PlayerInfo.currentPlayer.gameObject.SetActive(true);
             PlayerUtility.ApplyEmbarkProfile();
         }    

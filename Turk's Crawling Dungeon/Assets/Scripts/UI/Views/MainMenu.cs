@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using RedBlueGames.Tools.TextTyper;
 using TCD.Zones;
 using TCD.Zones.Dungeons;
 
@@ -8,14 +10,17 @@ namespace TCD.UI
 {
     public class MainMenu : ViewController
     {
+        [Header("Cache")]
         [SerializeField] private GameObject developerToolsButton;
+        [SerializeField] private TextTyper titleTyper;
 
         protected override string ViewName => gameObject.name;
 
         private void Start()
         {
-            if ((bool) GlobalVars.Get("bool_DeveloperMode"))
-                developerToolsButton.SetActive(true);
+            titleTyper.TypeText("TURK'S\nCRAWLING\nDUNGEON", 0.08f);
+            //if ((bool) GlobalVars.Get("bool_DeveloperMode"))
+            //    developerToolsButton.SetActive(true);
         }
 
         public void Continue()
@@ -43,5 +48,16 @@ namespace TCD.UI
         }
 
         public void ExitToDesktop() => TCDGame.ExitToDesktop();
+
+
+        public void OnPrintCompleted()
+        {
+
+        }
+
+        public void OnCharacterPrinted()
+        {
+
+        }
     }
 }

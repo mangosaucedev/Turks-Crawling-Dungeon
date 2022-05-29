@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Objects>
+
+	<Object Name="TeratomaWall" InheritsFrom="Enemy">
+
+		<OverridePart Name="Resources">
+			<Var Name="Hitpoints">100</Var>
+		</OverridePart>
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Teratoma</Var>
+			<Var Name="DisplayNamePlural">Teratomas</Var>
+			<Var Name="Description">A cavern of wet flesh bristling with sharp teeth.</Var>
+			<Var Name="Sprite">TeratomaWall</Var>
+      <Var Name="RenderOrder">7</Var>
+		</OverridePart>
+
+    <RemovePart Name="Movement"/>
+
+	</Object>
+	
+</Objects>

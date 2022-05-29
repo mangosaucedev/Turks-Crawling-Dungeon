@@ -11,9 +11,7 @@ namespace TCD.Cinematics.Dialogues
         public string text;
         public GoToCollection transitions;
 
-        public Dialogue GetTransition()
-        {
-            return null;
-        }
+        public Dialogue GetTransition() => Assets.Get<Dialogue>(transitions.GetTransition().node);
+        
     }
 }

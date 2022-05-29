@@ -9,5 +9,9 @@ namespace TCD
         Random,
         Start,
         Final,
+        StartPlusOne,
+        FinalMinusOne,
+        StartPlusTwo,
+        FinalMinusTwo
     }
 }

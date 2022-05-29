@@ -31,15 +31,16 @@ namespace TCD.Objects.Parts.Effects
 
         public override bool HandleEvent<T>(T e)
         {
-            if (e is GetResourceRegenEvent)
+            if (e.Id == GetResourceRegenEvent.id)
                 OnGetResourceRegen((GetResourceRegenEvent)(LocalEvent)e);
             return base.HandleEvent(e);
         }
 
         private void OnGetResourceRegen(GetResourceRegenEvent e)
         {
-            if (e.resource == Resource.Hitpoints)
-                e.amount *= Lifeblood.GetHealingMultiplier(level);
+            if (e.resource != Resource.Hitpoints)
+                return;
+            e.amount *= Lifeblood.GetHealingMultiplier(level);
         }
     }
 }

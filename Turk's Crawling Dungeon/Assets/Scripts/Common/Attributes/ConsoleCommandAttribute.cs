@@ -9,10 +9,12 @@ namespace TCD
     public class ConsoleCommandAttribute : Attribute
     {
         public string command;
+        public bool closeViews;
 
-        public ConsoleCommandAttribute(string command)
+        public ConsoleCommandAttribute(string command, bool closeViews = false)
         { 
             this.command = command;
+            this.closeViews = closeViews;
         }
     }
 }

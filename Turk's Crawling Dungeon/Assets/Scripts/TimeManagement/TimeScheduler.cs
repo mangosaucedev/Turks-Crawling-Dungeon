@@ -4,6 +4,8 @@ using UnityEngine;
 using TCD.Inputs;
 using TCD.Objects;
 using TCD.Objects.Parts;
+using TCD.Pathfinding;
+using TCD.Threading;
 
 namespace TCD.TimeManagement
 {
@@ -13,6 +15,8 @@ namespace TCD.TimeManagement
         public static int timeElapsedLastTurn;
         private static List<Actor> actors = new List<Actor>();
         private static Actor currentActor;
+
+        public readonly object _lock = new object();
 
         public static bool AddActor(Actor actor)
         {
@@ -36,14 +40,29 @@ namespace TCD.TimeManagement
 
         public static void Tick(int timeElapsedThisTurn)
         {
-            MessageLog.Add("--- end turn ---");
-            EventManager.Send(new BeforeTurnTickEvent(timeElapsedThisTurn));
-            PassTime(timeElapsedThisTurn);
-            if (actors.Count > 0)
-                UpdateActors();
-            ActionScheduler.PerformQueue();
-            ObjectCuller.PerformCulling();
-            EventManager.Send(new AfterTurnTickEvent(timeElapsedThisTurn));
+            lock (ServiceLocator.Get<TimeScheduler>()._lock)
+            {
+                MessageLog.Add("--- end turn ---");
+                EventManager.Send(new BeforeTurnTickEvent(timeElapsedThisTurn));
+                PassTime(timeElapsedThisTurn);
+
+                if (actors.Count > 0)
+                    UpdateActors();
+
+                //DebugLogger.Log("[Time] - Waiting for threads to join.");
+                //JobManager.WaitFor(JobGroup.Pathfinding);
+                //JobManager.WaitFor(JobGroup.Fluid);
+
+                //DebugLogger.Log("[Time] - Threads joined. Pathfinding manager outputting paths...");
+                //ServiceLocator.Get<PathfindingManager>().OutputPaths();
+
+                DebugLogger.Log("[Time] - Performing action queue.");
+                ActionScheduler.PerformQueue();
+                DebugLogger.Log("[Time] - Action queue performed. Culling objects.");
+                ObjectCuller.PerformCulling();
+                EventManager.Send(new AfterTurnTickEvent(timeElapsedThisTurn));
+                DebugLogger.Log("[Time] - Turn processed!");
+            }
         }
 
         private static void UpdateActors()

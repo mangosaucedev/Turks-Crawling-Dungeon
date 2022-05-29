@@ -12,14 +12,8 @@ namespace TCD
 
         private static LocalEventPool pool = new LocalEventPool();
 
-        public int uid;
-
         public abstract string Id { get; }
 
-        public LocalEvent()
-        {
-            uid = Random.Range(100000000, 999999999);
-        }
 
         public static T Get<T>() where T : LocalEvent, new() =>
             pool.Get<T>();

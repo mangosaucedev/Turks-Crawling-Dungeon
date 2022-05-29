@@ -1,6 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 
 namespace TCD.Objects.Parts
@@ -16,10 +16,11 @@ namespace TCD.Objects.Parts
         [SerializeField] private string faction;
 
         public AIQuery query;
-        public GoalCollection goals;
+        
+        private GoalCollection goals;
+
 #if UNITY_EDITOR
         [Header("Debug Info")]
-        public List<Vector2Int> path = new List<Vector2Int>();
         [SerializeField] private string currentGoal;
         [SerializeField, TextArea(3,5)] private string currentGoalStatus;
 #endif
@@ -28,6 +29,8 @@ namespace TCD.Objects.Parts
 
         [Header("Energy")]
         [SerializeField] private int energy;
+
+        public int Count => goals.Count;
 
         public int SightRadius
         {
@@ -50,6 +53,12 @@ namespace TCD.Objects.Parts
             base.Awake();
             goals = new GoalCollection(this);
             query = new AIQuery(this);
+        }
+
+        private void OnDestroy()
+        {
+            while (goals.Count > 0)
+                Pop();
         }
 
         public override bool HandleEvent<T>(T e)
@@ -79,7 +88,28 @@ namespace TCD.Objects.Parts
         private void PopFinishedGoals()
         {
             while (goals.Count > 0 && goals.Peek().IsFinished())
-                goals.Pop();
+                Pop();
+        }
+
+        public void Push(Goal goal)
+        {
+            goals.Push(goal);
+            GoalUtility.Add(goal, goal.id);
+        }
+
+        public void Pop()
+        {
+            if (goals.Count == 0)
+                return;
+            var goal = goals.Pop();
+            GoalUtility.Remove(goal.id);
+        }
+
+        public Goal Peek()
+        {
+            if (Count == 0)
+                return null;
+            return goals.Peek();
         }
 
         private void PerformSequentialActions()
@@ -125,7 +155,6 @@ namespace TCD.Objects.Parts
         {
             currentGoal = CurrentGoal?.GetType().Name;
             GetCurrentGoalStatus();
-            TryUpdatePath();
         }
         
         private void GetCurrentGoalStatus()
@@ -133,22 +162,6 @@ namespace TCD.Objects.Parts
             currentGoalStatus = $"Current Goal is null? ({CurrentGoal == null}) | " +
                                 $"Current Goal is MoveTo? ({CurrentGoal is MoveTo})";
         }
-
-        private void TryUpdatePath()
-        {
-            try
-            {
-                if (CurrentGoal != null && CurrentGoal is MoveTo)
-                    UpdatePath((MoveTo)CurrentGoal);
-            }
-            catch (Exception e)
-            {
-                ExceptionHandler.Handle(new BrainException(
-                    this, $"{parent.GetDisplayName()} could not update path debug info: {e.Message}"));
-            }
-        }
-
-        private void UpdatePath(MoveTo goal) => path = goal.path?.path; 
 #endif
     }
 }

@@ -45,7 +45,7 @@ namespace TCD
             if (State == loading)
                 return false;
             CinematicManager cinematicManager = ServiceLocator.Get<CinematicManager>();
-            return cinematicManager.currentCinematic != null;
+            return cinematicManager.CurrentCinematic != null;
         }
     }
 }

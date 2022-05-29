@@ -6,24 +6,14 @@
 		<Furnishers>
 			<Furnisher Name="TableAndChairs" Weight="2"/>
 			<Furnisher Name="RandomFurniture" Weight="4"/>
-			<Furnisher Name="Bush"/>
-			<Furnisher Name="Lake"/>
 		</Furnishers>
 		<Furnishings>
-			<Furnishing Name="GenericTable" Category="Table,Random"/>
-			<Furnishing Name="GenericChair" Category="Chair,Random"/>
-			<Furnishing Name="DeadBush" Category="Bush"/>
-			<Furnishing Name="RoseThorns" Category="Bush"/>
-			<Furnishing Name="DeadGrassLarge" Category="Bush"/>
-			<Furnishing Name="DeadGrassMedium" Category="Bush"/>
-			<Furnishing Name="DeadTree0" Category="Bush"/>
-			<Furnishing Name="DeadTree1" Category="Bush"/>
-			<Furnishing Name="DeadTree2" Category="Bush"/>
-			<Furnishing Name="WaterFull" Category="Lake" Weight="8"/>
-			<Furnishing Name="AcidFull" Category="Lake"/>
-			<Furnishing Name="EyeTv" Category="Random" Weight="2"/>
-			<Furnishing Name="TurkVessel" Category="Random" Weight="2"/>
-			<Furnishing Name="TurkArm" Category="Random" Weight="2"/>
+			<Furnishing Name="OldSmallTable0" Category="Table,Random"/>
+			<Furnishing Name="OldSmallTable1" Category="Table,Random"/>
+			<Furnishing Name="OldSurface" Category="Table,Random"/>
+			<Furnishing Name="BronzeChair" Category="Chair,Random"/>
+			<Furnishing Name="OldCabinet" Category="Random"/>
+			<Furnishing Name="Barrel0" Category="Random"/>
 		</Furnishings>
 	</Environment>
 	

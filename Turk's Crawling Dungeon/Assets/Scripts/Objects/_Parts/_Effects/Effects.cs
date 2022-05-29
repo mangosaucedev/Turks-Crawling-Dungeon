@@ -161,6 +161,14 @@ namespace TCD.Objects.Parts.Effects
             return successful;
         }
 
+        public bool RemoveEffect(Effect effect)
+        {
+            if (activeEffects.Contains(effect) || !CanRemoveEffect(effect))
+                return false;
+            RemovedEffect(effect);
+            return true;
+        }
+
         private bool CanRemoveEffect(Effect effect)
         {
             BeforeEffectRemovedEvent e = LocalEvent.Get<BeforeEffectRemovedEvent>();

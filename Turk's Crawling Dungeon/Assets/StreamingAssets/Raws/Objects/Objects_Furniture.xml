@@ -75,7 +75,13 @@
 			<Var Name="BaseMaxWeight">100</Var>
 		</Part>
 
-		<Part Name="Lootable"/>
+    <Part Name="Lootable">
+      <Var Name="GenerateLoot">True</Var>
+    </Part>
+
+    <Part Name="LootGraphic">
+      <Var Name="RenderOrder">-8</Var>
+    </Part>
 		
 	</Object>
 

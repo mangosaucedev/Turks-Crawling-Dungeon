@@ -33,8 +33,9 @@ namespace TCD.Objects.Parts
         {
             if (string.IsNullOrEmpty(Corpse))
                 return;
-            GameObject corpsePrefab = Assets.Get<GameObject>(Corpse);
-            GameObject corpseObject = ObjectFactory.BuildFromPrefab(corpsePrefab, Position).gameObject;
+            BaseObject corpseObject = ObjectFactory.BuildFromBlueprint(Corpse, Position);
+            Render corpseRender = corpseObject.Parts.Get<Render>();
+            corpseRender.DisplayName = $"{parent.GetDisplayName()} Corpse";
         }
     }
 }

@@ -23,6 +23,8 @@ namespace TCD
 
         private List<Item> weightedItems = new List<Item>();
 
+        public int Count => weightedItems.Count;
+
         public void AddItem(T obj, float weight)
         {
             Item item = new Item(obj, weight);

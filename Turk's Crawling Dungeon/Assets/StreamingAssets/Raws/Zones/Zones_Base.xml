@@ -3,7 +3,7 @@
 
 	<Zone Name="Level0">
 		<Params>Generic</Params>
-		<Environments>Generic</Environments>
+		<Environments>Dungeon</Environments>
 		<Encounters Density="1.5">Generic</Encounters>
 		<Terrain>
 			<Walls>

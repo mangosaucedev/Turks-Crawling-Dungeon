@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using TCD.UI.Notifications;
 
@@ -15,6 +16,8 @@ namespace TCD
 
         public static void HandleMessage(string message)
         {
+            if (Thread.CurrentThread != TCDGame.thread)
+                return;
             DebugLogger.LogException(message);
             if (!safeMode)
                 TCDGame.ExitToDesktop();

@@ -8,22 +8,28 @@ namespace TCD.Objects.Parts
     {
         public static Dictionary<string, CinematicTarget> targets = new Dictionary<string, CinematicTarget>();
 
-        public string id;
+        public string cinematicId;
 
         public override string Name => "Cinematic Target";
+
+        public string CinematicId
+        { 
+            get => cinematicId;
+            set => cinematicId = value; 
+        }
 
         protected override void OnEnable()
         {
             base.OnEnable();
-            if (!string.IsNullOrEmpty(id))
-                targets[id] = this;
+            if (!string.IsNullOrEmpty(cinematicId))
+                targets[cinematicId] = this;
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
-            if (targets.ContainsKey(id))
-                targets.Remove(id);
+            if (targets.ContainsKey(cinematicId))
+                targets.Remove(cinematicId);
         }
     }
 }

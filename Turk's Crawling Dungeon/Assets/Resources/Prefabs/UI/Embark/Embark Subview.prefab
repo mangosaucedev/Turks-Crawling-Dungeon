@@ -79,7 +79,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '[ Next ]'
+  m_Text: '[ TAB ]'
 --- !u!114 &4995398735644784398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,7 +248,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '[ Back ]'
+  m_Text: '[ Shift + TAB ]'
 --- !u!114 &5290533365681408837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -532,7 +532,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: / Left, Right Keys to Navigate / Press Esc to Close /
+  m_Text: / Tab, Shift + Tab to Navigate / Press Esc to Close /
 --- !u!114 &8579235534702240901
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -29,6 +29,11 @@ namespace TCD.Inputs.Actions
             if (!string.IsNullOrEmpty(talent.Indicator))
                 IndicatorHandler.ShowIndicator(talent.Indicator, talent.GetRange(talent.level), true);
             PlayerActionManager playerActionManager = ServiceLocator.Get<PlayerActionManager>();
+            if (talent.UseMode == UseMode.Passive)
+            {
+                playerActionManager.CancelCurrentAction();
+                return;
+            }
             if (talent.TargetMode == TargetMode.None)
             {
                 talent.Activate();
@@ -44,8 +49,6 @@ namespace TCD.Inputs.Actions
                 playerActionManager.CancelCurrentAction();
                 EventManager.Send(new TalentUsedEvent(talent));
             }
-            if (talent.UseMode == UseMode.Passive)
-                playerActionManager.CancelCurrentAction();
         }
 
         public override void End()

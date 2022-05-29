@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ZoneParams>
+
+	<ZoneParam Name="Tutorial">
+		<Width>32</Width>
+		<Height>24</Height>
+	</ZoneParam>
+	
+</ZoneParams>

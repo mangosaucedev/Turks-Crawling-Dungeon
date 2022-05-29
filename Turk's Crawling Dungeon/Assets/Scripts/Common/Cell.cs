@@ -14,17 +14,21 @@ namespace TCD
 
         private int x;
         private int y;   
+        private readonly object _lock = new object();
         
         public List<BaseObject> Objects
         {
             get
             {
-                for (int i = objects.Count - 1; i >= 0; i--)
+                lock (_lock)
                 {
-                    if (!objects[i])
-                        objects.RemoveAt(i);
+                    for (int i = objects.Count - 1; i >= 0; i--)
+                    {
+                        if (!objects[i])
+                            objects.RemoveAt(i);
+                    }
+                    return objects;
                 }
-                return objects;
             }
         }
 
@@ -40,19 +44,25 @@ namespace TCD
             this.y = y;
         }
 
-        public bool Contains(BaseObject obj) => Objects.Contains(obj);
-
+        public bool Contains(BaseObject obj)
+        {
+            lock (_lock)
+                return Objects.Contains(obj);
+        }
         public bool Contains<T>() where T : Part => Contains(out T part);
 
         public bool Contains<T>(out T part) where T : Part
         {
-            part = null;
-            foreach (BaseObject obj in Objects)
+            lock (_lock)
             {
-                if (obj.Parts.TryGet(out part))
-                    return part;
+                part = null;
+                foreach (BaseObject obj in Objects)
+                {
+                    if (obj.Parts.TryGet(out part))
+                        return part;
+                }
+                return false;
             }
-            return false;
         }
 
         public bool Add(BaseObject obj)
@@ -71,20 +81,26 @@ namespace TCD
             return true;
         }
 
-        public bool FireEvent<T>(ILocalEventHandler target, T e) where T : LocalEvent =>
-            target.HandleEvent(e);
+        public bool FireEvent<T>(ILocalEventHandler target, T e) where T : LocalEvent
+        {
+            lock (_lock)
+                return target.HandleEvent(e);
+        }
 
         public bool HandleEvent<T>(T e) where T : LocalEvent
         {
-            bool isSuccessful = true;
-            CleanupObjectList();
-            for (int i = Objects.Count - 1; i >= 0; i--)
+            lock (_lock)
             {
-                BaseObject obj = Objects[i];
-                if (!FireEvent(obj, e))
-                    isSuccessful = false;
+                bool isSuccessful = true;
+                CleanupObjectList();
+                for (int i = Objects.Count - 1; i >= 0; i--)
+                {
+                    BaseObject obj = Objects[i];
+                    if (!FireEvent(obj, e))
+                        isSuccessful = false;
+                }
+                return isSuccessful;
             }
-            return isSuccessful;
         }
 
         private void CleanupObjectList()

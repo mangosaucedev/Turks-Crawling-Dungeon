@@ -51,7 +51,7 @@ namespace TCD.Objects.Parts
         {
             Item item = parent.Parts.Get<Item>();
             BaseObject obj = item.Owner;
-            if (obj.Parts.TryGet(out Wallet wallet))
+            if (item.inventory.TryRemoveItem(parent) && obj.Parts.TryGet(out Wallet wallet))
             {
                 wallet.AddMoney((decimal) BaseValue.RoundToDecimal(2));
                 Destroy(parent.gameObject);

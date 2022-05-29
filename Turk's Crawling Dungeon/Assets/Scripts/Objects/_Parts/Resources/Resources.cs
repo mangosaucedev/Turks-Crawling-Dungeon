@@ -272,6 +272,7 @@ namespace TCD.Objects.Parts
             GetResourceEvent e = LocalEvent.Get<GetResourceEvent>();
             e.obj = parent;
             e.resource = resource;
+            e.amount = GetBaseResource(resource);
             FireEvent(parent, e);
             return e.amount;
         }
@@ -281,32 +282,16 @@ namespace TCD.Objects.Parts
             GetMaxResourceEvent e = LocalEvent.Get<GetMaxResourceEvent>();
             e.obj = parent;
             e.resource = resource;
+            e.amount = GetBaseMaxResource(resource) ;
             FireEvent(parent, e);
             return e.amount;
         }
 
         public override bool HandleEvent<T>(T e)
         {
-            if (e.Id == GetResourceEvent.id)
-                OnGetResource(e);
-            if (e.Id == GetMaxResourceEvent.id)
-                OnGetMaxResource(e);
-            if (e.Id == GetResourceRegenEvent.id)
-                OnGetResourceRegen(e);
-            if (e.Id == GetResourceRegenPointEvent.id)
-                OnGetResourceRegenPoint(e);
             if (e.Id == ResourceModifiedEvent.id)
                 OnResourceModified(e);
             return base.HandleEvent(e);
-        }
-
-        private void OnGetResource(LocalEvent e)
-        {
-            GetResourceEvent getResourceEvent = (GetResourceEvent) e;
-            if (getResourceEvent.obj != parent)
-                return;
-            getResourceEvent.amount = GetBaseResource(getResourceEvent.resource);
-            getResourceEvent.amount = Mathf.Clamp(getResourceEvent.amount, 0, GetMaxResource(getResourceEvent.resource));
         }
 
         public float GetBaseResource(Resource resource)
@@ -319,14 +304,6 @@ namespace TCD.Objects.Parts
             return value;
         }
 
-        private void OnGetMaxResource(LocalEvent e)
-        {
-            GetMaxResourceEvent getMaxResourceEvent = (GetMaxResourceEvent) e;
-            if (getMaxResourceEvent.obj != parent)
-                return;
-            getMaxResourceEvent.amount += GetBaseMaxResource(getMaxResourceEvent.resource);
-        }
-
         public float GetBaseMaxResource(Resource resource)
         {
             if (!maxResources.TryGetValue(resource, out float value))
@@ -337,12 +314,6 @@ namespace TCD.Objects.Parts
             return value;
         }
 
-        private void OnGetResourceRegen(LocalEvent e)
-        {
-            GetResourceRegenEvent getResourceRegenEvent = (GetResourceRegenEvent) e;
-            getResourceRegenEvent.amount += GetBaseResourceRegen(getResourceRegenEvent.resource);
-        }
-
         public float GetBaseResourceRegen(Resource resource)
         {
             if (!regen.TryGetValue(resource, out float value))
@@ -351,12 +322,6 @@ namespace TCD.Objects.Parts
                 regen[resource] = value;
             }
             return value;
-        }
-
-        private void OnGetResourceRegenPoint(LocalEvent e)
-        {
-            GetResourceRegenPointEvent getResourceRegenPointEvent = (GetResourceRegenPointEvent) e;
-            getResourceRegenPointEvent.amount += GetBaseResourceRegenPoint(getResourceRegenPointEvent.resource);
         }
 
         public float GetBaseResourceRegenPoint(Resource resource)
@@ -420,6 +385,8 @@ namespace TCD.Objects.Parts
             GetResourceRegenEvent e = LocalEvent.Get<GetResourceRegenEvent>();
             e.obj = parent;
             e.resource = resource;
+            e.amount = GetBaseResourceRegen(resource);
+            e.amount = Mathf.Clamp(e.amount, 0, GetMaxResource(resource));
             FireEvent(parent, e);
             return e.amount;
         }
@@ -429,6 +396,7 @@ namespace TCD.Objects.Parts
             GetResourceRegenPointEvent e = LocalEvent.Get<GetResourceRegenPointEvent>();
             e.obj = parent;
             e.resource = resource;
+            e.amount = GetBaseResourceRegenPoint(resource);
             FireEvent(parent, e);
             return e.amount;
         }

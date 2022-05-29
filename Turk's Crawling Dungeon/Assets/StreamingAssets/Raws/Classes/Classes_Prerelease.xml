@@ -10,8 +10,10 @@
 		<TalentTree>PrereleaseBasicAthletics</TalentTree>
 		<!--
 		<TalentTree>PrereleaseBasicGrappling</TalentTree>
-		<TalentTree>PrereleaseFitness</TalentTree>
 		-->
+		
+		<TalentTree>PrereleaseFitness</TalentTree>
+		
 		<TalentTree>PrereleaseRecklessCombat</TalentTree>
 		<TalentTree>PrereleaseMangle</TalentTree>
 		<TalentTree>PrereleaseFearfulTechniques</TalentTree>

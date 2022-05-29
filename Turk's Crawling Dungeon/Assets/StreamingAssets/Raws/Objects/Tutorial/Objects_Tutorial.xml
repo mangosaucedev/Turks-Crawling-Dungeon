@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Objects>
+	
+  <!-- Characters -->
+  
+	<Object Name="TutorialNpc" InheritsFrom="Character">
+
+		<OverridePart Name="Brain">
+			<Var Name="Faction">Player</Var>
+		</OverridePart>
+		
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Lulu</Var>
+			<Var Name="DisplayNamePlural">Lulus</Var>
+			<Var Name="Description">A haggard old woman.</Var>
+			<Var Name="Sprite">Lulu</Var>
+		</OverridePart>
+
+    <Part Name="CinematicTarget">
+      <Var Name="CinematicId">Lulu</Var>
+    </Part>
+    
+    <Part Name="TutorialNpc"/>
+
+	</Object>
+
+  <!-- Walls -->
+  
+  <Object Name="TutorialWall" InheritsFrom="Wall">
+
+    <OverridePart Name="Render">
+      <Var Name="DisplayName">Marble Wall</Var>
+      <Var Name="DisplayNamePlural">Marble Walls</Var>
+      <Var Name="Description">An impeccably smooth veined marble surface.</Var>
+      <Var Name="Sprite">TutorialWall</Var>
+    </OverridePart>
+
+  </Object>
+
+  <!-- Doors -->
+
+  <Object Name="TutorialDoor" InheritsFrom="Door">
+
+    <OverridePart Name="Door">
+      <Var Name="OpenSprite">TutorialDoorOpen</Var>
+    </OverridePart>
+
+    <OverridePart Name="Render">
+      <Var Name="Sprite">TutorialDoor</Var>
+    </OverridePart>
+
+  </Object>
+
+  <Object Name="TutorialDoor0" InheritsFrom="TutorialDoor">
+
+    <Part Name="TutorialDoor0"/>
+
+  </Object>
+
+  <Object Name="TutorialDoor1" InheritsFrom="Door">
+
+    <OverridePart Name="Render">
+      <Var Name="DisplayName">Barricaded Door</Var>
+      <Var Name="DisplayNamePlural">Barricaded Doors</Var>
+      <Var Name="Description">A door barred up with solid wooden boards. It can't be opened in this state.</Var>
+      <Var Name="Sprite">TutorialDoorLocked</Var>
+    </OverridePart>
+
+    <Part Name="TutorialDoor1"/>
+
+    <RemovePart Name="Door"/>
+
+  </Object>
+  
+  
+  <!-- Items -->
+
+  <Object Name="TutorialCrowbar" InheritsFrom="TwoHandedMeleeWeapon">
+
+    <OverridePart Name="MeleeWeapon">
+      <Var Name="InitAttacks">Tier1Bludgeon:1</Var>
+    </OverridePart>
+
+    <OverridePart Name="Render">
+      <Var Name="DisplayName">Crowbar</Var>
+      <Var Name="DisplayNamePlural">Crowbars</Var>
+      <Var Name="Description">A heavy steel tool. Could be used to pry boards from a barricaded door, or to bash in a skull.</Var>
+      <Var Name="Sprite">Crowbar</Var>
+    </OverridePart>
+
+    <Part Name="CinematicTarget">
+      <Var Name="CinematicId">Crowbar</Var>
+    </Part>
+
+    <Part Name="TutorialCrowbar"/>
+
+  </Object>
+
+  <!-- Misc -->
+
+  <Object Name="TutorialCrowbarSpawner" InheritsFrom="Object">
+
+    <Part Name="TutorialCrowbarSpawner"/>
+
+    <OverridePart Name="Render">
+      <Var Name="Sprite">Empty</Var>
+    </OverridePart>
+
+  </Object>
+
+  <Object Name="TutorialPoof" InheritsFrom="Object">
+
+    <Part Name="TutorialPoof"/>
+
+    <OverridePart Name="Render">
+      <Var Name="Sprite">Poof</Var>
+    </OverridePart>
+
+  </Object>
+	
+</Objects>

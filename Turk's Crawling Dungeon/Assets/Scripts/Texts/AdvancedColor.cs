@@ -14,7 +14,7 @@ namespace TCD.Texts
             Color color = Assets.Get<Color>(colorName);
             string hex = ColorUtility.ToHtmlStringRGB(color);
             text = text.Insert(0, $"<color=#{hex}>");
-            text = text.Insert(text.Length - 1, "</color>");
+            text = text.Insert(text.Length, "</color>");
         }
     }
 }

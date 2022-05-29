@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TCD.Objects.Parts.Effects;
+using TCD.Threading;
+using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts
 {
@@ -24,6 +26,8 @@ namespace TCD.Objects.Parts
         [SerializeField] private Vector2Int tilePosition;
         [SerializeField] private List<Cell> unoccupiedAdjacentCells = new List<Cell>();
 
+        private string liquidName;
+
         public string LiquidColor
         {
             get => liquidColor;
@@ -40,6 +44,7 @@ namespace TCD.Objects.Parts
         {
             base.Start();
             Draw();
+            liquidName = parent.name;
         }
 
         protected override void OnEnable()
@@ -68,11 +73,10 @@ namespace TCD.Objects.Parts
                 return;
             }
             float flowMultiplier = e.timeElapsed / TimeInfo.TIME_PER_STANDARD_TURN;
-            if (FlowToAdjacentCells(flowMultiplier))
-                isFlowing = true;
+            new FluidFlowJob(id, flowMultiplier).Execute();
         }
 
-        private bool FlowToAdjacentCells(float flowMultiplier)
+        public bool FlowToAdjacentCells(float flowMultiplier)
         {
             GetUnoccupiedAdjacentCells();
             if (unoccupiedAdjacentCells.Count == 0)
@@ -116,21 +120,33 @@ namespace TCD.Objects.Parts
                 liquid.AdjustDepth(flowAmount);
                 return;
             }
+
+            ActionScheduler.EnqueueAction(parent, () => { ScheduledFlowToCell(cell, flowAmount); });
+        }
+
+        private void ScheduledFlowToCell(Cell cell, float flowAmount)
+        {
             Vector2Int position = cell.Position;
-            BaseObject liquidObject = ObjectFactory.BuildFromBlueprint(parent.name, position);
-            liquid = liquidObject.Parts.Get<Liquid>();
+            BaseObject liquidObject = ObjectFactory.BuildFromBlueprint(liquidName, position);
+            Liquid liquid = liquidObject.Parts.Get<Liquid>();
             liquid.SetDepth(flowAmount);
         }
 
-        public void AdjustDepth(float amount) => SetDepth(Depth + amount);
-        
+        public void AdjustDepth(float amount)
+        {
+            lock (this)
+            {
+                SetDepth(Depth + amount);
+            }
+        }
+
         public void SetDepth(float amount)
         {
             Depth = Mathf.Clamp(amount, 0, MAX_DEPTH);
             if (Depth <= 0)
                 parent.Destroy();
             else
-                Draw();
+                ActionScheduler.EnqueueAction(parent, Draw);
         }
 
         private void Draw()

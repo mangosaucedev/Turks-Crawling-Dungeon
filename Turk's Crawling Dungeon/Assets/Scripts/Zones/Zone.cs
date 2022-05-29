@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TCD.Cinematics;
 using TCD.Zones.Environments;
+using Environment = TCD.Zones.Environments.Environment;
 
 namespace TCD.Zones
 {
@@ -24,6 +26,8 @@ namespace TCD.Zones
         private List<ICorridor> corridors = new List<ICorridor>();
         private TGrid<ChamberCellType> cellTypes;
         private TGrid<Environment> environments;
+        private List<string> customGeneratorMachineNames = new List<string>();
+        private List<ZoneGeneratorMachine> customGeneratorMachines = new List<ZoneGeneratorMachine>();
 
         public Cinematic Cinematic
         {
@@ -37,25 +41,45 @@ namespace TCD.Zones
 
         public IZoneParams ZoneParams
         {
-            get => zoneParams;
+            get
+            {
+                if (zoneParams == null)
+                    zoneParams = Assets.Get<IZoneParams>(zoneParamsName);
+                return zoneParams;
+            }
             set => zoneParams = value;
         }
 
         public ZoneEnvironments ZoneEnvironments
         {
-            get => zoneEnvironments;
+            get
+            {
+                if (zoneEnvironments == null)
+                    zoneEnvironments = Assets.Get<ZoneEnvironments>(zoneEnvironmentsName);
+                return zoneEnvironments;
+            }
             set => zoneEnvironments = value;
         }
 
         public ZoneTerrain ZoneTerrain
         {
-            get => zoneTerrain;
+            get
+            {
+                if (zoneTerrain == null)
+                    zoneTerrain = Assets.Get<ZoneTerrain>(name);
+                return zoneTerrain;
+            }
             set => zoneTerrain = value;
         }
 
         public ZoneEncounters ZoneEncounters
         {
-            get => zoneEncounters;
+            get
+            {
+                if (zoneEncounters == null)
+                    zoneEncounters = new ZoneEncounters();
+                return zoneEncounters;
+            }
             set => zoneEncounters = value;
         }
 
@@ -69,9 +93,31 @@ namespace TCD.Zones
 
         public List<ICorridor> Corridors => corridors;
 
-        public TGrid<ChamberCellType> CellTypes => cellTypes;
+        public TGrid<ChamberCellType> CellTypes
+        {
+            get
+            {
+                if (cellTypes == null)
+                    cellTypes = new TGrid<ChamberCellType>(Width, Height);
+                return cellTypes;
+            }
+        }
 
-        public TGrid<Environment> Environments => environments;
+        public TGrid<Environment> Environments
+        {
+            get
+            {
+                if (environments == null)
+                    environments = new TGrid<Environment>(Width, Height);
+                return environments;
+            }
+        }
+
+        public List<string> CustomGeneratorMachineNames
+        {
+            get => customGeneratorMachineNames;
+            set => customGeneratorMachineNames = value;
+        }
 
         public Zone()
         {
@@ -94,6 +140,20 @@ namespace TCD.Zones
                     undesignatedFeatures.Add(feature);
             }
             return undesignatedFeatures;
+        }
+
+        public List<ZoneGeneratorMachine> GetCustomGeneratorMachines()
+        {
+            if (customGeneratorMachines.Count == 0 && CustomGeneratorMachineNames.Count > 0)
+            {
+                foreach (string name in CustomGeneratorMachineNames)
+                {
+                    Type type = TypeResolver.ResolveType("TCD.Zones." + name);
+                    ZoneGeneratorMachine generatorMachine = (ZoneGeneratorMachine) Activator.CreateInstance(type);
+                    customGeneratorMachines.Add(generatorMachine);
+                }
+            }
+            return customGeneratorMachines;
         }
     }
 }

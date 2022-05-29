@@ -86,5 +86,11 @@ namespace TCD
             zoomIndex++;
             UpdateZoom();
         }
+
+        public void ResetZoom()
+        {
+            zoomIndex = zoomSizes.Length / 2;
+            UpdateZoom();
+        }
     }
 }

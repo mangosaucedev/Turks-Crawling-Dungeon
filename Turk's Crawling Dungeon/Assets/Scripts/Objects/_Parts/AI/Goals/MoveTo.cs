@@ -1,20 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 using TCD.Pathfinding;
+using TCD.Threading;
 using TCD.TimeManagement;
 
 namespace TCD.Objects.Parts
 {
     public class MoveTo : Goal
     {
-        public NavAstarPath path;
+        public AstarPath nativePath;
 
         private Vector2Int targetPosition;
+        private ObjectPathEvaluator evaluator = new ObjectPathEvaluator();
+        private NavAstarPath path;
 
-        protected virtual Vector2Int TargetPosition => targetPosition;
+        public Movement Movement => brain.parent.Parts.Get<Movement>();
 
-        protected Movement Movement => brain.parent.Parts.Get<Movement>();
+        public virtual Vector2Int TargetPosition => targetPosition;
 
         public MoveTo(Brain brain, Vector2Int targetPosition) : 
             base(brain)
@@ -24,14 +29,8 @@ namespace TCD.Objects.Parts
 
         public override int GetTimeCost()
         {
-            if (path == null || path.GetTargetPosition() != GetTargetPosition())
-                path = new NavAstarPath(Position, GetTargetPosition(), new ObjectPathEvaluator());
-                
-            if (!path.isValid)
-            {
-                FailToParent();
+            if (!TryGetPath())    
                 return 0;
-            }
 
             Cell cell = GetNextCellInPath();
             if (cell == null)
@@ -41,18 +40,25 @@ namespace TCD.Objects.Parts
 
         protected Cell GetNextCellInPath()
         {
-            if ((path == null || path.GetTargetPosition() != GetTargetPosition()) && !TryToFindPathToTarget())
+            if (!TryGetPath())
+            {
+                Think("Could not get next cell in path: invalid path!");
+                FailToParent();
                 return null;
+            }
 
             Vector2Int nextPosition = Position;
 
-            if (path.TryToGetIndexOfPosition(Position, out int i) && path.path.Count > i)
+            if (path.TryToGetIndexOfPosition(Position, out int i) && (path.path.Count > i))
                 nextPosition = path.path[i + 1];
             else if (path.path.Count > 0)
                 nextPosition = path.path[0];
 
             if (nextPosition == Position)
+            {
+                Think("Could not get next cell in path: could not find next position in path!");
                 return null;
+            }
 
             return CurrentZoneInfo.grid[nextPosition];
         }
@@ -62,51 +68,55 @@ namespace TCD.Objects.Parts
             if (!base.PerformAction())
                 return false;
 
-            Think("I am moving to a target position.");
-
-            if ((path == null || path.GetTargetPosition() != GetTargetPosition()) && !TryToFindPathToTarget())
-                return false;
-
-            if (Movement)
+            if (!Movement)
             {
-                MoveTowardsTargetPosition();
-                return true;
-            }
-            else
                 Think("I can't move!");
-            return false;
+                FailToParent();
+                return false;
+            }
+            
+            bool gotPath = TryGetPath();
+            if (gotPath)
+                ActionScheduler.EnqueueAction(id, MoveTowardsTargetPosition, ActionType.Goal);
+            else
+            {
+                Think("No valid path to target!");
+                FailToParent();
+                return false;
+            }
+            return true;
         }
 
         protected virtual Vector2Int GetTargetPosition() =>
             targetPosition;
 
-        private bool TryToFindPathToTarget()
+        private bool TryGetPath()
         {
-            path = new NavAstarPath(brain.Position, GetTargetPosition(), new ObjectPathEvaluator());
-            if (!path.isValid)
+            if (path == null || path.GetTargetPosition() != GetTargetPosition())
             {
-                Think("Could not path to target!");
-                FailToParent();
-                return false;
+                path = new NavAstarPath(brain.Position, GetTargetPosition(), evaluator);
+                return path.isValid;
             }
-            Think($"I've successfully calculated a path to my target in {path.stepsToCreate} steps.");
             return true;
         }
 
-        protected virtual void MoveTowardsTargetPosition()
+        public virtual void MoveTowardsTargetPosition()
         {
             Cell cell = GetNextCellInPath();
+
             if (cell == null)
                 return;
+
             AIBeforeMoveEvent e = LocalEvent.Get<AIBeforeMoveEvent>();
             e.obj = obj;
             e.nextCell = cell;
             e.targetPosition = GetTargetPosition();
             if (!obj.HandleEvent(e))
                 return;
+
             Vector2Int direction = GetDirectionToCell(cell);
             Think($"I am moving towards my target in direction: {direction}.");
-            Movement.TryToMove(direction);
+            Movement.TryToMove(direction, false, true);
         }
 
         private Vector2Int GetDirectionToCell(Cell cell)
@@ -123,7 +133,11 @@ namespace TCD.Objects.Parts
         public override bool IsFinished()
         {
             if (!Movement)
+            {
+                FailToParent();
+                Think("Move job finished cause I can't move!");
                 return true;
+            }
             return false;
         }
     }

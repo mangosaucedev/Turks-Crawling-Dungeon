@@ -72,43 +72,73 @@ namespace TCD.Objects.Parts.Talents
 
         protected override void OnObject()
         {
-            Vector2Int startPosition = parent.cell.Position;
+            Vector2Int startPosition = parent.cell.Position + ObjectUtility.GetDirectionToObject(parent, target);
             Vector2Int targetPosition = target.cell.Position;
+           
             GridRaycastResult result = GridRaycaster.Raycast(startPosition, targetPosition, new BlockedByObstaclesEvaluator());
             GridRay ray = result.ray;
+           
             int count = ray.positions.Count;
+
             if (count > 2 && result.collision && result.collisionIndex - 1 <= GetRange(level))
-            { 
-                Vector2Int position = ray.positions[result.collisionIndex - 1];
-                Movement movement = parent.Parts.Get<Movement>();
-                if (movement.TryMoveToPosition(position) && (Mathf.FloorToInt(Vector2Int.Distance(Position, position)) <= 1))
-                {
-                    if (AttackHandler.AutoAttack(parent, target) && target.Parts.TryGet(out Effects.Effects targetEffects))
-                    {
-                        if (SavingThrows.MakeSavingThrow(parent, target, Stat.PhysicalPower, Stat.PhysicalSave))
-                        {
-                            targetEffects.AddEffect(new Prone(), TimeInfo.TIME_PER_STANDARD_TURN * 2);
-                            if (parent == PlayerInfo.currentPlayer)
-                                MessageLog.Add($"You tackled {target.GetDisplayName()} to the ground!");
-                            if (target == PlayerInfo.currentPlayer)
-                                MessageLog.Add($"You were tackled to the ground by {parent.GetDisplayName()}!");
-                        }
-                        else if (parent.Parts.TryGet(out Effects.Effects attackerEffects))
-                        {
-                            attackerEffects.AddEffect(new OffBalance(), TimeInfo.TIME_PER_STANDARD_TURN * 2);
-                            if (parent == PlayerInfo.currentPlayer)
-                                MessageLog.Add($"You failed to tackle {target.GetDisplayName()}, and are knocked off-balance!");
-                            if (target == PlayerInfo.currentPlayer)
-                                MessageLog.Add($"{parent.GetDisplayName()} failed to tackle you, and is knocked off-balance!");
-                        }
-                    }
-                }
-                activeCooldown = GetCooldown(level);
-                if (parent.Parts.TryGet(out Resources resources))
-                    resources.ModifyResource(Resource, -GetActivationResourceCost(level));
-            }
+                TryTackling(result);
             else if (count <= 2 && parent == PlayerInfo.currentPlayer)
                 FloatingTextHandler.Draw(parent.transform.position, "Can't build momentum from this distance!", Color.red);
+            else if (result.collisionIndex - 1 > GetRange(level))
+                FloatingTextHandler.Draw(parent.transform.position, "Can't tackle from this far away!", Color.red);
+
+            if (!result.collision)
+                DebugLogger.LogError("[Tackle] - ray failed to collide!");
+        }
+
+        private void TryTackling(GridRaycastResult result)
+        {
+            GridRay ray = result.ray;
+            Vector2Int position = ray.positions[result.collisionIndex - 1];
+            Movement movement = parent.Parts.Get<Movement>();
+            if (movement.TryMoveToPosition(position) && (Mathf.FloorToInt(Vector2Int.Distance(Position, position)) <= 1))
+                TryTacklingAttack();
+            activeCooldown = GetCooldown(level);
+            if (parent.Parts.TryGet(out Resources resources))
+                resources.ModifyResource(Resource, -GetActivationResourceCost(level));
+        }
+
+        private void TryTacklingAttack()
+        {
+            bool attackSuccessful = AttackHandler.AutoAttack(parent, target);
+            if (attackSuccessful && target.Parts.TryGet(out Effects.Effects targetEffects))
+            {
+                if (SavingThrows.MakeSavingThrow(parent, target, Stat.PhysicalPower, Stat.PhysicalSave))
+                {
+                    targetEffects.AddEffect(new Prone(), TimeInfo.TIME_PER_STANDARD_TURN * 2);
+                    if (parent == PlayerInfo.currentPlayer)
+                        MessageLog.Add($"You tackled {target.GetDisplayName()} to the ground!");
+                    if (target == PlayerInfo.currentPlayer)
+                        MessageLog.Add($"You were tackled to the ground by {parent.GetDisplayName()}!");
+                }
+                else if (parent.Parts.TryGet(out Effects.Effects attackerEffects))
+                {
+                    attackerEffects.AddEffect(new OffBalance(), TimeInfo.TIME_PER_STANDARD_TURN * 2);
+                    if (parent == PlayerInfo.currentPlayer)
+                        MessageLog.Add($"You failed to tackle {target.GetDisplayName()}, and are knocked off-balance!");
+                    if (target == PlayerInfo.currentPlayer)
+                        MessageLog.Add($"{parent.GetDisplayName()} failed to tackle you, and is knocked off-balance!");
+                }
+            }
+            else if (!attackSuccessful)
+                FailedTacklingAttack();
+        }
+
+        private void FailedTacklingAttack()
+        {
+            if (parent != PlayerInfo.currentPlayer)
+            {
+                if (target == PlayerInfo.currentPlayer)
+                    MessageLog.Add($"You repelled {target.GetDisplayName()}'s tackle!");
+                return;
+            }
+            MessageLog.Add($"{target.GetDisplayName()} repelled your tackle!");
+            FloatingTextHandler.Draw(parent.transform.position, "Tackle repelled!", Color.red);
         }
 
         protected override bool CanUseOnCell(Cell cell) => false;

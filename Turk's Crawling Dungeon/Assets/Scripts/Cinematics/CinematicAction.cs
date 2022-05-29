@@ -8,6 +8,9 @@ namespace TCD.Cinematics
     {
         private const string INVALID_ARGUMENTS = "Invalid arguments given for event type {0}.";
 
+        public bool isRequired;
+        public bool skip;
+
         protected string[] arguments;
 
         public CinematicAction(CinematicEvent e)

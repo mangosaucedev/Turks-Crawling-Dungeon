@@ -16,6 +16,7 @@ namespace TCD.Objects.Parts
         private Dictionary<string, Color> colorLayersByName = new Dictionary<string, Color>();
         private List<Color> colorLayers = new List<Color>();
         private string baseColor;
+        private bool drawSprite;
 
         public string Sprite
         {
@@ -59,6 +60,7 @@ namespace TCD.Objects.Parts
         {
             base.Start();
 
+            EnableSprite();
             SetSprite(Sprite);
             if (GetBaseColor() != Color.white)
                 UpdateColor();
@@ -79,7 +81,8 @@ namespace TCD.Objects.Parts
 
         public void SetSprite(string spriteName)
         {
-            Sprite sprite = Assets.Get<Sprite>(this.sprite);
+            this.sprite = spriteName;
+            Sprite sprite = Assets.Get<Sprite>(spriteName);
             SetSprite(sprite);
         }
 
@@ -143,6 +146,24 @@ namespace TCD.Objects.Parts
             renderEffect.SetSprite(sprite);
             yield return new WaitForSeconds(duration);
             Destroy(obj);
+        }
+
+        public void EnableSprite()
+        {
+            if (!drawSprite)
+            {
+                parent.SpriteRenderer.sprite = Assets.Get<Sprite>(Sprite);
+                drawSprite = true;
+            }
+        }
+
+        public void DisableSprite()
+        {
+            if (drawSprite)
+            {
+                parent.SpriteRenderer.sprite = null;
+                drawSprite = false;
+            }
         }
     }
 }

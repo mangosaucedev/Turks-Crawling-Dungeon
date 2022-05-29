@@ -25,21 +25,17 @@ namespace TCD.Zones
 
         public Vector2Int GetRandomPosition()
         {
-            List<Vector2Int> positions = new List<Vector2Int>();
-            int xMin = currentFeature.BoundsInt.xMin;
-            int xMax = currentFeature.BoundsInt.xMax;
-            int yMin = currentFeature.BoundsInt.yMin;
-            int yMax = currentFeature.BoundsInt.yMax;
-            for (int x = xMin; x < xMax; x++)
-                for (int y = yMin; y < yMax; y++)
+            using (GrabBag<Vector2Int> positions = new GrabBag<Vector2Int>())
+            {
+                foreach (Vector2Int position in currentFeature.OccupiedPositions)
                 {
-                    Vector2Int position = new Vector2Int(x, y);
                     if (PositionChecker.IsEmpty(position))
-                        positions.Add(position);
+                        positions.AddItem(position, Mathf.Pow(Vector2Int.Distance(PlayerInfo.currentPlayer.cell.Position, position), 2));
                 }
-            if (positions.Count == 0)
-                ExceptionHandler.Handle(new Exception("Could not place down stairs in zone: no valid positions for placement!"));
-            return Choose.Random(positions);
+                if (positions.Count == 0)
+                    ExceptionHandler.Handle(new Exception("Could not place down stairs in zone: no valid positions for placement!"));
+                return positions.Grab();
+            }
         }
     }
 }

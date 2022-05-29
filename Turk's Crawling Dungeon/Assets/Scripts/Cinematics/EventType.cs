@@ -15,11 +15,13 @@ namespace TCD.Cinematics
         CameraMoveToTargetPosition,
         CameraLerpToTargetPosition,
         CameraLookAtTarget,
+        CameraResetZoom,
         FadeColor,
         FadeColorHex,
         StartDialogue,
         StartMonologue,
         ClearMonologue,
+        StartCinematic,
         FireTrigger
     }
 }

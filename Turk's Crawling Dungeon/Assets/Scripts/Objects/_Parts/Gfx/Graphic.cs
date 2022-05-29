@@ -47,6 +47,18 @@ namespace TCD.Objects.Parts
                 Destroy(graphicObject);
         }
 
+        public override bool HandleEvent<T>(T e)
+        {
+            if (e.Id == VisibilityChangedEvent.id)
+                OnVisibilityChanged((VisibilityChangedEvent) (LocalEvent) e);
+            return base.HandleEvent(e);
+        }
+
+        private void OnVisibilityChanged(VisibilityChangedEvent e)
+        {
+            graphicObject.SetActive(e.visible);
+        }
+
         protected virtual void SetupGraphic()
         {
             GameObject prefab = Assets.Get<GameObject>("Graphic");

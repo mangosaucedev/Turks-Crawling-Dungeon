@@ -9,6 +9,7 @@ namespace TCD.Objects
     public abstract class Part : MonoBehaviour, ILocalEventHandler 
     {
         public BaseObject parent;
+        public Guid id = Guid.NewGuid();
 
         protected bool hasStarted;
         protected bool isApplicationQuitting;
@@ -34,12 +35,12 @@ namespace TCD.Objects
 
         protected virtual void OnEnable()
         {
-
+            PartUtility.Add(this, id);
         }
 
         protected virtual void OnDisable()
         {
-
+            PartUtility.Remove(id);
         }
 
         protected virtual void OnApplicationQuit()

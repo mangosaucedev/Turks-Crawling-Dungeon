@@ -36,7 +36,9 @@ namespace TCD.Objects.Parts
         public bool EquipToSlots(BaseObject equipment)
         {
             Equippable equippable = equipment.Parts.Get<Equippable>();
-            if (!TryGetAvailableSlots(equippable, out List<EquipSlot> availableSlots))
+            if (!TryGetAvailableSlots(equippable, out List<EquipSlot> availableSlots) 
+                || equippable.equipSlots == null
+                || equippable.equipSlots.Length == 0)
                 return false;
             if (!equippable.RequiresSecondSlot)
             {

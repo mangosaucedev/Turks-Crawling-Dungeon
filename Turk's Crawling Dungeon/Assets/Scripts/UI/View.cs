@@ -14,10 +14,13 @@ namespace TCD.UI
         public event Action UpdateEvent = delegate { };
         public event Action CloseEvent = delegate { };
         public bool isActive;
+
         [SerializeField] private bool isCancellable;
         [SerializeField] private CanvasGroup canvasGroup;
         [SerializeField] private bool refreshOnStart;
         [SerializeField] private bool refreshOnUpdate;
+
+        private bool canCancel;
         
 
         private string ViewName => gameObject.name;
@@ -30,6 +33,8 @@ namespace TCD.UI
 
         private void Update()
         {
+            if (!canCancel)
+                canCancel = true;
             UpdateIsViewActive();
         }
 
@@ -87,8 +92,15 @@ namespace TCD.UI
             KeyEventContext context = e.context;
             KeyCommand command = context.command;
             KeyState state = context.state;
-            if (isCancellable && isActive && command == KeyCommand.Cancel && state == KeyState.PressedThisFrame)
+            if (isCancellable
+                && canCancel
+                && isActive
+                && command == KeyCommand.Cancel
+                && state == KeyState.PressedThisFrame)
+            {
+                DebugLogger.Log("[View]: Closing view " + gameObject.name);
                 ViewManager.Close(ViewName);
+            }
         }
 
         private void Refresh()

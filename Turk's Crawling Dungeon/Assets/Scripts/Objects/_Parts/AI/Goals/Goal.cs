@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ namespace TCD.Objects.Parts
     public abstract class Goal
     {
         public Goal parent;
+        public Guid id = Guid.NewGuid();
+
         protected Brain brain;
         protected BaseObject obj;
 
@@ -34,9 +37,9 @@ namespace TCD.Objects.Parts
 
         public virtual bool IsFinished() => false;
 
-        protected virtual void PushGoal() => brain.goals.Push(this);
+        protected virtual void PushGoal() => brain.Push(this);
         
-        protected virtual void PushGoal(Goal goal) => brain.goals.Push(goal);
+        protected virtual void PushGoal(Goal goal) => brain.Push(goal);
 
         protected virtual void PushChildGoal(Goal goal)
         {
@@ -44,13 +47,13 @@ namespace TCD.Objects.Parts
             goal.PushGoal();
         }
 
-        protected virtual void Pop() => brain.goals.Pop();
+        protected virtual void Pop() => brain.Pop();
         
         protected virtual void FailToParent()
         {
-            while (brain.goals.Count > 0 && brain.goals.Peek() != parent)
+            while (brain.Count > 0 && brain.Peek() != parent)
             {
-                Goal goal = brain.goals.Peek();
+                Goal goal = brain.Peek();
                 goal.OnFail();
                 Pop();
             }
@@ -66,7 +69,7 @@ namespace TCD.Objects.Parts
 
         }
 
-        protected virtual void Think(string thought) => 
+        public virtual void Think(string thought) => 
             brain.Think(thought);
         
     }

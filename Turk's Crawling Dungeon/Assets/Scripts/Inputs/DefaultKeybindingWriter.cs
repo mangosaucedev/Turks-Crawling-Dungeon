@@ -26,6 +26,20 @@ namespace TCD.Inputs
             Add(KeyCommand.MoveSouthwest, KeyCode.Keypad1);
             Add(KeyCommand.MoveSouth, KeyCode.Keypad2);
             Add(KeyCommand.MoveSoutheast, KeyCode.Keypad3);
+            //
+            Add(KeyCommand.AttackNorthwest, KeyCode.Keypad7, KeyCode.LeftControl);
+            Add(KeyCommand.AttackNorth, KeyCode.Keypad8, KeyCode.LeftControl);
+            Add(KeyCommand.AttackNortheast, KeyCode.Keypad9, KeyCode.LeftControl);
+            Add(KeyCommand.AttackWest, KeyCode.Keypad4, KeyCode.LeftControl);
+            Add(KeyCommand.AttackEast, KeyCode.Keypad6, KeyCode.LeftControl);
+            Add(KeyCommand.AttackSouthwest, KeyCode.Keypad1, KeyCode.LeftControl);
+            Add(KeyCommand.AttackSouth, KeyCode.Keypad2, KeyCode.LeftControl);
+            Add(KeyCommand.AttackSoutheast, KeyCode.Keypad3, KeyCode.LeftControl);
+            Add(KeyCommand.AttackNorthAlt, KeyCode.UpArrow, KeyCode.LeftControl);
+            Add(KeyCommand.AttackSouthAlt, KeyCode.DownArrow, KeyCode.LeftControl);
+            Add(KeyCommand.AttackWestAlt, KeyCode.LeftArrow, KeyCode.LeftControl);
+            Add(KeyCommand.AttackEastAlt, KeyCode.RightArrow, KeyCode.LeftControl);
+            //
             Add(KeyCommand.Interact, KeyCode.Space);
             Add(KeyCommand.InteractAdvanced, KeyCode.Space, KeyCode.LeftShift);
             Add(KeyCommand.Rest, KeyCode.Z);
@@ -77,6 +91,8 @@ namespace TCD.Inputs
             //
             Add(KeyCommand.DevConsole, KeyCode.Backslash);
             //
+            Add(KeyCommand.Tab, KeyCode.Tab);
+            Add(KeyCommand.BackTab, KeyCode.Tab, KeyCode.LeftShift);
             Add(KeyCommand.Reset, KeyCode.R);
             Add(KeyCommand.ResetToDefaults, KeyCode.R, KeyCode.LeftShift);
         }

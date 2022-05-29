@@ -6,40 +6,32 @@ namespace TCD.Zones
 {
     public class WallPlanner : ZoneGeneratorMachine
     {
-        public override string LoadMessage => "Planning walls...";
-
-        private TGrid<ChamberCellType> Cells => Zone.CellTypes;
-
         public override IEnumerator Generate()
         {
-            foreach (IFeature feature in Zone.Features)
-            {
-                PlaceWallAroundFeature(feature);
-                yield return null;
-            }
+            for (int x = 0; x < Width; x++)
+                for (int y = 0; y < Height; y++)
+                {
+                    if (Zone.CellTypes[x, y] == ChamberCellType.Floor)
+                        EvaluateIsFloorWall(x, y);
+                }
+            yield return null;
         }
 
-        private void PlaceWallAroundFeature(IFeature feature)
-        {
-            foreach(Vector2Int position in feature.OccupiedPositions)
-                EvaluateSurroundingCellsToPlaceWall(position.x, position.y);
-        }
-
-        private void EvaluateSurroundingCellsToPlaceWall(int xOrigin, int yOrigin)
+        private void EvaluateIsFloorWall(int x, int y)
         {
             for (int xOffset = -1; xOffset <= 1; xOffset++)
                 for (int yOffset = -1; yOffset <= 1; yOffset++)
                 {
-                    int x = xOrigin + xOffset;
-                    int y = yOrigin + yOffset;
-                    if ((x == xOrigin && y == yOrigin) || !Cells.IsWithinBounds(x, y)) 
+                    int dx = x + xOffset;
+                    int dy = y + yOffset;
+                    if (dx == x && dy == y)
                         continue;
-                    if (Cells[x, y] == ChamberCellType.None)
-                        PlaceWall(x, y);
+                    if (!Zone.CellTypes.IsWithinBounds(dx, dy) || Zone.CellTypes[dx, dy] < ChamberCellType.Floor)
+                    {
+                        Zone.CellTypes[x, y] = ChamberCellType.Wall;
+                        return;
+                    }    
                 }
         }
-
-        private void PlaceWall(int x, int y) =>
-            Cells[x, y] = ChamberCellType.Wall;
     }
 }

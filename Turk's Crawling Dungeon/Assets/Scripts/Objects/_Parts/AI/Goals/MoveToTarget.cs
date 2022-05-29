@@ -27,6 +27,6 @@ namespace TCD.Objects.Parts
         }
 
         protected override Vector2Int GetTargetPosition() =>
-            target?.cell.Position ?? Vector2Int.zero;
+            target?.cell.Position ?? brain.Position;
     }
 }

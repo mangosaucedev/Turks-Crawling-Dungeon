@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TCD.Objects.Encounters;
 
 namespace TCD.Objects.Parts
 {
@@ -12,6 +13,8 @@ namespace TCD.Objects.Parts
 
         [SerializeField] private float baseMaxWeight;
         [SerializeField] private string spawnEncounterTable;
+
+        private Encounter encounter;
 
         public float BaseMaxWeight
         {
@@ -25,11 +28,23 @@ namespace TCD.Objects.Parts
             set => spawnEncounterTable = value;
         }
 
+        public Encounter Encounter 
+        {
+            get
+            {
+                if (encounter == null)
+                    encounter = EncounterFactory.BuildFromBlueprint(SpawnEncounterTable);
+                return encounter;
+            }
+        }
+
         public override string Name => "Inventory";
 
         protected override void Start()
         {
             base.Start();
+            if (!string.IsNullOrEmpty(SpawnEncounterTable))
+                AddEncounterTable();
         }
 
         protected override void OnDisable()
@@ -40,6 +55,13 @@ namespace TCD.Objects.Parts
                 BaseObject item = items[i];
                 RemoveItem(item);
             }
+        }
+
+        private void AddEncounterTable()
+        {
+            var objects = Encounter.BuildForcedObjects(Position);
+            foreach (var obj in objects)
+                TryAddItem(obj);
         }
 
         public float GetWeight()

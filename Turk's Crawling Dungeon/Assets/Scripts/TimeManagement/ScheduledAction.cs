@@ -8,13 +8,15 @@ namespace TCD.TimeManagement
 {
     public struct ScheduledAction
     {
-        public BaseObject actor;
+        public Guid id;
         public Action action;
+        public ActionType type;
 
-        public ScheduledAction(BaseObject actor, Action action)
+        public ScheduledAction(Guid id, Action action, ActionType type)
         {
-            this.actor = actor;
+            this.id = id;
             this.action = action;
+            this.type = type;
         }
     }
 }

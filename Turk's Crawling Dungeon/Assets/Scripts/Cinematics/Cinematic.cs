@@ -12,6 +12,7 @@ namespace TCD.Cinematics
         public CinematicEvent[] events;
 
         private List<CinematicAction> actions = new List<CinematicAction>();
+        private int i;
 
         private List<CinematicAction> GetActions()
         {
@@ -19,14 +20,27 @@ namespace TCD.Cinematics
             {
                 foreach (CinematicEvent e in events)
                     actions.Add(CinematicActionFactory.GetFromEvent(e));
+                actions.Reverse();
             }
             return actions;
         }
 
         public IEnumerator PlayRoutine()
         {
-            foreach (CinematicAction action in GetActions())
-                yield return action.PerformRoutine();
+            for (i = GetActions().Count - 1; i >= 0; i--)
+                yield return GetActions()[i].PerformRoutine();
+        }
+
+        public void Skip()
+        {
+            if (i < 0 || i >= GetActions().Count)
+                return;
+            int index = i;
+            while (index >= 0 && !GetActions()[index].isRequired)
+            {
+                GetActions()[index].skip = true;
+                index--;
+            }
         }
     }
 }

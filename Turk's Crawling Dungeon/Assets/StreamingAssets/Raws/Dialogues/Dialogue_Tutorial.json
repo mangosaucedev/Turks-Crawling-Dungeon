@@ -1,0 +1,332 @@
+{
+    "dialogue": [
+        {
+            "name": "Tutorial0",
+            "text": "...<delay=1.5>Hm</delay>?",
+            "speakerName": "Lulu",
+            "oneShot": "false",
+            "transitions": {
+                "transitions": [
+                    {
+                        "node": "Tutorial0_1"
+                    }
+                ]
+            },
+            "choices": {
+                "choices": []
+            }
+        },
+
+        {
+            "name": "Tutorial0_1",
+            "text": "<delay=0.15>Oh</delay>, hello, dear. Come closer so Lulu can see you.",
+            "speakerName": "Lulu",
+            "oneShot": "false",
+            "transitions": {
+                "transitions": []
+            },
+            "choices": {
+                "choices": []
+            }
+        },
+
+        {
+            "name": "Tutorial1",
+            "text": "<delay=0.15>Ah, yes.</delay> I\u0027ve seen that face many times before.",
+            "speakerName": "Lulu",
+            "oneShot": "true",
+            "transitions": {
+                "transitions": [
+                    {
+                        "node": "Tutorial1_1"
+                    }
+                ]
+            },
+            "choices": {
+                "choices": []
+            }
+        },
+
+        {
+            "name": "Tutorial1_1",
+            "text": "No need to speak, dear. I\u0027ll show you the ropes. You can speed up talking to someone by pressing [Spacebar].",
+            "speakerName": "Lulu",
+            "transitions": {
+                "transitions": [
+                    {
+                        "node": "Tutorial1_2"
+                    }
+                ]
+            },
+            "choices": {
+                "choices": []
+            }
+        },
+
+        {
+            "name": "Tutorial1_2",
+            "text": "You can also select replies by using the [Keyboard]. Press the hotkey of the reply you\u0027d like to select.",
+            "speakerName": "Lulu",
+            "transitions": {
+                "transitions": []
+            },
+            "choices": {
+                "choices": [
+                    {
+                        "text": "What the fuck are you talking about?",
+                        "transitions": {
+                            "transitions": [
+                                {
+                                    "node": "Tutorial1_3A"
+                                }
+                            ]
+                        }
+                    },
+
+                    {
+                        "text": "What can we do to get out of here?",
+                        "transitions": {
+                            "transitions": [
+                                {
+                                    "node": "Tutorial1_3B"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+
+        {
+            "name": "Tutorial1_3A",
+            "text": "<delay=0.15>Is that any way to talk to an old woman?</delay>",
+            "speakerName": "Lulu",
+            "transitions": {
+                "transitions": []
+            },
+            "choices": {
+                "choices": [
+                    {
+                        "text": "I\u0027m sorry Lulu.",
+                        "transitions": {
+                            "transitions": [
+                                {
+                                    "node": "Tutorial1_3B"
+                                }
+                            ]
+                        }
+                    },
+
+                    {
+                        "text": "I\u0027m sorry Lulu.",
+                        "transitions": {
+                            "transitions": [
+                                {
+                                    "node": "Tutorial1_3B"
+                                }
+                            ]
+                        }
+                    },
+
+                    {
+                        "text": "I\u0027m sorry Lulu.",
+                        "transitions": {
+                            "transitions": [
+                                {
+                                    "node": "Tutorial1_3B"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+
+        {
+            "name": "Tutorial1_3B",
+            "text": "The door out is barred. Take this and figure out some way of opening it. I\u0027d do it myself, but I\u0027m old and my joints ache.",
+            "speakerName": "Lulu",
+            "trigger": "tutorialSpawnCrowbar",
+            "transitions": {
+                "transitions": []
+            },
+            "choices": {
+                "choices": []
+            }
+        },
+
+        {
+            "name": "Tutorial2",
+            "text": "<delay=0.15>Dear?</delay> It\u0027s <delay=0.15>time</delay> to get to work. The air in this room is getting rather stale...",
+            "speakerName": "Lulu",
+            "oneShot": "false",
+            "transitions": {
+                "transitions": []
+            },
+            "choices": {
+                "choices": [
+                    {
+                        "text": "Where am I?",
+                        "transitions": {
+                            "transitions": [
+                                {
+                                    "node": "Tutorial2_1A"
+                                }
+                            ]
+                        }
+                    },
+
+                    {
+                        "text": "Who are you?",
+                        "transitions": {
+                            "transitions": [
+                                {
+                                    "node": "Tutorial2_1B"
+                                }
+                            ]
+                        }
+                    },
+
+                    {
+                        "text": "Who am I?",
+                        "transitions": {
+                            "transitions": [
+                                {
+                                    "node": "Tutorial2_1C"
+                                }
+                            ]
+                        }
+                    },
+
+                    {
+                        "text": "Bye, Lulu. [End Conversation.]",
+                        "transitions": {
+                            "transitions": []
+                        }
+                    }
+                ]
+            }
+        },
+
+        {
+            "name": "Tutorial2_1A",
+            "text": "We\u0027re in the <c=Au>Tutorial Zone</>, Turk. Isn\u0027t that obvious?",
+            "speakerName": "Lulu",
+            "transitions": {
+                "transitions": [
+                    {
+                        "node": "Tutorial2_1A_1"
+                    }
+                ]
+            },
+            "choices": {
+                "choices": []
+            }
+        },
+
+        {
+            "name": "Tutorial2_1A_1",
+            "text": "In particular, we\u0027re in the second room of five. The fun part\u0027s just up ahead, so hurry up!",
+            "speakerName": "Lulu",
+            "transitions": {
+                "transitions": [
+                    {
+                        "node": "Tutorial2"
+                    }
+                ]
+            },
+            "choices": {
+                "choices": []
+            }
+        },
+
+        {
+            "name": "Tutorial2_1B",
+            "text": "I\u0027m <c=Lu>Lulu</>, <c=Au>Princess of the Tutorial Zone</>. It\u0027s a thankless job, I\u0027ll admit. So many \u0027\u0027Turk\u0027\u0027s come through here and they\u0027re all so ungrateful for my help! Harrumph.",
+            "speakerName": "Lulu",
+            "transitions": {
+                "transitions": []
+            },
+            "choices": {
+                "choices": [
+                    {
+                        "text": "What do you mean by \u0027\u0027Turk\u0027\u0027s, plural?",
+                        "transitions": {
+                            "transitions": [
+                                {
+                                    "node": "Tutorial2_1B_1A"
+                                }
+                            ]
+                        }
+                    },
+
+                    {
+                        "text": "I appreciate your help, Lulu. Thank you.",
+                        "transitions": {
+                            "transitions": [
+                                {
+                                    "node": "Tutorial2_1B_1B"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+
+        {
+            "name": "Tutorial2_1B_1A",
+            "text": "I mean other \u0027\u0027you\u0027\u0027s. You know, you\u0027re not the first Christopher Turkinopoulos to come for a tutorial.",
+            "speakerName": "Lulu",
+            "transitions": {
+                "transitions": [
+                    {
+                        "node": "Tutorial2"
+                    }
+                ]
+            },
+            "choices": {
+                "choices": []
+            }
+        },
+
+        {
+            "name": "Tutorial2_1B_1B",
+            "text": "Awh. Thank you, dear. You\u0027re one of the good ones.",
+            "speakerName": "Lulu",
+            "transitions": {
+                "transitions": [
+                    {
+                        "node": "Tutorial2"
+                    }
+                ]
+            },
+            "choices": {
+                "choices": []
+            }
+        },
+
+        {
+            "name": "Tutorial2_1C",
+            "text": "I\u0027m not buying the dissociative amnesia shtick, wise guy.",
+            "speakerName": "Lulu",
+            "transitions": {
+                "transitions": []
+            },
+            "choices": {
+                "choices": [
+                    {
+                        "text": "Hehe, I\u0027m just pulling your leg, Lulu.",
+                        "transitions": {
+                            "transitions": [
+                                {
+                                    "node": "Tutorial2"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

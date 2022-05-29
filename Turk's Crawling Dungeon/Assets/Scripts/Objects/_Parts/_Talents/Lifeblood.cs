@@ -69,7 +69,9 @@ namespace TCD.Objects.Parts.Talents
             activeCooldown = GetCooldown(level);
             if (parent == PlayerInfo.currentPlayer)
                 MessageLog.Add($"Your lifeblood surges forth, mending your grievous wounds!");
-            return base.Activate();
+            bool success = base.Activate();
+            isActive = false;
+            return success;
         }
 
         public override int GetEnergyCost() => 0;
@@ -116,32 +118,28 @@ namespace TCD.Objects.Parts.Talents
 
         public override bool HandleEvent<T>(T e)
         {
-            if (e.Id == HpModifiedEvent.id)
-                OnHpModified();
+            if (e.Id == ResourceModifiedEvent.id)
+                OnResourceModified((ResourceModifiedEvent)(LocalEvent) e);
             return base.HandleEvent(e);
         }
 
-        private void OnHpModified()
+        private void OnResourceModified(ResourceModifiedEvent e)
         {
-            DebugLogger.Log("LIFEBLOOD: hp modified!");
+            Resource resource = e.resource;
 
-            if (!parent.Parts.TryGet(out Resources resources) || parent.Parts.TryGet(out Effects.Effects effects))
+            if (resource != Resource.Hitpoints 
+                || !parent.Parts.TryGet(out Resources resources) 
+                || !parent.Parts.TryGet(out Effects.Effects effects))
                 return;
 
             float hpMax = resources.GetMaxResource(Resource.Hitpoints);
             float hp = resources.GetResource(Resource.Hitpoints);
             float percent = (float) hp / (float) hpMax;
 
-            bool belowThreshold = percent < 0.3f;
+
+            bool belowThreshold = (float) percent < 0.3f;
             bool cooldownActive = activeCooldown > 0f;
             bool hasEffect = effects.HasEffect("Surging Lifeblood");
-
-            if (belowThreshold)
-                DebugLogger.Log("LIFEBLOOD: hp below threshold!");
-            if (!cooldownActive)
-                DebugLogger.Log("LIFEBLOOD: cooldown inactive!");
-            if (!hasEffect)
-                DebugLogger.Log("LIFEBLOOD: does not have 'Surging Lifeblood' effect active!");
 
             if (belowThreshold && !cooldownActive && !hasEffect)
                 Activate();

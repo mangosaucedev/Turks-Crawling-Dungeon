@@ -33,16 +33,24 @@ namespace TCD.IO
         {
             currentZone = new Zone();
             currentZoneName = EvaluateAttribute(node, "Name", true);
+            
             currentZone.name = currentZoneName;
             currentZone.cinematicName = EvaluateNode(node, "Cinematic");
             currentZone.zoneParamsName = EvaluateNode(node, "Params", true);
+           
             XmlNode encountersNode = node.SelectSingleNode("Encounters");
             currentZone.zoneEncountersName = encountersNode.InnerText;
             currentZone.encounterDensity = float.Parse(EvaluateAttribute(encountersNode, "Density") ?? "1", CultureInfo.InvariantCulture);
             currentZone.zoneEnvironmentsName = EvaluateNode(node, "Environments", true);
-            Assets.Add(currentZoneName, currentZone);
+            
             XmlNode terrainNode = node.SelectSingleNode("Terrain");
             DeserializeTerrain(terrainNode);
+           
+            XmlNode customGeneratorMachinesNode = node.SelectSingleNode("CustomGeneratorMachines");
+            if (customGeneratorMachinesNode != null)
+                DeserializeCustomGenerators(customGeneratorMachinesNode);
+
+            Assets.Add(currentZoneName, currentZone);
         }
 
         private void DeserializeTerrain(XmlNode node)   
@@ -76,5 +84,14 @@ namespace TCD.IO
             floor.weight = float.Parse(EvaluateAttribute(node, "Weight") ?? "1", CultureInfo.InvariantCulture);
             currentZoneTerrain.floors.Add(floor);
         }
+
+        private void DeserializeCustomGenerators(XmlNode node)
+        {
+            foreach (XmlNode customGeneratorNode in node.SelectNodes("GeneratorMachine"))
+                DeserializeCustomGenerator(customGeneratorNode);
+        }
+
+        private void DeserializeCustomGenerator(XmlNode node) => 
+            currentZone.CustomGeneratorMachineNames.Add(node.InnerText);
     }
 }

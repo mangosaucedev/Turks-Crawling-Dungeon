@@ -31,6 +31,8 @@ namespace TCD.Cinematics.Dialogues
             if (oneShotDialogues.Contains(dialogue))
                 return false;
 
+            DebugLogger.Log("[Dialogue] - Going to dialogue node " + dialogue);
+
             if (dialogue.oneShot)
                 oneShotDialogues.Add(dialogue);
 
@@ -40,11 +42,16 @@ namespace TCD.Cinematics.Dialogues
 
             DialogueView dialogueView = ServiceLocator.Get<DialogueView>();
             dialogueView.DisplayDialogue(currentDialogue);
+
+            if (!string.IsNullOrEmpty(dialogue.trigger))
+                ServiceLocator.Get<CinematicManager>().FireEvent(dialogue.trigger);
+
             return true;
         }
 
         public static void EndDialogue()
         {
+            DebugLogger.Log("[Dialogue] - Ending dialogue.");
             isInDialogue = false;
             currentDialogue = null;
             ViewManager.Close("Dialogue View");

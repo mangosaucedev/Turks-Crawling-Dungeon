@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TCD.Objects.Attacks;
 using TCD.Inputs.Actions;
+using TCD.Texts;
 using TCD.TimeManagement;
 using TCD.UI;
 
@@ -50,7 +51,7 @@ namespace TCD.Objects.Parts
 
         public void Throw(BaseObject thrower, Vector2Int startPosition, Vector2Int targetPosition)
         {
-            lastThrowStartPosition = startPosition;
+            lastThrowStartPosition = startPosition + ObjectUtility.GetDirectionToVector(startPosition, targetPosition);
             lastThrowTargetPosition = targetPosition;
             ActionScheduler.EnqueueAction(thrower, Throw);
         }
@@ -63,30 +64,46 @@ namespace TCD.Objects.Parts
             if (!item || !item.inventory || (item.inventory && item.inventory.TryRemoveItem(parent)))
             {
                 GridRaycastResult result = GridRaycaster.Raycast(startPosition, targetPosition, new BlockedByObstaclesEvaluator());
-                Vector2Int collisionPoint = targetPosition;
-                if (result.collision)
+                if (result.collision && result.ray.positions.Count >= 2 && MarchForCollisionPosition(result.ray, out targetPosition, out Vector2Int collisionPoint))
                 {
-                    collisionPoint = result.ray.positions[result.collisionIndex];
-                    if (result.collisionIndex != 0)
-                        targetPosition = result.ray.positions[result.collisionIndex];
-                    else
-                        targetPosition = startPosition;
+                    if (!AttackAtPosition(collisionPoint))
+                        FloatingTextHandler.Draw(GameGrid.GridToWorld(collisionPoint), "Missed!", Color.red);
                 }
                 parent.cell.SetPosition(targetPosition);
-                AttackAtPosition(collisionPoint);
                 OnThrown();
             }
         }
 
-        private void AttackAtPosition(Vector2Int position)
+        private bool MarchForCollisionPosition(GridRay ray, out Vector2Int targetPosition, out Vector2Int collisionPosition)
         {
+            targetPosition = ray.positions[0];
+            collisionPosition = ray.positions[1];
+            Vector2Int lastPosition = ray.positions[0];
+            for (int i = 1; i < ray.positions.Count; i++)
+            {
+                Vector2Int position = ray.positions[i];
+                if (GameGrid.Current[position].Contains(out Obstacle obstacle) && obstacle.IsImpassable)
+                {
+                    collisionPosition = position;
+                    targetPosition = lastPosition;
+                    return true;
+                }
+                lastPosition = position;
+            }
+            return false;
+        }
+
+        private bool AttackAtPosition(Vector2Int position)
+        {
+            bool successful = false;
             Cell cell = CurrentZoneInfo.grid[position];
             for (int i = cell.Objects.Count - 1; i >= 0; i--)
             {
                 BaseObject obj = cell.Objects[i];
                 if (obj && parent != obj)
-                    AttackHandler.AttackTarget(parent, obj, ThrowAttack);
+                    successful = successful || AttackHandler.AttackTarget(parent, obj, ThrowAttack);
             }
+            return successful;
         }
 
 

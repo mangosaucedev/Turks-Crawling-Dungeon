@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Zones>
+
+	<Zone Name="Tutorial">
+		<Cinematic>TutorialOpening</Cinematic>
+		<Params>Tutorial</Params>
+		<Environments>None</Environments>
+		<Encounters Density="1">None</Encounters>
+		<Terrain>
+			<Walls>
+				<Wall Name="TutorialWall"/>
+			</Walls>
+			<Floors>
+				<Floor Name="TutorialFloor"/>
+			</Floors>
+		</Terrain>
+    <CustomGeneratorMachines>
+      <GeneratorMachine>TutorialPlanner</GeneratorMachine>
+      <GeneratorMachine>ZoneBuilder</GeneratorMachine>
+      <GeneratorMachine>ZoneColorer</GeneratorMachine>
+      <GeneratorMachine>TutorialSymbolBuilder</GeneratorMachine>
+    </CustomGeneratorMachines>
+	</Zone>
+
+</Zones>

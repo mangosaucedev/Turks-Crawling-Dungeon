@@ -32,6 +32,10 @@ namespace TCD.Zones
 
         TGrid<Environment> Environments { get; }
 
+        List<string> CustomGeneratorMachineNames { get; set; }
+
         List<IFeature> GetUndesignatedFeatures();
+
+        List<ZoneGeneratorMachine> GetCustomGeneratorMachines();
     }
 }

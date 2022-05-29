@@ -10,6 +10,7 @@ namespace TCD.Cinematics
     {
         public string type;
         public string[] arguments;
+        public bool isRequired;
 
         public EventType GetEventType()
         {
@@ -31,15 +32,22 @@ namespace TCD.Cinematics
                 case "waitviews":
                 case "waitforviews":
                     return EventType.WaitForViews;
+                case "resetzoom":
+                    return EventType.CameraResetZoom;
                 case "fade":
                 case "fadecolor":
                 case "fadetocolor":
                     return EventType.FadeColor;
+                case "dialogue":
+                case "startdialogue":
+                    return EventType.StartDialogue;
                 case "monologue":
                 case "startmonologue":
                     return EventType.StartMonologue;
                 case "clearmonologue":
                     return EventType.ClearMonologue;
+                case "startcinematic":
+                    return EventType.StartCinematic;
                 default:
                     return EventType.Unknown;            
             }

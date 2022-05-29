@@ -11,7 +11,7 @@ namespace TCD.Zones
         {
             machines.Enqueue(new CavernPlanner());
             machines.Enqueue(new FeatureFloorPlanner());
-            machines.Enqueue(new WallPlanner());
+            machines.Enqueue(new FeatureWallPlanner());
             machines.Enqueue(new DoorPlanner());
             machines.Enqueue(new ZoneBuilder());
             machines.Enqueue(new ZoneColorer());

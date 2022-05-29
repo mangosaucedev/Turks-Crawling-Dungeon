@@ -18,6 +18,18 @@ namespace TCD.Objects.Parts
 
         public override string Name => "Physics";
 
+        public override bool HandleEvent<T>(T e)
+        {
+            if (e.Id == GetDescriptionEvent.id)
+                OnGetDescription((GetDescriptionEvent) (LocalEvent) e);
+            return base.HandleEvent(e);
+        }
+
+        private void OnGetDescription(GetDescriptionEvent e)
+        {
+            e.AddToSuffix($"#{GetWeight()}");
+        }
+
         public float GetWeight()
         {
             GetWeightEvent e = LocalEvent.Get<GetWeightEvent>();

@@ -186,3 +186,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partsParent: {fileID: 1911370165469430447}
   spriteRenderer: {fileID: 3463201047385630400}
+  position: {x: 0, y: 0}

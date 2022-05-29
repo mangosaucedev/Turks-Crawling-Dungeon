@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ZoneEncounters>
 
-	<ZoneEncounter Name="Generic">
+  <ZoneEncounter Name="None"/>
+
+  <ZoneEncounter Name="Generic">
 		<Encounter Name="DungeonEnemyPatrolsTier0" Type="EnemyPatrol" Weight="5" />
 		<Encounter Name="DungeonEnemyPatrolsTier1" Type="EnemyPatrol" Weight="5"/>
 		<Encounter Name="DungeonEnemyPatrolsTier1B" Type="EnemyPatrol" Weight="2"/>
@@ -11,7 +13,8 @@
 		<Encounter Name="GoatGroupMedium" Type="EnemyPatrol" Weight="1" />
 		<Encounter Name="GoatGroupLarge" Type="EnemyPatrol" Weight="1" />
 		<Encounter Name="MeleeWeaponsTier0" Type="OpenLoot" Weight="1"/>
-		<Encounter Name="MeleeWeaponsTier1" Type="OpenLoot" Weight="1"/>
-	</ZoneEncounter>
+    <Encounter Name="MeleeWeaponsTier1" Type="OpenLoot" Weight="1"/>
+    <Encounter Name="GenericLoot0" Type="ClosedLoot" Weight="1"/>
+  </ZoneEncounter>
 	
 </ZoneEncounters>

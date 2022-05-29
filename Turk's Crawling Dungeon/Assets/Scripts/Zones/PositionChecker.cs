@@ -18,7 +18,7 @@ namespace TCD.Zones
 
         public static bool IsEmpty(int x, int y)
         {
-            if (!GameGrid.IsWithinBounds(x, y) || Zone.Environments[x, y] == null)
+            if (!GameGrid.IsWithinBounds(x, y) || !IsFloored(x, y))
                 return false;
             Cell cell = GameGrid[x, y];
             foreach (BaseObject obj in cell.Objects)

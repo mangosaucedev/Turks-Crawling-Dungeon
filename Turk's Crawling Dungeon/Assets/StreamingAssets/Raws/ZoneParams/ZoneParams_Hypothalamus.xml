@@ -14,5 +14,10 @@
 		<MinCorridorWidth>1</MinCorridorWidth>
 		<MaxCorridorWidth>3</MaxCorridorWidth>
 	</ZoneParam>
+
+  <ZoneParam Name="HypothalamusEverglades0">
+    <Width>128</Width>
+    <Height>128</Height>
+  </ZoneParam>
 	
 </ZoneParams>

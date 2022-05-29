@@ -19,21 +19,28 @@ namespace TCD.Inputs
         private EventSystem EventSystem => EventSystem.current;
 
         public void Update()
-        {
+        { 
             if (Input.GetMouseButtonDown(0))
                 OnLeftMouseButtonDown();
             if (Input.GetMouseButtonDown(1))
                 OnRightMouseButtonDown();
+            if (Input.mouseScrollDelta.y > 0)
+                ZoomIn();
+            if (Input.mouseScrollDelta.y < 0)
+                ZoomOut();
         }
+
+        private void ZoomIn() => ServiceLocator.Get<MainCamera>().ZoomIn();
+
+        private void ZoomOut() => ServiceLocator.Get<MainCamera>().ZoomOut();
 
         private void OnLeftMouseButtonDown()
         {
-            if (EventSystem.IsPointerOverGameObject() || !KeyEventManager.GetInputGroupEnabled(InputGroup.Gameplay)) 
+            if (EventSystem.IsPointerOverGameObject() || !KeyEventManager.GetInputGroupEnabled(InputGroup.Gameplay))
                 return;
             if (PlayerActionManager.currentAction == null)
                 PlayerActionManager.TryStartAction(new MoveToMouse());
-            else
-                PlayerActionManager.OnCell(MouseCursor.GetCell());
+            PlayerActionManager.OnCell(MouseCursor.GetCell());
         }
 
         private void OnRightMouseButtonDown()

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Objects>
+
+	<Object Name="RagBandage" InheritsFrom="Item">
+
+		<OverridePart Name="Render">
+			<Var Name="DisplayName">Rag Bandage</Var>
+			<Var Name="DisplayNamePlural">Rag Bandages</Var>
+			<Var Name="Description">Torn strips of fabric, can be used to stop minor bleeding.</Var>
+			<Var Name="Sprite">RagBandage</Var>
+		</OverridePart>
+    
+    <Part Name="Bandage"/>
+
+	</Object>
+
+</Objects>

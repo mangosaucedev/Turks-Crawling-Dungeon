@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TCD.Cinematics.Dialogues;
+using TCD.Texts;
 
 namespace TCD.UI
 {
@@ -28,33 +29,35 @@ namespace TCD.UI
 
             portraitImage.sprite = node.Speaker.Sprite;
 
-            foreach (var button in currentResponseButtons)
-            {
-                if (button)
-                    button.interactable = false;
-            }
+            for (int i = currentResponseButtons.Count - 1; i >= 0; i--)
+                Destroy(currentResponseButtons[i].gameObject);
             currentResponseButtons.Clear();
 
             currentNode = node;
             GameObject prefab = Assets.Get<GameObject>("Dialogue Node");
             GameObject gameObject = Instantiate(prefab, contentParent);
 
-            GoTo next = node.transitions.GetTransition();
-            if (next == null)
-            {
-                if (node.choices.Count > 0)
-                    CreateChoiceButtons();
-                else
-                    CreateEndConversationButton();
-            }
-            else
-                CreateContinueButton();
-
             DialogueNodeDisplay nodeDisplay = gameObject.GetComponent<DialogueNodeDisplay>();
             nodeDisplay.DisplayDialogue(node);
-
             StopAllCoroutines();
-            StartCoroutine(FinishDisplayRoutine());
+            StartCoroutine(ScrollDownRoutine());
+
+            nodeDisplay.typer.PrintCompleted.AddListener(() => 
+            {
+                GoTo next = node.transitions.GetTransition();
+                if (next == null)
+                {
+                    if (node.choices.Count > 0)
+                        CreateChoiceButtons();
+                    else
+                        CreateEndConversationButton();
+                }
+                else
+                    CreateContinueButton();
+                EnableResponseButtons();
+                StopAllCoroutines();
+                StartCoroutine(ScrollDownRoutine());
+            });
         }
 
         private void CreateEndConversationButton()
@@ -84,7 +87,7 @@ namespace TCD.UI
             GameObject gameObject = Instantiate(prefab, contentParent);
             ViewButton viewButton = gameObject.GetComponent<ViewButton>();
             viewButton.key = responseKeys[index];
-            viewButton.SetText(choice.text.ToString());
+            viewButton.SetText(new GameText(choice.text));
             
             GoTo transition = choice.transitions.GetTransition();
             if (transition == null)
@@ -94,6 +97,20 @@ namespace TCD.UI
             }
             else
             {
+                viewButton.onClick.AddListener(() =>
+                {
+                    GameObject prefab = Assets.Get<GameObject>("Dialogue Divider");
+                    Instantiate(prefab, contentParent);
+                    
+                    prefab = Assets.Get<GameObject>("Dialogue Node");
+                    GameObject gameObject = Instantiate(prefab, contentParent);
+
+                    DialogueNodeDisplay nodeDisplay = gameObject.GetComponent<DialogueNodeDisplay>();
+                    nodeDisplay.DisplayText("You - " + new GameText(choice.text));
+
+                    prefab = Assets.Get<GameObject>("Dialogue Divider");
+                    Instantiate(prefab, contentParent);
+                });
                 viewButton.onClick.AddListener(() => DialogueHandler.GoToDialogueNode(transition.node));
                 viewButton.onClick.AddListener(() => DebugLogger.Log("Response going to node " + transition.node));
             }
@@ -108,17 +125,28 @@ namespace TCD.UI
             ViewButton viewButton = gameObject.GetComponent<ViewButton>();
             viewButton.SetText("[Continue.]");
             viewButton.onClick.AddListener(() => Destroy(gameObject));
+            viewButton.onClick.AddListener(() =>
+            {
+                GameObject prefab = Assets.Get<GameObject>("Dialogue Divider");
+                Instantiate(prefab, contentParent);
+            });
             viewButton.onClick.AddListener(() => DialogueHandler.GoToDialogueNode(currentNode.GetTransition()));
             currentResponseButtons.Add(viewButton);
         }
 
-        private IEnumerator FinishDisplayRoutine()
+        private void EnableResponseButtons()
         {
-            yield return null;
-            DebugLogger.Log("Disabling dialogue response buttons!");
-            currentResponseButtons.ForEach(b => b.interactable = false);
+            DebugLogger.Log("Enabling dialogue response buttons!");
+            currentResponseButtons.ForEach(b => b.interactable = true);
+        }
+
+        private IEnumerator ScrollDownRoutine()
+        {
             yield return scrollDownWait;
-            scrollbar.value = 0f;
+            scrollbar.value = 0;
+            scrollbar.interactable = false;
+            yield return ServiceLocator.Get<ViewManager>().WaitToSelectTopLeftSelectableRoutine();
+            scrollbar.interactable = true;
         }
     }
 }

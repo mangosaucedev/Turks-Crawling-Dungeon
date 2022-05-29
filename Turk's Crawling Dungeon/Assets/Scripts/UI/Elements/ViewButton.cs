@@ -17,6 +17,8 @@ namespace TCD.UI
         [SerializeField] protected Text keyText;
         [SerializeField] protected Text text;
 
+        private bool isSubmittable;
+
         public string ViewName
         {
             get => view.gameObject.name;
@@ -58,6 +60,8 @@ namespace TCD.UI
         protected virtual void Update()
         {
             CheckIfKeyPressed();
+            if (!isSubmittable)
+                isSubmittable = true;
         }
 
         public static T Create<T>(string prefabName, Transform parent, string key = "") 
@@ -113,7 +117,7 @@ namespace TCD.UI
         {
             if (string.IsNullOrEmpty(key))
                 return;
-            if (ButtonInputKeys.IsKeyDown(key) && IsInteractive())
+            if (ButtonInputKeys.IsKeyDown(key) && IsInteractive() && isSubmittable)
                 onClick?.Invoke();
         }
 

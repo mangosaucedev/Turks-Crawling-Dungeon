@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 
 namespace TCD.Pathfinding
@@ -22,6 +23,32 @@ namespace TCD.Pathfinding
         {
             current = this;
             Fill();
+        }
+
+        public static AstarGrid GetObjectAstarGrid(INavEvaluator evaluator) => Current.BuildObjectAstarGrid(evaluator);
+
+        private AstarGrid BuildObjectAstarGrid(INavEvaluator evaluator)
+        {
+            var astarGrid = new AstarGrid
+            {
+                width = width,
+                height = height,
+                grid = new NativeArray<AstarNode>(width * height, Allocator.TempJob),
+                isInitialized = false
+            };
+            
+            for (int x = 0; x < width; x++)
+                for (int y = 0; y < height; y++)
+                {
+                    NavNode node = Get(x, y);
+                    AstarNode nativeNode = new AstarNode(x, y);
+                    nativeNode.difficulty = evaluator.GetDifficulty(node);
+                    nativeNode.isPassable = evaluator.IsPassable(node);
+                    astarGrid.Set(x, y, nativeNode);
+                }
+
+            astarGrid.isInitialized = true;
+            return astarGrid;
         }
 
         private void Fill()

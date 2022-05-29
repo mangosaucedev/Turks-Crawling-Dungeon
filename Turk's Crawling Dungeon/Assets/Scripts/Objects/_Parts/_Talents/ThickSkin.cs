@@ -63,19 +63,18 @@ namespace TCD.Objects.Parts.Talents
 
         public override bool HandleEvent<T>(T e)
         {
-            if (e.Id == BeforeHpModifiedEvent.id)
-                OnBeforeHpModified((BeforeHpModifiedEvent) (LocalEvent) e);
+            if (e.Id == BeforeResourceModifiedEvent.id)
+                OnBeforeHpModified((BeforeResourceModifiedEvent) (LocalEvent) e);
             return base.HandleEvent(e);
         }
 
-        private void OnBeforeHpModified(BeforeHpModifiedEvent e)
+        private void OnBeforeHpModified(BeforeResourceModifiedEvent e)
         {
-            if (e.IsDamage)
-            {
-                float soak = Mathf.Abs(e.amount * GetDamageSoak(level));
-                e.amount = Mathf.Min(0, e.amount + soak);
-                DebugLogger.Log($"THICK SKIN: {soak} damage soaked!");
-            }
+            if (e.resource != Resource.Hitpoints || e.amount >= 0f)
+                return;
+            float soak = Mathf.Abs(e.amount * GetDamageSoak(level));
+            e.amount = Mathf.Min(0, e.amount + soak);
+            DebugLogger.Log($"THICK SKIN: {soak} damage soaked!");
         }
     }
 }

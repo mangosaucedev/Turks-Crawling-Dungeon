@@ -158,6 +158,10 @@
 			<Var Name="Range">8</Var>
 			<Var Name="Attack">Tier0ThrowBlunt</Var>
 		</Part>
+
+    <Part Name="Stats">
+      <Var Name="InitStats">HitAccuracy:85</Var>
+    </Part>
 		
 	</Object>
 

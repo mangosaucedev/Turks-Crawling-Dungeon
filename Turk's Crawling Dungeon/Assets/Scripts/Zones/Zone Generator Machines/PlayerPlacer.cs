@@ -50,19 +50,18 @@ namespace TCD.Zones
             int yMin = firstFeature.BoundsInt.yMin;
             int yMax = yMin + firstFeature.BoundsInt.yMax;
             List<Vector2Int> validSpawns = new List<Vector2Int>();
-            for (int x = xMin; x < xMax; x++)
-                for (int y = yMin; y < yMax; y++)
-                {
-                    if (IsValidSpawn(x, y))
-                        validSpawns.Add(new Vector2Int(x, y));
-                }
+            foreach(Vector2Int position in firstFeature.OccupiedPositions)
+            { 
+                if (IsValidSpawn(position.x, position.y))
+                    validSpawns.Add(position);
+            }
             if (validSpawns.Count > 0)
                 return validSpawns[Random.Range(0, validSpawns.Count)];
             ExceptionHandler.Handle(new Exception("Cannot place player: no valid positions to spawn them!"));
             return default;
         }
 
-        private bool IsValidSpawn(int x, int y) => PositionChecker.IsEmpty(x, y) && PositionChecker.IsFloored(x, y);
+        private bool IsValidSpawn(int x, int y) => PositionChecker.IsEmpty(x, y);
 
     }
 }

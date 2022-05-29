@@ -21,7 +21,7 @@ namespace TCD.Objects.Parts
 
         public override string Name => "Movement";
 
-        public virtual bool TryToMove(Vector2Int direction, bool isForced = false)
+        public virtual bool TryToMove(Vector2Int direction, bool isForced = false, bool isScheduled = false)
         {
             movementVector = direction;
             lastMoveIsForced = isForced;
@@ -33,7 +33,11 @@ namespace TCD.Objects.Parts
                 if (!CanEnterCell(newPosition) && !lastMoveIsForced)
                     return false;
             }
-            ActionScheduler.EnqueueAction(parent, MoveInDirection);
+
+            if (isScheduled)
+                MoveInDirection();
+            else
+                ActionScheduler.EnqueueAction(parent, MoveInDirection);
             return true;
         }
 
@@ -176,8 +180,12 @@ namespace TCD.Objects.Parts
 
         public IEnumerator TryToNavigatePathRoutine(NavAstarPath path)
         {
+            navigatedPath = true;
             if (!path.isValid || path.path.Count == 0)
+            {
                 navigatedPath = false;
+                yield break;
+            }
             for (int i = 0; i < path.path.Count; i++)
             {
                 Vector2Int nextPosition = path.path[i];
@@ -187,19 +195,27 @@ namespace TCD.Objects.Parts
                 int xDirection = (int)Mathf.Clamp(roundedX, -1, 1);
                 int yDirection = (int)Mathf.Clamp(roundedY, -1, 1);
                 movementVector = new Vector2Int(xDirection, yDirection);
-                if (!TryToMove(movementVector))
-                {
+                if (!TryToMove(movementVector) || IsEnemySpotted())
                     navigatedPath = false;
-                }
                 yield return null;
                 if (!navigatedPath)
-                {
-                    if (parent == PlayerInfo.currentPlayer)
-
-                    yield return wait;
-                }
+                    yield break;
             }
-            navigatedPath = true;
         }
+
+        private bool IsEnemySpotted()
+        {
+            foreach (Vector2Int position in FieldOfView.visiblePositions)
+            {
+                Cell cell = CurrentZoneInfo.grid[position];
+                if (cell.Objects.Find(o =>
+                {
+                    return (o.Parts.TryGet(out Visible visible) && visible.IsVisibleToPlayer() && o.Parts.TryGet(out Brain brain) && brain.Faction == "Enemy");
+                }))
+                return true;
+            }
+            return false;
+        }
+
     }
 }

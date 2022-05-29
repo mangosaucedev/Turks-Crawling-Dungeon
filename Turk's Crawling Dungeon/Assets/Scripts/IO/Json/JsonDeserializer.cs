@@ -35,7 +35,7 @@ namespace TCD.IO
 
         public virtual IEnumerator LoadAll()
         {
-            List<string> paths = (from path in Directory.GetFiles(FullPath, $"*.{Extension}")
+            List<string> paths = (from path in Directory.GetFiles(FullPath, $"*.{Extension}", SearchOption.AllDirectories)
                         where !path.EndsWith(".meta")
                         select path).ToList();
             filesToDeserialize = paths.Count;

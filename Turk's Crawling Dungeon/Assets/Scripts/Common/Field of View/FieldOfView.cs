@@ -22,6 +22,7 @@ namespace TCD
         private static Quadrant currentQuadrant;
 
         private TileBase unseenTile;
+        private TileBase hiddenTile;
         private BoundsInt bounds;
 
         public static Tilemap Tilemap
@@ -77,6 +78,16 @@ namespace TCD
                 if (!unseenTile)
                     unseenTile = Assets.Get<TileBase>("Unseen");
                 return unseenTile;
+            }
+        }
+
+        private TileBase HiddenTile
+        {
+            get
+            {
+                if (!hiddenTile)
+                    hiddenTile = Assets.Get<TileBase>("Hidden");
+                return hiddenTile;
             }
         }
 
@@ -158,6 +169,7 @@ namespace TCD
             WipeScreen();
             RevealPlayerPosition();
             ScanQuadrantsForBlockedTiles();
+            EventManager.Send(new AfterFOVUpdateEvent());
         }
 
         public static void WipeScreen()
@@ -178,7 +190,7 @@ namespace TCD
                 {
                     Vector3Int position = new Vector3Int(x, y, 0);
                     if (!Tilemap.HasTile(position))
-                        Tilemap.SetTile(position, Current.unseenTile);
+                        Tilemap.SetTile(position, Current.HiddenTile);
                 }
         }
 

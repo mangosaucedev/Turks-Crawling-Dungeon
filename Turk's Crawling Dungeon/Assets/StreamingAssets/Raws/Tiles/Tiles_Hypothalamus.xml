@@ -11,4 +11,10 @@
 	
 	<Tile Name="BareConcrete0">BareConcrete0</Tile>
 
+  <Tile Name="EvergladesGrass0">EvergladesGrass0</Tile>
+
+  <Tile Name="EvergladesGrass1">EvergladesGrass1</Tile>
+
+  <Tile Name="EvergladesDirt0">EvergladesDirt0</Tile>
+
 </Tiles>

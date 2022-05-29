@@ -67,7 +67,7 @@ namespace TCD.Graphics.Indicators
         protected void IndicateTile(Vector2Int position, Sprite sprite)
         {
             GameGrid grid = CurrentZoneInfo.grid;
-            if (!grid.IsWithinBounds(position))
+            if (!grid.IsWithinBounds(position) || !FieldOfView.IsVisible(position))
                 return;
             IndicatorSprite indicatorSprite = IndicatorSprite.Draw(position,  sprite);
             indicatorSprites.Add(indicatorSprite);

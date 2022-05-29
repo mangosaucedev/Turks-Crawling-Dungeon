@@ -16,12 +16,12 @@ namespace TCD.Zones
             foreach (IFeature feature in Zone.Features)
             {
                 currentFeature = feature;
-                PlaceCoins();
+                TestPlace();
                 yield return null;
             }
         }
 
-        private void PlaceCoins()
+        private void TestPlace()
         {
             if (TryGetPointWithinFeature(out Vector2Int position))
             {

@@ -13,7 +13,8 @@ namespace TCD.Objects.Parts
         [SerializeField] private bool isLocked;
         [SerializeField] private bool canClose;
         [SerializeField] private string openSprite;
-        private Sprite closedSprite;
+        [SerializeField] private string closedSprite;
+        private Sprite savedClosedSprite;
         private Sprite savedOpenSprite;
 
         public override string Name => "Door";
@@ -42,10 +43,17 @@ namespace TCD.Objects.Parts
             set => openSprite = value;
         }
 
+        public string ClosedSprite
+        {
+            get => closedSprite;
+            set => closedSprite = value;
+        }
+
         protected override void Start()
         {
             base.Start();
-            closedSprite = parent?.SpriteRenderer?.sprite;
+            ClosedSprite = parent.Parts.Get<Render>().Sprite;
+            savedClosedSprite = parent?.SpriteRenderer?.sprite;
         }
 
         protected override void GetInteractions(GetInteractionsEvent e)
@@ -73,7 +81,7 @@ namespace TCD.Objects.Parts
             isOpen = true;
             if (!savedOpenSprite)
                 savedOpenSprite = Assets.Get<Sprite>(OpenSprite);
-            parent.SpriteRenderer.sprite = savedOpenSprite;
+            parent.Parts.Get<Render>().SetSprite(OpenSprite);
             FireEvent(parent, new DoorOpenedEvent());
         }
 
@@ -91,7 +99,7 @@ namespace TCD.Objects.Parts
             if (!isOpen)
                 return;
             isOpen = false;
-            parent.SpriteRenderer.sprite = closedSprite;
+            parent.Parts.Get<Render>().SetSprite(ClosedSprite);
             FireEvent(parent, new DoorClosedEvent());
         }
 

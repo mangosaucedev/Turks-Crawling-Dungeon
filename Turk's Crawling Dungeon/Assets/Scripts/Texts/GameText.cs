@@ -9,7 +9,7 @@ namespace TCD.Texts
     public class GameText
     {
         private const string PATTERN =
-            @"(?<command>((?!\<(i|b)\>|\<(size|color|material|quad))(\<(?<type>[a-zA-Z0-9]+)((\s*)\=(\s*)(((?<argument>[a-zA-Z0-9_]+)|)(,|))+|)(\>(?<text>([^\<\>]+|))(\<\/\>)|\/\>))))";
+            @"(?<command>((?!\<(i|b)\>|\<(size|color|material|quad|delay))(\<(?<type>[a-zA-Z0-9]+)((\s*)\=(\s*)(((?<argument>[a-zA-Z0-9_]+)|)(,|))+|)(\>(?<text>([^\<\>]+|))(\<\/\>)|\/\>))))";
 
         private static Regex regex = new Regex(PATTERN, RegexOptions.IgnoreCase);
 

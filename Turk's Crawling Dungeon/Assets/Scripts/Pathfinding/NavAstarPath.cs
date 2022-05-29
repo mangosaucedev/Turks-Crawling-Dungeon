@@ -7,6 +7,8 @@ namespace TCD.Pathfinding
 {
     public class NavAstarPath
     {
+        private const int MAX_STEPS = 2048;
+        private const int MAX_LENGTH = 512;
         private const int MAX_HEAP_SIZE = 256 * 256;
         private const int DIAGONAL_MOVE_COST = 14;
         private const int MOVE_COST = 10;
@@ -28,7 +30,13 @@ namespace TCD.Pathfinding
             this.startPosition = startPosition;
             this.targetPosition = targetPosition;
             this.evaluator = evaluator;
-            if (CanPathToTargetPosition())
+
+            if (startPosition == targetPosition)
+            {
+                path.Add(startPosition);
+                isValid = true;
+            }
+            else if (CanPathToTargetPosition())
                 isValid = TryToCalculatePath();
         } 
 
@@ -50,13 +58,12 @@ namespace TCD.Pathfinding
                 closedSet.Add(currentNode);
 
                 if (currentNode == targetNode)
-                {
-                    RetracePath();
-                    return true;
-                }
+                    return RetracePath();
 
                 EvaluateCurrentNodeNeighbors();
                 stepsToCreate++;
+                if (stepsToCreate > MAX_STEPS)
+                    return false;
             }
             return false;
         }
@@ -72,9 +79,11 @@ namespace TCD.Pathfinding
             } 
         }
 
-        private bool NodeCanBeEvaluated(NavNode node) =>
-            (evaluator.IsPassable(node) && !closedSet.Contains(node)) || 
-            node == startNode || node == targetNode;
+        private bool NodeCanBeEvaluated(NavNode node) => 
+            (evaluator.IsPassable(node) 
+            && !closedSet.Contains(node)) 
+            || node == startNode 
+            || node == targetNode;
 
 
         private void EvaluateNode(NavNode node)
@@ -106,15 +115,20 @@ namespace TCD.Pathfinding
                    (MOVE_COST * (yDistance - xDistance));
         }
 
-        private void RetracePath()
+        private bool RetracePath()
         {
             currentNode = targetNode;
+            int length = 0;
             while (currentNode != startNode)
             {
                 path.Add(currentNode.position);
                 currentNode = currentNode.parent;
+                length++;
+                if (length > MAX_LENGTH)
+                    return false;
             }
             path.Reverse();
+            return true;
         }
 
         public Vector2Int GetTargetPosition()

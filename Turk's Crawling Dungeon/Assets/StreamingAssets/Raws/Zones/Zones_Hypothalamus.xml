@@ -23,6 +23,36 @@
 		</Terrain>
 	</Zone>
 
+  <Zone Name="HypothalamusEverglades0">
+    <Params>HypothalamusEverglades0</Params>
+    <Environments>Hypothalamus0</Environments>
+    <Encounters Density="4">Hypothalamus0</Encounters>
+    <Terrain>
+      <Walls>
+        <Wall Name="EvergladesTreeWall0"/>
+        <Wall Name="EvergladesTreeWall1"/>
+        <Wall Name="EvergladesTreeWall2"/>
+      </Walls>
+      <Floors>
+        <Floor Name="EvergladesGrass0"/>
+        <Floor Name="EvergladesGrass1"/>
+        <Floor Name="EvergladesDirt0" Surface="1"/>
+        <Floor Name="EvergladesGrass0" Surface="2"/>
+        <Floor Name="EvergladesGrass1" Surface="2"/>
+      </Floors>
+    </Terrain>
+    <CustomGeneratorMachines>
+      <GeneratorMachine>ForestPlanner</GeneratorMachine>
+      <GeneratorMachine>WallPlanner</GeneratorMachine>
+      <GeneratorMachine>ZoneBuilder</GeneratorMachine>
+      <GeneratorMachine>ZoneColorer</GeneratorMachine>
+      <GeneratorMachine>PlayerPlacer</GeneratorMachine>
+      <GeneratorMachine>StairsPlacer</GeneratorMachine>
+      <GeneratorMachine>ZonePopulator</GeneratorMachine>
+      <GeneratorMachine>ZoneLootPlanner</GeneratorMachine>
+    </CustomGeneratorMachines>
+  </Zone>
+
 	<Zone Name="HypothalamusLevel1">
 		<Params>Generic</Params>
 		<Environments>Generic</Environments>

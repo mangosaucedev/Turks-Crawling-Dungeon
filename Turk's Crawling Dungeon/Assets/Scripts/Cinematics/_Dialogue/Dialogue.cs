@@ -11,7 +11,7 @@ namespace TCD.Cinematics.Dialogues
         public string name;
         public string speakerName;
         public bool oneShot;
-        public int trigger;
+        public string trigger;
         public ChoiceCollection choices;
 
         public Speaker Speaker => Assets.Get<Speaker>(speakerName);

@@ -27,14 +27,18 @@
 			<Var Name="StimulationRegenPoint">0.5</Var>
 			<Var Name="Regenerates">True</Var>
 		</OverridePart>
-		
-		<Part Name="Actor"/>
+
+    <Part Name="Actor"/>
+    
+    <Part Name="AttackExhaustion"/>
 		
 		<Part Name="Combat"/>
 		
 		<Part Name="Dodge"/>
 
-		<Part Name="Equipment"/>
+    <Part Name="Equipment"/>
+    
+    <Part Name="Injuries"/>
 
 		<Part Name="Movement"/>
 
@@ -48,8 +52,13 @@
 		</Part>
 
 		<Part Name="DropsCorpse">
-			<Var Name="Corpse"></Var>
+			<Var Name="Corpse">Corpse</Var>
 		</Part>
+
+
+    <Part Name="Hearing">
+      <Var Name="Sensitivity">1</Var>
+    </Part>
 
 		<Part Name="Inventory">
 			<Var Name="BaseMaxWeight">200</Var>
@@ -59,6 +68,11 @@
 			<Var Name="IsImpassable">True</Var>
 		</Part>
 
+    <Part Name="StandardInjurable">
+      <Var Name="InjuryDamageThreshold">0.08</Var>
+      <Var Name="PercentChanceOfInjury">8</Var>
+    </Part>
+    
 		<Part Name="Stats">
 			<Var Name="InitStats">Strength:8,Agility:8,Constitution:8,Cunning:8,Willpower:8,Charm:8,HitAccuracy:90,Dodge:5,PhysicalSave:10,MentalSave:10,MoveCost:12,AttackCost:12</Var>
 		</Part>
@@ -73,6 +87,10 @@
 		
 		<RemovePart Name="Wallet"/>
 
+    <OverridePart Name="Inventory">
+      <Var Name="SpawnEncounterTable">StandardPlayerLoadout</Var>
+    </OverridePart>
+    
 		<OverridePart Name="Resources">
 			<Var Name="Hitpoints">120</Var>
 		</OverridePart>
@@ -120,6 +138,22 @@
 
 	</Object>
 
+  <!-- Base Corpse -->
+
+  <Object Name="Corpse" InheritsFrom="Container">
+
+    <OverridePart Name="Render">
+      <Var Name="DisplayName">Corpse</Var>
+      <Var Name="DisplayNamePlural">Corpses</Var>
+      <Var Name="Description">A set of mutilated remains.</Var>
+      <Var Name="Sprite">Corpse</Var>
+      <Var Name="RenderOrder">-2</Var>
+    </OverridePart>
+
+    <RemovePart Name="Obstacle"/>
+
+  </Object>
+  
 	<!-- Enemies -->
 	
 	<Object Name="Enemy" InheritsFrom="Character">

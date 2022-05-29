@@ -17,6 +17,20 @@ namespace TCD.Inputs
         MoveSouthwest,
         MoveSouth,
         MoveSoutheast,
+        // Attack
+        AttackNorthwest,
+        AttackNorth,
+        AttackNortheast,
+        AttackWest,
+        AttackEast,
+        AttackSouthwest,
+        AttackSouth,
+        AttackSoutheast,
+        //
+        AttackNorthAlt,
+        AttackSouthAlt,
+        AttackWestAlt,
+        AttackEastAlt,
         //
         Enter,
         Cancel,
@@ -73,7 +87,9 @@ namespace TCD.Inputs
         //
         DevConsole,
         //
+        Tab,
+        BackTab,
         Reset,
-        ResetToDefaults
+        ResetToDefaults,
     }
 }

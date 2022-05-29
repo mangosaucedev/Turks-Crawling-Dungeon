@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Encounters>
+	
+	<Encounter Name="StandardPlayerLoadout" Density="Adjacent">
+		<Object Name="RagBandage" Count="3" ChanceIn100="100" Forced="True"/>
+	</Encounter>
+
+</Encounters>

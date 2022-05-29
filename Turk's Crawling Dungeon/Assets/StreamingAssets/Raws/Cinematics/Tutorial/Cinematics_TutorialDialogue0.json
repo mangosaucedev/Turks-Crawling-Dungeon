@@ -1,0 +1,26 @@
+{
+    "cinematics": [
+
+        {
+            "name": "TutorialDialogue0A",
+            "events": [
+                {
+                    "type": "ResetZoom"
+                }
+            ]
+        },
+
+        {
+            "name": "TutorialDialogue0B",
+            "events": [
+                {
+                    "type": "StartDialogue",
+                    "arguments": [
+                        "Tutorial0"
+                    ]
+                }
+            ]
+        }
+    ]
+}
+

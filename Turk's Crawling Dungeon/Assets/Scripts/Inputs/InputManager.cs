@@ -23,9 +23,16 @@ namespace TCD.Inputs
             KeyEventManager.Subscribe(InputGroup.None, KeyCommand.DevConsole, KeyState.PressedThisFrame, e => { OpenView("Dev Console"); });
 
             KeyEventManager.Subscribe(InputGroup.UI, KeyCommand.Cancel, KeyState.PressedThisFrame, e => { });
+            KeyEventManager.Subscribe(InputGroup.UI, KeyCommand.Tab, KeyState.PressedThisFrame, e => { });
+            KeyEventManager.Subscribe(InputGroup.UI, KeyCommand.BackTab, KeyState.PressedThisFrame, e => { });
 
             KeyEventManager.Subscribe(InputGroup.Gameplay, KeyCommand.MovePass, KeyState.PressedThisFrame, e => { Pass(); });
-            KeyEventManager.Subscribe(InputGroup.Gameplay, KeyCommand.OpenInventory, KeyState.PressedThisFrame, e => { OpenView("Player Inventory View"); });
+            KeyEventManager.Subscribe(InputGroup.Gameplay, KeyCommand.OpenInventory, KeyState.PressedThisFrame, e => 
+            { 
+                SelectionHandler.SetSelectedObject(PlayerInfo.currentPlayer);
+                SelectionHandler.SetSelectedInventory(PlayerInfo.currentPlayer.Parts.Get<Inventory>());
+                OpenView("Player Inventory v2"); 
+            });
             KeyEventManager.Subscribe(InputGroup.Gameplay, KeyCommand.Cancel, KeyState.PressedThisFrame, e => { OpenView("Escape View"); });
             KeyEventManager.Subscribe(InputGroup.Gameplay, KeyCommand.OpenHelp, KeyState.PressedThisFrame, e => { OpenView("Help View"); });
             KeyEventManager.Subscribe(InputGroup.Gameplay, KeyCommand.OpenTalents, KeyState.PressedThisFrame, e => { OpenView("Talent View"); });

@@ -48,6 +48,7 @@ namespace TCD
 
         public override void End()
         {
+            PlayerActionManager.CancelCurrentAction();
             if (viewsEnabled)
             {
                 ViewManager.Close("Side Bar");

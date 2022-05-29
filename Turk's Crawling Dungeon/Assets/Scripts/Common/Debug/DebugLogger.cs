@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using System.IO;
 using UnityEngine;
 
@@ -31,6 +32,8 @@ namespace TCD
 
         public static void Log(string message)
         {
+            if (Thread.CurrentThread != TCDGame.thread)
+                return;
             string finalMessage = InsertFrameTimeInfo(message);
             ConsoleLogEvent(finalMessage);
             finalMessage = InsertStackTrace(finalMessage);
@@ -68,6 +71,8 @@ namespace TCD
 
         public static void LogError(string message)
         {
+            if (Thread.CurrentThread != TCDGame.thread)
+                return;
             string finalMessage = InsertFrameTimeInfo(message);
             ConsoleLogEvent(finalMessage);
             finalMessage = InsertStackTrace(finalMessage);
@@ -79,6 +84,8 @@ namespace TCD
 
         public static void LogException(string message)
         {
+            if (Thread.CurrentThread != TCDGame.thread)
+                return;
             string finalMessage = InsertFrameTimeInfo(message);
             ConsoleLogEvent(finalMessage);
             finalMessage = InsertStackTrace(finalMessage);

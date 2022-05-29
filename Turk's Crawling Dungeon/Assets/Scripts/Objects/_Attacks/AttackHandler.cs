@@ -20,8 +20,13 @@ namespace TCD.Objects.Attacks
         {
             currentAttacker = attacker;
             currentDefender = defender;
-            if (!TryGetAttack(currentDefender, out currentAttack) || !CanAttackTarget())
+            if (!TryGetAttack(currentDefender, out currentAttack))
                 return false;
+            if (!CanAttackTarget())
+            {
+                CombatJuiceHandler.Punch(currentAttacker, ObjectUtility.GetDirectionToObject(currentAttacker, currentDefender));
+                return false;
+            }
             return AttackTarget();
         }
 
@@ -48,9 +53,11 @@ namespace TCD.Objects.Attacks
             if (!currentDefender.HandleEvent(e) || !currentAttacker.HandleEvent(e))
             {
                 if (currentAttacker == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"Your attack against {currentDefender.GetDisplayName()} {e.Result}!");
+                    MessageLog.Add(
+                        new GameText($"<c=Au>Your attack against {currentDefender.GetDisplayName()} {e.Result}!</>"));
                 if (currentDefender == PlayerInfo.currentPlayer)
-                    MessageLog.Add($"{currentAttacker.GetDisplayName()}'s attack against you {e.Result}!");
+                    MessageLog.Add(
+                        new GameText($"<c=Au>{currentAttacker.GetDisplayName()}'s attack against you {e.Result}!</>"));
                 return false;
             }
             return true;
@@ -62,7 +69,10 @@ namespace TCD.Objects.Attacks
             currentDefender = defender;
             currentAttack = attack;
             if (!CanAttackTarget())
+            {
+                CombatJuiceHandler.Punch(currentAttacker, ObjectUtility.GetDirectionToObject(currentAttacker, currentDefender));
                 return false;
+            }
             return AttackTarget();
         }
 

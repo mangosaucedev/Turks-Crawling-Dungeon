@@ -6,21 +6,22 @@ using UnityEngine.UI;
 using TCD.Cinematics.Dialogues;
 using TCD.Inputs;
 using TCD.Texts;
+using RedBlueGames.Tools.TextTyper;
 
 namespace TCD.UI
 {
     public class DialogueNodeDisplay : MonoBehaviour
     {
+        private const float TYPE_DELAY = 0.05f;
+
+        public TextTyper typer;
+
         [SerializeField] private Text text;
         [SerializeField] private VerticalLayoutGroup layoutGroup;
 
         private Dialogue currentNode;
-        private int index;
-        private WaitForSecondsRealtime printWait;
-        private bool isPrinting;
+        private int charactersPrinted;
         private bool canSkipPrinting;
-        private string fullText;
-        private StringBuilder stringBuilder = new StringBuilder();
         private RectTransform parentRectTransform;
 
         private RectTransform ParentRectTransform
@@ -35,85 +36,50 @@ namespace TCD.UI
 
         private void OnEnable()
         {
-            EventManager.Listen<BeforeDialogueUpdatedEvent>(this, OnBeforeDialogueUpdated);
             EventManager.Listen<KeyEvent>(this, OnKey);
         }
 
         private void OnDisable()
         {
-            EventManager.StopListening<BeforeDialogueUpdatedEvent>(this);
             EventManager.StopListening<KeyEvent>(this);
-        }
-
-        private void OnBeforeDialogueUpdated(BeforeDialogueUpdatedEvent e) 
-        {
-            if (FinishPrinting())
-                DebugLogger.Log($"Dialogue display skipping print: {e.Name} event!");
-        }
-        private bool FinishPrinting()
-        {
-            if (isPrinting && canSkipPrinting)
-            {
-                isPrinting = false;
-                StopAllCoroutines();
-                StartCoroutine(EnableResponseButtonsRoutine());
-                text.text = $"{GetSpeakerName()} - {fullText}";
-                LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform) layoutGroup.transform);
-                LayoutRebuilder.ForceRebuildLayoutImmediate(ParentRectTransform);
-                return true;
-            }
-            return false;
         }
 
         private void OnKey(KeyEvent e)
         {
             if (e.context.command == KeyCommand.Interact && 
                 e.context.state == KeyState.PressedThisFrame &&
-                FinishPrinting())
-                DebugLogger.Log("Dialogue display skipping print: Interact button pressed!");
+                canSkipPrinting)
+                typer.Skip();
         }
 
-        public void DisplayDialogue(Dialogue node) =>
-            StartCoroutine(DisplayDialogueRoutine(node));
+        public void DisplayText(string text)
+        {
+            typer.TypeText(text);
+            typer.Skip();
+        }
 
-
-        public IEnumerator DisplayDialogueRoutine(Dialogue node)
+        public void DisplayDialogue(Dialogue node)
         {
             currentNode = node;
-            isPrinting = true;
-            printWait = new WaitForSecondsRealtime(0.05f);
-            fullText = new GameText(node.text);
-            while (index < fullText.Length)
-            {
-                //DialogueView.currentResponseButtons.ForEach(b => DebugLogger.Log(
-                //    b.name + " interactable: " + b.interactable + " isInteractable: " + b.IsInteractable()));
-
-                index++;
-                
-                stringBuilder.Clear();
-                stringBuilder.Append(GetSpeakerName());
-                stringBuilder.Append(" - ");
-                stringBuilder.Append(currentNode.text.ToString().Substring(0, index));
-                text.text = stringBuilder.ToString();
-
-                if (index > 1 && !canSkipPrinting)
-                    canSkipPrinting = true;
-
-                yield return printWait;
-            }
-            FinishPrinting();
+            charactersPrinted = 0;
+            typer.TypeText(GetSpeakerName() + " - " + new GameText(currentNode.text), TYPE_DELAY);
         }
 
         private string GetSpeakerName() => 
             $"<color=#{ColorUtility.ToHtmlStringRGBA(currentNode.Speaker.Color)}>{currentNode.Speaker.displayName}</color>";
 
-        private IEnumerator EnableResponseButtonsRoutine()
+        public void OnCharacterPrinted()
         {
-            yield return null;
-            DebugLogger.Log("Enabling dialogue response buttons!");
-            DialogueView.currentResponseButtons.ForEach(b => b.interactable = true);
-            ViewManager manager = ServiceLocator.Get<ViewManager>();
-            manager.SelectTopLeftSelectable();
+            charactersPrinted++;
+            if (charactersPrinted > 1 && !canSkipPrinting)
+                canSkipPrinting = true;
+            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)layoutGroup.transform);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(ParentRectTransform);
+        }
+
+        public void OnPrintComplete()
+        {
+            canSkipPrinting = false;
         }
     }
 }

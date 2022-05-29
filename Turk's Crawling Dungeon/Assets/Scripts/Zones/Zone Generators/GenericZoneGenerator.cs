@@ -12,9 +12,10 @@ namespace TCD.Zones
             machines.Enqueue(new ChamberPlanner());
             machines.Enqueue(new CorridorPlanner());
             machines.Enqueue(new FeatureFloorPlanner());
-            machines.Enqueue(new WallPlanner());
+            machines.Enqueue(new FeatureWallPlanner());
             machines.Enqueue(new DoorPlanner());
             machines.Enqueue(new ZoneBuilder());
+            machines.Enqueue(new TeratomaWallsPlacer());
             machines.Enqueue(new ZoneColorer());
             machines.Enqueue(new EnvironmentPlanner());
             machines.Enqueue(new PlayerPlacer());

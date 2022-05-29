@@ -1,0 +1,30 @@
+{
+    "cinematics": [
+
+        {
+            "name": "TutorialOpening",
+            "events": [
+                {
+                    "type": "FadeColor",
+                    "arguments": [
+                        "Black",
+                        "1",
+                        "0",
+                        "True"
+                    ]
+                },
+
+                {
+                    "type": "FadeColor",
+                    "arguments": [
+                        "Black",
+                        "0",
+                        "2",
+                        "True"
+                    ]
+                }
+            ]
+        }
+
+    ]
+}

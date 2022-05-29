@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Encounters>
+
+  <Encounter Name="GenericLoot0" Density="Adjacent">
+    <Object Name="RagBandage" Count="1-3" ChanceIn100="99"/>
+  </Encounter>
+</Encounters>

@@ -10,6 +10,7 @@ namespace TCD.Inputs.Actions
 {
     public class MoveToMouse : PlayerAction
     {
+
         public override string Name => "Move To Mouse";
 
         public override MovementMode MovementMode => MovementMode.Cursor;
@@ -19,13 +20,13 @@ namespace TCD.Inputs.Actions
         public override void Start()
         {
             base.Start();
-            IndicatorHandler.ShowIndicator("Player Path To Cursor Indicator", 999, false);
+            //IndicatorHandler.ShowIndicator("Player Path To Cursor Indicator", 999, false);
         }
 
         public override void End()
         {
             base.End();
-            IndicatorHandler.HideIndicator();
+            //IndicatorHandler.HideIndicator();
         }
 
         public override IEnumerator OnObject(BaseObject target)

@@ -8,6 +8,7 @@ namespace TCD.Objects.Parts
     [Serializable]
     public class Visible : Part
     {
+        [SerializeField] private bool isVisible;
         [SerializeField] private int visibilityRadius;
 
         public override string Name => "Visible";
@@ -16,6 +17,40 @@ namespace TCD.Objects.Parts
         {
             get => visibilityRadius;
             set => visibilityRadius = value;
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            EventManager.Listen<AfterFOVUpdateEvent>(this, OnAfterFOVUpdate);
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            EventManager.StopListening<AfterFOVUpdateEvent>(this);
+        }
+
+        private void OnAfterFOVUpdate(AfterFOVUpdateEvent e) => UpdateVisibility();
+
+        private void UpdateVisibility()
+        {
+            isVisible = IsVisibleToPlayer();
+            Render render = parent.Parts.Get<Render>();
+            
+            if (isVisible)
+                render.EnableSprite();
+            if (!isVisible)
+                render.DisableSprite();
+            
+            FireVisibilityChangedEvent();
+        }
+
+        private void FireVisibilityChangedEvent()
+        {
+            VisibilityChangedEvent e = LocalEvent.Get<VisibilityChangedEvent>();
+            e.visible = isVisible;
+            FireEvent(parent, e);
         }
 
         public bool IsVisibleToPlayer() => (FieldOfView.IsVisible(Position) && 

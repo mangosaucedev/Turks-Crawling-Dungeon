@@ -10,9 +10,9 @@ namespace TCD.Objects.Parts
     [Serializable]
     public class PlayerMovement : Movement
     {
-        public override bool TryToMove(Vector2Int direction, bool isForced = false)
+        public override bool TryToMove(Vector2Int direction, bool isForced = false, bool isScheduled = false)
         {
-            bool success = base.TryToMove(direction, isForced);
+            bool success = base.TryToMove(direction, isForced, isScheduled);
             if (success)
             {
                 EventManager.Send(new PlayerMovedEvent());
